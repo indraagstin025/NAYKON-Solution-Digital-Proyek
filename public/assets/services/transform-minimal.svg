@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="nk-trans-grad" x1="10" y1="10" x2="54" y2="54" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00A3FF" />
+      <stop offset="50%" stop-color="#0062FF" />
+      <stop offset="100%" stop-color="#003BC2" />
+    </linearGradient>
+    <linearGradient id="nk-trans-soft" x1="10" y1="10" x2="54" y2="54" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00A3FF" stop-opacity="0.18" />
+      <stop offset="100%" stop-color="#0062FF" stop-opacity="0.04" />
+    </linearGradient>
+  </defs>
+
+  <!-- Ambient Glow -->
+  <circle cx="32" cy="32" r="24" fill="url(#nk-trans-soft)" />
+
+  <!-- Outer Orbiting Cycle Ring -->
+  <path d="M48 20C44.5 15 38.5 12 32 12C21 12 12 21 12 32C12 43 21 52 32 52C41.5 52 49.5 45.5 51.5 36.5" 
+        stroke="url(#nk-trans-grad)" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="4 2" />
+
+  <!-- Dynamic Fold Ribbon Loop (Inspired by NK Ribbon) -->
+  <path d="M22 24C22 19 28 17 33 21L43 29C47 32 46 38 41 40L31 44C26 46 22 42 22 37V24Z" 
+        fill="url(#nk-trans-soft)" stroke="url(#nk-trans-grad)" stroke-width="2" stroke-linejoin="round" />
+
+  <!-- Inner Dynamic Gradient Ribbon Surface -->
+  <path d="M22 28L35 38C38 40 42 39 44 36L42 26" 
+        stroke="#00A3FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- Dynamic Forward Transformation Arrow -->
+  <path d="M44 14L50 20L44 26" stroke="#00A3FF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+  
+  <!-- Pulse Node -->
+  <circle cx="51.5" cy="36.5" r="3" fill="#0062FF" stroke="#FFFFFF" stroke-width="1.5" />
+</svg>

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="nk-ai-grad" x1="10" y1="10" x2="54" y2="54" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00A3FF" />
+      <stop offset="50%" stop-color="#0062FF" />
+      <stop offset="100%" stop-color="#003BC2" />
+    </linearGradient>
+    <linearGradient id="nk-ai-soft" x1="12" y1="12" x2="52" y2="52" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00A3FF" stop-opacity="0.18" />
+      <stop offset="100%" stop-color="#0062FF" stop-opacity="0.04" />
+    </linearGradient>
+  </defs>
+
+  <!-- Ambient Glow -->
+  <circle cx="32" cy="32" r="24" fill="url(#nk-ai-soft)" />
+
+  <!-- Core AI Microchip (Rotated Diamond/Square) -->
+  <rect x="22" y="22" width="20" height="20" rx="5" fill="url(#nk-ai-soft)" stroke="url(#nk-ai-grad)" stroke-width="2.2" />
+  
+  <!-- Central Neural Pulse Core -->
+  <circle cx="32" cy="32" r="4.5" fill="url(#nk-ai-grad)" />
+  <circle cx="32" cy="32" r="2" fill="#FFFFFF" />
+
+  <!-- Neural Circuit Tracks (Top, Bottom, Left, Right) -->
+  <path d="M32 10V22M32 42V54" stroke="url(#nk-ai-grad)" stroke-width="2" stroke-linecap="round" />
+  <path d="M10 32H22M42 32H54" stroke="url(#nk-ai-grad)" stroke-width="2" stroke-linecap="round" />
+
+  <!-- Diagonal Synaptic Logic Nodes -->
+  <path d="M17 17L24 24" stroke="#00A3FF" stroke-width="1.8" stroke-linecap="round" />
+  <path d="M47 47L40 40" stroke="#003BC2" stroke-width="1.8" stroke-linecap="round" />
+  <path d="M47 17L40 24" stroke="#00A3FF" stroke-width="1.8" stroke-linecap="round" />
+  <path d="M17 47L24 40" stroke="#003BC2" stroke-width="1.8" stroke-linecap="round" />
+
+  <!-- Synaptic Nodes Terminal Dots -->
+  <circle cx="32" cy="10" r="2.5" fill="#00A3FF" stroke="#FFFFFF" stroke-width="1" />
+  <circle cx="32" cy="54" r="2.5" fill="#003BC2" stroke="#FFFFFF" stroke-width="1" />
+  <circle cx="10" cy="32" r="2.5" fill="#00A3FF" stroke="#FFFFFF" stroke-width="1" />
+  <circle cx="54" cy="32" r="2.5" fill="#003BC2" stroke="#FFFFFF" stroke-width="1" />
+</svg>

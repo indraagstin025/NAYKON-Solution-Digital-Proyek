@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="nk-redesign-grad" x1="10" y1="10" x2="54" y2="54" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00A3FF" />
+      <stop offset="50%" stop-color="#0062FF" />
+      <stop offset="100%" stop-color="#003BC2" />
+    </linearGradient>
+    <linearGradient id="nk-redesign-soft" x1="10" y1="10" x2="54" y2="54" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00A3FF" stop-opacity="0.18" />
+      <stop offset="100%" stop-color="#0062FF" stop-opacity="0.05" />
+    </linearGradient>
+  </defs>
+
+  <!-- Ambient Glow Background -->
+  <circle cx="32" cy="32" r="24" fill="url(#nk-redesign-soft)" />
+
+  <!-- Back/Old Website Wireframe (Subtle & Faded) -->
+  <rect x="8" y="18" width="34" height="30" rx="6" fill="#FFFFFF" fill-opacity="0.6" stroke="#B5CDEC" stroke-width="1.8" stroke-dasharray="3 2" />
+  <line x1="8" y1="26" x2="42" y2="26" stroke="#B5CDEC" stroke-width="1.5" />
+  <line x1="14" y1="32" x2="26" y2="32" stroke="#B5CDEC" stroke-width="1.5" stroke-linecap="round" />
+  <line x1="14" y1="36" x2="22" y2="36" stroke="#B5CDEC" stroke-width="1.5" stroke-linecap="round" />
+
+  <!-- Front/New Modern Website (Sharp, Glowing & Elevated) -->
+  <rect x="22" y="12" width="34" height="34" rx="8" fill="#FFFFFF" fill-opacity="0.95" stroke="url(#nk-redesign-grad)" stroke-width="2.2" />
+  
+  <!-- Header Bar -->
+  <line x1="22" y1="21" x2="56" y2="21" stroke="url(#nk-redesign-grad)" stroke-width="1.5" stroke-opacity="0.6" />
+  <circle cx="27" cy="16.5" r="1.5" fill="#00A3FF" />
+  <circle cx="32" cy="16.5" r="1.5" fill="#0062FF" />
+
+  <!-- Dynamic Refresh / Modernization Arrows -->
+  <path d="M30 33C30 28.5 33.5 25 38 25C41.5 25 44.5 27.2 45.5 30.5" stroke="url(#nk-redesign-grad)" stroke-width="2" stroke-linecap="round" />
+  <path d="M43 31L46 31L46 28" stroke="#00A3FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+  
+  <path d="M46 35C46 39.5 42.5 43 38 43C34.5 43 31.5 40.8 30.5 37.5" stroke="url(#nk-redesign-grad)" stroke-width="2" stroke-linecap="round" />
+  <path d="M33 37L30 37L30 40" stroke="#0062FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- Sparkle / Modern Polish Node -->
+  <path d="M51 10L52.5 13.5L56 15L52.5 16.5L51 20L49.5 16.5L46 15L49.5 13.5L51 10Z" fill="#00A3FF" />
+</svg>

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="nk-app-grad" x1="10" y1="12" x2="54" y2="52" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00A3FF" />
+      <stop offset="50%" stop-color="#0062FF" />
+      <stop offset="100%" stop-color="#003BC2" />
+    </linearGradient>
+    <linearGradient id="nk-app-soft" x1="12" y1="12" x2="52" y2="52" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00A3FF" stop-opacity="0.18" />
+      <stop offset="100%" stop-color="#0062FF" stop-opacity="0.04" />
+    </linearGradient>
+  </defs>
+
+  <!-- Ambient Glow Background -->
+  <circle cx="32" cy="32" r="24" fill="url(#nk-app-soft)" />
+
+  <!-- Main Web App Window -->
+  <rect x="9" y="13" width="46" height="38" rx="8" fill="url(#nk-app-soft)" stroke="url(#nk-app-grad)" stroke-width="2.2" />
+
+  <!-- App Header & Navigation Bar -->
+  <line x1="9" y1="22" x2="55" y2="22" stroke="url(#nk-app-grad)" stroke-width="1.5" stroke-opacity="0.5" />
+  <circle cx="15" cy="17.5" r="1.5" fill="#00A3FF" />
+  <circle cx="20" cy="17.5" r="1.5" fill="#0062FF" />
+  <circle cx="25" cy="17.5" r="1.5" fill="#003BC2" />
+
+  <!-- App Left Sidebar Menu -->
+  <line x1="21" y1="22" x2="21" y2="51" stroke="url(#nk-app-grad)" stroke-width="1.5" stroke-opacity="0.5" />
+  <rect x="13" y="27" width="5" height="4" rx="1.5" fill="#00A3FF" />
+  <rect x="13" y="34" width="5" height="4" rx="1.5" fill="#0062FF" />
+  <rect x="13" y="41" width="5" height="4" rx="1.5" fill="#003BC2" />
+
+  <!-- Right Dashboard Widgets & Analytics Chart -->
+  <rect x="25" y="26" width="12" height="8" rx="2" fill="#FFFFFF" stroke="url(#nk-app-grad)" stroke-width="1.2" />
+  <line x1="28" y1="30" x2="34" y2="30" stroke="#00A3FF" stroke-width="1.2" stroke-linecap="round" />
+
+  <rect x="40" y="26" width="11" height="8" rx="2" fill="#FFFFFF" stroke="url(#nk-app-grad)" stroke-width="1.2" />
+  <line x1="43" y1="30" x2="48" y2="30" stroke="#0062FF" stroke-width="1.2" stroke-linecap="round" />
+
+  <!-- Data Analytics Trend Line Inside App -->
+  <rect x="25" y="37" width="26" height="10" rx="2.5" fill="#FFFFFF" stroke="url(#nk-app-grad)" stroke-width="1.2" />
+  <path d="M28 44L33 41L38 43L43 39L48 40" stroke="url(#nk-app-grad)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+  <circle cx="43" cy="39" r="1.5" fill="#00A3FF" />
+</svg>

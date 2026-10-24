@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="nk-cloud-grad" x1="8" y1="12" x2="56" y2="52" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00A3FF" />
+      <stop offset="50%" stop-color="#0062FF" />
+      <stop offset="100%" stop-color="#003BC2" />
+    </linearGradient>
+    <linearGradient id="nk-cloud-soft" x1="12" y1="12" x2="52" y2="52" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00A3FF" stop-opacity="0.18" />
+      <stop offset="100%" stop-color="#0062FF" stop-opacity="0.05" />
+    </linearGradient>
+  </defs>
+
+  <!-- Ambient Glow -->
+  <circle cx="32" cy="32" r="24" fill="url(#nk-cloud-soft)" />
+
+  <!-- Minimalist Cloud Contour -->
+  <path d="M20 40H45C50 40 54 36 54 31C54 26.5 50.8 22.8 46.5 22.2C45.2 16.5 40.2 12 34 12C28.8 12 24.3 15.2 22.4 19.8C21.6 19.5 20.8 19.3 20 19.3C15 19.3 11 23.3 11 28.3C11 34.3 15 40 20 40Z" 
+        fill="url(#nk-cloud-soft)" stroke="url(#nk-cloud-grad)" stroke-width="2.2" stroke-linejoin="round" />
+
+  <!-- Data Infrastructure Shelf / Layers -->
+  <rect x="22" y="27" width="20" height="4" rx="2" fill="#FFFFFF" stroke="url(#nk-cloud-grad)" stroke-width="1.2" />
+  <circle cx="26" cy="29" r="0.8" fill="#00A3FF" />
+  <circle cx="29" cy="29" r="0.8" fill="#0062FF" />
+
+  <rect x="22" y="34" width="20" height="4" rx="2" fill="#FFFFFF" stroke="url(#nk-cloud-grad)" stroke-width="1.2" />
+  <circle cx="26" cy="36" r="0.8" fill="#00A3FF" />
+  <circle cx="29" cy="36" r="0.8" fill="#0062FF" />
+
+  <!-- Fast Data Flow Uplink / Downlink Rays -->
+  <path d="M26 44V51M26 51L23 48M26 51L29 48" stroke="#00A3FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M38 51V44M38 44L35 47M38 44L41 47" stroke="#0062FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+</svg>

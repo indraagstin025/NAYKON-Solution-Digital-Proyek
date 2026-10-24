@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="nk-prod-grad" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00A3FF" />
+      <stop offset="60%" stop-color="#0062FF" />
+      <stop offset="100%" stop-color="#003BC2" />
+    </linearGradient>
+    <linearGradient id="nk-prod-soft" x1="12" y1="12" x2="52" y2="52" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00A3FF" stop-opacity="0.16" />
+      <stop offset="100%" stop-color="#0062FF" stop-opacity="0.04" />
+    </linearGradient>
+  </defs>
+
+  <!-- Ambient Glow -->
+  <circle cx="32" cy="32" r="24" fill="url(#nk-prod-soft)" />
+
+  <!-- Base Isometric Plate / App Window -->
+  <rect x="10" y="14" width="44" height="36" rx="8" fill="url(#nk-prod-soft)" stroke="url(#nk-prod-grad)" stroke-width="2" stroke-linecap="round" />
+  
+  <!-- Header Bar -->
+  <line x1="10" y1="24" x2="54" y2="24" stroke="url(#nk-prod-grad)" stroke-width="1.5" stroke-opacity="0.5" />
+  <circle cx="16" cy="19" r="1.5" fill="#00A3FF" />
+  <circle cx="21" cy="19" r="1.5" fill="#0062FF" />
+  <circle cx="26" cy="19" r="1.5" fill="#003BC2" />
+
+  <!-- Code Bracket & Digital Component Inside -->
+  <path d="M22 32L17 37L22 42" stroke="url(#nk-prod-grad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M42 32L47 37L42 42" stroke="url(#nk-prod-grad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+  <line x1="34" y1="31" x2="30" y2="43" stroke="#00A3FF" stroke-width="2" stroke-linecap="round" />
+
+  <!-- Floating Modular Block Accent -->
+  <rect x="42" y="8" width="12" height="12" rx="3" fill="#FFFFFF" stroke="url(#nk-prod-grad)" stroke-width="1.5" />
+  <path d="M45 14H51" stroke="#00A3FF" stroke-width="1.5" stroke-linecap="round" />
+</svg>

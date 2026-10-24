@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="nk-web-grad" x1="10" y1="10" x2="54" y2="54" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00A3FF" />
+      <stop offset="60%" stop-color="#0062FF" />
+      <stop offset="100%" stop-color="#003BC2" />
+    </linearGradient>
+    <linearGradient id="nk-web-soft" x1="12" y1="12" x2="52" y2="52" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00A3FF" stop-opacity="0.18" />
+      <stop offset="100%" stop-color="#0062FF" stop-opacity="0.05" />
+    </linearGradient>
+  </defs>
+
+  <!-- Ambient Glow Background -->
+  <circle cx="32" cy="32" r="24" fill="url(#nk-web-soft)" />
+
+  <!-- Browser Window Frame -->
+  <rect x="9" y="13" width="46" height="38" rx="8" fill="url(#nk-web-soft)" stroke="url(#nk-web-grad)" stroke-width="2.2" />
+
+  <!-- Browser Header -->
+  <line x1="9" y1="23" x2="55" y2="23" stroke="url(#nk-web-grad)" stroke-width="1.5" stroke-opacity="0.5" />
+  <circle cx="15" cy="18" r="1.5" fill="#00A3FF" />
+  <circle cx="20" cy="18" r="1.5" fill="#0062FF" />
+  <circle cx="25" cy="18" r="1.5" fill="#003BC2" />
+
+  <!-- URL Bar Minimal -->
+  <rect x="30" y="16.5" width="20" height="3" rx="1.5" fill="#FFFFFF" fill-opacity="0.7" />
+
+  <!-- Website Content: Hero Banner Block -->
+  <rect x="15" y="27" width="22" height="11" rx="3" fill="#FFFFFF" fill-opacity="0.9" stroke="url(#nk-web-grad)" stroke-width="1.2" />
+  <line x1="18" y1="31" x2="28" y2="31" stroke="#00A3FF" stroke-width="1.5" stroke-linecap="round" />
+  <line x1="18" y1="34" x2="24" y2="34" stroke="#0062FF" stroke-width="1.2" stroke-linecap="round" />
+
+  <!-- Website CTA Button -->
+  <rect x="18" y="41" width="10" height="5" rx="2" fill="url(#nk-web-grad)" />
+
+  <!-- Web Content Cards Right Column -->
+  <rect x="40" y="27" width="10" height="19" rx="3" fill="#FFFFFF" fill-opacity="0.8" stroke="url(#nk-web-grad)" stroke-width="1.2" />
+  <circle cx="45" cy="33" r="2.5" fill="#00A3FF" />
+  <line x1="43" y1="39" x2="47" y2="39" stroke="#0062FF" stroke-width="1.2" stroke-linecap="round" />
+</svg>
