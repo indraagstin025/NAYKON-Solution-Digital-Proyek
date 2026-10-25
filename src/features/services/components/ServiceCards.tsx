@@ -29,7 +29,7 @@ export function ServiceCards() {
                 Pembuatan Website Bisnis
               </h2>
               <p className="mt-2.5 text-[13px] sm:text-[13.5px] leading-[1.68] text-[#4A5D78]">
-                Website korporasi dan landing page yang berfokus pada kredibilitas,
+                Website profil bisnis, company profile, dan landing page yang berfokus pada kredibilitas,
                 konversi, dan pengalaman pengguna.
               </p>
 
@@ -292,7 +292,7 @@ export function ServiceCards() {
               </h2>
               <p className="mt-2.5 text-[13px] sm:text-[13.5px] leading-[1.68] text-blue-100/90">
                 Pembuatan aplikasi Android dan iOS yang responsif, intuitif, dan
-                terintegrasi dengan sistem bisnis dan API server perusahaan Anda.
+                terintegrasi dengan sistem alur kerja dan API server bisnis Anda.
               </p>
 
               <div className="mt-5 flex flex-wrap gap-2">

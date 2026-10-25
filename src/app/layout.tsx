@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "NAYKON - Software House & Solusi Transformasi Digital Indonesia",
+  title: "NAYKON - Software House & Solusi Digital Indonesia",
   description:
-    "Mitra teknologi terpercaya untuk pengembangan aplikasi web, mobile, dan sistem enterprise terintegrasi di Indonesia.",
+    "Tim rekayasa digital terpercaya untuk pengembangan website, aplikasi web, dan aplikasi mobile modern di Indonesia.",
 };
 
 export default function RootLayout({

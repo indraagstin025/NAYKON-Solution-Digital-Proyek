@@ -53,7 +53,7 @@ export function AboutSection() {
           <div className="inline-flex items-center gap-2 rounded-full bg-[#0066FF] px-3.5 py-1 text-white shadow-sm">
             <span className="h-2 w-2 rounded-full bg-white shrink-0" />
             <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.12em] text-white">
-              PROFIL PERUSAHAAN
+              TENTANG TIM KAMI
             </span>
           </div>
 
@@ -67,7 +67,7 @@ export function AboutSection() {
           </h2>
 
           <p className="mt-4 text-[13.5px] sm:text-[14.5px] leading-[1.7] text-[#4A5D78] dark:text-slate-300">
-            NAIKON Digital Solution adalah mitra rekayasa perangkat lunak dan website yang berfokus pada hasil terukur. Kami merancang arsitektur sistem yang cepat, aman, dan mudah dioperasikan agar bisnis Anda dapat berkembang secara efisien.
+            NAIKON Digital Solution adalah tim rekayasa web dan aplikasi yang berfokus pada hasil terukur. Tim kami merancang arsitektur website dan sistem yang cepat, aman, dan mudah dioperasikan agar bisnis Anda dapat berkembang secara efisien.
           </p>
 
           <div className="mt-6 divide-y divide-[#D8E6F8] dark:divide-slate-800">

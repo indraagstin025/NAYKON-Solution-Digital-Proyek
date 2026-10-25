@@ -12,7 +12,7 @@ export function PortfolioCaseStudies() {
   const filterTabs: { label: string; value: CategoryFilter }[] = [
     { label: "Semua Proyek", value: "all" },
     { label: "Aplikasi Web & Dasbor", value: "webapp" },
-    { label: "Website Korporasi", value: "website" },
+    { label: "Website Bisnis", value: "website" },
     { label: "Aplikasi Mobile", value: "mobile" },
   ];
 

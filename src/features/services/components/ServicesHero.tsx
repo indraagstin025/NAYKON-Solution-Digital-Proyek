@@ -32,7 +32,7 @@ export function ServicesHero() {
           <span className="text-[#0066FF]">pertumbuhan bisnis</span>
         </h1>
         <p className="mx-auto mt-4 max-w-[660px] text-[14px] sm:text-[15px] leading-[1.7] text-[#4A5D78]">
-          Dari website profil korporasi hingga sistem alur kerja terintegrasi, kami
+          Dari website profil bisnis hingga sistem alur kerja terintegrasi, tim kami
           merancang dan mengembangkan produk digital yang siap digunakan jangka panjang.
         </p>
       </div>

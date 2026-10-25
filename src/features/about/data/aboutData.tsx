@@ -31,9 +31,9 @@ export const ABOUT_APPROACH_ITEMS = [
 export const ABOUT_VALUE_CARDS = [
   {
     icon: <RocketIcon className="h-6 w-6" />,
-    title: "Visi Perusahaan",
+    title: "Visi Tim Kami",
     description:
-      "Menjadi mitra rekayasa teknologi pilihan utama bagi korporasi dan bisnis di Indonesia dalam mengakselerasi inovasi digital yang berkelanjutan.",
+      "Menjadi mitra rekayasa teknologi pilihan utama bagi UMKM dan bisnis di Indonesia dalam menghadirkan solusi website dan aplikasi yang berdampak nyata.",
   },
   {
     icon: <LightningBoltIcon className="h-6 w-6" />,

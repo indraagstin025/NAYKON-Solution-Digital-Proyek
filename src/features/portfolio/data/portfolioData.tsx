@@ -31,12 +31,12 @@ export const PORTFOLIO_CASES: PortfolioProject[] = [
   },
   {
     id: "nusa-precast",
-    category: "Website Korporasi",
+    category: "Website Bisnis",
     categorySlug: "website",
     clientSector: "Manufaktur & Konstruksi B2B",
-    title: "Nusa Mandiri Precast - Portal Korporasi & Katalog B2B",
+    title: "Nusa Mandiri Precast - Portal Bisnis & Katalog B2B",
     description:
-      "Website profil perusahaan manufaktur beton pracetak dengan katalog produk digital terstruktur, formulir permintaan penawaran harga otomatis, serta optimasi SEO halaman spesifikasi.",
+      "Website profil usaha manufaktur beton pracetak dengan katalog produk digital terstruktur, formulir permintaan penawaran harga otomatis, serta optimasi SEO halaman spesifikasi.",
     tech: ["React", "Next.js", "SEO Engine", "Headless CMS"],
     impact:
       "Mempermudah eksplorasi katalog produk bagi mitra kontraktor dan meningkatkan penerimaan penawaran harga terverifikasi hingga 3x lipat.",

@@ -25,8 +25,8 @@ export default function Footer() {
               />
             </Link>
             <p className="mt-4 max-w-[340px] text-[13px] sm:text-[13.5px] leading-[1.7] text-[#4A5D78] dark:text-slate-300">
-              NAIKON Digital Solution adalah mitra rekayasa perangkat lunak dan website
-              korporasi yang berfokus pada arsitektur modern, performa tinggi, dan dampak
+              NAIKON Digital Solution adalah tim rekayasa perangkat lunak dan website
+              yang berfokus pada arsitektur modern, performa tinggi, dan dampak
               pertumbuhan nyata bagi bisnis Anda.
             </p>
             <div className="mt-5 inline-flex items-center gap-2 rounded-full bg-white/90 dark:bg-slate-900/90 border border-[#D4E6FF] dark:border-slate-800 px-3.5 py-1.5 shadow-2xs">

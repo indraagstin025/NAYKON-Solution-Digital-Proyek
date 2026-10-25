@@ -33,7 +33,7 @@ export function AboutValues() {
               Siap Berkolaborasi?
             </h3>
             <p className="mt-2 text-[13.5px] leading-[1.68] text-[#4A5D78]">
-              Diskusikan rencana pengembangan website atau sistem internal perusahaan
+              Diskusikan rencana pengembangan website atau sistem internal bisnis
               Anda bersama tim teknis NAIKON.
             </p>
           </div>

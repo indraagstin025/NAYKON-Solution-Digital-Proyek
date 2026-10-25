@@ -15,7 +15,7 @@ export const SERVICES_LIST = [
     category: "Website",
     title: "Pembuatan Website Bisnis",
     description:
-      "Website korporasi dan landing page yang berfokus pada kredibilitas, konversi, dan pengalaman pengguna.",
+      "Website profil bisnis, company profile, dan landing page yang berfokus pada kredibilitas, konversi, dan pengalaman pengguna.",
     tags: ["Company Profile", "Landing Page", "Optimasi SEO", "Panel Admin / CMS"],
     linkText: "Konsultasi Pembuatan Web",
     linkHref: "/kontak",
@@ -48,7 +48,7 @@ export const SERVICES_LIST = [
     category: "Mobile App",
     title: "Pengembangan Aplikasi Mobile",
     description:
-      "Pembuatan aplikasi Android dan iOS yang responsif, intuitif, dan terintegrasi dengan sistem bisnis dan API server perusahaan Anda.",
+      "Pembuatan aplikasi Android dan iOS yang responsif, intuitif, dan terintegrasi dengan sistem alur kerja dan API server bisnis Anda.",
     tags: [
       "Android & iOS",
       "Push Notification",

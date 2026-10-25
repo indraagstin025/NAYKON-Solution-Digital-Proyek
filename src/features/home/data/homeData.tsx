@@ -58,7 +58,7 @@ export const ABOUT_FEATURES = [
     icon: <CodeIcon className="h-5 w-5" />,
     title: "Standar Kode Teruji & Skalabilitas Tinggi",
     description:
-      "Arsitektur modern yang cepat, aman dari celah kerentanan, dan mudah dikembangkan untuk kebutuhan jangka panjang perusahaan Anda.",
+      "Arsitektur modern yang cepat, aman dari celah kerentanan, dan mudah dikembangkan untuk kebutuhan jangka panjang bisnis Anda.",
   },
   {
     icon: <CheckCircledIcon className="h-5 w-5" />,
@@ -74,7 +74,7 @@ export const SERVICES_TEASERS: ServiceTeaserItem[] = [
     category: "Website",
     title: "Pembuatan Website Bisnis",
     description:
-      "Website korporasi dan landing page berkecepatan tinggi yang dirancang untuk membangun kredibilitas, meningkatkan konversi prospek, dan ramah seluler.",
+      "Website profil bisnis dan landing page berkecepatan tinggi yang dirancang untuk membangun kredibilitas, meningkatkan konversi prospek, dan ramah seluler.",
     tags: ["Company Profile", "Landing Page", "Optimasi SEO", "Panel Admin / CMS"],
     linkText: "Konsultasi Pembuatan Web",
     linkHref: "/kontak",
@@ -107,7 +107,7 @@ export const SERVICES_TEASERS: ServiceTeaserItem[] = [
     category: "Mobile App",
     title: "Pengembangan Aplikasi Mobile",
     description:
-      "Aplikasi Android dan iOS yang responsif, intuitif, dan terintegrasi aman dengan database server dan sistem manajemen bisnis perusahaan Anda.",
+      "Aplikasi Android dan iOS yang responsif, intuitif, dan terintegrasi aman dengan database server dan sistem alur kerja bisnis Anda.",
     tags: [
       "Android & iOS",
       "Push Notification",
@@ -176,12 +176,12 @@ export const PORTFOLIO_TEASERS: PortfolioTeaserItem[] = [
   },
   {
     id: "nusa-precast",
-    category: "Website Korporasi",
+    category: "Website Bisnis",
     categorySlug: "website",
     clientSector: "Manufaktur & Konstruksi B2B",
-    title: "Nusa Mandiri Precast - Portal Korporasi & Katalog B2B",
+    title: "Nusa Mandiri Precast - Portal Bisnis & Katalog B2B",
     description:
-      "Website profil perusahaan manufaktur beton pracetak dengan katalog produk digital terstruktur, formulir permintaan penawaran harga otomatis, serta optimasi SEO halaman spesifikasi.",
+      "Website profil usaha manufaktur beton pracetak dengan katalog produk digital terstruktur, formulir permintaan penawaran harga otomatis, serta optimasi SEO halaman spesifikasi.",
     tech: ["React", "Next.js", "SEO Engine", "Headless CMS"],
     businessImpact:
       "Mempermudah eksplorasi katalog produk bagi mitra kontraktor dan meningkatkan penerimaan penawaran harga terverifikasi hingga 3x lipat.",
@@ -275,7 +275,7 @@ export const PRICING_PLANS: PricingPlan[] = [
     priceLabel: "Mulai dari",
     price: "Rp 3.500.000",
     description:
-      "Solusi terlengkap untuk Perusahaan, Korporasi, dan Bisnis Berkembang yang mengutamakan kredibilitas tinggi, optimasi SEO Google, dan kemudahan update konten.",
+      "Solusi lengkap untuk brand, profil usaha, dan bisnis berkembang yang mengutamakan kredibilitas tinggi, optimasi SEO Google, dan kemudahan update konten.",
     features: [
       "Estimasi pengerjaan terstruktur (5 – 10 hari kerja)",
       "4 – 8 Halaman lengkap (Beranda, Profil, Layanan, Portofolio, dsb.)",
@@ -316,7 +316,7 @@ export const FAQ_ITEMS: FaqItem[] = [
     id: "durasi-pengerjaan",
     question: "Berapa lama estimasi waktu pengerjaan proyek di NAIKON?",
     answer:
-      "Waktu pengerjaan bergantung pada skala proyek. Untuk Landing Page atau paket Starter, pengerjaan biasanya berkisar antara 2 – 4 hari kerja. Untuk Website Korporasi lengkap berkisar 5 – 10 hari kerja. Sementara untuk Aplikasi Web kustom atau Aplikasi Mobile, jadwal disesuaikan dengan roadmap sprint Agile yang disepakati bersama sejak awal.",
+      "Waktu pengerjaan bergantung pada skala proyek. Untuk Landing Page atau paket Starter, pengerjaan biasanya berkisar antara 2 – 4 hari kerja. Untuk Website Bisnis lengkap berkisar 5 – 10 hari kerja. Sementara untuk Aplikasi Web kustom atau Aplikasi Mobile, jadwal disesuaikan dengan roadmap sprint Agile yang disepakati bersama tim kami sejak awal.",
   },
   {
     id: "garansi-teknis",
@@ -328,7 +328,7 @@ export const FAQ_ITEMS: FaqItem[] = [
     id: "materi-klien",
     question: "Apa saja materi yang perlu disiapkan oleh pihak klien?",
     answer:
-      "Secara umum, materi awal mencakup logo perusahaan, profil singkat bisnis, daftar layanan/produk, dan kontak resmi. Namun jika Anda belum memiliki konten yang tersusun rapi, tim NAIKON siap membantu menyusun arsitektur informasi dan memberikan template materi yang mudah diisi.",
+      "Secara umum, materi awal mencakup logo usaha, profil singkat bisnis, daftar layanan/produk, dan kontak resmi. Namun jika Anda belum memiliki konten yang tersusun rapi, tim kami siap membantu menyusun arsitektur informasi dan memberikan template materi yang mudah diisi.",
   },
   {
     id: "mobile-dan-seo",

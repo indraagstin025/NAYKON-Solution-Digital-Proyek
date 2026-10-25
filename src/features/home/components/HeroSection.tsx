@@ -67,9 +67,9 @@ export function HeroSection() {
             </h1>
 
             <p className="mt-4 max-w-[465px] text-[13.5px] sm:text-[15px] leading-[1.65] text-[#4A5D78] dark:text-[#b5c5dd] font-normal">
-              NAIKON Solutions Digital adalah perusahaan teknologi yang merancang solusi
-              digital cerdas untuk membantu bisnis tumbuh, beradaptasi, dan melangkah
-              lebih jauh.
+              NAIKON Digital Solution adalah tim rekayasa website dan aplikasi yang
+              merancang solusi digital cerdas untuk membantu bisnis Anda tumbuh,
+              beradaptasi, dan melangkah lebih jauh.
             </p>
 
             <div className="mt-6 flex flex-wrap items-center gap-3.5">

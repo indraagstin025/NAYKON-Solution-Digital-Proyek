@@ -23,7 +23,7 @@ export function AboutHero() {
 
       <div className="mx-auto w-full max-w-[1240px] px-6 sm:px-9 lg:px-14 text-center">
         <p className="text-[11px] sm:text-xs font-extrabold uppercase tracking-[0.24em] text-[#0066FF]">
-          PROFIL PERUSAHAAN
+          TENTANG TIM KAMI
         </p>
         <h1 className="mt-3 text-[30px] sm:text-[40px] lg:text-[44px] font-extrabold leading-[1.15] tracking-[-0.02em] text-[#041E42]">
           Mitra rekayasa digital untuk{" "}

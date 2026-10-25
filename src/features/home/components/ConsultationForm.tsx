@@ -59,7 +59,7 @@ export function ConsultationForm() {
             value={formData.email}
             onChange={handleChange}
             autoComplete="email"
-            placeholder="nama@perusahaan.com"
+            placeholder="nama@email.com"
             required
             maxLength={254}
             className="w-full rounded-xl border border-[#D8E6F8] dark:border-slate-700 bg-[#F8FBFF] dark:bg-slate-800/80 px-4 py-3 text-[13.5px] text-[#041E42] dark:text-white placeholder:text-[#869AB8] outline-none transition focus:border-[#0066FF] focus:bg-white dark:focus:bg-slate-900 focus:ring-3 focus:ring-[#0066FF]/15"
