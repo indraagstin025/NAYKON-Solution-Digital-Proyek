@@ -48,10 +48,10 @@ export function PortfolioCaseStudies() {
           >
             <div>
               <div className="flex items-center justify-between mb-4">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#E8F2FF] text-[#0066FF] transition-transform duration-300 group-hover:scale-105">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#0066FF] text-white shadow-sm transition-transform duration-300 group-hover:scale-105">
                   {item.icon}
                 </div>
-                <span className="rounded-full bg-[#EDF5FF] px-3.5 py-1 text-[11px] font-bold text-[#0066FF]">
+                <span className="rounded-full bg-[#0066FF] text-white px-3.5 py-1 text-[11px] font-bold shadow-sm">
                   {item.metric}
                 </span>
               </div>
@@ -71,7 +71,7 @@ export function PortfolioCaseStudies() {
                 {item.tech.map((tech) => (
                   <span
                     key={tech}
-                    className="rounded-full bg-[#EEF5FF] px-3 py-1 text-[11px] font-semibold text-[#0A2558]"
+                    className="rounded-full bg-slate-100 px-3 py-1 text-[11px] font-semibold text-[#0A2558] border border-slate-200"
                   >
                     {tech}
                   </span>

@@ -6,7 +6,7 @@ export function BlogCallout() {
   return (
     <div className="mt-12 rounded-[24px] bg-[#F4F8FF] border border-[#DCEBFE] p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6">
       <div className="flex items-start sm:items-center gap-4">
-        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#E8F2FF] text-[#0066FF]">
+        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#0066FF] text-white shadow-sm">
           <ReaderIcon className="h-6 w-6" />
         </div>
         <div>

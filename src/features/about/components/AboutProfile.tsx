@@ -18,8 +18,8 @@ export function AboutProfile() {
             />
           </div>
 
-          <div className="relative sm:absolute -bottom-5 left-0 sm:-left-3 mt-4 sm:mt-0 w-full sm:w-[82%] max-w-[390px] rounded-2xl border border-slate-100 bg-white px-5 py-4 shadow-[0_16px_38px_-8px_rgba(10,35,80,0.14)] flex items-center gap-4">
-            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#EAF3FF] text-[#0066FF]">
+          <div className="relative sm:absolute -bottom-5 left-0 sm:-left-3 mt-4 sm:mt-0 w-full sm:w-[82%] max-w-[390px] rounded-2xl border border-slate-200 bg-white px-5 py-4 shadow-[0_16px_38px_-8px_rgba(10,35,80,0.14)] flex items-center gap-4">
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#0066FF] text-white shadow-sm">
               <PersonIcon className="h-5 w-5" />
             </div>
             <div className="h-9 w-[1px] bg-[#CBD5E1] shrink-0" />
@@ -52,9 +52,9 @@ export function AboutProfile() {
           {ABOUT_APPROACH_ITEMS.map((item) => (
             <div
               key={item.title}
-              className="py-4 first:pt-2 last:pb-0 flex items-start gap-4"
+              className="py-4 first:pt-2 last:pb-0 flex items-start gap-4 group"
             >
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#E6F1FF] text-[#0066FF]">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#0066FF] text-white shadow-sm transition-transform duration-300 group-hover:scale-105">
                 {item.icon}
               </div>
               <div>

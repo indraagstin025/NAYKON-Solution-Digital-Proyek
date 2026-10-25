@@ -40,10 +40,6 @@ export function ServicesSection() {
         <circle cx="154.2" cy="116.1" r="5.5" fill="#0066FF" />
       </svg>
 
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -bottom-24 -left-16 h-[210px] w-[210px] rounded-full bg-[#DCEEFF]/75 dark:bg-blue-900/15 -z-10"
-      />
 
       <svg
         viewBox="0 0 260 260"
@@ -99,7 +95,7 @@ export function ServicesSection() {
                     <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#0066FF] text-white shadow-sm transition-transform duration-300 group-hover:scale-105">
                       <GlobeIcon className="h-5 w-5" />
                     </div>
-                    <span className="rounded-full bg-[#EDF5FF] dark:bg-blue-950/80 px-3.5 py-1 text-[11.5px] font-semibold text-[#0066FF] dark:text-blue-300">
+                    <span className="rounded-full bg-[#0066FF] px-3.5 py-1 text-[11.5px] font-bold text-white shadow-sm">
                       Website
                     </span>
                   </div>
@@ -121,7 +117,7 @@ export function ServicesSection() {
                     ].map((tag) => (
                       <span
                         key={tag}
-                        className="inline-flex items-center gap-1.5 rounded-full bg-[#EEF5FF] dark:bg-slate-800 px-3 py-1.5 text-[11.5px] font-semibold text-[#0055D4] dark:text-blue-300 transition-colors group-hover:bg-[#E2EFFF] dark:group-hover:bg-slate-700"
+                        className="inline-flex items-center gap-1.5 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-3 py-1.5 text-[11.5px] font-semibold text-[#0F172A] dark:text-slate-200 transition-colors group-hover:bg-slate-200 dark:group-hover:bg-slate-700"
                       >
                         <CheckIcon className="h-3.5 w-3.5 shrink-0 text-[#0066FF] dark:text-blue-400 stroke-2" />
                         <span>{tag}</span>
@@ -238,18 +234,13 @@ export function ServicesSection() {
               </div>
             </article>
 
-            <article className="lg:col-span-5 relative overflow-hidden flex flex-col justify-between rounded-[30px] bg-white dark:bg-slate-900/95 border border-[#E6F0FD] dark:border-slate-800 p-7 sm:p-9 shadow-[0_14px_38px_-10px_rgba(10,35,80,0.07)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_22px_45px_-10px_rgba(0,102,255,0.15)] hover:border-[#0066FF]/40 group">
-              <div
-                aria-hidden="true"
-                className="pointer-events-none absolute -bottom-16 -right-16 h-48 w-48 rounded-full bg-[#EBF4FF]/80 dark:bg-blue-900/15 -z-10"
-              />
-
+            <article className="lg:col-span-5 relative overflow-hidden flex flex-col justify-between rounded-[30px] bg-white dark:bg-slate-900/95 border border-[#E6F0FD] dark:border-slate-800 p-7 sm:p-9 shadow-[0_14px_38px_-10px_rgba(10,35,80,0.07)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_22px_45px_-10px_rgba(0,102,255,0.15)] hover:border-[#0066FF] group">
               <div>
                 <div className="flex items-center justify-between mb-5">
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#E8F2FF] text-[#0066FF] dark:bg-blue-950/80 dark:text-blue-400 transition-transform duration-300 group-hover:scale-105 group-hover:rotate-45">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#0066FF] text-white shadow-sm transition-transform duration-300 group-hover:scale-105 group-hover:rotate-45">
                     <UpdateIcon className="h-5 w-5" />
                   </div>
-                  <span className="rounded-full bg-[#EDF5FF] dark:bg-blue-950/70 px-3.5 py-1 text-[11.5px] font-semibold text-[#0066FF] dark:text-blue-300">
+                  <span className="rounded-full bg-[#0066FF] px-3.5 py-1 text-[11.5px] font-bold text-white shadow-sm">
                     Penyegaran
                   </span>
                 </div>
@@ -271,7 +262,7 @@ export function ServicesSection() {
                   ].map((tag) => (
                     <span
                       key={tag}
-                      className="rounded-full bg-[#EEF5FF] dark:bg-slate-800 px-3.5 py-1.5 text-[11.5px] font-semibold text-[#0A2558] dark:text-slate-200 transition-colors group-hover:bg-[#E3EFFF]"
+                      className="rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-3.5 py-1.5 text-[11.5px] font-semibold text-[#0F172A] dark:text-slate-200 transition-colors group-hover:bg-slate-200 dark:group-hover:bg-slate-700"
                     >
                       {tag}
                     </span>
@@ -292,13 +283,13 @@ export function ServicesSection() {
           </div>
 
           <div className="grid gap-6 lg:gap-7 lg:grid-cols-12 items-stretch">
-            <article className="lg:col-span-5 relative overflow-hidden flex flex-col justify-between rounded-[30px] bg-white dark:bg-slate-900/95 border border-[#E6F0FD] dark:border-slate-800 p-7 sm:p-9 shadow-[0_14px_38px_-10px_rgba(10,35,80,0.07)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_22px_45px_-10px_rgba(0,102,255,0.15)] hover:border-[#0066FF]/40 group">
+            <article className="lg:col-span-5 relative overflow-hidden flex flex-col justify-between rounded-[30px] bg-white dark:bg-slate-900/95 border border-[#E6F0FD] dark:border-slate-800 p-7 sm:p-9 shadow-[0_14px_38px_-10px_rgba(10,35,80,0.07)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_22px_45px_-10px_rgba(0,102,255,0.15)] hover:border-[#0066FF] group">
               <div>
                 <div className="flex items-center justify-between mb-5">
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#E8F2FF] text-[#0066FF] dark:bg-blue-950/80 dark:text-blue-400 transition-transform duration-300 group-hover:scale-105">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#0066FF] text-white shadow-sm transition-transform duration-300 group-hover:scale-105">
                     <CodeIcon className="h-5 w-5" />
                   </div>
-                  <span className="rounded-full bg-[#EDF5FF] dark:bg-blue-950/70 px-3.5 py-1 text-[11.5px] font-semibold text-[#0066FF] dark:text-blue-300">
+                  <span className="rounded-full bg-[#0066FF] px-3.5 py-1 text-[11.5px] font-bold text-white shadow-sm">
                     Sistem Web
                   </span>
                 </div>
@@ -321,7 +312,7 @@ export function ServicesSection() {
                   ].map((tag) => (
                     <span
                       key={tag}
-                      className="rounded-full bg-[#EEF5FF] dark:bg-slate-800 px-3.5 py-1.5 text-[11.5px] font-semibold text-[#0A2558] dark:text-slate-200 transition-colors group-hover:bg-[#E3EFFF]"
+                      className="rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-3.5 py-1.5 text-[11.5px] font-semibold text-[#0F172A] dark:text-slate-200 transition-colors group-hover:bg-slate-200 dark:group-hover:bg-slate-700"
                     >
                       {tag}
                     </span>

@@ -21,10 +21,10 @@ export function ServiceWorkflow() {
             className="rounded-[24px] bg-white border border-[#E6F0FD] p-6 shadow-[0_12px_32px_-10px_rgba(10,35,80,0.06)]"
           >
             <div className="flex items-center justify-between mb-4">
-              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#E8F2FF] text-[#0066FF]">
+              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#0066FF] text-white shadow-sm">
                 {item.icon}
               </div>
-              <span className="rounded-full bg-[#EDF5FF] px-3 py-1 text-[11px] font-bold text-[#0066FF]">
+              <span className="rounded-full bg-[#0066FF] text-white px-3 py-1 text-[11px] font-bold shadow-sm">
                 {item.step}
               </span>
             </div>

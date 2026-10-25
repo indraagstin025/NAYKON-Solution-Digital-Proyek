@@ -32,10 +32,6 @@ export function WorkflowSection() {
         <circle cx="115.8" cy="116" r="5.5" fill="#0066FF" />
       </svg>
 
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -bottom-24 -left-20 h-[210px] w-[210px] rounded-full bg-[#DCEEFF]/70 dark:bg-blue-900/15 -z-10"
-      />
 
       <div className="relative z-10 mx-auto w-full max-w-[1240px] px-6 sm:px-9 lg:px-14">
         <div className="text-center max-w-[740px] mx-auto">
@@ -62,10 +58,10 @@ export function WorkflowSection() {
             >
               <div>
                 <div className="flex items-center justify-between mb-5">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#E8F2FF] text-[#0066FF] dark:bg-blue-950/80 dark:text-blue-400 transition-transform duration-300 group-hover:scale-105">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#0066FF] text-white shadow-sm transition-transform duration-300 group-hover:scale-105">
                     {step.icon}
                   </div>
-                  <span className="rounded-full bg-[#EDF5FF] dark:bg-blue-950/70 px-3.5 py-1 text-[11.5px] font-bold text-[#0066FF] dark:text-blue-300">
+                  <span className="rounded-full bg-[#0066FF] text-white px-3.5 py-1 text-[11.5px] font-bold shadow-sm">
                     {step.badge}
                   </span>
                 </div>

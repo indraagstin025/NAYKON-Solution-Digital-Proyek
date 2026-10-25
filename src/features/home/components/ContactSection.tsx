@@ -8,10 +8,6 @@ export function ContactSection() {
       id="kontak"
       className="relative isolate overflow-hidden bg-gradient-to-b from-[#F8FBFF] via-[#FFFFFF] to-[#F3F8FF] dark:from-[#030711] dark:via-[#061231] dark:to-[#091a45] py-16 sm:py-20 lg:py-24 border-t border-slate-200/50 dark:border-blue-900/30"
     >
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -top-20 -right-20 h-[215px] w-[215px] rounded-full bg-[#DCEEFF]/75 dark:bg-blue-900/15 -z-10"
-      />
       <svg
         viewBox="0 0 260 260"
         fill="none"
@@ -61,7 +57,7 @@ export function ContactSection() {
                 key={item.title}
                 className="flex items-center gap-4 rounded-2xl bg-white dark:bg-slate-900/90 border border-[#E6F0FD] dark:border-slate-800 p-4 sm:p-5 shadow-[0_12px_32px_-10px_rgba(10,35,80,0.06)]"
               >
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#E8F2FF] text-[#0066FF] dark:bg-blue-950/80 dark:text-blue-400">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#0066FF] text-white shadow-sm">
                   {item.icon}
                 </div>
                 <div>

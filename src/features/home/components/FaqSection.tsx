@@ -53,7 +53,7 @@ export function FaqSection() {
                   <span className="text-[15px] sm:text-[16px] font-bold text-[#041E42] dark:text-white">
                     {item.question}
                   </span>
-                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#EBF3FF] text-[#0066FF] dark:bg-blue-950 dark:text-blue-400">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#0066FF] text-white shadow-sm">
                     {isOpen ? (
                       <MinusIcon className="h-4 w-4" />
                     ) : (
@@ -74,7 +74,7 @@ export function FaqSection() {
 
         <div className="mt-12 rounded-[24px] bg-[#F4F8FF] dark:bg-slate-800/70 border border-[#DCEBFE] dark:border-slate-700/60 p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-5">
           <div className="flex items-center gap-3.5">
-            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#E8F2FF] text-[#0066FF] dark:bg-blue-950 dark:text-blue-400">
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#0066FF] text-white shadow-sm">
               <ChatBubbleIcon className="h-5 w-5" />
             </div>
             <div>

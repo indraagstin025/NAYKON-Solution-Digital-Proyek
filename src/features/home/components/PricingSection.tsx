@@ -53,7 +53,7 @@ export function PricingSection() {
                     className={`inline-block rounded-full px-4 py-1 text-[11px] font-bold uppercase tracking-wider ${
                       plan.isRecommended
                         ? "bg-[#0066FF] text-white shadow-md"
-                        : "bg-[#EDF5FF] text-[#0066FF] border border-[#CDE2FF] dark:bg-slate-800 dark:border-slate-700 dark:text-blue-300"
+                        : "bg-[#041E42] text-white shadow-sm dark:bg-slate-800 dark:border-slate-700 dark:text-blue-300"
                     }`}
                   >
                     {plan.badge}
@@ -99,7 +99,7 @@ export function PricingSection() {
                   className={`inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full px-6 py-3 text-[13.5px] font-bold transition-all ${
                     plan.isRecommended
                       ? "bg-[#0066FF] text-white shadow-[0_10px_25px_-5px_rgba(0,102,255,0.45)] hover:bg-[#0052CC] hover:scale-[1.01]"
-                      : "bg-[#F0F6FF] text-[#0066FF] hover:bg-[#E3EFFF] dark:bg-slate-800 dark:text-blue-300 dark:hover:bg-slate-700"
+                      : "bg-slate-100 text-[#041E42] hover:bg-slate-200 border border-slate-200 dark:bg-slate-800 dark:text-white dark:hover:bg-slate-700"
                   }`}
                 >
                   <span>{plan.ctaText}</span>

@@ -10,14 +10,6 @@ export function HeroSection() {
       id="beranda"
       className="relative isolate overflow-hidden pt-[68px] lg:pt-[76px] bg-gradient-to-b from-[#F8FBFF] via-[#FFFFFF] to-[#F3F9FF] dark:from-[#030711] dark:via-[#061231] dark:to-[#091a45] min-h-screen flex items-center"
     >
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -top-12 -left-14 h-[195px] w-[195px] rounded-full bg-[#E4F0FF]/80 dark:bg-blue-900/15"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute top-20 -right-20 h-[220px] w-[220px] rounded-full bg-[#E4F0FF]/75 dark:bg-blue-900/15"
-      />
 
       <div
         aria-hidden="true"
@@ -103,7 +95,7 @@ export function HeroSection() {
                     <div className="hidden sm:block h-6 w-[1px] bg-[#CBD5E1] dark:bg-slate-700/80" />
                   )}
                   <div className="flex items-center gap-2.5">
-                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#E6F1FF] text-[#0066FF] dark:bg-blue-950/80 dark:text-blue-400">
+                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#0066FF] text-white shadow-sm">
                       {item.icon}
                     </div>
                     <span className="text-xs sm:text-[12.5px] font-medium text-[#0A192F] dark:text-slate-200">

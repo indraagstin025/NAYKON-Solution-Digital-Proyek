@@ -12,7 +12,7 @@ export function AboutValues() {
             key={card.title}
             className="rounded-[24px] bg-white border border-[#E6F0FD] p-6 sm:p-7 shadow-[0_14px_38px_-10px_rgba(10,35,80,0.06)]"
           >
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#E8F2FF] text-[#0066FF] mb-4">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#0066FF] text-white shadow-sm mb-4">
               {card.icon}
             </div>
             <h3 className="text-[18px] font-extrabold text-[#041E42]">
@@ -26,7 +26,7 @@ export function AboutValues() {
 
         <article className="rounded-[24px] bg-white border border-[#E6F0FD] p-6 sm:p-7 shadow-[0_14px_38px_-10px_rgba(10,35,80,0.06)] flex flex-col justify-between">
           <div>
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#E8F2FF] text-[#0066FF] mb-4">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#0066FF] text-white shadow-sm mb-4">
               <CheckCircledIcon className="h-6 w-6" />
             </div>
             <h3 className="text-[18px] font-extrabold text-[#041E42]">

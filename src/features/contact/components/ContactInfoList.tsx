@@ -18,7 +18,7 @@ export function ContactInfoList() {
             key={item.title}
             className="flex items-center gap-4 rounded-2xl bg-white border border-[#E6F0FD] p-4 sm:p-5 shadow-[0_12px_32px_-10px_rgba(10,35,80,0.06)]"
           >
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#E8F2FF] text-[#0066FF]">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#0066FF] text-white shadow-sm">
               {item.icon}
             </div>
             <div>

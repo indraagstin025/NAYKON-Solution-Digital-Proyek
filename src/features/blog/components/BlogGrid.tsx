@@ -12,10 +12,10 @@ export function BlogGrid() {
         >
           <div>
             <div className="flex items-center justify-between mb-5">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#E8F2FF] text-[#0066FF]">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#0066FF] text-white shadow-sm">
                 {post.icon}
               </div>
-              <span className="rounded-full bg-[#EDF5FF] px-3.5 py-1 text-[11.5px] font-semibold text-[#0066FF]">
+              <span className="rounded-full bg-[#0066FF] text-white px-3.5 py-1 text-[11.5px] font-semibold shadow-sm">
                 {post.category}
               </span>
             </div>
