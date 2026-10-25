@@ -1,50 +1,40 @@
 import React from "react";
 import Link from "next/link";
-import { CheckCircledIcon, ArrowRightIcon } from "@radix-ui/react-icons";
+import { CheckCircledIcon, ArrowRightIcon, BarChartIcon, ChatBubbleIcon } from "@radix-ui/react-icons";
 import { PRICING_PLANS } from "../data/homeData";
 
 export function PricingSection() {
   return (
     <section
       id="paket"
-      className="relative isolate overflow-hidden bg-gradient-to-b from-[#F7FAFF] via-[#FFFFFF] to-[#F5F9FF] dark:from-[#030711] dark:via-[#061231] dark:to-[#091a45] py-16 sm:py-20 lg:py-24 border-t border-slate-200/50 dark:border-blue-900/30"
+      className="relative isolate overflow-hidden bg-white dark:bg-[#030711] py-16 sm:py-20 lg:py-24 border-t border-slate-200 dark:border-slate-800"
     >
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -top-20 -right-20 h-[210px] w-[210px] rounded-full bg-[#DCEEFF]/75 dark:bg-blue-900/15 -z-10"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -bottom-24 -left-20 h-[210px] w-[210px] rounded-full bg-[#DCEEFF]/70 dark:bg-blue-900/15 -z-10"
-      />
-
       <div className="relative z-10 mx-auto w-full max-w-[1240px] px-6 sm:px-9 lg:px-14">
         <div className="text-center max-w-[760px] mx-auto">
           <p className="text-[11px] sm:text-xs font-extrabold uppercase tracking-[0.24em] text-[#0066FF] dark:text-blue-400">
             PAKET LAYANAN &amp; INVESTASI
           </p>
           <h2 className="mt-3 text-[26px] sm:text-[34px] lg:text-[38px] font-extrabold leading-[1.18] tracking-[-0.02em] text-[#041E42] dark:text-white">
-            Pilihan paket solusi digital terukur{" "}
+            Pilihan paket solusi website terukur{" "}
             <br className="hidden sm:inline" />
             untuk{" "}
             <span className="text-[#0066FF] dark:text-[#38BDF8]">
               kebutuhan bisnis Anda
             </span>
           </h2>
-          <p className="mx-auto mt-3.5 max-w-[660px] text-[13.5px] sm:text-[14.5px] leading-[1.68] text-[#4A5D78] dark:text-slate-300">
-            Biaya pasti sejak awal tanpa biaya tersembunyi, dengan pengerjaan terstruktur,
-            dukungan teknis penuh, serta garansi pasca-peluncuran.
+          <p className="mx-auto mt-3.5 max-w-[680px] text-[13.5px] sm:text-[14.5px] leading-[1.68] text-[#4A5D78] dark:text-slate-300">
+            Estimasi biaya awal transparan dan sudah termasuk Dashboard Analitik buatan NAIKON Digital Solutions untuk memantau performa dan kunjungan website secara mandiri.
           </p>
         </div>
 
-        <div className="mt-12 sm:mt-14 grid gap-8 lg:grid-cols-3 items-stretch">
+        <div className="mt-12 sm:mt-14 grid gap-6 lg:gap-7 sm:grid-cols-2 lg:grid-cols-3 items-stretch">
           {PRICING_PLANS.map((plan) => (
             <article
               key={plan.id}
-              className={`relative flex flex-col justify-between rounded-[26px] p-7 sm:p-8 transition-all duration-300 ${
+              className={`relative flex flex-col justify-between rounded-[26px] p-6 sm:p-7 transition-all duration-300 ${
                 plan.isRecommended
-                  ? "bg-white dark:bg-slate-900 border-2 border-[#0066FF] shadow-[0_22px_50px_-12px_rgba(0,102,255,0.22)] lg:-translate-y-2"
-                  : "bg-white dark:bg-slate-900/90 border border-[#E6F0FD] dark:border-slate-800 shadow-[0_14px_38px_-10px_rgba(10,35,80,0.07)] hover:-translate-y-1"
+                  ? "bg-white dark:bg-slate-900 border-2 border-[#0066FF] shadow-[0_22px_50px_-12px_rgba(0,102,255,0.22)] lg:-translate-y-1.5"
+                  : "bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 shadow-[0_14px_38px_-10px_rgba(10,35,80,0.06)] hover:-translate-y-1"
               }`}
             >
               {plan.badge && (
@@ -62,29 +52,29 @@ export function PricingSection() {
               )}
 
               <div>
-                <h3 className="text-[20px] sm:text-[22px] font-extrabold text-[#041E42] dark:text-white">
+                <h3 className="text-[19px] sm:text-[21px] font-extrabold text-[#041E42] dark:text-white">
                   {plan.name}
                 </h3>
-                <p className="mt-2 text-[13px] leading-relaxed text-[#4A5D78] dark:text-slate-300 min-h-[48px]">
+                <p className="mt-2 text-[13px] leading-relaxed text-[#4A5D78] dark:text-slate-300 min-h-[44px]">
                   {plan.description}
                 </p>
 
-                <div className="mt-6 pt-5 pb-6 border-y border-[#E8F0FC] dark:border-slate-800">
+                <div className="mt-5 pt-4 pb-5 border-y border-[#E8F0FC] dark:border-slate-800">
                   <span className="block text-xs font-semibold uppercase tracking-wider text-[#7388A6] dark:text-slate-400">
                     {plan.priceLabel}
                   </span>
-                  <div className="mt-1 text-[28px] sm:text-[32px] font-extrabold text-[#0066FF] dark:text-[#38BDF8] tracking-tight">
+                  <div className="mt-1 text-[21px] sm:text-[23px] font-extrabold text-[#0066FF] dark:text-[#38BDF8] tracking-tight">
                     {plan.price}
                   </div>
                 </div>
 
-                <div className="mt-6 space-y-3">
+                <div className="mt-5 space-y-3">
                   <p className="text-xs font-bold uppercase tracking-wider text-[#041E42] dark:text-slate-200">
                     Fitur &amp; Cakupan Layanan:
                   </p>
                   <ul className="space-y-2.5">
                     {plan.features.map((feature) => (
-                      <li key={feature} className="flex items-start gap-2.5 text-[13px] text-[#4A5D78] dark:text-slate-300">
+                      <li key={feature} className="flex items-start gap-2.5 text-[12.5px] sm:text-[13px] text-[#4A5D78] dark:text-slate-300">
                         <CheckCircledIcon className="h-4 w-4 shrink-0 text-[#0066FF] dark:text-blue-400 mt-0.5" />
                         <span>{feature}</span>
                       </li>
@@ -93,10 +83,10 @@ export function PricingSection() {
                 </div>
               </div>
 
-              <div className="mt-8 pt-4">
+              <div className="mt-7 pt-4">
                 <Link
                   href={plan.ctaHref}
-                  className={`inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full px-6 py-3 text-[13.5px] font-bold transition-all ${
+                  className={`inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full px-5 py-2.5 text-[13px] sm:text-[13.5px] font-bold transition-all ${
                     plan.isRecommended
                       ? "bg-[#0066FF] text-white shadow-[0_10px_25px_-5px_rgba(0,102,255,0.45)] hover:bg-[#0052CC] hover:scale-[1.01]"
                       : "bg-slate-100 text-[#041E42] hover:bg-slate-200 border border-slate-200 dark:bg-slate-800 dark:text-white dark:hover:bg-slate-700"
@@ -108,6 +98,45 @@ export function PricingSection() {
               </div>
             </article>
           ))}
+        </div>
+
+        <div className="mt-12 rounded-[26px] bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-7 sm:p-9 shadow-sm grid gap-6 md:grid-cols-2 items-center">
+          <div className="flex items-start gap-4">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#0066FF] text-white shadow-sm">
+              <BarChartIcon className="h-6 w-6" />
+            </div>
+            <div>
+              <h4 className="text-[16px] sm:text-[17px] font-extrabold text-[#041E42] dark:text-white">
+                Termasuk Dashboard Analitik NAIKON
+              </h4>
+              <p className="mt-1.5 text-xs sm:text-[13px] leading-relaxed text-[#526580] dark:text-slate-300">
+                Setiap paket website sudah dilengkapi modul pelacakan performa agregat tanpa cookie pelacak. Pantau angka pengunjung unik, halaman terpopuler, hingga jumlah klik tombol WhatsApp secara real-time.
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-start gap-4 md:border-l md:border-slate-200 md:dark:border-slate-800 md:pl-6">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#0066FF] text-white shadow-sm">
+              <ChatBubbleIcon className="h-6 w-6" />
+            </div>
+            <div>
+              <h4 className="text-[16px] sm:text-[17px] font-extrabold text-[#041E42] dark:text-white">
+                Butuh Sistem atau Fitur Kustom?
+              </h4>
+              <p className="mt-1.5 text-xs sm:text-[13px] leading-relaxed text-[#526580] dark:text-slate-300">
+                Harga di atas merupakan estimasi awal yang fleksibel sesuai ruang lingkup proyek. Untuk pengembangan sistem informasi internal, desain UI/UX, atau penambahan fitur khusus, diskusikan langsung bersama tim kami.
+              </p>
+              <div className="mt-3">
+                <Link
+                  href="/kontak"
+                  className="inline-flex items-center gap-1.5 text-xs sm:text-[13px] font-bold text-[#0066FF] dark:text-blue-400 hover:text-[#0052CC]"
+                >
+                  <span>Konsultasikan Kebutuhan Kustom</span>
+                  <ArrowRightIcon className="h-3.5 w-3.5" />
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
