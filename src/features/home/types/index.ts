@@ -40,11 +40,35 @@ export interface WorkflowStepItem {
 export interface PortfolioTeaserItem {
   id: string;
   category: string;
+  categorySlug: "all" | "webapp" | "website" | "mobile";
+  clientSector: string;
   title: string;
   description: string;
   tech: string[];
   businessImpact: string;
+  metric: string;
   icon: React.ReactNode;
+}
+
+export interface PricingPlan {
+  id: string;
+  name: string;
+  badge?: string;
+  isRecommended?: boolean;
+  priceLabel: string;
+  price: string;
+  period?: string;
+  description: string;
+  features: string[];
+  ctaText: string;
+  ctaHref: string;
+}
+
+export interface FaqItem {
+  id: string;
+  question: string;
+  answer: string;
+  category?: string;
 }
 
 export interface ContactInfoItem {

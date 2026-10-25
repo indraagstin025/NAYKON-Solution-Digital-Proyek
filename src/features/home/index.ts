@@ -4,6 +4,8 @@ export * from "./components/AboutSection";
 export * from "./components/ServicesSection";
 export * from "./components/WorkflowSection";
 export * from "./components/PortfolioSection";
+export * from "./components/PricingSection";
+export * from "./components/FaqSection";
 export * from "./components/ContactSection";
 export * from "./components/ConsultationForm";
 export * from "./hooks/useConsultationForm";

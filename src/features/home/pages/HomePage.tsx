@@ -8,6 +8,8 @@ import { AboutSection } from "../components/AboutSection";
 import { ServicesSection } from "../components/ServicesSection";
 import { WorkflowSection } from "../components/WorkflowSection";
 import { PortfolioSection } from "../components/PortfolioSection";
+import { PricingSection } from "../components/PricingSection";
+import { FaqSection } from "../components/FaqSection";
 import { ContactSection } from "../components/ContactSection";
 
 export function HomePage() {
@@ -33,6 +35,8 @@ export function HomePage() {
         <ServicesSection />
         <WorkflowSection />
         <PortfolioSection />
+        <PricingSection />
+        <FaqSection />
         <ContactSection />
       </main>
       <Footer />
