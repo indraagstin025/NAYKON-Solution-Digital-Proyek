@@ -365,10 +365,10 @@ export function ServicesSection() {
               <div className="grid gap-6 md:grid-cols-[1.1fr_0.9fr] items-center">
                 <div>
                   <div className="flex items-center gap-3 mb-5">
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white/20 text-white backdrop-blur-md border border-white/25 shadow-sm transition-transform duration-300 group-hover:scale-105">
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#08296B] text-white border border-[#164294] shadow-sm transition-transform duration-300 group-hover:scale-105">
                       <MobileIcon className="h-5 w-5" />
                     </div>
-                    <span className="rounded-full bg-white/15 backdrop-blur-md border border-white/20 px-3.5 py-1 text-[11.5px] font-semibold text-white">
+                    <span className="rounded-full bg-[#08296B] border border-[#164294] px-3.5 py-1 text-[11.5px] font-semibold text-white">
                       Mobile App
                     </span>
                   </div>
@@ -390,7 +390,7 @@ export function ServicesSection() {
                     ].map((tag) => (
                       <span
                         key={tag}
-                        className="rounded-full bg-white/15 backdrop-blur-sm border border-white/20 px-3.5 py-1.5 text-[11.5px] font-semibold text-white transition-colors group-hover:bg-white/25"
+                        className="rounded-full bg-[#08296B] border border-[#164294] px-3.5 py-1.5 text-[11.5px] font-semibold text-white transition-colors group-hover:bg-[#0D388E]"
                       >
                         {tag}
                       </span>
