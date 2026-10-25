@@ -63,7 +63,7 @@ export function PricingSection() {
                   <span className="block text-xs font-semibold uppercase tracking-wider text-[#7388A6] dark:text-slate-400">
                     {plan.priceLabel}
                   </span>
-                  <div className="mt-1 text-[21px] sm:text-[23px] font-extrabold text-[#0066FF] dark:text-[#38BDF8] tracking-tight">
+                  <div className="mt-1 text-[26px] sm:text-[28px] font-extrabold text-[#0066FF] dark:text-[#38BDF8] tracking-tight">
                     {plan.price}
                   </div>
                 </div>
