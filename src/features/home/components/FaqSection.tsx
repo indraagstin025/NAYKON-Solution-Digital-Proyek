@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { PlusIcon, MinusIcon, ArrowRightIcon, ChatBubbleIcon } from "@radix-ui/react-icons";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { FAQ_ITEMS } from "../data/homeData";
 
 export function FaqSection() {
@@ -18,7 +19,7 @@ export function FaqSection() {
       className="relative isolate overflow-hidden bg-gradient-to-b from-[#F5F9FF] via-[#FFFFFF] to-[#F8FBFF] dark:from-[#030711] dark:via-[#061231] dark:to-[#091a45] py-16 sm:py-20 lg:py-24 border-t border-slate-200/50 dark:border-blue-900/30"
     >
       <div className="relative z-10 mx-auto w-full max-w-[980px] px-6 sm:px-9 lg:px-14">
-        <div className="text-center max-w-[700px] mx-auto">
+        <ScrollReveal className="text-center max-w-[700px] mx-auto">
           <p className="text-[11px] sm:text-xs font-extrabold uppercase tracking-[0.24em] text-[#0066FF] dark:text-blue-400">
             PERTANYAAN UMUM (FAQ)
           </p>
@@ -34,66 +35,93 @@ export function FaqSection() {
             Jawaban transparan mengenai durasi pengerjaan, garansi teknis, kesiapan materi,
             serta tata cara memulai proyek bersama tim NAIKON.
           </p>
-        </div>
+        </ScrollReveal>
 
         <div className="mt-12 space-y-3.5">
-          {FAQ_ITEMS.map((item) => {
+          {FAQ_ITEMS.map((item, idx) => {
             const isOpen = openId === item.id;
+            const panelId = `faq-panel-${item.id}`;
             return (
-              <div
-                key={item.id}
-                className="overflow-hidden rounded-2xl bg-white dark:bg-slate-900/90 border border-[#E6F0FD] dark:border-slate-800 shadow-[0_8px_24px_-8px_rgba(10,35,80,0.05)] transition-colors"
-              >
-                <button
-                  type="button"
-                  onClick={() => toggleItem(item.id)}
-                  aria-expanded={isOpen}
-                  className="flex w-full items-center justify-between gap-4 p-5 sm:p-6 text-left transition-colors hover:bg-blue-50/40 dark:hover:bg-slate-800/40"
+              <ScrollReveal key={item.id} delayMs={idx * 55}>
+                <div
+                  className={`overflow-hidden rounded-2xl bg-white dark:bg-slate-900 border shadow-[0_8px_24px_-8px_rgba(10,35,80,0.05)] transition-all duration-300 ${
+                    isOpen
+                      ? "border-[#0066FF] shadow-[0_14px_34px_-10px_rgba(0,102,255,0.14)]"
+                      : "border-[#E6F0FD] dark:border-slate-800 hover:border-[#0066FF] dark:hover:border-blue-500"
+                  }`}
                 >
-                  <span className="text-[15px] sm:text-[16px] font-bold text-[#041E42] dark:text-white">
-                    {item.question}
-                  </span>
-                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#0066FF] text-white shadow-sm">
-                    {isOpen ? (
-                      <MinusIcon className="h-4 w-4" />
-                    ) : (
-                      <PlusIcon className="h-4 w-4" />
-                    )}
-                  </div>
-                </button>
+                  <button
+                    type="button"
+                    onClick={() => toggleItem(item.id)}
+                    aria-expanded={isOpen}
+                    aria-controls={panelId}
+                    className="group flex w-full items-center justify-between gap-4 p-5 sm:p-6 text-left transition-colors hover:bg-slate-50 dark:hover:bg-slate-800/60 cursor-pointer"
+                  >
+                    <span
+                      className={`text-[15px] sm:text-[16px] font-bold transition-colors ${
+                        isOpen
+                          ? "text-[#0066FF] dark:text-[#38BDF8]"
+                          : "text-[#041E42] dark:text-white group-hover:text-[#0066FF] dark:group-hover:text-[#38BDF8]"
+                      }`}
+                    >
+                      {item.question}
+                    </span>
+                    <div
+                      className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#0066FF] text-white shadow-sm transition-transform duration-300 ${
+                        isOpen ? "rotate-180 scale-105" : "group-hover:scale-105"
+                      }`}
+                    >
+                      {isOpen ? (
+                        <MinusIcon className="h-4 w-4" />
+                      ) : (
+                        <PlusIcon className="h-4 w-4" />
+                      )}
+                    </div>
+                  </button>
 
-                {isOpen && (
-                  <div className="px-5 pb-6 sm:px-6 pt-1 text-[13.5px] leading-[1.75] text-[#4A5D78] dark:text-slate-300 border-t border-[#F0F5FD] dark:border-slate-800/80">
-                    {item.answer}
+                  <div
+                    id={panelId}
+                    role="region"
+                    className={`grid transition-[grid-template-rows,opacity] duration-300 ease-out ${
+                      isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                    }`}
+                  >
+                    <div className="overflow-hidden">
+                      <div className="px-5 pb-6 sm:px-6 pt-2 text-[13.5px] leading-[1.75] text-[#4A5D78] dark:text-slate-300 border-t border-[#F0F5FD] dark:border-slate-800">
+                        {item.answer}
+                      </div>
+                    </div>
                   </div>
-                )}
-              </div>
+                </div>
+              </ScrollReveal>
             );
           })}
         </div>
 
-        <div className="mt-12 rounded-[24px] bg-[#F4F8FF] dark:bg-slate-800/70 border border-[#DCEBFE] dark:border-slate-700/60 p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-5">
-          <div className="flex items-center gap-3.5">
-            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#0066FF] text-white shadow-sm">
-              <ChatBubbleIcon className="h-5 w-5" />
+        <ScrollReveal delayMs={120}>
+          <div className="mt-12 rounded-[24px] bg-[#F4F8FF] dark:bg-slate-900 border border-[#DCEBFE] dark:border-slate-800 p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-5 transition-all duration-300 hover:border-[#0066FF]">
+            <div className="flex items-center gap-3.5 group">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#0066FF] text-white shadow-sm transition-transform duration-300 group-hover:scale-110">
+                <ChatBubbleIcon className="h-5 w-5" />
+              </div>
+              <div>
+                <h3 className="text-[15px] sm:text-base font-bold text-[#041E42] dark:text-white">
+                  Masih memiliki pertanyaan teknis lainnya?
+                </h3>
+                <p className="text-xs sm:text-[13px] text-[#4A5D78] dark:text-slate-300">
+                  Tim rekayasa NAIKON siap berdiskusi langsung sesuai kebutuhan unik bisnis Anda.
+                </p>
+              </div>
             </div>
-            <div>
-              <h3 className="text-[15px] sm:text-base font-bold text-[#041E42] dark:text-white">
-                Masih memiliki pertanyaan teknis lainnya?
-              </h3>
-              <p className="text-xs sm:text-[13px] text-[#4A5D78] dark:text-slate-300">
-                Tim rekayasa NAIKON siap berdiskusi langsung sesuai kebutuhan unik bisnis Anda.
-              </p>
-            </div>
+            <Link
+              href="/kontak"
+              className="group shrink-0 inline-flex min-h-11 items-center gap-2 rounded-full bg-[#0066FF] hover:bg-[#0052CC] px-5 py-2.5 text-xs sm:text-[13px] font-bold text-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98]"
+            >
+              <span>Hubungi Kami</span>
+              <ArrowRightIcon className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-1" />
+            </Link>
           </div>
-          <Link
-            href="/kontak"
-            className="shrink-0 inline-flex items-center gap-2 rounded-full bg-[#0066FF] hover:bg-[#0052CC] px-5 py-2.5 text-xs sm:text-[13px] font-bold text-white shadow-sm transition-all"
-          >
-            <span>Hubungi Kami</span>
-            <ArrowRightIcon className="h-3.5 w-3.5" />
-          </Link>
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );

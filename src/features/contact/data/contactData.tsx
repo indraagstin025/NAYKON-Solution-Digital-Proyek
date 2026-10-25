@@ -12,7 +12,7 @@ export const CONTACT_CHANNELS = [
   {
     icon: <ClockIcon className="h-5 w-5" />,
     title: "Jam Kerja Operasional",
-    content: "Senin – Jumat, 09.00 – 18.00 WIB",
+    content: "Senin - Jumat, 09.00 - 18.00 WIB",
   },
   {
     icon: <ChatBubbleIcon className="h-5 w-5" />,

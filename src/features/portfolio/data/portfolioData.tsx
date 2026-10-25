@@ -11,6 +11,8 @@ export interface PortfolioProject {
   tech: string[];
   impact: string;
   metric: string;
+  image: string;
+  imageAlt: string;
   icon: React.ReactNode;
 }
 
@@ -27,7 +29,10 @@ export const PORTFOLIO_CASES: PortfolioProject[] = [
     impact:
       "Menghilangkan pencatatan ganda antar-cabang dan mempercepat konsolidasi laporan operasional harian hingga 65%.",
     metric: "Efisiensi +65%",
-    icon: <LayersIcon className="h-6 w-6" />,
+    image: "/portfolio/karsa-logistics.jpg",
+    imageAlt:
+      "Tampilan antarmuka dasbor operasional inventaris multi-gudang Karsa Logistics Hub pada layar laptop",
+    icon: <LayersIcon className="h-5 w-5" />,
   },
   {
     id: "nusa-precast",
@@ -41,7 +46,10 @@ export const PORTFOLIO_CASES: PortfolioProject[] = [
     impact:
       "Mempermudah eksplorasi katalog produk bagi mitra kontraktor dan meningkatkan penerimaan penawaran harga terverifikasi hingga 3x lipat.",
     metric: "Konversi B2B 3x",
-    icon: <GlobeIcon className="h-6 w-6" />,
+    image: "/portfolio/nusa-precast.jpg",
+    imageAlt:
+      "Pratinjau website bisnis dan katalog spesifikasi beton pracetak B2B Nusa Mandiri Precast pada layar monitor",
+    icon: <GlobeIcon className="h-5 w-5" />,
   },
   {
     id: "medikalink-express",
@@ -55,7 +63,10 @@ export const PORTFOLIO_CASES: PortfolioProject[] = [
     impact:
       "Memastikan bukti serah terima terdokumentasi akurat dan memangkas waktu verifikasi lapangan tanpa sengketa pengantaran.",
     metric: "Akurasi 99.8%",
-    icon: <MobileIcon className="h-6 w-6" />,
+    image: "/portfolio/medikalink-express.jpg",
+    imageAlt:
+      "Mockup dua smartphone menampilkan rute GPS kurir dan tanda tangan serah terima digital MedikaLink Express",
+    icon: <MobileIcon className="h-5 w-5" />,
   },
   {
     id: "finops-dashboard",
@@ -69,7 +80,10 @@ export const PORTFOLIO_CASES: PortfolioProject[] = [
     impact:
       "Memangkas waktu tutup buku bulanan dari 7 hari kerja menjadi hanya 1.5 hari berkat rekonsiliasi otomatis terpadu.",
     metric: "Tutup Buku 4x Cepat",
-    icon: <LayersIcon className="h-6 w-6" />,
+    image: "/portfolio/finops-dashboard.jpg",
+    imageAlt:
+      "Tampilan dasbor analisis cash flow dan rekonsiliasi bank otomatis FinOps Enterprise pada laptop",
+    icon: <LayersIcon className="h-5 w-5" />,
   },
   {
     id: "artha-retail-pos",
@@ -83,7 +97,10 @@ export const PORTFOLIO_CASES: PortfolioProject[] = [
     impact:
       "Mencegah kebocoran stok ritel hingga 0% dan memastikan antrean kasir tetap berjalan lancar tanpa terganggu kendala sinyal.",
     metric: "Uptime 99.9%",
-    icon: <DesktopIcon className="h-6 w-6" />,
+    image: "/portfolio/artha-retail-pos.jpg",
+    imageAlt:
+      "Tampilan tablet kasir ritel Artha POS Cloud dengan katalog produk dan sinkronisasi transaksi online",
+    icon: <DesktopIcon className="h-5 w-5" />,
   },
   {
     id: "aura-living",
@@ -97,6 +114,9 @@ export const PORTFOLIO_CASES: PortfolioProject[] = [
     impact:
       "Membuka jalur penjualan langsung ke konsumen nasional dan mencatatkan kenaikan transaksi pemesanan kustom sebesar 120%.",
     metric: "Penjualan +120%",
-    icon: <GlobeIcon className="h-6 w-6" />,
+    image: "/portfolio/aura-living.jpg",
+    imageAlt:
+      "Tampilan katalog e-commerce furnitur kayu kustom Aura Living Studio dengan pilihan material pada layar laptop",
+    icon: <GlobeIcon className="h-5 w-5" />,
   },
 ];

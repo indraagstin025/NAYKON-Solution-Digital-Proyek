@@ -8,9 +8,8 @@ export function HeroSection() {
   return (
     <section
       id="beranda"
-      className="relative isolate overflow-hidden pt-[68px] lg:pt-[76px] bg-gradient-to-b from-[#F8FBFF] via-[#FFFFFF] to-[#F3F9FF] dark:from-[#030711] dark:via-[#061231] dark:to-[#091a45] min-h-screen flex items-center"
+      className="relative isolate overflow-hidden pt-[68px] lg:pt-[76px] bg-gradient-to-b from-[#F8FBFF] via-[#FFFFFF] to-[#F3F9FF] dark:from-[#030711] dark:via-[#061231] dark:to-[#091a45] min-h-[auto] lg:min-h-dvh flex items-center"
     >
-
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 bottom-0 h-[115px] sm:h-[155px] lg:h-[190px] w-full overflow-hidden -z-10"
@@ -52,10 +51,10 @@ export function HeroSection() {
         </svg>
       </div>
 
-      <div className="relative z-10 mx-auto w-full max-w-[1240px] px-6 sm:px-9 lg:px-14 py-8 sm:py-11 lg:py-12">
+      <div className="relative z-10 mx-auto w-full max-w-[1240px] px-6 sm:px-9 lg:px-14 py-10 sm:py-14 lg:py-12">
         <div className="grid items-center gap-10 lg:grid-cols-[1.02fr_0.98fr] lg:gap-8">
           <div className="max-w-[530px]">
-            <h1 className="text-[33px] sm:text-[42px] lg:text-[48px] xl:text-[52px] font-extrabold leading-[1.12] tracking-[-0.025em] text-[#041E42] dark:text-[#f4f8ff]">
+            <h1 className="nk-hero-enter text-[33px] sm:text-[42px] lg:text-[48px] xl:text-[52px] font-extrabold leading-[1.12] tracking-[-0.025em] text-[#041E42] dark:text-[#f4f8ff]">
               Inovasi teknologi.
               <br />
               <span className="sm:whitespace-nowrap">
@@ -66,39 +65,39 @@ export function HeroSection() {
               </span>
             </h1>
 
-            <p className="mt-4 max-w-[465px] text-[13.5px] sm:text-[15px] leading-[1.65] text-[#4A5D78] dark:text-[#b5c5dd] font-normal">
+            <p className="nk-hero-enter nk-hero-delay-1 mt-4 max-w-[465px] text-[13.5px] sm:text-[15px] leading-[1.65] text-[#4A5D78] dark:text-[#b5c5dd] font-normal">
               NAIKON Digital Solution adalah tim rekayasa website dan aplikasi yang
               merancang solusi digital cerdas untuk membantu bisnis Anda tumbuh,
               beradaptasi, dan melangkah lebih jauh.
             </p>
 
-            <div className="mt-6 flex flex-wrap items-center gap-3.5">
+            <div className="nk-hero-enter nk-hero-delay-2 mt-6 flex flex-wrap items-center gap-3.5">
               <Link
                 href="/kontak"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-[#0066FF] hover:bg-[#0052CC] px-6 py-3 text-[13.5px] font-semibold text-white shadow-[0_10px_25px_-5px_rgba(0,102,255,0.45)] transition-all hover:scale-[1.02] hover:shadow-[0_14px_30px_-5px_rgba(0,102,255,0.55)]"
+                className="group inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-[#0066FF] hover:bg-[#0052CC] px-6 py-3 text-[13.5px] font-semibold text-white shadow-[0_10px_25px_-5px_rgba(0,102,255,0.45)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_14px_30px_-5px_rgba(0,102,255,0.55)] active:scale-[0.98]"
               >
                 <span>Mulai Berkolaborasi</span>
-                <ArrowRightIcon className="h-4 w-4" />
+                <ArrowRightIcon className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
               </Link>
               <Link
                 href="/portofolio"
-                className="inline-flex items-center justify-center rounded-full border border-[#3B82F6] bg-white/85 hover:bg-blue-50/80 px-6 py-3 text-[13.5px] font-semibold text-[#0066FF] transition-all hover:scale-[1.02] dark:bg-slate-900/80 dark:border-blue-500/60 dark:text-blue-400 dark:hover:bg-slate-800"
+                className="inline-flex min-h-11 items-center justify-center rounded-full border-2 border-[#0066FF] bg-white hover:bg-[#0066FF] hover:text-white px-6 py-3 text-[13.5px] font-semibold text-[#0066FF] transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98] dark:bg-slate-900 dark:border-blue-500 dark:text-blue-400 dark:hover:bg-[#0066FF] dark:hover:text-white"
               >
                 Lihat Portofolio
               </Link>
             </div>
 
-            <div className="mt-9 sm:mt-11 flex flex-wrap items-center gap-y-3 gap-x-4 sm:gap-x-5">
+            <div className="nk-hero-enter nk-hero-delay-3 mt-9 sm:mt-11 flex flex-wrap items-center gap-y-3 gap-x-4 sm:gap-x-5">
               {HERO_HIGHLIGHTS.map((item, index) => (
                 <React.Fragment key={item.label}>
                   {index > 0 && (
                     <div className="hidden sm:block h-6 w-[1px] bg-[#CBD5E1] dark:bg-slate-700/80" />
                   )}
-                  <div className="flex items-center gap-2.5">
-                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#0066FF] text-white shadow-sm">
+                  <div className="group flex items-center gap-2.5">
+                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#0066FF] text-white shadow-sm transition-transform duration-300 group-hover:scale-110">
                       {item.icon}
                     </div>
-                    <span className="text-xs sm:text-[12.5px] font-medium text-[#0A192F] dark:text-slate-200">
+                    <span className="text-xs sm:text-[12.5px] font-semibold text-[#0A192F] dark:text-slate-200">
                       {item.label}
                     </span>
                   </div>
@@ -107,12 +106,12 @@ export function HeroSection() {
             </div>
           </div>
 
-          <div className="relative flex items-center justify-center w-full max-w-[550px] mx-auto min-h-[300px] sm:min-h-[380px] lg:min-h-[430px]">
+          <div className="nk-hero-enter nk-hero-delay-2 group relative flex items-center justify-center w-full max-w-[550px] mx-auto min-h-[280px] sm:min-h-[360px] lg:min-h-[430px]">
             <svg
               viewBox="0 0 700 540"
               fill="none"
               aria-hidden="true"
-              className="pointer-events-none absolute inset-0 w-full h-full"
+              className="pointer-events-none absolute inset-0 w-full h-full transition-transform duration-700 ease-out group-hover:scale-[1.02]"
             >
               <defs>
                 <linearGradient id="heroAuraOval" x1="15%" y1="5%" x2="85%" y2="95%">
@@ -199,7 +198,7 @@ export function HeroSection() {
               />
             </svg>
 
-            <div className="relative z-10 w-[63%] sm:w-[65%] max-w-[345px] transition-transform duration-500 hover:scale-[1.01]">
+            <div className="relative z-10 w-[63%] sm:w-[65%] max-w-[345px] transition-transform duration-500 ease-out group-hover:scale-[1.03] group-hover:-translate-y-1">
               <Image
                 src="/logo-hero.png"
                 alt="NAIKON Digital Solution - Mengakselerasi Inovasi, Mewujudkan Karya Digital"

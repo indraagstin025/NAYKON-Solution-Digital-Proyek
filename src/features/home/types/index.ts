@@ -47,6 +47,8 @@ export interface PortfolioTeaserItem {
   tech: string[];
   businessImpact: string;
   metric: string;
+  image: string;
+  imageAlt: string;
   icon: React.ReactNode;
 }
 

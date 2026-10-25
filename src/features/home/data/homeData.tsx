@@ -172,7 +172,10 @@ export const PORTFOLIO_TEASERS: PortfolioTeaserItem[] = [
     businessImpact:
       "Menghilangkan pencatatan ganda antar-cabang dan mempercepat konsolidasi laporan operasional harian hingga 65%.",
     metric: "Efisiensi +65%",
-    icon: <LayersIcon className="h-6 w-6" />,
+    image: "/portfolio/karsa-logistics.jpg",
+    imageAlt:
+      "Tampilan antarmuka dasbor operasional inventaris multi-gudang Karsa Logistics Hub pada layar laptop",
+    icon: <LayersIcon className="h-5 w-5" />,
   },
   {
     id: "nusa-precast",
@@ -186,7 +189,10 @@ export const PORTFOLIO_TEASERS: PortfolioTeaserItem[] = [
     businessImpact:
       "Mempermudah eksplorasi katalog produk bagi mitra kontraktor dan meningkatkan penerimaan penawaran harga terverifikasi hingga 3x lipat.",
     metric: "Konversi B2B 3x",
-    icon: <GlobeIcon className="h-6 w-6" />,
+    image: "/portfolio/nusa-precast.jpg",
+    imageAlt:
+      "Pratinjau website bisnis dan katalog spesifikasi beton pracetak B2B Nusa Mandiri Precast pada layar monitor",
+    icon: <GlobeIcon className="h-5 w-5" />,
   },
   {
     id: "medikalink-express",
@@ -200,7 +206,10 @@ export const PORTFOLIO_TEASERS: PortfolioTeaserItem[] = [
     businessImpact:
       "Memastikan bukti serah terima terdokumentasi akurat dan memangkas waktu verifikasi lapangan tanpa sengketa pengantaran.",
     metric: "Akurasi 99.8%",
-    icon: <MobileIcon className="h-6 w-6" />,
+    image: "/portfolio/medikalink-express.jpg",
+    imageAlt:
+      "Mockup dua smartphone menampilkan rute GPS kurir dan tanda tangan serah terima digital MedikaLink Express",
+    icon: <MobileIcon className="h-5 w-5" />,
   },
   {
     id: "finops-dashboard",
@@ -214,7 +223,10 @@ export const PORTFOLIO_TEASERS: PortfolioTeaserItem[] = [
     businessImpact:
       "Memangkas waktu tutup buku bulanan dari 7 hari kerja menjadi hanya 1.5 hari berkat rekonsiliasi otomatis terpadu.",
     metric: "Tutup Buku 4x Cepat",
-    icon: <LayersIcon className="h-6 w-6" />,
+    image: "/portfolio/finops-dashboard.jpg",
+    imageAlt:
+      "Tampilan dasbor analisis cash flow dan rekonsiliasi bank otomatis FinOps Enterprise pada laptop",
+    icon: <LayersIcon className="h-5 w-5" />,
   },
   {
     id: "artha-retail-pos",
@@ -228,7 +240,10 @@ export const PORTFOLIO_TEASERS: PortfolioTeaserItem[] = [
     businessImpact:
       "Mencegah kebocoran stok ritel hingga 0% dan memastikan antrean kasir tetap berjalan lancar tanpa terganggu kendala sinyal.",
     metric: "Uptime 99.9%",
-    icon: <DesktopIcon className="h-6 w-6" />,
+    image: "/portfolio/artha-retail-pos.jpg",
+    imageAlt:
+      "Tampilan tablet kasir ritel Artha POS Cloud dengan katalog produk dan sinkronisasi transaksi online",
+    icon: <DesktopIcon className="h-5 w-5" />,
   },
   {
     id: "aura-living",
@@ -242,7 +257,10 @@ export const PORTFOLIO_TEASERS: PortfolioTeaserItem[] = [
     businessImpact:
       "Membuka jalur penjualan langsung ke konsumen nasional dan mencatatkan kenaikan transaksi pemesanan kustom sebesar 120%.",
     metric: "Penjualan +120%",
-    icon: <GlobeIcon className="h-6 w-6" />,
+    image: "/portfolio/aura-living.jpg",
+    imageAlt:
+      "Tampilan katalog e-commerce furnitur kayu kustom Aura Living Studio dengan pilihan material pada layar laptop",
+    icon: <GlobeIcon className="h-5 w-5" />,
   },
 ];
 
@@ -263,7 +281,7 @@ export const PRICING_PLANS: PricingPlan[] = [
       "Optimasi dasar judul halaman & metadata SEO Google",
       "Termasuk Dashboard Analitik Tingkat Dasar buatan NAIKON",
       "Lacak klik tombol WhatsApp & grafik kunjungan 30 hari",
-      "Garansi teknis 14–30 hari & pendampingan penyesuaian konten",
+      "Garansi teknis 14 hingga 30 hari & pendampingan penyesuaian konten",
     ],
     ctaText: "Pilih Landing Page",
     ctaHref: "/kontak",
@@ -326,7 +344,7 @@ export const PRICING_PLANS: PricingPlan[] = [
       "Integrasi media sosial resmi & peta lokasi Google Maps",
       "Termasuk Dashboard Analitik Tingkat Dasar (Upgrade Menengah jika ada CMS)",
       "Panduan penggunaan & pelatihan pengelolaan bagi admin sekolah",
-      "Garansi teknis 30–45 hari & dukungan pemeliharaan awal",
+      "Garansi teknis 30 hingga 45 hari & dukungan pemeliharaan awal",
     ],
     ctaText: "Konsultasi Web Sekolah",
     ctaHref: "/kontak",
@@ -347,7 +365,7 @@ export const PRICING_PLANS: PricingPlan[] = [
       "Desain responsif & terhubung ke kanal media sosial komunitas",
       "Termasuk Dashboard Analitik Tingkat Dasar (Upgrade Menengah jika ada CMS)",
       "Panduan operasional dasar bagi tim pengurus organisasi",
-      "Garansi teknis 30–45 hari & dukungan penyesuaian konten",
+      "Garansi teknis 30 hingga 45 hari & dukungan penyesuaian konten",
     ],
     ctaText: "Konsultasi Web Komunitas",
     ctaHref: "/kontak",
@@ -368,7 +386,7 @@ export const PRICING_PLANS: PricingPlan[] = [
       "Termasuk Dashboard Analitik Tingkat Menengah (Satu panel dengan CMS)",
       "Statistik real-time, artikel terpopuler, durasi baca, & ekspor data CSV",
       "Optimasi SEO On-Page dinamis untuk setiap publikasi artikel",
-      "Panduan penggunaan sistem & garansi teknis 30–45 hari",
+      "Panduan penggunaan sistem & garansi teknis 30 hingga 45 hari",
     ],
     ctaText: "Pilih Portal Berita CMS",
     ctaHref: "/kontak",
@@ -380,13 +398,13 @@ export const FAQ_ITEMS: FaqItem[] = [
     id: "durasi-pengerjaan",
     question: "Berapa lama estimasi waktu pengerjaan proyek di NAIKON?",
     answer:
-      "Waktu pengerjaan bergantung pada skala proyek. Untuk Landing Page atau paket Starter, pengerjaan biasanya berkisar antara 2 – 4 hari kerja. Untuk Website Bisnis lengkap berkisar 5 – 10 hari kerja. Sementara untuk Aplikasi Web kustom atau Aplikasi Mobile, jadwal disesuaikan dengan roadmap sprint Agile yang disepakati bersama tim kami sejak awal.",
+      "Waktu pengerjaan bergantung pada skala proyek. Untuk paket Website Landing Page atau Portofolio Personal, pengerjaan biasanya berkisar antara 3 hingga 5 hari kerja. Untuk Website Company Profile, Komunitas, atau Sekolah berkisar 5 hingga 10 hari kerja. Sementara untuk Portal Berita CMS atau aplikasi kustom, jadwal disesuaikan dengan ruang lingkup yang disepakati bersama tim kami sejak awal.",
   },
   {
     id: "garansi-teknis",
     question: "Apakah ada garansi setelah website atau aplikasi selesai diluncurkan?",
     answer:
-      "Ya, setiap proyek NAIKON dilindungi garansi teknis resmi minimal 30 hingga 60 hari pasca-peluncuran. Jika ditemukan kendala, bug, atau error dari kode yang kami bangun, tim kami akan memperbaikinya secara cepat tanpa biaya tambahan.",
+      "Ya, setiap proyek NAIKON dilindungi garansi teknis resmi mulai dari 14 hingga 45 hari pasca-peluncuran sesuai paket layanan. Jika ditemukan kendala, bug, atau error dari kode yang tim kami bangun, kami akan memperbaikinya secara cepat tanpa biaya tambahan.",
   },
   {
     id: "materi-klien",
@@ -398,19 +416,19 @@ export const FAQ_ITEMS: FaqItem[] = [
     id: "mobile-dan-seo",
     question: "Apakah website yang dibangun sudah mobile-friendly dan ramah SEO?",
     answer:
-      "Tentu. Seluruh website yang kami rancang menggunakan pendekatan Mobile-First yang responsif di semua perangkat (smartphone, tablet, monitor lebar). Kode kami juga terstruktur dengan tag semantik SEO, open graph social media, dan Core Web Vitals berkecepatan tinggi agar mudah terindeks mesin pencari Google.",
+      "Tentu. Seluruh website yang tim kami rancang menggunakan pendekatan Mobile-First yang responsif di semua perangkat (smartphone, tablet, monitor lebar). Kode kami juga terstruktur dengan tag semantik SEO, open graph social media, dan Core Web Vitals berkecepatan tinggi agar mudah terindeks mesin pencari Google.",
   },
   {
     id: "skema-pembayaran",
     question: "Bagaimana skema pembayaran dan tahapan pengerjaan di NAIKON?",
     answer:
-      "Kami menerapkan skema pembayaran bertahap yang transparan dan aman bagi kedua pihak: Uang Muka (Down Payment) sebesar 40-50% saat proyek dimulai, dan pelunasan dilakukan setelah proses revisi disetujui serta aplikasi siap ditayangkan (Go-Live). Untuk proyek skala besar, kami juga menyediakan skema milestone berbasis sprint.",
+      "Tim kami menerapkan skema pembayaran bertahap yang transparan dan aman bagi kedua pihak: Uang Muka (Down Payment) sebesar 40 hingga 50% saat proyek dimulai, dan pelunasan dilakukan setelah proses revisi disetujui serta website siap ditayangkan (Go-Live).",
   },
   {
     id: "kelola-mandiri",
     question: "Apakah saya bisa mengelola atau mengubah isi konten website sendiri?",
     answer:
-      "Bisa. Untuk paket Corporate Pro dan Enterprise, kami menyediakan panel admin / CMS yang intuitif sehingga Anda atau tim admin dapat mengubah teks, menambah gambar produk, maupun menerbitkan artikel blog baru tanpa perlu memahami koding.",
+      "Bisa. Pada paket Website Portal Berita (CMS) maupun paket website yang ditambahkan modul CMS NAIKON, kami menyediakan panel admin intuitif sehingga Anda dapat mengubah teks, menambah galeri gambar, maupun menerbitkan artikel baru tanpa perlu memahami koding.",
   },
 ];
 
@@ -425,7 +443,7 @@ export const CONTACT_INFO_ITEMS: ContactInfoItem[] = [
   {
     icon: <ClockIcon className="h-5 w-5" />,
     title: "Jam Kerja Operasional",
-    content: "Senin – Jumat, 09.00 – 18.00 WIB",
+    content: "Senin - Jumat, 09.00 - 18.00 WIB",
   },
   {
     icon: <ChatBubbleIcon className="h-5 w-5" />,
