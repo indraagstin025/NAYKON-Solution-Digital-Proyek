@@ -6,12 +6,18 @@ import { NextResponse } from "next/server";
 import type { Role } from "@prisma/client";
 import { prisma } from "@/lib/db";
 import { hasPermission, type Permission } from "@/lib/permissions";
+import { withServerTimeout } from "@/lib/request-security";
 import {
+  SESSION_ABSOLUTE_MAX_SECONDS,
   SESSION_COOKIE_NAME,
+  SESSION_TTL_SECONDS,
   decryptSessionToken,
   encryptSessionToken,
+  getClearedSessionCookieOptions,
   getSessionCookieOptions,
 } from "@/lib/session-crypto";
+
+const SESSION_DB_VERIFY_TIMEOUT_MS = 8_000;
 
 export interface AuthenticatedUser {
   id: string;
@@ -33,18 +39,22 @@ export const getCurrentUser = cache(async (): Promise<AuthenticatedUser | null> 
   const payload = await decryptSessionToken(rawToken);
   if (!payload) return null;
 
-  const user = await prisma.user.findUnique({
-    where: { id: payload.sub },
-    select: {
-      id: true,
-      name: true,
-      email: true,
-      role: true,
-      isActive: true,
-      sessionVersion: true,
-      emailVerified: true,
-    },
-  });
+  const user = await withServerTimeout(
+    prisma.user.findUnique({
+      where: { id: payload.sub },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        role: true,
+        isActive: true,
+        sessionVersion: true,
+        emailVerified: true,
+      },
+    }),
+    SESSION_DB_VERIFY_TIMEOUT_MS,
+    "getCurrentUser"
+  );
 
   if (!user || !user.isActive || user.sessionVersion !== payload.sv) {
     return null;
@@ -119,17 +129,24 @@ export async function createUserSession(
   sessionVersion: number
 ): Promise<void> {
   const nowSeconds = Math.floor(Date.now() / 1000);
+  const absoluteExpiry = nowSeconds + SESSION_ABSOLUTE_MAX_SECONDS;
   const token = await encryptSessionToken({
     sub: userId,
     sv: sessionVersion,
     rf: nowSeconds,
+    abs: absoluteExpiry,
   });
 
   const cookieStore = await cookies();
-  cookieStore.set(SESSION_COOKIE_NAME, token, getSessionCookieOptions());
+  cookieStore.set(
+    SESSION_COOKIE_NAME,
+    token,
+    getSessionCookieOptions(SESSION_TTL_SECONDS)
+  );
 }
 
+// Uses explicit Secure + Path=/ attributes so __Host- cookies clear reliably on HTTPS.
 export async function destroyUserSession(): Promise<void> {
   const cookieStore = await cookies();
-  cookieStore.delete(SESSION_COOKIE_NAME);
+  cookieStore.set(SESSION_COOKIE_NAME, "", getClearedSessionCookieOptions());
 }

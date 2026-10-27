@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ExitIcon, ExternalLinkIcon } from "@radix-ui/react-icons";
+import { ExternalLinkIcon } from "@radix-ui/react-icons";
 import { requireUser } from "@/lib/auth";
-import { logoutPortalAction } from "@/features/auth/actions";
+import LogoutForm from "@/features/auth/components/LogoutForm";
 
 export const dynamic = "force-dynamic";
 
@@ -81,15 +81,7 @@ export default async function AdminWorkspaceLayout({
               </p>
             </div>
 
-            <form action={logoutPortalAction}>
-              <button
-                type="submit"
-                className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3.5 py-2 text-sm font-semibold text-[#F1F5FB] transition-colors hover:bg-[#192D54] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8]"
-              >
-                <ExitIcon className="h-4 w-4 text-[#94A7C4]" aria-hidden="true" />
-                <span>Keluar</span>
-              </button>
-            </form>
+            <LogoutForm />
           </div>
         </div>
       </header>

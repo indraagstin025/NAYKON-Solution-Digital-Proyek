@@ -10,6 +10,7 @@ import {
   ArrowRightIcon,
 } from "@radix-ui/react-icons";
 import PortalAccessBar from "@/features/auth/components/PortalAccessBar";
+import PortalErrorBoundary from "@/features/auth/components/PortalErrorBoundary";
 
 const NAV_ITEMS = [
   { label: "Beranda", href: "/" },
@@ -60,7 +61,9 @@ export default function Navbar() {
       }`}
       suppressHydrationWarning
     >
-      <PortalAccessBar onVisibilityChange={setIsPortalOpen} />
+      <PortalErrorBoundary>
+        <PortalAccessBar onVisibilityChange={setIsPortalOpen} />
+      </PortalErrorBoundary>
       <div className="mx-auto flex md:grid md:grid-cols-[1fr_auto_1fr] w-full max-w-[1240px] min-h-[68px] lg:min-h-[76px] items-center justify-between gap-4 px-6 sm:px-9 lg:px-14 py-2">
         <Link
           href="/"
