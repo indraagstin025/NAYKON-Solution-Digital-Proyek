@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { submitContactMessage } from "../actions";
 
 export interface ContactFormData {
   name: string;
@@ -50,16 +51,32 @@ export function useContactForm() {
       return;
     }
 
-    setFormStatus({ type: "sending", message: "Sedang mengirim pesan..." });
+    setFormStatus({ type: "sending", message: "Sedang mengirim pesan ke server..." });
 
-    setTimeout(() => {
-      setFormStatus({
-        type: "success",
-        message:
-          "Terima kasih! Pesan Anda telah kami terima. Tim NAIKON akan menghubungi Anda dalam waktu 1x24 jam kerja.",
+    try {
+      const result = await submitContactMessage({
+        ...formData,
+        sourcePage: typeof window !== "undefined" ? window.location.pathname : "/kontak",
       });
-      resetForm();
-    }, 900);
+
+      if (result.success) {
+        setFormStatus({
+          type: "success",
+          message: result.message,
+        });
+        resetForm();
+      } else {
+        setFormStatus({
+          type: "error",
+          message: result.message,
+        });
+      }
+    } catch {
+      setFormStatus({
+        type: "error",
+        message: "Terjadi kendala jaringan saat menghubungi server. Silakan coba lagi.",
+      });
+    }
   };
 
   return {
