@@ -1,0 +1,161 @@
+"use client";
+
+import { useMemo, useState } from "react";
+import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
+import type { AdminAuditLogDTO } from "@/server/modules/audit/queries";
+
+const dateTimeFormatter = new Intl.DateTimeFormat("id-ID", {
+  dateStyle: "medium",
+  timeStyle: "short",
+  timeZone: "Asia/Jakarta",
+});
+
+export interface AuditLogsManagerProps {
+  logs: AdminAuditLogDTO[];
+  entityTypes: string[];
+}
+
+export function AuditLogsManager({ logs, entityTypes }: AuditLogsManagerProps) {
+  const [entityFilter, setEntityFilter] = useState("ALL");
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const filteredLogs = useMemo(() => {
+    const q = searchQuery.trim().toLowerCase();
+    return logs.filter((log) => {
+      if (entityFilter !== "ALL" && log.entityType !== entityFilter) {
+        return false;
+      }
+      if (!q) return true;
+      return (
+        log.action.toLowerCase().includes(q) ||
+        log.entityType.toLowerCase().includes(q) ||
+        log.userName.toLowerCase().includes(q) ||
+        log.summaryText.toLowerCase().includes(q) ||
+        (log.entityId ?? "").toLowerCase().includes(q)
+      );
+    });
+  }, [logs, entityFilter, searchQuery]);
+
+  return (
+    <div className="space-y-6">
+      <div className="rounded-2xl border border-[#1E3358] bg-[#0B1730] p-4 sm:p-5 space-y-4">
+        <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+          <div className="flex flex-wrap items-center gap-1.5">
+            {entityTypes.map((entity) => {
+              const active = entityFilter === entity;
+              return (
+                <button
+                  key={entity}
+                  type="button"
+                  onClick={() => setEntityFilter(entity)}
+                  className={`inline-flex min-h-11 items-center rounded-xl border px-3 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8] ${
+                    active
+                      ? "border-[#60A5FA] bg-[#12213F] text-[#F1F5FB]"
+                      : "border-[#4E6E9E] bg-[#0B1730] text-[#94A7C4] hover:bg-[#12213F]"
+                  }`}
+                >
+                  {entity === "ALL" ? "Semua Entitas" : entity}
+                </button>
+              );
+            })}
+          </div>
+
+          <div className="relative w-full lg:w-72">
+            <label htmlFor="audit-search" className="sr-only">
+              Cari aksi, pelaku, atau entitas
+            </label>
+            <MagnifyingGlassIcon
+              className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#94A7C4]"
+              aria-hidden="true"
+            />
+            <input
+              id="audit-search"
+              type="search"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Cari aksi atau pelaku..."
+              className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] pl-10 pr-3.5 text-sm text-[#F1F5FB] placeholder:text-[#94A7C4]"
+            />
+          </div>
+        </div>
+      </div>
+
+      <section
+        aria-label="Tabel catatan audit keamanan"
+        className="rounded-2xl border border-[#1E3358] bg-[#0B1730] p-5 sm:p-6"
+      >
+        {filteredLogs.length === 0 ? (
+          <p className="py-8 text-center text-sm text-[#94A7C4]">
+            Tidak ada catatan log audit yang cocok dengan filter saat ini.
+          </p>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[680px] text-left text-sm">
+              <thead>
+                <tr className="border-b border-[#1E3358] text-xs font-semibold text-[#94A7C4]">
+                  <th scope="col" className="pb-2.5 pr-4">
+                    Aksi Sistem
+                  </th>
+                  <th scope="col" className="pb-2.5 pr-4">
+                    Entitas
+                  </th>
+                  <th scope="col" className="pb-2.5 pr-4">
+                    Pelaku
+                  </th>
+                  <th scope="col" className="pb-2.5 pr-4">
+                    Ringkasan Perubahan (Tersanitasi)
+                  </th>
+                  <th scope="col" className="pb-2.5 text-right">
+                    Waktu Kejadian (WIB)
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-[#1E3358]">
+                {filteredLogs.map((log) => (
+                  <tr key={log.id} className="align-top">
+                    <td className="py-3 pr-4">
+                      <p className="font-mono text-xs font-semibold text-[#F1F5FB]">
+                        {log.action}
+                      </p>
+                      {log.ipHash && (
+                        <p className="mt-0.5 font-mono text-[10px] text-[#94A7C4]">
+                          IP Hash: {log.ipHash}
+                        </p>
+                      )}
+                    </td>
+                    <td className="py-3 pr-4">
+                      <span className="inline-block rounded-md border border-[#4E6E9E] bg-[#12213F] px-2 py-0.5 text-xs font-semibold text-[#F1F5FB]">
+                        {log.entityType}
+                      </span>
+                      {log.entityId && (
+                        <p className="mt-0.5 font-mono text-[10px] text-[#94A7C4]">
+                          ID: {log.entityId}
+                        </p>
+                      )}
+                    </td>
+                    <td className="py-3 pr-4">
+                      <p className="text-xs font-semibold text-[#F1F5FB]">
+                        {log.userName}
+                      </p>
+                      {log.userEmail && (
+                        <p className="text-[11px] text-[#94A7C4]">
+                          {log.userEmail}
+                        </p>
+                      )}
+                    </td>
+                    <td className="py-3 pr-4 text-xs text-[#94A7C4]">
+                      {log.summaryText}
+                    </td>
+                    <td className="py-3 text-right text-xs tabular-nums text-[#94A7C4]">
+                      {dateTimeFormatter.format(new Date(log.createdAt))}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </section>
+    </div>
+  );
+}

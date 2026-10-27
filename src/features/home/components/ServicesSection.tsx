@@ -13,6 +13,14 @@ import type { PublicServiceDTO } from "@/lib/public-content";
 import { pickServiceCopy } from "@/lib/live-content-adapters";
 
 export function ServicesSection({ services }: { services?: PublicServiceDTO[] | null }) {
+  const CORE_SERVICE_SLUGS = new Set([
+    "pembuatan-website-bisnis",
+    "redesign-optimalisasi-website",
+    "aplikasi-web-dashboard-kustom",
+    "pengembangan-aplikasi-mobile",
+  ]);
+  const extraServices = (services ?? []).filter((item) => !CORE_SERVICE_SLUGS.has(item.slug));
+
   const web = pickServiceCopy(services, "pembuatan-website-bisnis", {
     title: "Pembuatan Website Bisnis",
     description:
@@ -472,6 +480,57 @@ export function ServicesSection({ services }: { services?: PublicServiceDTO[] | 
               </article>
             </ScrollReveal>
           </div>
+
+          {extraServices.length > 0 && (
+            <div className="grid gap-6 lg:gap-7 md:grid-cols-2 items-stretch">
+              {extraServices.map((extra, idx) => (
+                <ScrollReveal key={extra.slug} delayMs={60 * (idx + 1)} className="h-full">
+                  <article className="h-full relative overflow-hidden flex flex-col justify-between rounded-[30px] bg-white dark:bg-slate-900 border border-[#E6F0FD] dark:border-slate-800 p-7 sm:p-9 shadow-[0_14px_38px_-10px_rgba(10,35,80,0.07)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_22px_45px_-10px_rgba(0,102,255,0.15)] hover:border-[#0066FF] group">
+                    <div>
+                      <div className="flex items-center justify-between mb-5">
+                        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#0066FF] text-white shadow-sm transition-transform duration-300 group-hover:scale-105">
+                          <CodeIcon className="h-5 w-5" />
+                        </div>
+                        <span className="rounded-full bg-[#0066FF] px-3.5 py-1 text-[11.5px] font-bold text-white shadow-sm">
+                          {extra.category || "Layanan Khusus"}
+                        </span>
+                      </div>
+
+                      <h3 className="text-[20px] sm:text-[21px] font-extrabold tracking-[-0.015em] text-[#041E42] dark:text-white">
+                        {extra.title}
+                      </h3>
+                      <p className="mt-2.5 text-[13px] sm:text-[13.5px] leading-[1.68] text-[#4A5D78] dark:text-slate-300">
+                        {extra.shortDesc}
+                      </p>
+
+                      {extra.features.length > 0 && (
+                        <div className="mt-5 flex flex-wrap gap-2">
+                          {extra.features.map((tag: string) => (
+                            <span
+                              key={tag}
+                              className="rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-3.5 py-1.5 text-[11.5px] font-semibold text-[#0F172A] dark:text-slate-200 transition-colors group-hover:bg-slate-200 dark:group-hover:bg-slate-700"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="mt-8 pt-4 border-t border-[#E8F0FC] dark:border-slate-800">
+                      <Link
+                        href="/layanan"
+                        className="inline-flex items-center gap-2 text-[13.5px] font-bold text-[#0066FF] dark:text-blue-400 hover:text-[#0052CC] transition-colors group/link"
+                      >
+                        <span>Lihat detail</span>
+                        <ArrowRightIcon className="h-4 w-4 transition-transform group-hover/link:translate-x-1.5" />
+                      </Link>
+                    </div>
+                  </article>
+                </ScrollReveal>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </section>

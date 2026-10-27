@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ExternalLinkIcon } from "@radix-ui/react-icons";
-import { requireUser } from "@/lib/auth";
+import { requireUser } from "@/server/security/auth";
+import { hasPermission } from "@/server/security/permissions";
+import { getUnreadMessagesBadgeCount } from "@/server/modules/overview/queries";
+import { AdminNav } from "@/components/admin/AdminNav";
 import LogoutForm from "@/features/auth/components/LogoutForm";
 
 export const dynamic = "force-dynamic";
@@ -30,6 +32,7 @@ export default async function AdminWorkspaceLayout({
   children: React.ReactNode;
 }) {
   const user = await requireUser();
+  const unreadMessagesCount = await getUnreadMessagesBadgeCount(user);
 
   return (
     <div className="min-h-screen bg-[#030711] text-[#F1F5FB] flex flex-col">
@@ -42,33 +45,16 @@ export default async function AdminWorkspaceLayout({
 
       <header className="border-b border-[#1E3358] bg-[#0B1730]">
         <div className="mx-auto flex w-full max-w-[1240px] flex-wrap items-center justify-between gap-3 px-5 sm:px-8 py-3">
-          <div className="flex flex-wrap items-center gap-3 sm:gap-6">
+          <div className="flex flex-wrap items-center gap-3">
             <Link
               href="/admin"
               className="inline-flex min-h-11 items-center gap-2.5 rounded-xl px-2 text-sm font-bold tracking-tight text-[#F1F5FB] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8]"
             >
               <span>NAIKON</span>
               <span className="rounded-md border border-[#4E6E9E] bg-[#12213F] px-2 py-0.5 text-xs font-medium text-[#94A7C4]">
-                Ruang Kerja
+                Ruang Kerja CMS
               </span>
             </Link>
-
-            <nav aria-label="Navigasi ruang kerja" className="flex items-center gap-2">
-              <Link
-                href="/admin"
-                aria-current="page"
-                className="inline-flex min-h-11 items-center rounded-xl border border-[#60A5FA] bg-[#12213F] px-3.5 text-sm font-semibold text-[#F1F5FB] transition-colors hover:bg-[#192D54] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8]"
-              >
-                Ringkasan
-              </Link>
-              <Link
-                href="/"
-                className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-[#4E6E9E] px-3.5 text-sm font-medium text-[#94A7C4] transition-colors hover:bg-[#12213F] hover:text-[#F1F5FB] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8]"
-              >
-                <span>Situs Publik</span>
-                <ExternalLinkIcon className="h-3.5 w-3.5" aria-hidden="true" />
-              </Link>
-            </nav>
           </div>
 
           <div className="flex items-center gap-3">
@@ -84,6 +70,14 @@ export default async function AdminWorkspaceLayout({
             <LogoutForm />
           </div>
         </div>
+
+        <AdminNav
+          unreadMessagesCount={unreadMessagesCount}
+          canViewMessages={hasPermission(user.role, "messages.view")}
+          canViewContent={hasPermission(user.role, "content.view")}
+          canManageUsers={hasPermission(user.role, "users.manage")}
+          canViewAudit={hasPermission(user.role, "audit.view")}
+        />
       </header>
 
       <main

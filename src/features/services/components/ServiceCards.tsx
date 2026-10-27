@@ -38,6 +38,14 @@ export function ServiceCards({ services }: { services?: PublicServiceDTO[] | nul
     tags: ["Android & iOS", "Push Notification", "Integrasi Payment Gateway", "Sinkronisasi Real-Time"],
   });
 
+  const coreSlugs = new Set([
+    "pembuatan-website-bisnis",
+    "redesign-optimalisasi-website",
+    "aplikasi-web-dashboard-kustom",
+    "pengembangan-aplikasi-mobile",
+  ]);
+  const extraServices = (services ?? []).filter((s) => !coreSlugs.has(s.slug));
+
   return (
     <div className="space-y-6 lg:space-y-7">
       <div className="grid gap-6 lg:gap-7 lg:grid-cols-12 items-stretch">
@@ -398,6 +406,52 @@ export function ServiceCards({ services }: { services?: PublicServiceDTO[] | nul
           </article>
         </ScrollReveal>
       </div>
+
+      {extraServices.length > 0 && (
+        <div className="grid gap-6 lg:gap-7 md:grid-cols-2">
+          {extraServices.map((svc) => (
+            <ScrollReveal key={svc.slug} className="h-full">
+              <article className="h-full flex flex-col justify-between rounded-[30px] bg-white dark:bg-slate-900 border border-[#E6F0FD] dark:border-slate-800 p-7 sm:p-9 shadow-[0_14px_38px_-10px_rgba(10,35,80,0.07)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#0066FF] group">
+                <div>
+                  <div className="flex items-center justify-between mb-5">
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#0066FF] text-white shadow-sm">
+                      <CodeIcon className="h-5 w-5" />
+                    </div>
+                    <span className="rounded-full bg-[#0066FF] px-3.5 py-1 text-[11.5px] font-bold text-white shadow-sm">
+                      {svc.category}
+                    </span>
+                  </div>
+                  <h2 className="text-[20px] sm:text-[21px] font-extrabold tracking-[-0.015em] text-[#041E42] dark:text-white">
+                    {svc.title}
+                  </h2>
+                  <p className="mt-2.5 text-[13px] sm:text-[13.5px] leading-[1.68] text-[#4A5D78] dark:text-slate-300">
+                    {svc.shortDesc}
+                  </p>
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {svc.features.map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-3.5 py-1.5 text-[11.5px] font-semibold text-[#0F172A] dark:text-slate-200"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <div className="mt-8 pt-4 border-t border-[#E8F0FC] dark:border-slate-800">
+                  <Link
+                    href={svc.ctaHref}
+                    className="inline-flex items-center gap-2 text-[13.5px] font-bold text-[#0066FF] dark:text-blue-400 hover:text-[#0052CC] transition-colors group/link"
+                  >
+                    <span>{svc.ctaLabel}</span>
+                    <ArrowRightIcon className="h-4 w-4 transition-transform group-hover/link:translate-x-1.5" />
+                  </Link>
+                </div>
+              </article>
+            </ScrollReveal>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
