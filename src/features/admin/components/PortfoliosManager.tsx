@@ -149,12 +149,12 @@ export function PortfoliosManager({
         onDismiss={clearFeedback}
       />
 
-      <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-[#1E3358] bg-[#0B1730] p-4">
-        <div className="flex flex-wrap items-center gap-3 text-xs text-[#94A7C4]">
-          <span className="rounded-lg border border-[#1E3358] bg-[#12213F] px-3 py-1.5 font-semibold text-[#F1F5FB]">
+      <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-xs dark:border-[#1E3358] dark:bg-[#0B1730]">
+        <div className="flex flex-wrap items-center gap-3 text-xs text-[#5A6E85] dark:text-[#94A7C4]">
+          <span className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 font-semibold text-[#041E42] dark:border-[#1E3358] dark:bg-[#12213F] dark:text-[#F1F5FB]">
             Total Studi Kasus: {portfolios.length}
           </span>
-          <span className="rounded-lg border border-[#60A5FA]/60 bg-[#12213F] px-3 py-1.5 font-semibold tabular-nums text-[#F1F5FB]">
+          <span className="rounded-lg border border-blue-200 bg-blue-50 px-3 py-1.5 font-semibold tabular-nums text-[#0066FF] dark:border-[#60A5FA]/60 dark:bg-[#12213F] dark:text-[#F1F5FB]">
             Sorotan Beranda Aktif: {featuredCount} / 3
           </span>
         </div>
@@ -163,7 +163,7 @@ export function PortfoliosManager({
           <button
             type="button"
             onClick={startNewPortfolio}
-            className="inline-flex min-h-11 items-center gap-1.5 rounded-xl bg-[#2563EB] px-3.5 text-xs font-semibold text-white hover:bg-[#1D4ED8] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8]"
+            className="inline-flex min-h-11 items-center gap-1.5 rounded-xl bg-[#0066FF] px-3.5 text-xs font-semibold text-white hover:bg-[#0052CC] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:bg-[#2563EB] dark:hover:bg-[#1D4ED8] dark:focus-visible:outline-[#38BDF8]"
           >
             <PlusIcon className="h-4 w-4" aria-hidden="true" />
             <span>Studi Kasus Baru</span>
@@ -172,7 +172,7 @@ export function PortfoliosManager({
       </div>
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 items-start">
-        <div className="lg:col-span-5 rounded-2xl border border-[#1E3358] bg-[#0B1730] divide-y divide-[#1E3358] overflow-hidden">
+        <div className="lg:col-span-5 rounded-2xl border border-slate-200 bg-white divide-y divide-slate-100 overflow-hidden shadow-xs dark:border-[#1E3358] dark:bg-[#0B1730] dark:divide-[#1E3358]">
           {portfolios.map((item) => {
             const selected = item.id === editingId;
             return (
@@ -180,24 +180,24 @@ export function PortfoliosManager({
                 key={item.id}
                 type="button"
                 onClick={() => loadPortfolio(item)}
-                className={`w-full text-left p-4 transition-colors focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#38BDF8] ${
+                className={`w-full text-left p-4 transition-colors focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8] ${
                   selected
-                    ? "bg-[#12213F]"
-                    : "bg-[#0B1730] hover:bg-[#12213F]/60"
+                    ? "bg-blue-50/70 border-l-4 border-l-[#0066FF] dark:bg-[#12213F] dark:border-l-[#38BDF8]"
+                    : "bg-white hover:bg-slate-50 dark:bg-[#0B1730] dark:hover:bg-[#12213F]/60"
                 }`}
               >
                 <div className="flex items-start justify-between gap-2">
                   <div>
-                    <p className="text-sm font-semibold text-[#F1F5FB] flex items-center gap-1.5">
+                    <p className="text-sm font-semibold text-[#041E42] dark:text-[#F1F5FB] flex items-center gap-1.5">
                       <span>{item.title}</span>
                       {item.featured && (
-                        <span className="inline-flex items-center gap-1 rounded-md border border-[#60A5FA] bg-[#0B1730] px-1.5 py-0.5 text-[10px] font-bold text-[#60A5FA]">
+                        <span className="inline-flex items-center gap-1 rounded-md border border-blue-200 bg-blue-50 px-1.5 py-0.5 text-[10px] font-bold text-[#0066FF] dark:border-[#60A5FA] dark:bg-[#0B1730] dark:text-[#60A5FA]">
                           <StarFilledIcon className="h-3 w-3" />
                           <span>Beranda</span>
                         </span>
                       )}
                     </p>
-                    <p className="mt-0.5 text-xs text-[#94A7C4]">
+                    <p className="mt-0.5 text-xs text-[#5A6E85] dark:text-[#94A7C4]">
                       {item.category} · {item.clientSector}
                     </p>
                   </div>
@@ -205,10 +205,10 @@ export function PortfoliosManager({
                   <span
                     className={`shrink-0 rounded-md border px-2 py-0.5 text-[11px] font-semibold ${
                       item.deletedAt
-                        ? "border-[#F87171]/60 bg-[#0B1730] text-[#FCA5A5]"
+                        ? "border-rose-200 bg-rose-50 text-rose-700 dark:border-[#F87171]/60 dark:bg-[#0B1730] dark:text-[#FCA5A5]"
                         : item.status === "PUBLISHED"
-                        ? "border-[#34D399]/60 bg-[#0B1730] text-[#34D399]"
-                        : "border-[#FBBF24]/60 bg-[#0B1730] text-[#FBBF24]"
+                        ? "border-emerald-200 bg-emerald-50 text-emerald-700 dark:border-[#34D399]/60 dark:bg-[#0B1730] dark:text-[#34D399]"
+                        : "border-amber-200 bg-amber-50 text-amber-700 dark:border-[#FBBF24]/60 dark:bg-[#0B1730] dark:text-[#FBBF24]"
                     }`}
                   >
                     {item.deletedAt ? "Sampah" : STATUS_LABELS[item.status]}
@@ -221,15 +221,15 @@ export function PortfoliosManager({
 
         <section
           aria-label="Editor studi kasus portofolio"
-          className="lg:col-span-7 rounded-2xl border border-[#1E3358] bg-[#0B1730] p-5 sm:p-6 space-y-5"
+          className="lg:col-span-7 rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 space-y-5 shadow-xs dark:border-[#1E3358] dark:bg-[#0B1730]"
         >
           <div>
-            <h2 className="text-base sm:text-lg font-bold text-[#F1F5FB]">
+            <h2 className="text-base sm:text-lg font-bold text-[#041E42] dark:text-[#F1F5FB]">
               {editingId
                 ? "Perbarui Studi Kasus Portofolio"
                 : "Tambah Studi Kasus Portofolio"}
             </h2>
-            <p className="text-xs text-[#94A7C4]">
+            <p className="text-xs text-[#5A6E85] dark:text-[#94A7C4]">
               Maksimal 3 studi kasus dengan status Terbit yang dapat ditampilkan
               sebagai sorotan di halaman Beranda.
             </p>
@@ -240,7 +240,7 @@ export function PortfoliosManager({
               <div>
                 <label
                   htmlFor="port-title"
-                  className="block text-xs font-semibold text-[#F1F5FB] mb-1.5"
+                  className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1.5"
                 >
                   Judul Studi Kasus
                 </label>
@@ -258,14 +258,14 @@ export function PortfoliosManager({
                       setImageAlt(e.target.value);
                     }
                   }}
-                  className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3.5 text-sm text-[#F1F5FB]"
+                  className="min-h-11 w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#0066FF] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#38BDF8]"
                 />
               </div>
 
               <div>
                 <label
                   htmlFor="port-slug"
-                  className="block text-xs font-semibold text-[#F1F5FB] mb-1.5"
+                  className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1.5"
                 >
                   Slug Identifikasi
                 </label>
@@ -277,7 +277,7 @@ export function PortfoliosManager({
                   maxLength={100}
                   value={slug}
                   onChange={(e) => setSlug(e.target.value)}
-                  className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3.5 text-sm text-[#F1F5FB]"
+                  className="min-h-11 w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#0066FF] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#38BDF8]"
                 />
               </div>
             </div>
@@ -286,7 +286,7 @@ export function PortfoliosManager({
               <div>
                 <label
                   htmlFor="port-cat"
-                  className="block text-xs font-semibold text-[#F1F5FB] mb-1.5"
+                  className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1.5"
                 >
                   Kategori Solusi
                 </label>
@@ -294,7 +294,7 @@ export function PortfoliosManager({
                   id="port-cat"
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
-                  className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3.5 text-sm text-[#F1F5FB]"
+                  className="min-h-11 w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#0066FF] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#38BDF8]"
                 >
                   <option value="Website Bisnis">Website Bisnis</option>
                   <option value="Sistem Web">Sistem Web</option>
@@ -306,7 +306,7 @@ export function PortfoliosManager({
               <div>
                 <label
                   htmlFor="port-sector"
-                  className="block text-xs font-semibold text-[#F1F5FB] mb-1.5"
+                  className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1.5"
                 >
                   Sektor Industri Klien
                 </label>
@@ -316,7 +316,7 @@ export function PortfoliosManager({
                   required
                   value={clientSector}
                   onChange={(e) => setClientSector(e.target.value)}
-                  className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3.5 text-sm text-[#F1F5FB]"
+                  className="min-h-11 w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#0066FF] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#38BDF8]"
                 />
               </div>
             </div>
@@ -324,7 +324,7 @@ export function PortfoliosManager({
             <div>
               <label
                 htmlFor="port-summary"
-                className="block text-xs font-semibold text-[#F1F5FB] mb-1.5"
+                className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1.5"
               >
                 Ringkasan Ruang Lingkup & Solusi
               </label>
@@ -336,7 +336,7 @@ export function PortfoliosManager({
                 maxLength={360}
                 value={summary}
                 onChange={(e) => setSummary(e.target.value)}
-                className="w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] p-3.5 text-sm text-[#F1F5FB]"
+                className="w-full rounded-xl border border-slate-300 bg-slate-50 p-3.5 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#0066FF] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#38BDF8]"
               />
             </div>
 
@@ -344,7 +344,7 @@ export function PortfoliosManager({
               <div>
                 <label
                   htmlFor="port-impact"
-                  className="block text-xs font-semibold text-[#F1F5FB] mb-1.5"
+                  className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1.5"
                 >
                   Dampak Operasional Nyata
                 </label>
@@ -355,14 +355,14 @@ export function PortfoliosManager({
                   value={impact}
                   onChange={(e) => setImpact(e.target.value)}
                   placeholder="Contoh: Sinkronisasi stok lintas cabang otomatis"
-                  className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3.5 text-sm text-[#F1F5FB]"
+                  className="min-h-11 w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#0066FF] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#38BDF8]"
                 />
               </div>
 
               <div>
                 <label
                   htmlFor="port-metric"
-                  className="block text-xs font-semibold text-[#F1F5FB] mb-1.5"
+                  className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1.5"
                 >
                   Label Cakupan Teknis (Metric)
                 </label>
@@ -372,7 +372,7 @@ export function PortfoliosManager({
                   value={metric}
                   onChange={(e) => setMetric(e.target.value)}
                   placeholder="Contoh: Sistem Inventaris Multi-Gudang"
-                  className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3.5 text-sm text-[#F1F5FB]"
+                  className="min-h-11 w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#0066FF] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#38BDF8]"
                 />
               </div>
             </div>
@@ -381,7 +381,7 @@ export function PortfoliosManager({
               <div>
                 <label
                   htmlFor="port-tech"
-                  className="block text-xs font-semibold text-[#F1F5FB] mb-1.5"
+                  className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1.5"
                 >
                   Teknologi yang Digunakan (Satu per baris)
                 </label>
@@ -391,7 +391,7 @@ export function PortfoliosManager({
                   required
                   value={techRaw}
                   onChange={(e) => setTechRaw(e.target.value)}
-                  className="w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] p-3.5 text-sm text-[#F1F5FB]"
+                  className="w-full rounded-xl border border-slate-300 bg-slate-50 p-3.5 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#0066FF] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#38BDF8]"
                 />
               </div>
 
@@ -399,7 +399,7 @@ export function PortfoliosManager({
                 <div>
                   <label
                     htmlFor="port-alt"
-                    className="block text-xs font-semibold text-[#F1F5FB] mb-1.5"
+                    className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1.5"
                   >
                     Teks Alternatif Gambar (Wajib saat Terbit)
                   </label>
@@ -411,7 +411,7 @@ export function PortfoliosManager({
                     value={imageAlt}
                     onChange={(e) => setImageAlt(e.target.value)}
                     placeholder="Deskripsi visual antarmuka untuk pembaca layar"
-                    className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3.5 text-sm text-[#F1F5FB]"
+                    className="min-h-11 w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#0066FF] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#38BDF8]"
                   />
                 </div>
 
@@ -419,7 +419,7 @@ export function PortfoliosManager({
                   <div>
                     <label
                       htmlFor="port-order"
-                      className="block text-xs font-semibold text-[#F1F5FB] mb-1"
+                      className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1"
                     >
                       Urutan
                     </label>
@@ -430,14 +430,14 @@ export function PortfoliosManager({
                       max={999}
                       value={sortOrder}
                       onChange={(e) => setSortOrder(Number(e.target.value))}
-                      className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3 text-sm text-[#F1F5FB]"
+                      className="min-h-11 w-full rounded-xl border border-slate-300 bg-slate-50 px-3 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#0066FF] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#38BDF8]"
                     />
                   </div>
 
                   <div>
                     <label
                       htmlFor="port-status"
-                      className="block text-xs font-semibold text-[#F1F5FB] mb-1"
+                      className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1"
                     >
                       Status
                     </label>
@@ -447,7 +447,7 @@ export function PortfoliosManager({
                       onChange={(e) =>
                         setStatus(e.target.value as ContentStatus)
                       }
-                      className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3 text-sm text-[#F1F5FB]"
+                      className="min-h-11 w-full rounded-xl border border-slate-300 bg-slate-50 px-3 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#0066FF] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#38BDF8]"
                     >
                       <option value="DRAFT">Draf</option>
                       <option value="REVIEW">Tinjauan</option>
@@ -459,17 +459,17 @@ export function PortfoliosManager({
               </div>
             </div>
 
-            <div className="flex items-center gap-3 rounded-xl border border-[#4E6E9E] bg-[#12213F] p-3.5">
+            <div className="flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 p-3.5 dark:border-[#4E6E9E] dark:bg-[#12213F]">
               <input
                 id="port-featured"
                 type="checkbox"
                 checked={featured}
                 onChange={(e) => setFeatured(e.target.checked)}
-                className="h-4 w-4 rounded border-[#4E6E9E] accent-[#2563EB]"
+                className="h-4 w-4 rounded border-slate-300 accent-[#0066FF] dark:border-[#4E6E9E] dark:accent-[#2563EB]"
               />
               <label
                 htmlFor="port-featured"
-                className="text-xs font-semibold text-[#F1F5FB]"
+                className="text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB]"
               >
                 Tampilkan pada seksi Sorotan Portofolio di halaman Beranda
                 (Maksimal 3 item terbit).
@@ -481,7 +481,7 @@ export function PortfoliosManager({
                 <button
                   type="submit"
                   disabled={isPending}
-                  className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#2563EB] px-4 text-xs font-semibold text-white hover:bg-[#1D4ED8] disabled:opacity-60"
+                  className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#0066FF] px-4 text-xs font-semibold text-white hover:bg-[#0052CC] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] disabled:opacity-60 dark:bg-[#2563EB] dark:hover:bg-[#1D4ED8] dark:focus-visible:outline-[#38BDF8]"
                 >
                   <CheckCircledIcon className="h-4 w-4" aria-hidden="true" />
                   <span>
@@ -502,7 +502,7 @@ export function PortfoliosManager({
                       })
                     )
                   }
-                  className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-[#F87171]/60 bg-[#0B1730] px-3.5 text-xs font-semibold text-[#FCA5A5] hover:bg-[#12213F]"
+                  className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-rose-200 bg-white px-3.5 text-xs font-semibold text-rose-600 hover:bg-rose-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-500 dark:border-[#F87171]/60 dark:bg-[#0B1730] dark:text-[#FCA5A5] dark:hover:bg-[#12213F]"
                 >
                   <TrashIcon className="h-4 w-4" aria-hidden="true" />
                   <span>

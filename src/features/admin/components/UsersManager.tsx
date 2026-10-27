@@ -102,13 +102,13 @@ export function UsersManager({
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 items-start">
         <section
           aria-label="Tambah akun internal baru"
-          className="lg:col-span-5 rounded-2xl border border-[#1E3358] bg-[#0B1730] p-5 sm:p-6 space-y-5"
+          className="lg:col-span-5 rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 space-y-5 shadow-xs dark:border-[#1E3358] dark:bg-[#0B1730]"
         >
           <div>
-            <h2 className="text-base sm:text-lg font-bold text-[#F1F5FB]">
+            <h2 className="text-base sm:text-lg font-bold text-[#041E42] dark:text-[#F1F5FB]">
               Tambah Akun Pengguna Internal
             </h2>
-            <p className="text-xs text-[#94A7C4]">
+            <p className="text-xs text-[#5A6E85] dark:text-[#94A7C4]">
               Kata sandi dienkripsi dengan algoritma bcrypt (cost 12). Tidak ada
               fitur pendaftaran publik.
             </p>
@@ -118,7 +118,7 @@ export function UsersManager({
             <div>
               <label
                 htmlFor="user-name"
-                className="block text-xs font-semibold text-[#F1F5FB] mb-1.5"
+                className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1.5"
               >
                 Nama Lengkap Anggota Tim
               </label>
@@ -131,14 +131,14 @@ export function UsersManager({
                 value={newName}
                 onChange={(e) => setNewName(e.target.value)}
                 placeholder="Contoh: Raka Pradipta"
-                className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3.5 text-sm text-[#F1F5FB] placeholder:text-[#94A7C4]"
+                className="min-h-11 w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#0066FF] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#38BDF8]"
               />
             </div>
 
             <div>
               <label
                 htmlFor="user-email"
-                className="block text-xs font-semibold text-[#F1F5FB] mb-1.5"
+                className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1.5"
               >
                 Alamat Email Kerja
               </label>
@@ -149,14 +149,14 @@ export function UsersManager({
                 value={newEmail}
                 onChange={(e) => setNewEmail(e.target.value)}
                 placeholder="raka@naikon.id"
-                className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3.5 text-sm text-[#F1F5FB] placeholder:text-[#94A7C4]"
+                className="min-h-11 w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#0066FF] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#38BDF8]"
               />
             </div>
 
             <div>
               <label
                 htmlFor="user-password"
-                className="block text-xs font-semibold text-[#F1F5FB] mb-1.5"
+                className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1.5"
               >
                 Kata Sandi Awal
               </label>
@@ -169,14 +169,14 @@ export function UsersManager({
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
                 placeholder="Minimal 10 karakter (huruf besar, kecil & angka)"
-                className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3.5 text-sm text-[#F1F5FB] placeholder:text-[#94A7C4]"
+                className="min-h-11 w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#0066FF] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#38BDF8]"
               />
             </div>
 
             <div>
               <label
                 htmlFor="user-role"
-                className="block text-xs font-semibold text-[#F1F5FB] mb-1.5"
+                className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1.5"
               >
                 Peran Hak Akses (RBAC)
               </label>
@@ -184,7 +184,7 @@ export function UsersManager({
                 id="user-role"
                 value={newRole}
                 onChange={(e) => setNewRole(e.target.value as Role)}
-                className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3.5 text-sm text-[#F1F5FB]"
+                className="min-h-11 w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#0066FF] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#38BDF8]"
               >
                 <option value="EDITOR">Editor Konten (Kelola & Terbitkan)</option>
                 <option value="ANALYST">Analis (Akses Metrik & Baca)</option>
@@ -196,7 +196,7 @@ export function UsersManager({
             <button
               type="submit"
               disabled={isPending}
-              className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl bg-[#2563EB] px-4 text-xs font-semibold text-white hover:bg-[#1D4ED8] disabled:opacity-60"
+              className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl bg-[#0066FF] px-4 text-xs font-semibold text-white hover:bg-[#0052CC] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] disabled:opacity-60 dark:bg-[#2563EB] dark:hover:bg-[#1D4ED8] dark:focus-visible:outline-[#38BDF8]"
             >
               <PlusIcon className="h-4 w-4" aria-hidden="true" />
               <span>
@@ -208,14 +208,14 @@ export function UsersManager({
 
         <section
           aria-label="Daftar akun pengguna internal"
-          className="lg:col-span-7 rounded-2xl border border-[#1E3358] bg-[#0B1730] p-5 sm:p-6 space-y-5"
+          className="lg:col-span-7 rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 space-y-5 shadow-xs dark:border-[#1E3358] dark:bg-[#0B1730]"
         >
-          <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#1E3358] pb-4">
+          <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 pb-4 dark:border-[#1E3358]">
             <div>
-              <h2 className="text-base sm:text-lg font-bold text-[#F1F5FB]">
+              <h2 className="text-base sm:text-lg font-bold text-[#041E42] dark:text-[#F1F5FB]">
                 Daftar Pengguna Terdaftar ({users.length})
               </h2>
-              <p className="text-xs text-[#94A7C4]">
+              <p className="text-xs text-[#5A6E85] dark:text-[#94A7C4]">
                 Administrator aktif saat ini: {activeAdminCount}. Sistem menolak
                 penghapusan atau penonaktifan Administrator terakhir.
               </p>
@@ -228,20 +228,20 @@ export function UsersManager({
               return (
                 <article
                   key={u.id}
-                  className="rounded-xl border border-[#1E3358] bg-[#12213F]/50 p-4 space-y-3"
+                  className="rounded-xl border border-slate-200 bg-slate-50/70 p-4 space-y-3 dark:border-[#1E3358] dark:bg-[#12213F]/50"
                 >
                   <div className="flex flex-wrap items-start justify-between gap-2">
                     <div>
-                      <p className="text-sm font-bold text-[#F1F5FB] flex items-center gap-2">
+                      <p className="text-sm font-bold text-[#041E42] dark:text-[#F1F5FB] flex items-center gap-2">
                         <span>{u.name}</span>
                         {isSelf && (
-                          <span className="rounded-md border border-[#60A5FA] bg-[#0B1730] px-2 py-0.5 text-[10px] font-semibold text-[#60A5FA]">
+                          <span className="rounded-md border border-blue-200 bg-blue-50 px-2 py-0.5 text-[10px] font-semibold text-[#0066FF] dark:border-[#60A5FA] dark:bg-[#0B1730] dark:text-[#60A5FA]">
                             Akun Anda
                           </span>
                         )}
                       </p>
-                      <p className="text-xs text-[#94A7C4]">{u.email}</p>
-                      <p className="mt-1 text-[11px] text-[#94A7C4]">
+                      <p className="text-xs text-[#5A6E85] dark:text-[#94A7C4]">{u.email}</p>
+                      <p className="mt-1 text-[11px] text-[#5A6E85] dark:text-[#94A7C4]">
                         Peran: {ROLE_LABELS[u.role]} · Versi sesi: #
                         {u.sessionVersion} · Login terakhir:{" "}
                         {u.lastLoginAt
@@ -255,15 +255,15 @@ export function UsersManager({
                     <span
                       className={`rounded-md border px-2 py-0.5 text-xs font-semibold ${
                         u.isActive
-                          ? "border-[#34D399]/60 bg-[#0B1730] text-[#34D399]"
-                          : "border-[#F87171]/60 bg-[#0B1730] text-[#FCA5A5]"
+                          ? "border-emerald-200 bg-emerald-50 text-emerald-700 dark:border-[#34D399]/60 dark:bg-[#0B1730] dark:text-[#34D399]"
+                          : "border-rose-200 bg-rose-50 text-rose-700 dark:border-[#F87171]/60 dark:bg-[#0B1730] dark:text-[#FCA5A5]"
                       }`}
                     >
                       {u.isActive ? "Aktif" : "Nonaktif"}
                     </span>
                   </div>
 
-                  <div className="flex flex-wrap items-center justify-between gap-3 border-t border-[#1E3358] pt-3">
+                  <div className="flex flex-wrap items-center justify-between gap-3 border-t border-slate-200 pt-3 dark:border-[#1E3358]">
                     <div className="flex flex-wrap items-center gap-2">
                       <label htmlFor={`role-${u.id}`} className="sr-only">
                         Ubah peran {u.name}
@@ -279,7 +279,7 @@ export function UsersManager({
                             u.isActive
                           )
                         }
-                        className="min-h-11 rounded-xl border border-[#4E6E9E] bg-[#0B1730] px-3 text-xs font-semibold text-[#F1F5FB] disabled:opacity-50"
+                        className="min-h-11 rounded-xl border border-slate-300 bg-white px-3 text-xs font-semibold text-[#041E42] disabled:opacity-50 dark:border-[#4E6E9E] dark:bg-[#0B1730] dark:text-[#F1F5FB]"
                       >
                         <option value="ADMIN">ADMIN</option>
                         <option value="EDITOR">EDITOR</option>
@@ -293,7 +293,7 @@ export function UsersManager({
                         onClick={() =>
                           handleRoleOrActiveChange(u, u.role, !u.isActive)
                         }
-                        className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-[#4E6E9E] bg-[#0B1730] px-3 text-xs font-semibold text-[#F1F5FB] hover:bg-[#12213F] disabled:opacity-50"
+                        className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-slate-300 bg-white px-3 text-xs font-semibold text-[#041E42] hover:bg-slate-100 disabled:opacity-50 dark:border-[#4E6E9E] dark:bg-[#0B1730] dark:text-[#F1F5FB] dark:hover:bg-[#12213F]"
                       >
                         <CheckCircledIcon className="h-3.5 w-3.5" />
                         <span>
@@ -306,7 +306,7 @@ export function UsersManager({
                       type="button"
                       disabled={isPending}
                       onClick={() => handleRevokeSessions(u)}
-                      className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-[#F87171]/60 bg-[#0B1730] px-3 text-xs font-semibold text-[#FCA5A5] hover:bg-[#12213F] disabled:opacity-50"
+                      className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-rose-200 bg-white px-3 text-xs font-semibold text-rose-600 hover:bg-rose-50 disabled:opacity-50 dark:border-[#F87171]/60 dark:bg-[#0B1730] dark:text-[#FCA5A5] dark:hover:bg-[#12213F]"
                     >
                       <LockClosedIcon className="h-3.5 w-3.5" />
                       <span>Cabut Semua Sesi</span>

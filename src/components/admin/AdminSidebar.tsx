@@ -1,0 +1,348 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import {
+  CardStackIcon,
+  Cross1Icon,
+  DashboardIcon,
+  EnvelopeClosedIcon,
+  ExternalLinkIcon,
+  FileTextIcon,
+  HamburgerMenuIcon,
+  LayersIcon,
+  LockClosedIcon,
+  PersonIcon,
+  QuestionMarkCircledIcon,
+} from "@radix-ui/react-icons";
+import { AdminThemeToggle } from "./AdminThemeToggle";
+import LogoutForm from "@/features/auth/components/LogoutForm";
+
+export interface AdminSidebarProps {
+  userName: string;
+  userEmail: string;
+  userRole: string;
+  unreadMessagesCount: number;
+  canViewMessages: boolean;
+  canViewContent: boolean;
+  canManageUsers: boolean;
+  canViewAudit: boolean;
+}
+
+interface NavItem {
+  href: string;
+  label: string;
+  icon: React.ComponentType<{ className?: string }>;
+  visible: boolean;
+  badge?: number;
+  exact?: boolean;
+}
+
+interface NavSection {
+  title: string;
+  items: NavItem[];
+}
+
+const ROLE_LABELS: Record<string, string> = {
+  ADMIN: "Administrator",
+  EDITOR: "Editor Konten",
+  ANALYST: "Analis",
+  VIEWER: "Pemeriksa",
+};
+
+export function AdminSidebar({
+  userName,
+  userEmail,
+  userRole,
+  unreadMessagesCount,
+  canViewMessages,
+  canViewContent,
+  canManageUsers,
+  canViewAudit,
+}: AdminSidebarProps) {
+  const pathname = usePathname();
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  const sections: NavSection[] = [
+    {
+      title: "UTAMA",
+      items: [
+        {
+          href: "/admin",
+          label: "Ringkasan",
+          icon: DashboardIcon,
+          visible: true,
+          exact: true,
+        },
+        {
+          href: "/admin/pesan",
+          label: "Pesan Masuk",
+          icon: EnvelopeClosedIcon,
+          visible: canViewMessages,
+          badge: unreadMessagesCount > 0 ? unreadMessagesCount : undefined,
+        },
+      ],
+    },
+    {
+      title: "MANAJEMEN KONTEN",
+      items: [
+        {
+          href: "/admin/konten/artikel",
+          label: "Artikel & Kategori",
+          icon: FileTextIcon,
+          visible: canViewContent,
+        },
+        {
+          href: "/admin/konten/layanan",
+          label: "Layanan & Harga",
+          icon: LayersIcon,
+          visible: canViewContent,
+        },
+        {
+          href: "/admin/konten/portofolio",
+          label: "Portofolio",
+          icon: CardStackIcon,
+          visible: canViewContent,
+        },
+        {
+          href: "/admin/konten/faq",
+          label: "FAQ & Halaman",
+          icon: QuestionMarkCircledIcon,
+          visible: canViewContent,
+        },
+      ],
+    },
+    {
+      title: "SISTEM & AUDIT",
+      items: [
+        {
+          href: "/admin/pengguna",
+          label: "Pengguna",
+          icon: PersonIcon,
+          visible: canManageUsers,
+        },
+        {
+          href: "/admin/audit",
+          label: "Log Audit",
+          icon: LockClosedIcon,
+          visible: canViewAudit,
+        },
+      ],
+    },
+  ];
+
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setMobileOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [mobileOpen]);
+
+  const isItemActive = (item: NavItem) => {
+    if (item.exact) {
+      return pathname === item.href;
+    }
+    return pathname === item.href || pathname.startsWith(`${item.href}/`);
+  };
+
+  const navContent = (
+    <div className="flex h-full flex-col justify-between p-5">
+      <div className="space-y-6">
+        {/* Brand Header */}
+        <div className="flex items-center justify-between border-b border-slate-200 dark:border-[#1E3358] pb-4">
+          <Link
+            href="/admin"
+            className="flex items-center gap-2.5 transition-transform hover:opacity-90"
+            onClick={() => setMobileOpen(false)}
+          >
+            <Image
+              src="/logo-navbar.png"
+              alt="Logo NAIKON"
+              width={160}
+              height={36}
+              priority
+              className="h-[28px] w-auto object-contain dark:brightness-150"
+            />
+          </Link>
+          <span className="rounded-md border border-blue-200 dark:border-[#4E6E9E] bg-blue-50 dark:bg-[#12213F] px-2 py-0.5 text-[10px] font-bold text-[#0066FF] dark:text-[#94A7C4]">
+            CMS
+          </span>
+        </div>
+
+        {/* User Profile Card */}
+        <div className="rounded-2xl border border-slate-200 dark:border-[#1E3358] bg-slate-50/80 dark:bg-[#071225] p-3.5 flex items-center gap-3">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#0066FF] to-[#1D4ED8] text-white font-bold text-sm shadow-xs">
+            {userName.charAt(0).toUpperCase()}
+          </div>
+          <div className="min-w-0 flex-1">
+            <p className="truncate text-xs font-bold text-[#041E42] dark:text-[#F1F5FB]">
+              {userName}
+            </p>
+            <div className="flex items-center gap-1.5 mt-0.5">
+              <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#10B981]" />
+              <span className="truncate text-[11px] text-[#5A6E85] dark:text-[#94A7C4]">
+                {ROLE_LABELS[userRole] || userRole}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Navigation Sections */}
+        <nav aria-label="Navigasi admin utama" className="space-y-5">
+          {sections.map((section) => {
+            const visibleItems = section.items.filter((item) => item.visible);
+            if (visibleItems.length === 0) return null;
+
+            return (
+              <div key={section.title} className="space-y-1.5">
+                <p className="px-3 text-[10px] font-extrabold uppercase tracking-wider text-slate-400 dark:text-[#5A6E85]">
+                  {section.title}
+                </p>
+                <div className="space-y-1">
+                  {visibleItems.map((item) => {
+                    const active = isItemActive(item);
+                    const Icon = item.icon;
+
+                    return (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        onClick={() => setMobileOpen(false)}
+                        aria-current={active ? "page" : undefined}
+                        className={`flex min-h-11 items-center justify-between rounded-xl px-3 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8] ${
+                          active
+                            ? "bg-[#0066FF]/10 text-[#0066FF] border border-[#0066FF]/25 dark:bg-[#12213F] dark:text-[#F1F5FB] dark:border-[#60A5FA]"
+                            : "border border-transparent text-[#5A6E85] dark:text-[#94A7C4] hover:bg-slate-100 dark:hover:bg-[#12213F] hover:text-[#041E42] dark:hover:text-[#F1F5FB]"
+                        }`}
+                      >
+                        <div className="flex items-center gap-2.5">
+                          <Icon
+                            className={`h-4 w-4 shrink-0 ${
+                              active
+                                ? "text-[#0066FF] dark:text-[#60A5FA]"
+                                : "text-[#5A6E85] dark:text-[#94A7C4]"
+                            }`}
+                          />
+                          <span>{item.label}</span>
+                        </div>
+
+                        {item.badge !== undefined && (
+                          <span className="rounded-md border border-amber-300 dark:border-[#FBBF24]/60 bg-amber-50 dark:bg-[#0B1730] px-2 py-0.5 text-[11px] font-bold tabular-nums text-amber-700 dark:text-[#FBBF24]">
+                            {item.badge}
+                          </span>
+                        )}
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+            );
+          })}
+        </nav>
+      </div>
+
+      {/* Footer Area: Theme Switcher, Public Site, Logout */}
+      <div className="border-t border-slate-200 dark:border-[#1E3358] pt-4 space-y-2.5">
+        <div className="flex items-center justify-between gap-2">
+          <AdminThemeToggle className="flex-1" />
+          <Link
+            href="/"
+            title="Lihat Situs Publik"
+            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-white dark:bg-[#12213F] text-[#5A6E85] dark:text-[#94A7C4] transition-colors hover:bg-slate-100 dark:hover:bg-[#192D54] hover:text-[#041E42] dark:hover:text-[#F1F5FB] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
+          >
+            <ExternalLinkIcon className="h-4 w-4" aria-hidden="true" />
+            <span className="sr-only">Buka Situs Publik</span>
+          </Link>
+        </div>
+
+        <div className="w-full">
+          <LogoutForm />
+        </div>
+      </div>
+    </div>
+  );
+
+  return (
+    <>
+      {/* Mobile Top Header */}
+      <header className="lg:hidden sticky top-0 z-40 flex min-h-[64px] items-center justify-between border-b border-slate-200 dark:border-[#1E3358] bg-white/95 dark:bg-[#0B1730]/95 px-5 backdrop-blur-md">
+        <div className="flex items-center gap-3">
+          <button
+            type="button"
+            onClick={() => setMobileOpen((prev) => !prev)}
+            aria-expanded={mobileOpen}
+            aria-controls="admin-drawer"
+            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-white dark:bg-[#12213F] text-[#041E42] dark:text-[#F1F5FB] hover:bg-slate-100 dark:hover:bg-[#192D54] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
+          >
+            {mobileOpen ? (
+              <Cross1Icon className="h-5 w-5" aria-hidden="true" />
+            ) : (
+              <HamburgerMenuIcon className="h-5 w-5" aria-hidden="true" />
+            )}
+            <span className="sr-only">
+              {mobileOpen ? "Tutup Menu Sidebar" : "Buka Menu Sidebar"}
+            </span>
+          </button>
+
+          <Link href="/admin" className="flex items-center">
+            <Image
+              src="/logo-navbar.png"
+              alt="Logo NAIKON"
+              width={140}
+              height={32}
+              priority
+              className="h-[24px] w-auto object-contain dark:brightness-150"
+            />
+          </Link>
+        </div>
+
+        <div className="flex items-center gap-2">
+          {unreadMessagesCount > 0 && (
+            <Link
+              href="/admin/pesan"
+              className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-amber-300 dark:border-[#FBBF24]/60 bg-amber-50 dark:bg-[#12213F] px-2.5 text-xs font-bold text-amber-700 dark:text-[#FBBF24]"
+            >
+              <EnvelopeClosedIcon className="h-3.5 w-3.5" />
+              <span>{unreadMessagesCount}</span>
+            </Link>
+          )}
+          <AdminThemeToggle showLabel={false} />
+        </div>
+      </header>
+
+      {/* Mobile Drawer Backdrop */}
+      {mobileOpen && (
+        <div
+          role="presentation"
+          onClick={() => setMobileOpen(false)}
+          className="lg:hidden fixed inset-0 z-40 bg-slate-900/60 dark:bg-black/70 backdrop-blur-xs transition-opacity"
+        />
+      )}
+
+      {/* Mobile Slide-over Drawer */}
+      <aside
+        id="admin-drawer"
+        aria-label="Menu navigasi samping mobile"
+        className={`lg:hidden fixed inset-y-0 left-0 z-50 w-72 max-w-[85vw] border-r border-slate-200 dark:border-[#1E3358] bg-white dark:bg-[#0B1730] shadow-2xl transition-transform duration-300 ease-in-out ${
+          mobileOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
+        {navContent}
+      </aside>
+
+      {/* Desktop Fixed Sidebar */}
+      <aside
+        aria-label="Navigasi samping admin"
+        className="hidden lg:flex lg:w-72 lg:shrink-0 lg:flex-col lg:border-r lg:border-slate-200 lg:dark:border-[#1E3358] lg:bg-white lg:dark:bg-[#0B1730] lg:sticky lg:top-0 lg:h-screen lg:overflow-y-auto"
+      >
+        {navContent}
+      </aside>
+    </>
+  );
+}

@@ -164,7 +164,7 @@ export function MessagesManager({
         onDismiss={clearFeedback}
       />
 
-      <div className="rounded-2xl border border-[#1E3358] bg-[#0B1730] p-4 sm:p-5 space-y-4">
+      <div className="rounded-2xl border border-slate-200 dark:border-[#1E3358] bg-white dark:bg-[#0B1730] p-4 sm:p-5 shadow-xs space-y-4">
         <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
           <div
             role="tablist"
@@ -181,14 +181,14 @@ export function MessagesManager({
                   role="tab"
                   aria-selected={active}
                   onClick={() => setStatusFilter(tab.value)}
-                  className={`inline-flex min-h-11 items-center gap-2 rounded-xl border px-3.5 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8] ${
+                  className={`inline-flex min-h-11 items-center gap-2 rounded-xl border px-3.5 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8] ${
                     active
-                      ? "border-[#60A5FA] bg-[#12213F] text-[#F1F5FB]"
-                      : "border-[#4E6E9E] bg-[#0B1730] text-[#94A7C4] hover:bg-[#12213F] hover:text-[#F1F5FB]"
+                      ? "border-[#0066FF] bg-[#0066FF]/10 text-[#0066FF] dark:border-[#60A5FA] dark:bg-[#12213F] dark:text-[#F1F5FB]"
+                      : "border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#0B1730] text-[#5A6E85] dark:text-[#94A7C4] hover:bg-slate-100 dark:hover:bg-[#12213F] hover:text-[#041E42] dark:hover:text-[#F1F5FB]"
                   }`}
                 >
                   <span>{tab.label}</span>
-                  <span className="rounded-md bg-[#030711] px-1.5 py-0.5 text-[11px] tabular-nums text-[#94A7C4]">
+                  <span className="rounded-md bg-slate-200 dark:bg-[#030711] px-1.5 py-0.5 text-[11px] tabular-nums text-slate-700 dark:text-[#94A7C4]">
                     {count}
                   </span>
                 </button>
@@ -201,7 +201,7 @@ export function MessagesManager({
               Cari pengirim, email, atau isi pesan
             </label>
             <MagnifyingGlassIcon
-              className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#94A7C4]"
+              className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#5A6E85] dark:text-[#94A7C4]"
               aria-hidden="true"
             />
             <input
@@ -210,24 +210,24 @@ export function MessagesManager({
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Cari nama, email, atau layanan..."
-              className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] pl-10 pr-3.5 text-sm text-[#F1F5FB] placeholder:text-[#94A7C4] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8]"
+              className="min-h-11 w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] pl-10 pr-3.5 text-sm text-[#041E42] dark:text-[#F1F5FB] placeholder:text-slate-400 dark:placeholder:text-[#94A7C4] focus:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
             />
           </div>
         </div>
       </div>
 
       {filteredItems.length === 0 ? (
-        <div className="rounded-2xl border border-[#1E3358] bg-[#0B1730] p-8 text-center">
-          <p className="text-sm font-semibold text-[#F1F5FB]">
+        <div className="rounded-2xl border border-slate-200 dark:border-[#1E3358] bg-white dark:bg-[#0B1730] p-10 text-center shadow-xs">
+          <p className="text-sm font-semibold text-[#041E42] dark:text-[#F1F5FB]">
             Tidak ada pesan yang cocok dengan filter saat ini.
           </p>
-          <p className="mt-1 text-xs text-[#94A7C4]">
+          <p className="mt-1 text-xs text-[#5A6E85] dark:text-[#94A7C4]">
             Ubah tab status atau kata kunci pencarian untuk menampilkan pesan lainnya.
           </p>
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 items-start">
-          <div className="lg:col-span-5 rounded-2xl border border-[#1E3358] bg-[#0B1730] divide-y divide-[#1E3358] overflow-hidden">
+          <div className="lg:col-span-5 rounded-2xl border border-slate-200 dark:border-[#1E3358] bg-white dark:bg-[#0B1730] divide-y divide-slate-100 dark:divide-[#1E3358] overflow-hidden shadow-xs">
             {filteredItems.map((msg) => {
               const isSelected = selectedMessage?.id === msg.id;
               return (
@@ -235,42 +235,42 @@ export function MessagesManager({
                   key={msg.id}
                   type="button"
                   onClick={() => selectMessage(msg)}
-                  className={`w-full text-left p-4 transition-colors focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#38BDF8] ${
+                  className={`w-full text-left p-4 transition-colors focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8] ${
                     isSelected
-                      ? "bg-[#12213F]"
-                      : "bg-[#0B1730] hover:bg-[#12213F]/70"
+                      ? "bg-blue-50/70 dark:bg-[#12213F]"
+                      : "bg-white dark:bg-[#0B1730] hover:bg-slate-50 dark:hover:bg-[#12213F]/70"
                   }`}
                 >
                   <div className="flex items-start justify-between gap-2">
                     <div className="min-w-0">
-                      <p className="truncate text-sm font-semibold text-[#F1F5FB]">
+                      <p className="truncate text-sm font-bold text-[#041E42] dark:text-[#F1F5FB]">
                         {msg.name}
                       </p>
-                      <p className="truncate text-xs text-[#94A7C4]">
+                      <p className="truncate text-xs text-[#5A6E85] dark:text-[#94A7C4]">
                         {msg.email}
                       </p>
                     </div>
                     <span
-                      className={`shrink-0 rounded-md border px-2 py-0.5 text-[11px] font-semibold ${
+                      className={`shrink-0 rounded-md border px-2 py-0.5 text-[11px] font-bold ${
                         msg.status === "NEW"
-                          ? "border-[#FBBF24]/60 bg-[#0B1730] text-[#FBBF24]"
+                          ? "border-amber-300 dark:border-[#FBBF24]/60 bg-amber-50 dark:bg-[#0B1730] text-amber-800 dark:text-[#FBBF24]"
                           : msg.status === "REPLIED"
-                          ? "border-[#34D399]/60 bg-[#0B1730] text-[#34D399]"
+                          ? "border-emerald-300 dark:border-[#34D399]/60 bg-emerald-50 dark:bg-[#0B1730] text-emerald-800 dark:text-[#34D399]"
                           : msg.status === "SPAM"
-                          ? "border-[#F87171]/60 bg-[#0B1730] text-[#FCA5A5]"
-                          : "border-[#4E6E9E] bg-[#0B1730] text-[#94A7C4]"
+                          ? "border-rose-300 dark:border-[#F87171]/60 bg-rose-50 dark:bg-[#0B1730] text-rose-800 dark:text-[#FCA5A5]"
+                          : "border-slate-300 dark:border-[#4E6E9E] bg-slate-100 dark:bg-[#0B1730] text-slate-700 dark:text-[#94A7C4]"
                       }`}
                     >
                       {STATUS_LABELS[msg.status]}
                     </span>
                   </div>
 
-                  <p className="mt-2 line-clamp-2 text-xs text-[#F1F5FB]/90">
+                  <p className="mt-2 line-clamp-2 text-xs text-slate-700 dark:text-[#F1F5FB]/90">
                     {msg.message}
                   </p>
 
-                  <div className="mt-2.5 flex items-center justify-between text-[11px] text-[#94A7C4]">
-                    <span>{msg.service || "Konsultasi Umum"}</span>
+                  <div className="mt-2.5 flex items-center justify-between text-[11px] text-[#5A6E85] dark:text-[#94A7C4]">
+                    <span className="font-medium">{msg.service || "Konsultasi Umum"}</span>
                     <span className="tabular-nums">
                       {dateTimeFormatter.format(new Date(msg.createdAt))}
                     </span>
@@ -284,18 +284,18 @@ export function MessagesManager({
             <section
               key={selectedMessage.id}
               aria-label="Detail pesan terpilih"
-              className="lg:col-span-7 rounded-2xl border border-[#1E3358] bg-[#0B1730] p-5 sm:p-6 space-y-6"
+              className="lg:col-span-7 rounded-2xl border border-slate-200 dark:border-[#1E3358] bg-white dark:bg-[#0B1730] p-5 sm:p-6 space-y-6 shadow-xs"
             >
-              <div className="flex flex-wrap items-start justify-between gap-4 border-b border-[#1E3358] pb-4">
+              <div className="flex flex-wrap items-start justify-between gap-4 border-b border-slate-200 dark:border-[#1E3358] pb-4">
                 <div>
-                  <h2 className="text-lg font-bold text-[#F1F5FB]">
+                  <h2 className="text-lg font-bold text-[#041E42] dark:text-[#F1F5FB]">
                     {selectedMessage.name}
                   </h2>
-                  <p className="text-xs text-[#94A7C4]">
+                  <p className="text-xs text-[#5A6E85] dark:text-[#94A7C4]">
                     Email: {selectedMessage.email} · Sumber:{" "}
                     {selectedMessage.sourcePage}
                   </p>
-                  <p className="mt-1 text-xs text-[#94A7C4]">
+                  <p className="mt-1 text-xs text-[#5A6E85] dark:text-[#94A7C4]">
                     Waktu masuk:{" "}
                     {dateTimeFormatter.format(new Date(selectedMessage.createdAt))}{" "}
                     WIB
@@ -313,7 +313,7 @@ export function MessagesManager({
                       selectedMessage.service || "Kebutuhan Proyek Digital"
                     }`
                   )}`}
-                  className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#2563EB] px-4 text-xs font-semibold text-white transition-colors hover:bg-[#1D4ED8] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8]"
+                  className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#0066FF] hover:bg-[#0052CC] dark:bg-[#2563EB] dark:hover:bg-[#1D4ED8] px-4 text-xs font-semibold text-white transition-colors shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
                 >
                   <EnvelopeClosedIcon className="h-4 w-4" aria-hidden="true" />
                   <span>Balas via Email</span>
@@ -321,10 +321,10 @@ export function MessagesManager({
               </div>
 
               <div className="space-y-2">
-                <p className="text-xs font-semibold uppercase tracking-wider text-[#94A7C4]">
+                <p className="text-xs font-bold uppercase tracking-wider text-[#5A6E85] dark:text-[#94A7C4]">
                   Kebutuhan Layanan: {selectedMessage.service || "Umum"}
                 </p>
-                <div className="rounded-xl border border-[#1E3358] bg-[#12213F] p-4 text-sm leading-relaxed text-[#F1F5FB] whitespace-pre-wrap">
+                <div className="rounded-xl border border-slate-200 dark:border-[#1E3358] bg-slate-50 dark:bg-[#12213F] p-4 text-sm leading-relaxed text-[#041E42] dark:text-[#F1F5FB] whitespace-pre-wrap">
                   {selectedMessage.message}
                 </div>
               </div>
@@ -334,7 +334,7 @@ export function MessagesManager({
                   <div>
                     <label
                       htmlFor="message-status-select"
-                      className="block text-xs font-semibold text-[#F1F5FB] mb-1.5"
+                      className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1.5"
                     >
                       Status Penanganan
                     </label>
@@ -345,7 +345,7 @@ export function MessagesManager({
                       onChange={(e) =>
                         setDraftStatus(e.target.value as MessageStatus)
                       }
-                      className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3.5 text-sm text-[#F1F5FB] disabled:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8]"
+                      className="min-h-11 w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] px-3.5 text-sm text-[#041E42] dark:text-[#F1F5FB] disabled:opacity-60 focus:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
                     >
                       <option value="NEW">Baru (Belum Ditangani)</option>
                       <option value="READ">Sudah Dibaca</option>
@@ -358,7 +358,7 @@ export function MessagesManager({
                 <div>
                   <label
                     htmlFor="message-internal-note"
-                    className="block text-xs font-semibold text-[#F1F5FB] mb-1.5"
+                    className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1.5"
                   >
                     Catatan Internal Tim (Tidak terlihat oleh pengirim)
                   </label>
@@ -370,7 +370,7 @@ export function MessagesManager({
                     value={draftNote}
                     onChange={(e) => setDraftNote(e.target.value)}
                     placeholder="Contoh: Sudah dihubungi melalui email pada pukul 10.30 WIB untuk penjadwalan diskusi teknis."
-                    className="w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] p-3.5 text-sm text-[#F1F5FB] placeholder:text-[#94A7C4] disabled:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8]"
+                    className="w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] p-3.5 text-sm text-[#041E42] dark:text-[#F1F5FB] placeholder:text-slate-400 dark:placeholder:text-[#94A7C4] disabled:opacity-60 focus:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
                   />
                 </div>
 
@@ -379,7 +379,7 @@ export function MessagesManager({
                     <button
                       type="submit"
                       disabled={isPending}
-                      className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#2563EB] px-4 text-xs font-semibold text-white transition-colors hover:bg-[#1D4ED8] disabled:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8]"
+                      className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#0066FF] hover:bg-[#0052CC] dark:bg-[#2563EB] dark:hover:bg-[#1D4ED8] px-4 text-xs font-semibold text-white transition-colors disabled:opacity-60 shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
                     >
                       <CheckCircledIcon className="h-4 w-4" aria-hidden="true" />
                       <span>
@@ -387,7 +387,7 @@ export function MessagesManager({
                       </span>
                     </button>
                   ) : (
-                    <p className="text-xs text-[#94A7C4]">
+                    <p className="text-xs text-[#5A6E85] dark:text-[#94A7C4]">
                       Peran akun Anda hanya memiliki akses baca pada pesan masuk.
                     </p>
                   )}
@@ -400,7 +400,7 @@ export function MessagesManager({
                             type="button"
                             disabled={isPending}
                             onClick={() => handleDelete(selectedMessage.id)}
-                            className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-[#F87171] bg-[#12213F] px-3.5 text-xs font-semibold text-[#FCA5A5] transition-colors hover:bg-[#192D54] disabled:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8]"
+                            className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-rose-300 dark:border-[#F87171] bg-rose-50 dark:bg-[#12213F] px-3.5 text-xs font-semibold text-rose-700 dark:text-[#FCA5A5] transition-colors hover:bg-rose-100 dark:hover:bg-[#192D54] disabled:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-500"
                           >
                             <span>Konfirmasi Hapus Permanen</span>
                           </button>
@@ -408,7 +408,7 @@ export function MessagesManager({
                             type="button"
                             disabled={isPending}
                             onClick={() => setConfirmDeleteId(null)}
-                            className="inline-flex min-h-11 items-center rounded-xl border border-[#4E6E9E] bg-[#0B1730] px-3 text-xs font-medium text-[#94A7C4] hover:bg-[#12213F] hover:text-[#F1F5FB] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8]"
+                            className="inline-flex min-h-11 items-center rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-white dark:bg-[#0B1730] px-3 text-xs font-medium text-[#5A6E85] dark:text-[#94A7C4] hover:bg-slate-100 dark:hover:bg-[#12213F]"
                           >
                             Batal
                           </button>
@@ -418,7 +418,7 @@ export function MessagesManager({
                           type="button"
                           disabled={isPending}
                           onClick={() => setConfirmDeleteId(selectedMessage.id)}
-                          className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-[#F87171]/60 bg-[#0B1730] px-3.5 text-xs font-semibold text-[#FCA5A5] transition-colors hover:bg-[#12213F] disabled:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8]"
+                          className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-rose-200 dark:border-[#F87171]/60 bg-white dark:bg-[#0B1730] px-3.5 text-xs font-semibold text-rose-600 dark:text-[#FCA5A5] transition-colors hover:bg-rose-50 dark:hover:bg-[#12213F] disabled:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-500"
                         >
                           <TrashIcon className="h-4 w-4" aria-hidden="true" />
                           <span>Hapus Pesan</span>

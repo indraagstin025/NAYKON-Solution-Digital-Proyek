@@ -157,7 +157,7 @@ export function FaqsManager({
         onDismiss={clearFeedback}
       />
 
-      <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-[#1E3358] bg-[#0B1730] p-4">
+      <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-xs dark:border-[#1E3358] dark:bg-[#0B1730]">
         <div
           role="tablist"
           aria-label="Submodul FAQ dan halaman statis"
@@ -168,10 +168,10 @@ export function FaqsManager({
             role="tab"
             aria-selected={activeTab === "faqs"}
             onClick={() => setActiveTab("faqs")}
-            className={`inline-flex min-h-11 items-center rounded-xl border px-4 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8] ${
+            className={`inline-flex min-h-11 items-center rounded-xl border px-4 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8] ${
               activeTab === "faqs"
-                ? "border-[#60A5FA] bg-[#12213F] text-[#F1F5FB]"
-                : "border-[#4E6E9E] bg-[#0B1730] text-[#94A7C4] hover:bg-[#12213F]"
+                ? "border-[#0066FF] bg-blue-50/70 text-[#0066FF] dark:border-[#60A5FA] dark:bg-[#12213F] dark:text-[#F1F5FB]"
+                : "border-slate-200 bg-white text-[#5A6E85] hover:bg-slate-50 dark:border-[#4E6E9E] dark:bg-[#0B1730] dark:text-[#94A7C4] dark:hover:bg-[#12213F]"
             }`}
           >
             Pertanyaan FAQ ({faqs.length})
@@ -182,10 +182,10 @@ export function FaqsManager({
             role="tab"
             aria-selected={activeTab === "pages"}
             onClick={() => setActiveTab("pages")}
-            className={`inline-flex min-h-11 items-center rounded-xl border px-4 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8] ${
+            className={`inline-flex min-h-11 items-center rounded-xl border px-4 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8] ${
               activeTab === "pages"
-                ? "border-[#60A5FA] bg-[#12213F] text-[#F1F5FB]"
-                : "border-[#4E6E9E] bg-[#0B1730] text-[#94A7C4] hover:bg-[#12213F]"
+                ? "border-[#0066FF] bg-blue-50/70 text-[#0066FF] dark:border-[#60A5FA] dark:bg-[#12213F] dark:text-[#F1F5FB]"
+                : "border-slate-200 bg-white text-[#5A6E85] hover:bg-slate-50 dark:border-[#4E6E9E] dark:bg-[#0B1730] dark:text-[#94A7C4] dark:hover:bg-[#12213F]"
             }`}
           >
             Halaman Statis ({pages.length})
@@ -196,7 +196,7 @@ export function FaqsManager({
           <button
             type="button"
             onClick={startNewFaq}
-            className="inline-flex min-h-11 items-center gap-1.5 rounded-xl bg-[#2563EB] px-3.5 text-xs font-semibold text-white hover:bg-[#1D4ED8] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8]"
+            className="inline-flex min-h-11 items-center gap-1.5 rounded-xl bg-[#0066FF] px-3.5 text-xs font-semibold text-white hover:bg-[#0052CC] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:bg-[#2563EB] dark:hover:bg-[#1D4ED8] dark:focus-visible:outline-[#38BDF8]"
           >
             <PlusIcon className="h-4 w-4" aria-hidden="true" />
             <span>Pertanyaan FAQ Baru</span>
@@ -206,7 +206,7 @@ export function FaqsManager({
 
       {activeTab === "faqs" ? (
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 items-start">
-          <div className="lg:col-span-5 rounded-2xl border border-[#1E3358] bg-[#0B1730] divide-y divide-[#1E3358] overflow-hidden">
+          <div className="lg:col-span-5 rounded-2xl border border-slate-200 bg-white divide-y divide-slate-100 overflow-hidden shadow-xs dark:border-[#1E3358] dark:bg-[#0B1730] dark:divide-[#1E3358]">
             {faqs.map((item) => {
               const selected = item.id === faqId;
               return (
@@ -214,29 +214,29 @@ export function FaqsManager({
                   key={item.id}
                   type="button"
                   onClick={() => loadFaq(item)}
-                  className={`w-full text-left p-4 transition-colors focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#38BDF8] ${
+                  className={`w-full text-left p-4 transition-colors focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8] ${
                     selected
-                      ? "bg-[#12213F]"
-                      : "bg-[#0B1730] hover:bg-[#12213F]/60"
+                      ? "bg-blue-50/70 border-l-4 border-l-[#0066FF] dark:bg-[#12213F] dark:border-l-[#38BDF8]"
+                      : "bg-white hover:bg-slate-50 dark:bg-[#0B1730] dark:hover:bg-[#12213F]/60"
                   }`}
                 >
                   <div className="flex items-start justify-between gap-2">
-                    <p className="text-sm font-semibold text-[#F1F5FB] line-clamp-2">
+                    <p className="text-sm font-semibold text-[#041E42] dark:text-[#F1F5FB] line-clamp-2">
                       {item.question}
                     </p>
                     <span
                       className={`shrink-0 rounded-md border px-2 py-0.5 text-[11px] font-semibold ${
                         item.deletedAt
-                          ? "border-[#F87171]/60 bg-[#0B1730] text-[#FCA5A5]"
+                          ? "border-rose-200 bg-rose-50 text-rose-700 dark:border-[#F87171]/60 dark:bg-[#0B1730] dark:text-[#FCA5A5]"
                           : item.status === "PUBLISHED"
-                          ? "border-[#34D399]/60 bg-[#0B1730] text-[#34D399]"
-                          : "border-[#FBBF24]/60 bg-[#0B1730] text-[#FBBF24]"
+                          ? "border-emerald-200 bg-emerald-50 text-emerald-700 dark:border-[#34D399]/60 dark:bg-[#0B1730] dark:text-[#34D399]"
+                          : "border-amber-200 bg-amber-50 text-amber-700 dark:border-[#FBBF24]/60 dark:bg-[#0B1730] dark:text-[#FBBF24]"
                       }`}
                     >
                       {item.deletedAt ? "Sampah" : STATUS_LABELS[item.status]}
                     </span>
                   </div>
-                  <p className="mt-1 text-xs text-[#94A7C4]">
+                  <p className="mt-1 text-xs text-[#5A6E85] dark:text-[#94A7C4]">
                     Urutan #{item.sortOrder} · {item.category || "Umum"}
                   </p>
                 </button>
@@ -246,13 +246,13 @@ export function FaqsManager({
 
           <section
             aria-label="Editor pertanyaan FAQ"
-            className="lg:col-span-7 rounded-2xl border border-[#1E3358] bg-[#0B1730] p-5 sm:p-6 space-y-5"
+            className="lg:col-span-7 rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 space-y-5 shadow-xs dark:border-[#1E3358] dark:bg-[#0B1730]"
           >
             <div>
-              <h2 className="text-base sm:text-lg font-bold text-[#F1F5FB]">
+              <h2 className="text-base sm:text-lg font-bold text-[#041E42] dark:text-[#F1F5FB]">
                 {faqId ? "Perbarui Pertanyaan FAQ" : "Tambah Pertanyaan FAQ"}
               </h2>
-              <p className="text-xs text-[#94A7C4]">
+              <p className="text-xs text-[#5A6E85] dark:text-[#94A7C4]">
                 Pertanyaan FAQ terbit akan ditampilkan beserta schema.org
                 FAQPage pada halaman Beranda.
               </p>
@@ -262,7 +262,7 @@ export function FaqsManager({
               <div>
                 <label
                   htmlFor="faq-question"
-                  className="block text-xs font-semibold text-[#F1F5FB] mb-1.5"
+                  className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1.5"
                 >
                   Pertanyaan
                 </label>
@@ -274,14 +274,14 @@ export function FaqsManager({
                   maxLength={180}
                   value={question}
                   onChange={(e) => setQuestion(e.target.value)}
-                  className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3.5 text-sm text-[#F1F5FB]"
+                  className="min-h-11 w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#0066FF] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#38BDF8]"
                 />
               </div>
 
               <div>
                 <label
                   htmlFor="faq-answer"
-                  className="block text-xs font-semibold text-[#F1F5FB] mb-1.5"
+                  className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1.5"
                 >
                   Jawaban Lengkap
                 </label>
@@ -293,7 +293,7 @@ export function FaqsManager({
                   maxLength={1200}
                   value={answer}
                   onChange={(e) => setAnswer(e.target.value)}
-                  className="w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] p-3.5 text-sm text-[#F1F5FB]"
+                  className="w-full rounded-xl border border-slate-300 bg-slate-50 p-3.5 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#0066FF] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#38BDF8]"
                 />
               </div>
 
@@ -301,7 +301,7 @@ export function FaqsManager({
                 <div>
                   <label
                     htmlFor="faq-category"
-                    className="block text-xs font-semibold text-[#F1F5FB] mb-1.5"
+                    className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1.5"
                   >
                     Kategori Topik
                   </label>
@@ -310,14 +310,14 @@ export function FaqsManager({
                     type="text"
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
-                    className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3.5 text-sm text-[#F1F5FB]"
+                    className="min-h-11 w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#0066FF] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#38BDF8]"
                   />
                 </div>
 
                 <div>
                   <label
                     htmlFor="faq-order"
-                    className="block text-xs font-semibold text-[#F1F5FB] mb-1.5"
+                    className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1.5"
                   >
                     Urutan Tampil
                   </label>
@@ -328,14 +328,14 @@ export function FaqsManager({
                     max={999}
                     value={sortOrder}
                     onChange={(e) => setSortOrder(Number(e.target.value))}
-                    className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3.5 text-sm text-[#F1F5FB]"
+                    className="min-h-11 w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#0066FF] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#38BDF8]"
                   />
                 </div>
 
                 <div>
                   <label
                     htmlFor="faq-status"
-                    className="block text-xs font-semibold text-[#F1F5FB] mb-1.5"
+                    className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1.5"
                   >
                     Status Publikasi
                   </label>
@@ -345,7 +345,7 @@ export function FaqsManager({
                     onChange={(e) =>
                       setFaqStatus(e.target.value as ContentStatus)
                     }
-                    className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3.5 text-sm text-[#F1F5FB]"
+                    className="min-h-11 w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#0066FF] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#38BDF8]"
                   >
                     <option value="DRAFT">Draf</option>
                     <option value="REVIEW">Tinjauan</option>
@@ -360,7 +360,7 @@ export function FaqsManager({
                   <button
                     type="submit"
                     disabled={isPending}
-                    className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#2563EB] px-4 text-xs font-semibold text-white hover:bg-[#1D4ED8] disabled:opacity-60"
+                    className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#0066FF] px-4 text-xs font-semibold text-white hover:bg-[#0052CC] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] disabled:opacity-60 dark:bg-[#2563EB] dark:hover:bg-[#1D4ED8] dark:focus-visible:outline-[#38BDF8]"
                   >
                     <CheckCircledIcon className="h-4 w-4" aria-hidden="true" />
                     <span>{isPending ? "Menyimpan..." : "Simpan FAQ"}</span>
@@ -379,7 +379,7 @@ export function FaqsManager({
                         })
                       )
                     }
-                    className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-[#F87171]/60 bg-[#0B1730] px-3.5 text-xs font-semibold text-[#FCA5A5] hover:bg-[#12213F]"
+                    className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-rose-200 bg-white px-3.5 text-xs font-semibold text-rose-600 hover:bg-rose-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-500 dark:border-[#F87171]/60 dark:bg-[#0B1730] dark:text-[#FCA5A5] dark:hover:bg-[#12213F]"
                   >
                     <TrashIcon className="h-4 w-4" aria-hidden="true" />
                     <span>
@@ -395,7 +395,7 @@ export function FaqsManager({
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 items-start">
-          <div className="lg:col-span-4 rounded-2xl border border-[#1E3358] bg-[#0B1730] divide-y divide-[#1E3358] overflow-hidden">
+          <div className="lg:col-span-4 rounded-2xl border border-slate-200 bg-white divide-y divide-slate-100 overflow-hidden shadow-xs dark:border-[#1E3358] dark:bg-[#0B1730] dark:divide-[#1E3358]">
             {pages.map((p) => {
               const selected = p.id === pageId;
               return (
@@ -403,16 +403,16 @@ export function FaqsManager({
                   key={p.id}
                   type="button"
                   onClick={() => loadPage(p)}
-                  className={`w-full text-left p-4 transition-colors focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#38BDF8] ${
+                  className={`w-full text-left p-4 transition-colors focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8] ${
                     selected
-                      ? "bg-[#12213F]"
-                      : "bg-[#0B1730] hover:bg-[#12213F]/60"
+                      ? "bg-blue-50/70 border-l-4 border-l-[#0066FF] dark:bg-[#12213F] dark:border-l-[#38BDF8]"
+                      : "bg-white hover:bg-slate-50 dark:bg-[#0B1730] dark:hover:bg-[#12213F]/60"
                   }`}
                 >
-                  <p className="text-sm font-semibold text-[#F1F5FB]">
+                  <p className="text-sm font-semibold text-[#041E42] dark:text-[#F1F5FB]">
                     {p.title}
                   </p>
-                  <p className="text-xs text-[#94A7C4]">Slug: /{p.slug}</p>
+                  <p className="text-xs text-[#5A6E85] dark:text-[#94A7C4]">Slug: /{p.slug}</p>
                 </button>
               );
             })}
@@ -421,13 +421,13 @@ export function FaqsManager({
           {currentPage && (
             <section
               aria-label="Editor halaman statis"
-              className="lg:col-span-8 rounded-2xl border border-[#1E3358] bg-[#0B1730] p-5 sm:p-6 space-y-5"
+              className="lg:col-span-8 rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 space-y-5 shadow-xs dark:border-[#1E3358] dark:bg-[#0B1730]"
             >
               <div>
-                <h2 className="text-base sm:text-lg font-bold text-[#F1F5FB]">
+                <h2 className="text-base sm:text-lg font-bold text-[#041E42] dark:text-[#F1F5FB]">
                   Perbarui Halaman: /{currentPage.slug}
                 </h2>
-                <p className="text-xs text-[#94A7C4]">
+                <p className="text-xs text-[#5A6E85] dark:text-[#94A7C4]">
                   Perubahan langsung diperbarui pada halaman publik /
                   {currentPage.slug}.
                 </p>
@@ -438,7 +438,7 @@ export function FaqsManager({
                   <div>
                     <label
                       htmlFor="page-title"
-                      className="block text-xs font-semibold text-[#F1F5FB] mb-1.5"
+                      className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1.5"
                     >
                       Judul Halaman
                     </label>
@@ -448,14 +448,14 @@ export function FaqsManager({
                       required
                       value={pageTitle}
                       onChange={(e) => setPageTitle(e.target.value)}
-                      className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3.5 text-sm text-[#F1F5FB]"
+                      className="min-h-11 w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#0066FF] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#38BDF8]"
                     />
                   </div>
 
                   <div>
                     <label
                       htmlFor="page-updated-label"
-                      className="block text-xs font-semibold text-[#F1F5FB] mb-1.5"
+                      className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1.5"
                     >
                       Label Pembaruan Dokumen
                     </label>
@@ -465,7 +465,7 @@ export function FaqsManager({
                       value={pageUpdatedLabel}
                       onChange={(e) => setPageUpdatedLabel(e.target.value)}
                       placeholder="Contoh: Oktober 2026"
-                      className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3.5 text-sm text-[#F1F5FB]"
+                      className="min-h-11 w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#0066FF] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#38BDF8]"
                     />
                   </div>
                 </div>
@@ -473,7 +473,7 @@ export function FaqsManager({
                 <div>
                   <label
                     htmlFor="page-body"
-                    className="block text-xs font-semibold text-[#F1F5FB] mb-1.5"
+                    className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1.5"
                   >
                     Isi Dokumen Terstruktur
                   </label>
@@ -483,7 +483,7 @@ export function FaqsManager({
                     required
                     value={pageBodyText}
                     onChange={(e) => setPageBodyText(e.target.value)}
-                    className="w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] p-3.5 font-mono text-xs leading-relaxed text-[#F1F5FB]"
+                    className="w-full rounded-xl border border-slate-300 bg-slate-50 p-3.5 font-mono text-xs leading-relaxed text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#0066FF] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#38BDF8]"
                   />
                 </div>
 
@@ -491,7 +491,7 @@ export function FaqsManager({
                   <div>
                     <label
                       htmlFor="page-seo-title"
-                      className="block text-xs font-semibold text-[#F1F5FB] mb-1.5"
+                      className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1.5"
                     >
                       Judul SEO
                     </label>
@@ -501,14 +501,14 @@ export function FaqsManager({
                       maxLength={70}
                       value={pageSeoTitle}
                       onChange={(e) => setPageSeoTitle(e.target.value)}
-                      className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3.5 text-sm text-[#F1F5FB]"
+                      className="min-h-11 w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#0066FF] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#38BDF8]"
                     />
                   </div>
 
                   <div>
                     <label
                       htmlFor="page-seo-desc"
-                      className="block text-xs font-semibold text-[#F1F5FB] mb-1.5"
+                      className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1.5"
                     >
                       Deskripsi SEO
                     </label>
@@ -518,14 +518,14 @@ export function FaqsManager({
                       maxLength={170}
                       value={pageSeoDesc}
                       onChange={(e) => setPageSeoDesc(e.target.value)}
-                      className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3.5 text-sm text-[#F1F5FB]"
+                      className="min-h-11 w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#0066FF] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#38BDF8]"
                     />
                   </div>
 
                   <div>
                     <label
                       htmlFor="page-status"
-                      className="block text-xs font-semibold text-[#F1F5FB] mb-1.5"
+                      className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1.5"
                     >
                       Status
                     </label>
@@ -535,7 +535,7 @@ export function FaqsManager({
                       onChange={(e) =>
                         setPageStatus(e.target.value as ContentStatus)
                       }
-                      className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3.5 text-sm text-[#F1F5FB]"
+                      className="min-h-11 w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#0066FF] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#38BDF8]"
                     >
                       <option value="DRAFT">Draf</option>
                       {canPublish && <option value="PUBLISHED">Terbit</option>}
@@ -547,7 +547,7 @@ export function FaqsManager({
                   <button
                     type="submit"
                     disabled={isPending}
-                    className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#2563EB] px-4 text-xs font-semibold text-white hover:bg-[#1D4ED8] disabled:opacity-60"
+                    className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#0066FF] px-4 text-xs font-semibold text-white hover:bg-[#0052CC] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] disabled:opacity-60 dark:bg-[#2563EB] dark:hover:bg-[#1D4ED8] dark:focus-visible:outline-[#38BDF8]"
                   >
                     <CheckCircledIcon className="h-4 w-4" aria-hidden="true" />
                     <span>

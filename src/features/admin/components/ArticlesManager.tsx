@@ -275,7 +275,7 @@ export function ArticlesManager({
         onDismiss={clearFeedback}
       />
 
-      <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-[#1E3358] bg-[#0B1730] p-4">
+      <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-slate-200 dark:border-[#1E3358] bg-white dark:bg-[#0B1730] p-4 shadow-xs">
         <div
           role="tablist"
           aria-label="Submodul manajemen artikel"
@@ -286,10 +286,10 @@ export function ArticlesManager({
             role="tab"
             aria-selected={activeTab === "articles"}
             onClick={() => setActiveTab("articles")}
-            className={`inline-flex min-h-11 items-center gap-2 rounded-xl border px-4 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8] ${
+            className={`inline-flex min-h-11 items-center gap-2 rounded-xl border px-4 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8] ${
               activeTab === "articles"
-                ? "border-[#60A5FA] bg-[#12213F] text-[#F1F5FB]"
-                : "border-[#4E6E9E] bg-[#0B1730] text-[#94A7C4] hover:bg-[#12213F] hover:text-[#F1F5FB]"
+                ? "border-[#0066FF] bg-[#0066FF]/10 text-[#0066FF] dark:border-[#60A5FA] dark:bg-[#12213F] dark:text-[#F1F5FB]"
+                : "border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#0B1730] text-[#5A6E85] dark:text-[#94A7C4] hover:bg-slate-100 dark:hover:bg-[#12213F] hover:text-[#041E42] dark:hover:text-[#F1F5FB]"
             }`}
           >
             <span>Editor & Daftar Artikel ({articles.length})</span>
@@ -300,10 +300,10 @@ export function ArticlesManager({
             role="tab"
             aria-selected={activeTab === "taxonomy"}
             onClick={() => setActiveTab("taxonomy")}
-            className={`inline-flex min-h-11 items-center gap-2 rounded-xl border px-4 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8] ${
+            className={`inline-flex min-h-11 items-center gap-2 rounded-xl border px-4 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8] ${
               activeTab === "taxonomy"
-                ? "border-[#60A5FA] bg-[#12213F] text-[#F1F5FB]"
-                : "border-[#4E6E9E] bg-[#0B1730] text-[#94A7C4] hover:bg-[#12213F] hover:text-[#F1F5FB]"
+                ? "border-[#0066FF] bg-[#0066FF]/10 text-[#0066FF] dark:border-[#60A5FA] dark:bg-[#12213F] dark:text-[#F1F5FB]"
+                : "border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#0B1730] text-[#5A6E85] dark:text-[#94A7C4] hover:bg-slate-100 dark:hover:bg-[#12213F] hover:text-[#041E42] dark:hover:text-[#F1F5FB]"
             }`}
           >
             <span>
@@ -312,15 +312,15 @@ export function ArticlesManager({
           </button>
         </div>
 
-        <div className="flex items-center gap-2 text-xs text-[#94A7C4]">
-          <span className="rounded-lg border border-[#1E3358] bg-[#12213F] px-3 py-1.5 tabular-nums">
+        <div className="flex items-center gap-2 text-xs text-[#5A6E85] dark:text-[#94A7C4]">
+          <span className="rounded-xl border border-slate-200 dark:border-[#1E3358] bg-slate-50 dark:bg-[#12213F] px-3 py-1.5 tabular-nums">
             Pengalihan URL 301 aktif: {redirectsCount}
           </span>
           {canCreate && activeTab === "articles" && (
             <button
               type="button"
               onClick={startNewArticle}
-              className="inline-flex min-h-11 items-center gap-1.5 rounded-xl bg-[#2563EB] px-3.5 text-xs font-semibold text-white transition-colors hover:bg-[#1D4ED8] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8]"
+              className="inline-flex min-h-11 items-center gap-1.5 rounded-xl bg-[#0066FF] hover:bg-[#0052CC] dark:bg-[#2563EB] dark:hover:bg-[#1D4ED8] px-3.5 text-xs font-semibold text-white transition-colors shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
             >
               <PlusIcon className="h-4 w-4" aria-hidden="true" />
               <span>Artikel Baru</span>
@@ -331,7 +331,7 @@ export function ArticlesManager({
 
       {activeTab === "articles" ? (
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 items-start">
-          <div className="lg:col-span-5 rounded-2xl border border-[#1E3358] bg-[#0B1730] p-4 space-y-4">
+          <div className="lg:col-span-5 rounded-2xl border border-slate-200 dark:border-[#1E3358] bg-white dark:bg-[#0B1730] p-4 space-y-4 shadow-xs">
             <div className="flex flex-wrap items-center gap-1.5">
               {(
                 ["ALL", "PUBLISHED", "DRAFT", "REVIEW", "ARCHIVED"] as const
@@ -340,10 +340,10 @@ export function ArticlesManager({
                   key={st}
                   type="button"
                   onClick={() => setStatusFilter(st)}
-                  className={`inline-flex min-h-11 items-center rounded-xl border px-3 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8] ${
+                  className={`inline-flex min-h-11 items-center rounded-xl border px-3 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8] ${
                     statusFilter === st
-                      ? "border-[#60A5FA] bg-[#12213F] text-[#F1F5FB]"
-                      : "border-[#4E6E9E] bg-[#0B1730] text-[#94A7C4] hover:bg-[#12213F]"
+                      ? "border-[#0066FF] bg-[#0066FF]/10 text-[#0066FF] dark:border-[#60A5FA] dark:bg-[#12213F] dark:text-[#F1F5FB]"
+                      : "border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#0B1730] text-[#5A6E85] dark:text-[#94A7C4] hover:bg-slate-100 dark:hover:bg-[#12213F]"
                   }`}
                 >
                   {st === "ALL" ? "Semua" : STATUS_LABELS[st]}
@@ -351,9 +351,9 @@ export function ArticlesManager({
               ))}
             </div>
 
-            <div className="divide-y divide-[#1E3358] border-t border-[#1E3358]">
+            <div className="divide-y divide-slate-100 dark:divide-[#1E3358] border-t border-slate-200 dark:border-[#1E3358]">
               {filteredArticles.length === 0 ? (
-                <p className="py-6 text-center text-xs text-[#94A7C4]">
+                <p className="py-8 text-center text-xs text-[#5A6E85] dark:text-[#94A7C4]">
                   Tidak ada artikel pada status ini.
                 </p>
               ) : (
@@ -364,23 +364,23 @@ export function ArticlesManager({
                       key={art.id}
                       type="button"
                       onClick={() => loadArticleIntoForm(art)}
-                      className={`w-full text-left py-3.5 px-3 transition-colors focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#38BDF8] ${
+                      className={`w-full text-left py-3.5 px-3 transition-colors rounded-xl focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8] ${
                         selected
-                          ? "bg-[#12213F]"
-                          : "bg-[#0B1730] hover:bg-[#12213F]/60"
+                          ? "bg-blue-50/70 dark:bg-[#12213F]"
+                          : "bg-white dark:bg-[#0B1730] hover:bg-slate-50 dark:hover:bg-[#12213F]/60"
                       }`}
                     >
                       <div className="flex items-start justify-between gap-2">
-                        <p className="text-sm font-semibold text-[#F1F5FB] line-clamp-2">
+                        <p className="text-sm font-bold text-[#041E42] dark:text-[#F1F5FB] line-clamp-2">
                           {art.title}
                         </p>
                         <span
-                          className={`shrink-0 rounded-md border px-2 py-0.5 text-[11px] font-semibold ${
+                          className={`shrink-0 rounded-md border px-2 py-0.5 text-[11px] font-bold ${
                             art.deletedAt
-                              ? "border-[#F87171]/60 bg-[#0B1730] text-[#FCA5A5]"
+                              ? "border-rose-300 dark:border-[#F87171]/60 bg-rose-50 dark:bg-[#0B1730] text-rose-800 dark:text-[#FCA5A5]"
                               : art.status === "PUBLISHED"
-                              ? "border-[#34D399]/60 bg-[#0B1730] text-[#34D399]"
-                              : "border-[#FBBF24]/60 bg-[#0B1730] text-[#FBBF24]"
+                              ? "border-emerald-300 dark:border-[#34D399]/60 bg-emerald-50 dark:bg-[#0B1730] text-emerald-800 dark:text-[#34D399]"
+                              : "border-amber-300 dark:border-[#FBBF24]/60 bg-amber-50 dark:bg-[#0B1730] text-amber-800 dark:text-[#FBBF24]"
                           }`}
                         >
                           {art.deletedAt
@@ -389,7 +389,7 @@ export function ArticlesManager({
                         </span>
                       </div>
 
-                      <p className="mt-1 text-xs text-[#94A7C4]">
+                      <p className="mt-1.5 text-xs text-[#5A6E85] dark:text-[#94A7C4]">
                         {art.categoryName} · {art.readingTime} menit baca ·{" "}
                         {art.revisionCount} revisi
                       </p>
@@ -402,14 +402,14 @@ export function ArticlesManager({
 
           <section
             aria-label="Formulir editor artikel"
-            className="lg:col-span-7 rounded-2xl border border-[#1E3358] bg-[#0B1730] p-5 sm:p-6 space-y-5"
+            className="lg:col-span-7 rounded-2xl border border-slate-200 dark:border-[#1E3358] bg-white dark:bg-[#0B1730] p-5 sm:p-6 space-y-5 shadow-xs"
           >
-            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#1E3358] pb-4">
+            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 dark:border-[#1E3358] pb-4">
               <div>
-                <h2 className="text-base sm:text-lg font-bold text-[#F1F5FB]">
+                <h2 className="text-base sm:text-lg font-bold text-[#041E42] dark:text-[#F1F5FB]">
                   {editingId ? "Perbarui Artikel Blog" : "Buat Artikel Baru"}
                 </h2>
-                <p className="text-xs text-[#94A7C4]">
+                <p className="text-xs text-[#5A6E85] dark:text-[#94A7C4]">
                   {editingId
                     ? "Mengubah slug artikel yang sudah terbit akan otomatis mencatat pengalihan 301."
                     : "Isi konten artikel menggunakan format blok teks terstruktur."}
@@ -420,7 +420,7 @@ export function ArticlesManager({
                 <Link
                   href={`/blog/${currentArticle.slug}`}
                   target="_blank"
-                  className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3 text-xs font-semibold text-[#F1F5FB] hover:bg-[#192D54] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8]"
+                  className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] px-3.5 text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] hover:bg-slate-100 dark:hover:bg-[#192D54] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
                 >
                   <span>Lihat di Situs Publik</span>
                   <ExternalLinkIcon className="h-3.5 w-3.5" aria-hidden="true" />
@@ -432,7 +432,7 @@ export function ArticlesManager({
               <div>
                 <label
                   htmlFor="article-title"
-                  className="block text-xs font-semibold text-[#F1F5FB] mb-1.5"
+                  className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1.5"
                 >
                   Judul Artikel
                 </label>
@@ -451,7 +451,7 @@ export function ArticlesManager({
                     }
                   }}
                   placeholder="Contoh: Arsitektur Aplikasi Web Multi-Cabang yang Mudah Dipelihara"
-                  className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3.5 text-sm text-[#F1F5FB] placeholder:text-[#94A7C4] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8]"
+                  className="min-h-11 w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] px-3.5 text-sm text-[#041E42] dark:text-[#F1F5FB] placeholder:text-slate-400 dark:placeholder:text-[#94A7C4] focus:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
                 />
               </div>
 
@@ -460,14 +460,14 @@ export function ArticlesManager({
                   <div className="flex items-center justify-between mb-1.5">
                     <label
                       htmlFor="article-slug"
-                      className="text-xs font-semibold text-[#F1F5FB]"
+                      className="text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB]"
                     >
                       Slug URL (/blog/...)
                     </label>
                     <button
                       type="button"
                       onClick={() => setSlug(toClientSlug(title))}
-                      className="text-[11px] font-semibold text-[#60A5FA] hover:underline"
+                      className="text-[11px] font-bold text-[#0066FF] dark:text-[#60A5FA] hover:underline"
                     >
                       Buat dari judul
                     </button>
@@ -482,14 +482,14 @@ export function ArticlesManager({
                     value={slug}
                     onChange={(e) => setSlug(e.target.value)}
                     placeholder="arsitektur-aplikasi-web-multi-cabang"
-                    className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3.5 text-sm text-[#F1F5FB] placeholder:text-[#94A7C4] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8]"
+                    className="min-h-11 w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] px-3.5 text-sm text-[#041E42] dark:text-[#F1F5FB] placeholder:text-slate-400 dark:placeholder:text-[#94A7C4] focus:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
                   />
                 </div>
 
                 <div>
                   <label
                     htmlFor="article-category"
-                    className="block text-xs font-semibold text-[#F1F5FB] mb-1.5"
+                    className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1.5"
                   >
                     Kategori Artikel
                   </label>
@@ -499,7 +499,7 @@ export function ArticlesManager({
                     disabled={!canSubmitForm || isPending}
                     value={categoryId}
                     onChange={(e) => setCategoryId(e.target.value)}
-                    className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3.5 text-sm text-[#F1F5FB] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8]"
+                    className="min-h-11 w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] px-3.5 text-sm text-[#041E42] dark:text-[#F1F5FB] focus:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
                   >
                     {categories.map((cat) => (
                       <option key={cat.id} value={cat.id}>
@@ -513,7 +513,7 @@ export function ArticlesManager({
               <div>
                 <label
                   htmlFor="article-excerpt"
-                  className="block text-xs font-semibold text-[#F1F5FB] mb-1.5"
+                  className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1.5"
                 >
                   Ringkasan Singkat (Excerpt)
                 </label>
@@ -527,24 +527,24 @@ export function ArticlesManager({
                   value={excerpt}
                   onChange={(e) => setExcerpt(e.target.value)}
                   placeholder="Ringkasan 1 hingga 2 kalimat yang tampil pada kartu daftar artikel blog."
-                  className="w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] p-3.5 text-sm text-[#F1F5FB] placeholder:text-[#94A7C4] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8]"
+                  className="w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] p-3.5 text-sm text-[#041E42] dark:text-[#F1F5FB] placeholder:text-slate-400 dark:placeholder:text-[#94A7C4] focus:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
                 />
               </div>
 
               <div>
                 <label
                   htmlFor="article-body"
-                  className="block text-xs font-semibold text-[#F1F5FB] mb-1.5"
+                  className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1.5"
                 >
                   Isi Artikel Terstruktur
                 </label>
-                <p className="mb-2 text-[11px] text-[#94A7C4]">
+                <p className="mb-2 text-[11px] text-[#5A6E85] dark:text-[#94A7C4]">
                   Pisahkan blok dengan baris kosong. Awali dengan{" "}
-                  <code className="text-[#F1F5FB]">## Judul Bagian</code> untuk
+                  <code className="text-[#0066FF] dark:text-[#60A5FA]">## Judul Bagian</code> untuk
                   subjudul H2,{" "}
-                  <code className="text-[#F1F5FB]">### Subbagian</code> untuk H3,{" "}
-                  <code className="text-[#F1F5FB]">- Butir</code> untuk daftar,
-                  atau <code className="text-[#F1F5FB]">&gt; Kutipan</code>.
+                  <code className="text-[#0066FF] dark:text-[#60A5FA]">### Subbagian</code> untuk H3,{" "}
+                  <code className="text-[#0066FF] dark:text-[#60A5FA]">- Butir</code> untuk daftar,
+                  atau <code className="text-[#0066FF] dark:text-[#60A5FA]">&gt; Kutipan</code>.
                 </p>
                 <textarea
                   id="article-body"
@@ -553,13 +553,13 @@ export function ArticlesManager({
                   disabled={!canSubmitForm || isPending}
                   value={bodyText}
                   onChange={(e) => setBodyText(e.target.value)}
-                  className="w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] p-3.5 font-mono text-xs leading-relaxed text-[#F1F5FB] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8]"
+                  className="w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] p-3.5 font-mono text-xs leading-relaxed text-[#041E42] dark:text-[#F1F5FB] focus:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
                 />
               </div>
 
               {tags.length > 0 && (
                 <fieldset className="space-y-2">
-                  <legend className="text-xs font-semibold text-[#F1F5FB]">
+                  <legend className="text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB]">
                     Tag Topik Artikel
                   </legend>
                   <div className="flex flex-wrap gap-2">
@@ -572,10 +572,10 @@ export function ArticlesManager({
                           disabled={!canSubmitForm || isPending}
                           onClick={() => toggleTagSelection(tag.id)}
                           aria-pressed={checked}
-                          className={`inline-flex min-h-11 items-center rounded-xl border px-3 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8] ${
+                          className={`inline-flex min-h-11 items-center rounded-xl border px-3 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8] ${
                             checked
-                              ? "border-[#60A5FA] bg-[#12213F] text-[#F1F5FB]"
-                              : "border-[#4E6E9E] bg-[#0B1730] text-[#94A7C4] hover:bg-[#12213F]"
+                              ? "border-[#0066FF] bg-[#0066FF]/10 text-[#0066FF] dark:border-[#60A5FA] dark:bg-[#12213F] dark:text-[#F1F5FB]"
+                              : "border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#0B1730] text-[#5A6E85] dark:text-[#94A7C4] hover:bg-slate-100 dark:hover:bg-[#12213F]"
                           }`}
                         >
                           #{tag.name}
@@ -586,11 +586,11 @@ export function ArticlesManager({
                 </fieldset>
               )}
 
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 border-t border-[#1E3358] pt-4">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 border-t border-slate-200 dark:border-[#1E3358] pt-4">
                 <div>
                   <label
                     htmlFor="article-status"
-                    className="block text-xs font-semibold text-[#F1F5FB] mb-1.5"
+                    className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1.5"
                   >
                     Status Publikasi
                   </label>
@@ -601,7 +601,7 @@ export function ArticlesManager({
                     onChange={(e) =>
                       setStatus(e.target.value as ContentStatus)
                     }
-                    className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3.5 text-sm text-[#F1F5FB] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8]"
+                    className="min-h-11 w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] px-3.5 text-sm text-[#041E42] dark:text-[#F1F5FB] focus:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
                   >
                     <option value="DRAFT">Draf</option>
                     <option value="REVIEW">Tinjauan</option>
@@ -613,7 +613,7 @@ export function ArticlesManager({
                 <div>
                   <label
                     htmlFor="article-seo-title"
-                    className="block text-xs font-semibold text-[#F1F5FB] mb-1.5"
+                    className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1.5"
                   >
                     Judul SEO (Maks 70 karakter)
                   </label>
@@ -625,14 +625,14 @@ export function ArticlesManager({
                     value={seoTitle}
                     onChange={(e) => setSeoTitle(e.target.value)}
                     placeholder="Kosongkan untuk memakai judul utama"
-                    className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3.5 text-sm text-[#F1F5FB] placeholder:text-[#94A7C4] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8]"
+                    className="min-h-11 w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] px-3.5 text-sm text-[#041E42] dark:text-[#F1F5FB] placeholder:text-slate-400 dark:placeholder:text-[#94A7C4] focus:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
                   />
                 </div>
 
                 <div>
                   <label
                     htmlFor="article-seo-desc"
-                    className="block text-xs font-semibold text-[#F1F5FB] mb-1.5"
+                    className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1.5"
                   >
                     Deskripsi SEO (Maks 170 karakter)
                   </label>
@@ -644,7 +644,7 @@ export function ArticlesManager({
                     value={seoDescription}
                     onChange={(e) => setSeoDescription(e.target.value)}
                     placeholder="Kosongkan untuk memakai ringkasan"
-                    className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3.5 text-sm text-[#F1F5FB] placeholder:text-[#94A7C4] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8]"
+                    className="min-h-11 w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] px-3.5 text-sm text-[#041E42] dark:text-[#F1F5FB] placeholder:text-slate-400 dark:placeholder:text-[#94A7C4] focus:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
                   />
                 </div>
               </div>
@@ -654,7 +654,7 @@ export function ArticlesManager({
                   <button
                     type="submit"
                     disabled={isPending}
-                    className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#2563EB] px-4 text-xs font-semibold text-white transition-colors hover:bg-[#1D4ED8] disabled:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8]"
+                    className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#0066FF] hover:bg-[#0052CC] dark:bg-[#2563EB] dark:hover:bg-[#1D4ED8] px-4 text-xs font-semibold text-white transition-colors disabled:opacity-60 shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
                   >
                     <CheckCircledIcon className="h-4 w-4" aria-hidden="true" />
                     <span>
@@ -666,7 +666,7 @@ export function ArticlesManager({
                     </span>
                   </button>
                 ) : (
-                  <p className="text-xs text-[#94A7C4]">
+                  <p className="text-xs text-[#5A6E85] dark:text-[#94A7C4]">
                     Akun Anda memiliki akses baca saja.
                   </p>
                 )}
@@ -684,7 +684,7 @@ export function ArticlesManager({
                               currentArticle.latestRevisionId!
                             )
                           }
-                          className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3.5 text-xs font-semibold text-[#F1F5FB] hover:bg-[#192D54] disabled:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8]"
+                          className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] px-3.5 text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] hover:bg-slate-100 dark:hover:bg-[#192D54] disabled:opacity-60"
                         >
                           <ResetIcon className="h-3.5 w-3.5" aria-hidden="true" />
                           <span>
@@ -703,7 +703,7 @@ export function ArticlesManager({
                             Boolean(currentArticle.deletedAt)
                           )
                         }
-                        className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-[#F87171]/60 bg-[#0B1730] px-3.5 text-xs font-semibold text-[#FCA5A5] hover:bg-[#12213F] disabled:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8]"
+                        className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-rose-200 dark:border-[#F87171]/60 bg-white dark:bg-[#0B1730] px-3.5 text-xs font-semibold text-rose-600 dark:text-[#FCA5A5] hover:bg-rose-50 dark:hover:bg-[#12213F] disabled:opacity-60"
                       >
                         <TrashIcon className="h-4 w-4" aria-hidden="true" />
                         <span>
@@ -723,13 +723,13 @@ export function ArticlesManager({
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 items-start">
           <section
             aria-label="Manajemen kategori artikel"
-            className="lg:col-span-7 rounded-2xl border border-[#1E3358] bg-[#0B1730] p-5 sm:p-6 space-y-5"
+            className="lg:col-span-7 rounded-2xl border border-slate-200 dark:border-[#1E3358] bg-white dark:bg-[#0B1730] p-5 sm:p-6 space-y-5 shadow-xs"
           >
             <div>
-              <h2 className="text-base font-bold text-[#F1F5FB]">
+              <h2 className="text-base font-bold text-[#041E42] dark:text-[#F1F5FB]">
                 Kategori Artikel
               </h2>
-              <p className="text-xs text-[#94A7C4]">
+              <p className="text-xs text-[#5A6E85] dark:text-[#94A7C4]">
                 Kategori yang sedang digunakan oleh artikel aktif tidak dapat dihapus
                 sebelum artikel dipindahkan.
               </p>
@@ -738,12 +738,12 @@ export function ArticlesManager({
             {canManageTaxonomy && (
               <form
                 onSubmit={handleCreateCategory}
-                className="grid grid-cols-1 gap-3 sm:grid-cols-2 rounded-xl border border-[#1E3358] bg-[#12213F]/50 p-4"
+                className="grid grid-cols-1 gap-3 sm:grid-cols-2 rounded-xl border border-slate-200 dark:border-[#1E3358] bg-slate-50/70 dark:bg-[#12213F]/50 p-4"
               >
                 <div>
                   <label
                     htmlFor="cat-name"
-                    className="block text-xs font-semibold text-[#F1F5FB] mb-1"
+                    className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1"
                   >
                     Nama Kategori
                   </label>
@@ -759,13 +759,13 @@ export function ArticlesManager({
                       setCatSlug(toClientSlug(e.target.value));
                     }}
                     placeholder="Contoh: Keamanan Aplikasi"
-                    className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3 text-sm text-[#F1F5FB]"
+                    className="min-h-11 w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-white dark:bg-[#12213F] px-3 text-sm text-[#041E42] dark:text-[#F1F5FB]"
                   />
                 </div>
                 <div>
                   <label
                     htmlFor="cat-slug"
-                    className="block text-xs font-semibold text-[#F1F5FB] mb-1"
+                    className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1"
                   >
                     Slug Kategori
                   </label>
@@ -778,13 +778,13 @@ export function ArticlesManager({
                     value={catSlug}
                     onChange={(e) => setCatSlug(e.target.value)}
                     placeholder="keamanan-aplikasi"
-                    className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3 text-sm text-[#F1F5FB]"
+                    className="min-h-11 w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-white dark:bg-[#12213F] px-3 text-sm text-[#041E42] dark:text-[#F1F5FB]"
                   />
                 </div>
                 <div>
                   <label
                     htmlFor="cat-desc"
-                    className="block text-xs font-semibold text-[#F1F5FB] mb-1"
+                    className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1"
                   >
                     Deskripsi Singkat
                   </label>
@@ -795,14 +795,14 @@ export function ArticlesManager({
                     value={catDesc}
                     onChange={(e) => setCatDesc(e.target.value)}
                     placeholder="Topik audit keamanan dan proteksi data"
-                    className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3 text-sm text-[#F1F5FB]"
+                    className="min-h-11 w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-white dark:bg-[#12213F] px-3 text-sm text-[#041E42] dark:text-[#F1F5FB]"
                   />
                 </div>
                 <div className="flex items-end gap-2">
                   <div className="w-24">
                     <label
                       htmlFor="cat-order"
-                      className="block text-xs font-semibold text-[#F1F5FB] mb-1"
+                      className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1"
                     >
                       Urutan
                     </label>
@@ -813,13 +813,13 @@ export function ArticlesManager({
                       max={999}
                       value={catOrder}
                       onChange={(e) => setCatOrder(Number(e.target.value))}
-                      className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3 text-sm text-[#F1F5FB]"
+                      className="min-h-11 w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-white dark:bg-[#12213F] px-3 text-sm text-[#041E42] dark:text-[#F1F5FB]"
                     />
                   </div>
                   <button
                     type="submit"
                     disabled={isPending}
-                    className="inline-flex min-h-11 flex-1 items-center justify-center gap-1.5 rounded-xl bg-[#2563EB] px-4 text-xs font-semibold text-white hover:bg-[#1D4ED8] disabled:opacity-60"
+                    className="inline-flex min-h-11 flex-1 items-center justify-center gap-1.5 rounded-xl bg-[#0066FF] hover:bg-[#0052CC] dark:bg-[#2563EB] dark:hover:bg-[#1D4ED8] px-4 text-xs font-semibold text-white disabled:opacity-60 shadow-xs"
                   >
                     <PlusIcon className="h-4 w-4" aria-hidden="true" />
                     <span>Tambah Kategori</span>
@@ -831,7 +831,7 @@ export function ArticlesManager({
             <div className="overflow-x-auto">
               <table className="w-full min-w-[440px] text-left text-sm">
                 <thead>
-                  <tr className="border-b border-[#1E3358] text-xs font-semibold text-[#94A7C4]">
+                  <tr className="border-b border-slate-200 dark:border-[#1E3358] text-xs font-bold text-[#5A6E85] dark:text-[#94A7C4]">
                     <th scope="col" className="pb-2.5 pr-3">
                       Kategori
                     </th>
@@ -846,16 +846,16 @@ export function ArticlesManager({
                     </th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#1E3358]">
+                <tbody className="divide-y divide-slate-100 dark:divide-[#1E3358]">
                   {categories.map((cat) => (
                     <tr key={cat.id}>
-                      <td className="py-3 pr-3 font-medium text-[#F1F5FB]">
+                      <td className="py-3 pr-3 font-bold text-[#041E42] dark:text-[#F1F5FB]">
                         {cat.name}
                       </td>
-                      <td className="py-3 pr-3 text-xs text-[#94A7C4]">
+                      <td className="py-3 pr-3 text-xs text-[#5A6E85] dark:text-[#94A7C4]">
                         {cat.slug}
                       </td>
-                      <td className="py-3 pr-3 text-xs tabular-nums text-[#F1F5FB]">
+                      <td className="py-3 pr-3 text-xs tabular-nums font-semibold text-[#041E42] dark:text-[#F1F5FB]">
                         {cat.articleCount}
                       </td>
                       <td className="py-3 text-right">
@@ -864,7 +864,7 @@ export function ArticlesManager({
                             type="button"
                             disabled={isPending}
                             onClick={() => handleDeleteCategory(cat.id)}
-                            className="inline-flex min-h-11 items-center gap-1 rounded-xl border border-[#F87171]/60 bg-[#0B1730] px-3 text-xs font-semibold text-[#FCA5A5] hover:bg-[#12213F] disabled:opacity-50"
+                            className="inline-flex min-h-11 items-center gap-1 rounded-xl border border-rose-200 dark:border-[#F87171]/60 bg-white dark:bg-[#0B1730] px-3 text-xs font-semibold text-rose-600 dark:text-[#FCA5A5] hover:bg-rose-50 dark:hover:bg-[#12213F] disabled:opacity-50"
                           >
                             <TrashIcon className="h-3.5 w-3.5" aria-hidden="true" />
                             <span>Hapus</span>
@@ -880,13 +880,13 @@ export function ArticlesManager({
 
           <section
             aria-label="Manajemen tag artikel"
-            className="lg:col-span-5 rounded-2xl border border-[#1E3358] bg-[#0B1730] p-5 sm:p-6 space-y-5"
+            className="lg:col-span-5 rounded-2xl border border-slate-200 dark:border-[#1E3358] bg-white dark:bg-[#0B1730] p-5 sm:p-6 space-y-5 shadow-xs"
           >
             <div>
-              <h2 className="text-base font-bold text-[#F1F5FB]">
+              <h2 className="text-base font-bold text-[#041E42] dark:text-[#F1F5FB]">
                 Tag Topik Artikel
               </h2>
-              <p className="text-xs text-[#94A7C4]">
+              <p className="text-xs text-[#5A6E85] dark:text-[#94A7C4]">
                 Tag memudahkan pengelompokan lintas kategori pada halaman blog.
               </p>
             </div>
@@ -894,12 +894,12 @@ export function ArticlesManager({
             {canManageTaxonomy && (
               <form
                 onSubmit={handleCreateTag}
-                className="space-y-3 rounded-xl border border-[#1E3358] bg-[#12213F]/50 p-4"
+                className="space-y-3 rounded-xl border border-slate-200 dark:border-[#1E3358] bg-slate-50/70 dark:bg-[#12213F]/50 p-4"
               >
                 <div>
                   <label
                     htmlFor="tag-name"
-                    className="block text-xs font-semibold text-[#F1F5FB] mb-1"
+                    className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1"
                   >
                     Nama Tag
                   </label>
@@ -915,13 +915,13 @@ export function ArticlesManager({
                       setTagSlug(toClientSlug(e.target.value));
                     }}
                     placeholder="Contoh: PostgreSQL"
-                    className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3 text-sm text-[#F1F5FB]"
+                    className="min-h-11 w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-white dark:bg-[#12213F] px-3 text-sm text-[#041E42] dark:text-[#F1F5FB]"
                   />
                 </div>
                 <div>
                   <label
                     htmlFor="tag-slug"
-                    className="block text-xs font-semibold text-[#F1F5FB] mb-1"
+                    className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1"
                   >
                     Slug Tag
                   </label>
@@ -934,13 +934,13 @@ export function ArticlesManager({
                     value={tagSlug}
                     onChange={(e) => setTagSlug(e.target.value)}
                     placeholder="postgresql"
-                    className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3 text-sm text-[#F1F5FB]"
+                    className="min-h-11 w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-white dark:bg-[#12213F] px-3 text-sm text-[#041E42] dark:text-[#F1F5FB]"
                   />
                 </div>
                 <button
                   type="submit"
                   disabled={isPending}
-                  className="inline-flex min-h-11 w-full items-center justify-center gap-1.5 rounded-xl bg-[#2563EB] px-4 text-xs font-semibold text-white hover:bg-[#1D4ED8] disabled:opacity-60"
+                  className="inline-flex min-h-11 w-full items-center justify-center gap-1.5 rounded-xl bg-[#0066FF] hover:bg-[#0052CC] dark:bg-[#2563EB] dark:hover:bg-[#1D4ED8] px-4 text-xs font-semibold text-white disabled:opacity-60 shadow-xs"
                 >
                   <PlusIcon className="h-4 w-4" aria-hidden="true" />
                   <span>Tambah Tag</span>
@@ -948,15 +948,15 @@ export function ArticlesManager({
               </form>
             )}
 
-            <ul className="divide-y divide-[#1E3358] text-sm">
+            <ul className="divide-y divide-slate-100 dark:divide-[#1E3358] text-sm">
               {tags.map((tag) => (
                 <li
                   key={tag.id}
                   className="flex items-center justify-between gap-2 py-2.5"
                 >
                   <div>
-                    <p className="font-medium text-[#F1F5FB]">#{tag.name}</p>
-                    <p className="text-xs text-[#94A7C4]">
+                    <p className="font-bold text-[#041E42] dark:text-[#F1F5FB]">#{tag.name}</p>
+                    <p className="text-xs text-[#5A6E85] dark:text-[#94A7C4]">
                       Slug: {tag.slug} · {tag.articleCount} artikel
                     </p>
                   </div>
@@ -965,7 +965,7 @@ export function ArticlesManager({
                       type="button"
                       disabled={isPending}
                       onClick={() => handleDeleteTag(tag.id)}
-                      className="inline-flex min-h-11 items-center gap-1 rounded-xl border border-[#F87171]/60 bg-[#0B1730] px-3 text-xs font-semibold text-[#FCA5A5] hover:bg-[#12213F]"
+                      className="inline-flex min-h-11 items-center gap-1 rounded-xl border border-rose-200 dark:border-[#F87171]/60 bg-white dark:bg-[#0B1730] px-3 text-xs font-semibold text-rose-600 dark:text-[#FCA5A5] hover:bg-rose-50 dark:hover:bg-[#12213F]"
                     >
                       <TrashIcon className="h-3.5 w-3.5" aria-hidden="true" />
                       <span>Hapus</span>

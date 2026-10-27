@@ -247,7 +247,7 @@ export function ServicesManager({
         onDismiss={clearFeedback}
       />
 
-      <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-[#1E3358] bg-[#0B1730] p-4">
+      <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-slate-200 dark:border-[#1E3358] bg-white dark:bg-[#0B1730] p-4 shadow-xs">
         <div
           role="tablist"
           aria-label="Submodul layanan dan harga"
@@ -258,10 +258,10 @@ export function ServicesManager({
             role="tab"
             aria-selected={activeTab === "services"}
             onClick={() => setActiveTab("services")}
-            className={`inline-flex min-h-11 items-center rounded-xl border px-4 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8] ${
+            className={`inline-flex min-h-11 items-center rounded-xl border px-4 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8] ${
               activeTab === "services"
-                ? "border-[#60A5FA] bg-[#12213F] text-[#F1F5FB]"
-                : "border-[#4E6E9E] bg-[#0B1730] text-[#94A7C4] hover:bg-[#12213F]"
+                ? "border-[#0066FF] bg-[#0066FF]/10 text-[#0066FF] dark:border-[#60A5FA] dark:bg-[#12213F] dark:text-[#F1F5FB]"
+                : "border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#0B1730] text-[#5A6E85] dark:text-[#94A7C4] hover:bg-slate-100 dark:hover:bg-[#12213F]"
             }`}
           >
             Daftar Layanan ({services.length})
@@ -272,10 +272,10 @@ export function ServicesManager({
             role="tab"
             aria-selected={activeTab === "pricing"}
             onClick={() => setActiveTab("pricing")}
-            className={`inline-flex min-h-11 items-center rounded-xl border px-4 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8] ${
+            className={`inline-flex min-h-11 items-center rounded-xl border px-4 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8] ${
               activeTab === "pricing"
-                ? "border-[#60A5FA] bg-[#12213F] text-[#F1F5FB]"
-                : "border-[#4E6E9E] bg-[#0B1730] text-[#94A7C4] hover:bg-[#12213F]"
+                ? "border-[#0066FF] bg-[#0066FF]/10 text-[#0066FF] dark:border-[#60A5FA] dark:bg-[#12213F] dark:text-[#F1F5FB]"
+                : "border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#0B1730] text-[#5A6E85] dark:text-[#94A7C4] hover:bg-slate-100 dark:hover:bg-[#12213F]"
             }`}
           >
             Paket Harga ({pricingPlans.length})
@@ -288,7 +288,7 @@ export function ServicesManager({
             onClick={
               activeTab === "services" ? startNewService : startNewPricingPlan
             }
-            className="inline-flex min-h-11 items-center gap-1.5 rounded-xl bg-[#2563EB] px-3.5 text-xs font-semibold text-white hover:bg-[#1D4ED8] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8]"
+            className="inline-flex min-h-11 items-center gap-1.5 rounded-xl bg-[#0066FF] hover:bg-[#0052CC] dark:bg-[#2563EB] dark:hover:bg-[#1D4ED8] px-3.5 text-xs font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
           >
             <PlusIcon className="h-4 w-4" aria-hidden="true" />
             <span>
@@ -300,7 +300,7 @@ export function ServicesManager({
 
       {activeTab === "services" ? (
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 items-start">
-          <div className="lg:col-span-5 rounded-2xl border border-[#1E3358] bg-[#0B1730] divide-y divide-[#1E3358] overflow-hidden">
+          <div className="lg:col-span-5 rounded-2xl border border-slate-200 dark:border-[#1E3358] bg-white dark:bg-[#0B1730] divide-y divide-slate-100 dark:divide-[#1E3358] overflow-hidden shadow-xs">
             {services.map((svc) => {
               const selected = svc.id === svcId;
               return (
@@ -308,28 +308,28 @@ export function ServicesManager({
                   key={svc.id}
                   type="button"
                   onClick={() => loadService(svc)}
-                  className={`w-full text-left p-4 transition-colors focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#38BDF8] ${
+                  className={`w-full text-left p-4 transition-colors focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8] ${
                     selected
-                      ? "bg-[#12213F]"
-                      : "bg-[#0B1730] hover:bg-[#12213F]/60"
+                      ? "bg-blue-50/70 dark:bg-[#12213F]"
+                      : "bg-white dark:bg-[#0B1730] hover:bg-slate-50 dark:hover:bg-[#12213F]/60"
                   }`}
                 >
                   <div className="flex items-start justify-between gap-2">
                     <div>
-                      <p className="text-sm font-semibold text-[#F1F5FB]">
+                      <p className="text-sm font-bold text-[#041E42] dark:text-[#F1F5FB]">
                         {svc.title}
                       </p>
-                      <p className="text-xs text-[#94A7C4]">
+                      <p className="text-xs text-[#5A6E85] dark:text-[#94A7C4]">
                         Slug: {svc.slug} · Urutan: #{svc.sortOrder}
                       </p>
                     </div>
                     <span
-                      className={`shrink-0 rounded-md border px-2 py-0.5 text-[11px] font-semibold ${
+                      className={`shrink-0 rounded-md border px-2 py-0.5 text-[11px] font-bold ${
                         svc.deletedAt
-                          ? "border-[#F87171]/60 bg-[#0B1730] text-[#FCA5A5]"
+                          ? "border-rose-300 dark:border-[#F87171]/60 bg-rose-50 dark:bg-[#0B1730] text-rose-800 dark:text-[#FCA5A5]"
                           : svc.status === "PUBLISHED"
-                          ? "border-[#34D399]/60 bg-[#0B1730] text-[#34D399]"
-                          : "border-[#FBBF24]/60 bg-[#0B1730] text-[#FBBF24]"
+                          ? "border-emerald-300 dark:border-[#34D399]/60 bg-emerald-50 dark:bg-[#0B1730] text-emerald-800 dark:text-[#34D399]"
+                          : "border-amber-300 dark:border-[#FBBF24]/60 bg-amber-50 dark:bg-[#0B1730] text-amber-800 dark:text-[#FBBF24]"
                       }`}
                     >
                       {svc.deletedAt ? "Sampah" : STATUS_LABELS[svc.status]}
@@ -342,13 +342,13 @@ export function ServicesManager({
 
           <section
             aria-label="Editor layanan"
-            className="lg:col-span-7 rounded-2xl border border-[#1E3358] bg-[#0B1730] p-5 sm:p-6 space-y-5"
+            className="lg:col-span-7 rounded-2xl border border-slate-200 dark:border-[#1E3358] bg-white dark:bg-[#0B1730] p-5 sm:p-6 space-y-5 shadow-xs"
           >
             <div>
-              <h2 className="text-base sm:text-lg font-bold text-[#F1F5FB]">
+              <h2 className="text-base sm:text-lg font-bold text-[#041E42] dark:text-[#F1F5FB]">
                 {svcId ? "Perbarui Layanan" : "Tambah Layanan Baru"}
               </h2>
-              <p className="text-xs text-[#94A7C4]">
+              <p className="text-xs text-[#5A6E85] dark:text-[#94A7C4]">
                 Perubahan langsung disinkronkan ke halaman Beranda dan halaman
                 Layanan.
               </p>
@@ -359,7 +359,7 @@ export function ServicesManager({
                 <div>
                   <label
                     htmlFor="svc-title"
-                    className="block text-xs font-semibold text-[#F1F5FB] mb-1.5"
+                    className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1.5"
                   >
                     Nama Layanan
                   </label>
@@ -375,14 +375,14 @@ export function ServicesManager({
                       setSvcTitle(e.target.value);
                       if (!svcId) setSvcSlug(toClientSlug(e.target.value));
                     }}
-                    className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3.5 text-sm text-[#F1F5FB]"
+                    className="min-h-11 w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] px-3.5 text-sm text-[#041E42] dark:text-[#F1F5FB] focus:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
                   />
                 </div>
 
                 <div>
                   <label
                     htmlFor="svc-slug"
-                    className="block text-xs font-semibold text-[#F1F5FB] mb-1.5"
+                    className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1.5"
                   >
                     Slug Identifikasi
                   </label>
@@ -395,7 +395,7 @@ export function ServicesManager({
                     disabled={!canSubmitService || isPending}
                     value={svcSlug}
                     onChange={(e) => setSvcSlug(e.target.value)}
-                    className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3.5 text-sm text-[#F1F5FB]"
+                    className="min-h-11 w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] px-3.5 text-sm text-[#041E42] dark:text-[#F1F5FB] focus:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
                   />
                 </div>
               </div>
@@ -404,7 +404,7 @@ export function ServicesManager({
                 <div>
                   <label
                     htmlFor="svc-category"
-                    className="block text-xs font-semibold text-[#F1F5FB] mb-1.5"
+                    className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1.5"
                   >
                     Kategori Layanan
                   </label>
@@ -414,14 +414,14 @@ export function ServicesManager({
                     required
                     value={svcCategory}
                     onChange={(e) => setSvcCategory(e.target.value)}
-                    className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3.5 text-sm text-[#F1F5FB]"
+                    className="min-h-11 w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] px-3.5 text-sm text-[#041E42] dark:text-[#F1F5FB] focus:bg-white"
                   />
                 </div>
 
                 <div>
                   <label
                     htmlFor="svc-icon"
-                    className="block text-xs font-semibold text-[#F1F5FB] mb-1.5"
+                    className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1.5"
                   >
                     Ikon Visual
                   </label>
@@ -429,7 +429,7 @@ export function ServicesManager({
                     id="svc-icon"
                     value={svcIcon}
                     onChange={(e) => setSvcIcon(e.target.value)}
-                    className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3.5 text-sm text-[#F1F5FB]"
+                    className="min-h-11 w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] px-3.5 text-sm text-[#041E42] dark:text-[#F1F5FB] focus:bg-white"
                   >
                     <option value="GlobeIcon">GlobeIcon (Web)</option>
                     <option value="UpdateIcon">UpdateIcon (Redesign)</option>
@@ -446,7 +446,7 @@ export function ServicesManager({
                 <div>
                   <label
                     htmlFor="svc-order"
-                    className="block text-xs font-semibold text-[#F1F5FB] mb-1.5"
+                    className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1.5"
                   >
                     Urutan Tampil
                   </label>
@@ -457,7 +457,7 @@ export function ServicesManager({
                     max={999}
                     value={svcSortOrder}
                     onChange={(e) => setSvcSortOrder(Number(e.target.value))}
-                    className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3.5 text-sm text-[#F1F5FB]"
+                    className="min-h-11 w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] px-3.5 text-sm text-[#041E42] dark:text-[#F1F5FB] focus:bg-white"
                   />
                 </div>
               </div>
@@ -465,7 +465,7 @@ export function ServicesManager({
               <div>
                 <label
                   htmlFor="svc-short-desc"
-                  className="block text-xs font-semibold text-[#F1F5FB] mb-1.5"
+                  className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1.5"
                 >
                   Deskripsi Ringkas Layanan
                 </label>
@@ -477,14 +477,14 @@ export function ServicesManager({
                   maxLength={280}
                   value={svcShortDesc}
                   onChange={(e) => setSvcShortDesc(e.target.value)}
-                  className="w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] p-3.5 text-sm text-[#F1F5FB]"
+                  className="w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] p-3.5 text-sm text-[#041E42] dark:text-[#F1F5FB] focus:bg-white"
                 />
               </div>
 
               <div>
                 <label
                   htmlFor="svc-features"
-                  className="block text-xs font-semibold text-[#F1F5FB] mb-1.5"
+                  className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1.5"
                 >
                   Daftar Cakupan / Fitur Utama (Satu butir per baris)
                 </label>
@@ -494,7 +494,7 @@ export function ServicesManager({
                   required
                   value={svcFeatures}
                   onChange={(e) => setSvcFeatures(e.target.value)}
-                  className="w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] p-3.5 text-sm text-[#F1F5FB]"
+                  className="w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] p-3.5 text-sm text-[#041E42] dark:text-[#F1F5FB] focus:bg-white"
                 />
               </div>
 
@@ -502,7 +502,7 @@ export function ServicesManager({
                 <div>
                   <label
                     htmlFor="svc-cta-label"
-                    className="block text-xs font-semibold text-[#F1F5FB] mb-1.5"
+                    className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1.5"
                   >
                     Label Tombol CTA
                   </label>
@@ -512,14 +512,14 @@ export function ServicesManager({
                     required
                     value={svcCtaLabel}
                     onChange={(e) => setSvcCtaLabel(e.target.value)}
-                    className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3.5 text-sm text-[#F1F5FB]"
+                    className="min-h-11 w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] px-3.5 text-sm text-[#041E42] dark:text-[#F1F5FB] focus:bg-white"
                   />
                 </div>
 
                 <div>
                   <label
                     htmlFor="svc-cta-href"
-                    className="block text-xs font-semibold text-[#F1F5FB] mb-1.5"
+                    className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1.5"
                   >
                     Tautan Internal CTA
                   </label>
@@ -529,14 +529,14 @@ export function ServicesManager({
                     required
                     value={svcCtaHref}
                     onChange={(e) => setSvcCtaHref(e.target.value)}
-                    className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3.5 text-sm text-[#F1F5FB]"
+                    className="min-h-11 w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] px-3.5 text-sm text-[#041E42] dark:text-[#F1F5FB] focus:bg-white"
                   />
                 </div>
 
                 <div>
                   <label
                     htmlFor="svc-status"
-                    className="block text-xs font-semibold text-[#F1F5FB] mb-1.5"
+                    className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1.5"
                   >
                     Status Publikasi
                   </label>
@@ -546,7 +546,7 @@ export function ServicesManager({
                     onChange={(e) =>
                       setSvcStatus(e.target.value as ContentStatus)
                     }
-                    className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3.5 text-sm text-[#F1F5FB]"
+                    className="min-h-11 w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] px-3.5 text-sm text-[#041E42] dark:text-[#F1F5FB] focus:bg-white"
                   >
                     <option value="DRAFT">Draf</option>
                     <option value="REVIEW">Tinjauan</option>
@@ -561,7 +561,7 @@ export function ServicesManager({
                   <button
                     type="submit"
                     disabled={isPending}
-                    className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#2563EB] px-4 text-xs font-semibold text-white hover:bg-[#1D4ED8] disabled:opacity-60"
+                    className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#0066FF] hover:bg-[#0052CC] dark:bg-[#2563EB] dark:hover:bg-[#1D4ED8] px-4 text-xs font-semibold text-white shadow-xs disabled:opacity-60"
                   >
                     <CheckCircledIcon className="h-4 w-4" aria-hidden="true" />
                     <span>
@@ -582,7 +582,7 @@ export function ServicesManager({
                         })
                       )
                     }
-                    className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-[#F87171]/60 bg-[#0B1730] px-3.5 text-xs font-semibold text-[#FCA5A5] hover:bg-[#12213F]"
+                    className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-rose-200 dark:border-[#F87171]/60 bg-white dark:bg-[#0B1730] px-3.5 text-xs font-semibold text-rose-600 dark:text-[#FCA5A5] hover:bg-rose-50 dark:hover:bg-[#12213F]"
                   >
                     <TrashIcon className="h-4 w-4" aria-hidden="true" />
                     <span>
@@ -598,7 +598,7 @@ export function ServicesManager({
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 items-start">
-          <div className="lg:col-span-5 rounded-2xl border border-[#1E3358] bg-[#0B1730] divide-y divide-[#1E3358] overflow-hidden">
+          <div className="lg:col-span-5 rounded-2xl border border-slate-200 dark:border-[#1E3358] bg-white dark:bg-[#0B1730] divide-y divide-slate-100 dark:divide-[#1E3358] overflow-hidden shadow-xs">
             {pricingPlans.map((plan) => {
               const selected = plan.id === planId;
               return (
@@ -606,34 +606,34 @@ export function ServicesManager({
                   key={plan.id}
                   type="button"
                   onClick={() => loadPricingPlan(plan)}
-                  className={`w-full text-left p-4 transition-colors focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#38BDF8] ${
+                  className={`w-full text-left p-4 transition-colors focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8] ${
                     selected
-                      ? "bg-[#12213F]"
-                      : "bg-[#0B1730] hover:bg-[#12213F]/60"
+                      ? "bg-blue-50/70 dark:bg-[#12213F]"
+                      : "bg-white dark:bg-[#0B1730] hover:bg-slate-50 dark:hover:bg-[#12213F]/60"
                   }`}
                 >
                   <div className="flex items-start justify-between gap-2">
                     <div>
-                      <p className="text-sm font-semibold text-[#F1F5FB] flex items-center gap-1.5">
+                      <p className="text-sm font-bold text-[#041E42] dark:text-[#F1F5FB] flex items-center gap-1.5">
                         <span>{plan.name}</span>
                         {plan.isPopular && (
-                          <span className="inline-flex items-center gap-1 rounded-md border border-[#60A5FA] bg-[#0B1730] px-1.5 py-0.5 text-[10px] font-bold text-[#60A5FA]">
+                          <span className="inline-flex items-center gap-1 rounded-md border border-blue-200 dark:border-[#60A5FA] bg-blue-50 dark:bg-[#0B1730] px-1.5 py-0.5 text-[10px] font-bold text-[#0066FF] dark:text-[#60A5FA]">
                             <StarFilledIcon className="h-3 w-3" />
                             <span>Paling Populer</span>
                           </span>
                         )}
                       </p>
-                      <p className="text-xs text-[#94A7C4]">
+                      <p className="text-xs text-[#5A6E85] dark:text-[#94A7C4]">
                         {plan.priceLabel} · Urutan #{plan.sortOrder}
                       </p>
                     </div>
                     <span
-                      className={`shrink-0 rounded-md border px-2 py-0.5 text-[11px] font-semibold ${
+                      className={`shrink-0 rounded-md border px-2 py-0.5 text-[11px] font-bold ${
                         plan.deletedAt
-                          ? "border-[#F87171]/60 bg-[#0B1730] text-[#FCA5A5]"
+                          ? "border-rose-300 dark:border-[#F87171]/60 bg-rose-50 dark:bg-[#0B1730] text-rose-800 dark:text-[#FCA5A5]"
                           : plan.status === "PUBLISHED"
-                          ? "border-[#34D399]/60 bg-[#0B1730] text-[#34D399]"
-                          : "border-[#FBBF24]/60 bg-[#0B1730] text-[#FBBF24]"
+                          ? "border-emerald-300 dark:border-[#34D399]/60 bg-emerald-50 dark:bg-[#0B1730] text-emerald-800 dark:text-[#34D399]"
+                          : "border-amber-300 dark:border-[#FBBF24]/60 bg-amber-50 dark:bg-[#0B1730] text-amber-800 dark:text-[#FBBF24]"
                       }`}
                     >
                       {plan.deletedAt ? "Sampah" : STATUS_LABELS[plan.status]}
@@ -646,13 +646,13 @@ export function ServicesManager({
 
           <section
             aria-label="Editor paket harga"
-            className="lg:col-span-7 rounded-2xl border border-[#1E3358] bg-[#0B1730] p-5 sm:p-6 space-y-5"
+            className="lg:col-span-7 rounded-2xl border border-slate-200 dark:border-[#1E3358] bg-white dark:bg-[#0B1730] p-5 sm:p-6 space-y-5 shadow-xs"
           >
             <div>
-              <h2 className="text-base sm:text-lg font-bold text-[#F1F5FB]">
+              <h2 className="text-base sm:text-lg font-bold text-[#041E42] dark:text-[#F1F5FB]">
                 {planId ? "Perbarui Paket Harga" : "Tambah Paket Harga Baru"}
               </h2>
-              <p className="text-xs text-[#94A7C4]">
+              <p className="text-xs text-[#5A6E85] dark:text-[#94A7C4]">
                 Hanya satu paket harga yang dapat memegang penanda &ldquo;Paling
                 Populer&rdquo; pada satu waktu.
               </p>
@@ -663,7 +663,7 @@ export function ServicesManager({
                 <div>
                   <label
                     htmlFor="plan-name"
-                    className="block text-xs font-semibold text-[#F1F5FB] mb-1.5"
+                    className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1.5"
                   >
                     Nama Paket
                   </label>
@@ -673,14 +673,14 @@ export function ServicesManager({
                     required
                     value={planName}
                     onChange={(e) => setPlanName(e.target.value)}
-                    className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3.5 text-sm text-[#F1F5FB]"
+                    className="min-h-11 w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] px-3.5 text-sm text-[#041E42] dark:text-[#F1F5FB] focus:bg-white"
                   />
                 </div>
 
                 <div>
                   <label
                     htmlFor="plan-price"
-                    className="block text-xs font-semibold text-[#F1F5FB] mb-1.5"
+                    className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1.5"
                   >
                     Label Harga
                   </label>
@@ -691,14 +691,14 @@ export function ServicesManager({
                     value={planPriceLabel}
                     onChange={(e) => setPlanPriceLabel(e.target.value)}
                     placeholder="Contoh: Mulai Rp 15 Juta"
-                    className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3.5 text-sm text-[#F1F5FB]"
+                    className="min-h-11 w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] px-3.5 text-sm text-[#041E42] dark:text-[#F1F5FB] focus:bg-white"
                   />
                 </div>
 
                 <div>
                   <label
                     htmlFor="plan-note"
-                    className="block text-xs font-semibold text-[#F1F5FB] mb-1.5"
+                    className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1.5"
                   >
                     Catatan Harga
                   </label>
@@ -708,7 +708,7 @@ export function ServicesManager({
                     value={planPriceNote}
                     onChange={(e) => setPlanPriceNote(e.target.value)}
                     placeholder="Contoh: sekali bayar / sesuai ruang lingkup"
-                    className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3.5 text-sm text-[#F1F5FB]"
+                    className="min-h-11 w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] px-3.5 text-sm text-[#041E42] dark:text-[#F1F5FB] focus:bg-white"
                   />
                 </div>
               </div>
@@ -716,7 +716,7 @@ export function ServicesManager({
               <div>
                 <label
                   htmlFor="plan-desc"
-                  className="block text-xs font-semibold text-[#F1F5FB] mb-1.5"
+                  className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1.5"
                 >
                   Deskripsi Paket
                 </label>
@@ -726,14 +726,14 @@ export function ServicesManager({
                   required
                   value={planDesc}
                   onChange={(e) => setPlanDesc(e.target.value)}
-                  className="w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] p-3.5 text-sm text-[#F1F5FB]"
+                  className="w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] p-3.5 text-sm text-[#041E42] dark:text-[#F1F5FB] focus:bg-white"
                 />
               </div>
 
               <div>
                 <label
                   htmlFor="plan-features"
-                  className="block text-xs font-semibold text-[#F1F5FB] mb-1.5"
+                  className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1.5"
                 >
                   Daftar Fitur Paket (Satu butir per baris)
                 </label>
@@ -743,21 +743,21 @@ export function ServicesManager({
                   required
                   value={planFeatures}
                   onChange={(e) => setPlanFeatures(e.target.value)}
-                  className="w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] p-3.5 text-sm text-[#F1F5FB]"
+                  className="w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] p-3.5 text-sm text-[#041E42] dark:text-[#F1F5FB] focus:bg-white"
                 />
               </div>
 
-              <div className="flex items-center gap-3 rounded-xl border border-[#4E6E9E] bg-[#12213F] p-3.5">
+              <div className="flex items-center gap-3 rounded-xl border border-slate-200 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] p-3.5">
                 <input
                   id="plan-popular"
                   type="checkbox"
                   checked={planPopular}
                   onChange={(e) => setPlanPopular(e.target.checked)}
-                  className="h-4 w-4 rounded border-[#4E6E9E] accent-[#2563EB]"
+                  className="h-4 w-4 rounded border-slate-300 dark:border-[#4E6E9E] accent-[#0066FF]"
                 />
                 <label
                   htmlFor="plan-popular"
-                  className="text-xs font-semibold text-[#F1F5FB]"
+                  className="text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB]"
                 >
                   Jadikan paket ini sebagai rekomendasi utama (&ldquo;Paling
                   Populer&rdquo;). Paket lain otomatis dilepas dari penanda ini.
@@ -768,7 +768,7 @@ export function ServicesManager({
                 <div>
                   <label
                     htmlFor="plan-cta-label"
-                    className="block text-xs font-semibold text-[#F1F5FB] mb-1.5"
+                    className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1.5"
                   >
                     Label Tombol
                   </label>
@@ -778,14 +778,14 @@ export function ServicesManager({
                     required
                     value={planCtaLabel}
                     onChange={(e) => setPlanCtaLabel(e.target.value)}
-                    className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3 text-sm text-[#F1F5FB]"
+                    className="min-h-11 w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] px-3 text-sm text-[#041E42] dark:text-[#F1F5FB] focus:bg-white"
                   />
                 </div>
 
                 <div>
                   <label
                     htmlFor="plan-cta-href"
-                    className="block text-xs font-semibold text-[#F1F5FB] mb-1.5"
+                    className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1.5"
                   >
                     Tautan Tombol
                   </label>
@@ -795,14 +795,14 @@ export function ServicesManager({
                     required
                     value={planCtaHref}
                     onChange={(e) => setPlanCtaHref(e.target.value)}
-                    className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3 text-sm text-[#F1F5FB]"
+                    className="min-h-11 w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] px-3 text-sm text-[#041E42] dark:text-[#F1F5FB] focus:bg-white"
                   />
                 </div>
 
                 <div>
                   <label
                     htmlFor="plan-order"
-                    className="block text-xs font-semibold text-[#F1F5FB] mb-1.5"
+                    className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1.5"
                   >
                     Urutan
                   </label>
@@ -813,14 +813,14 @@ export function ServicesManager({
                     max={999}
                     value={planSortOrder}
                     onChange={(e) => setPlanSortOrder(Number(e.target.value))}
-                    className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3 text-sm text-[#F1F5FB]"
+                    className="min-h-11 w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] px-3 text-sm text-[#041E42] dark:text-[#F1F5FB] focus:bg-white"
                   />
                 </div>
 
                 <div>
                   <label
                     htmlFor="plan-status"
-                    className="block text-xs font-semibold text-[#F1F5FB] mb-1.5"
+                    className="block text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] mb-1.5"
                   >
                     Status
                   </label>
@@ -830,7 +830,7 @@ export function ServicesManager({
                     onChange={(e) =>
                       setPlanStatus(e.target.value as ContentStatus)
                     }
-                    className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3 text-sm text-[#F1F5FB]"
+                    className="min-h-11 w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] px-3 text-sm text-[#041E42] dark:text-[#F1F5FB] focus:bg-white"
                   >
                     <option value="DRAFT">Draf</option>
                     <option value="REVIEW">Tinjauan</option>
@@ -845,7 +845,7 @@ export function ServicesManager({
                   <button
                     type="submit"
                     disabled={isPending}
-                    className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#2563EB] px-4 text-xs font-semibold text-white hover:bg-[#1D4ED8] disabled:opacity-60"
+                    className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#0066FF] hover:bg-[#0052CC] dark:bg-[#2563EB] dark:hover:bg-[#1D4ED8] px-4 text-xs font-semibold text-white shadow-xs disabled:opacity-60"
                   >
                     <CheckCircledIcon className="h-4 w-4" aria-hidden="true" />
                     <span>
@@ -866,7 +866,7 @@ export function ServicesManager({
                         })
                       )
                     }
-                    className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-[#F87171]/60 bg-[#0B1730] px-3.5 text-xs font-semibold text-[#FCA5A5] hover:bg-[#12213F]"
+                    className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-rose-200 dark:border-[#F87171]/60 bg-white dark:bg-[#0B1730] px-3.5 text-xs font-semibold text-rose-600 dark:text-[#FCA5A5] hover:bg-rose-50 dark:hover:bg-[#12213F]"
                   >
                     <TrashIcon className="h-4 w-4" aria-hidden="true" />
                     <span>

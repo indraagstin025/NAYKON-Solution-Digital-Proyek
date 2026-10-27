@@ -38,7 +38,7 @@ export function AuditLogsManager({ logs, entityTypes }: AuditLogsManagerProps) {
 
   return (
     <div className="space-y-6">
-      <div className="rounded-2xl border border-[#1E3358] bg-[#0B1730] p-4 sm:p-5 space-y-4">
+      <div className="rounded-2xl border border-slate-200 bg-white p-4 sm:p-5 shadow-xs space-y-4 dark:border-[#1E3358] dark:bg-[#0B1730]">
         <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
           <div className="flex flex-wrap items-center gap-1.5">
             {entityTypes.map((entity) => {
@@ -48,10 +48,10 @@ export function AuditLogsManager({ logs, entityTypes }: AuditLogsManagerProps) {
                   key={entity}
                   type="button"
                   onClick={() => setEntityFilter(entity)}
-                  className={`inline-flex min-h-11 items-center rounded-xl border px-3 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8] ${
+                  className={`inline-flex min-h-11 items-center rounded-xl border px-3 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8] ${
                     active
-                      ? "border-[#60A5FA] bg-[#12213F] text-[#F1F5FB]"
-                      : "border-[#4E6E9E] bg-[#0B1730] text-[#94A7C4] hover:bg-[#12213F]"
+                      ? "border-[#0066FF] bg-blue-50/70 text-[#0066FF] dark:border-[#60A5FA] dark:bg-[#12213F] dark:text-[#F1F5FB]"
+                      : "border-slate-200 bg-white text-[#5A6E85] hover:bg-slate-50 dark:border-[#4E6E9E] dark:bg-[#0B1730] dark:text-[#94A7C4] dark:hover:bg-[#12213F]"
                   }`}
                 >
                   {entity === "ALL" ? "Semua Entitas" : entity}
@@ -65,7 +65,7 @@ export function AuditLogsManager({ logs, entityTypes }: AuditLogsManagerProps) {
               Cari aksi, pelaku, atau entitas
             </label>
             <MagnifyingGlassIcon
-              className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#94A7C4]"
+              className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#5A6E85] dark:text-[#94A7C4]"
               aria-hidden="true"
             />
             <input
@@ -74,7 +74,7 @@ export function AuditLogsManager({ logs, entityTypes }: AuditLogsManagerProps) {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Cari aksi atau pelaku..."
-              className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] pl-10 pr-3.5 text-sm text-[#F1F5FB] placeholder:text-[#94A7C4]"
+              className="min-h-11 w-full rounded-xl border border-slate-300 bg-slate-50 pl-10 pr-3.5 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#0066FF] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#38BDF8]"
             />
           </div>
         </div>
@@ -82,17 +82,17 @@ export function AuditLogsManager({ logs, entityTypes }: AuditLogsManagerProps) {
 
       <section
         aria-label="Tabel catatan audit keamanan"
-        className="rounded-2xl border border-[#1E3358] bg-[#0B1730] p-5 sm:p-6"
+        className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 shadow-xs dark:border-[#1E3358] dark:bg-[#0B1730]"
       >
         {filteredLogs.length === 0 ? (
-          <p className="py-8 text-center text-sm text-[#94A7C4]">
+          <p className="py-8 text-center text-sm text-[#5A6E85] dark:text-[#94A7C4]">
             Tidak ada catatan log audit yang cocok dengan filter saat ini.
           </p>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full min-w-[680px] text-left text-sm">
               <thead>
-                <tr className="border-b border-[#1E3358] text-xs font-semibold text-[#94A7C4]">
+                <tr className="border-b border-slate-200 text-xs font-semibold text-[#5A6E85] dark:border-[#1E3358] dark:text-[#94A7C4]">
                   <th scope="col" className="pb-2.5 pr-4">
                     Aksi Sistem
                   </th>
@@ -110,43 +110,43 @@ export function AuditLogsManager({ logs, entityTypes }: AuditLogsManagerProps) {
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#1E3358]">
+              <tbody className="divide-y divide-slate-100 dark:divide-[#1E3358]">
                 {filteredLogs.map((log) => (
                   <tr key={log.id} className="align-top">
                     <td className="py-3 pr-4">
-                      <p className="font-mono text-xs font-semibold text-[#F1F5FB]">
+                      <p className="font-mono text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB]">
                         {log.action}
                       </p>
                       {log.ipHash && (
-                        <p className="mt-0.5 font-mono text-[10px] text-[#94A7C4]">
+                        <p className="mt-0.5 font-mono text-[10px] text-[#5A6E85] dark:text-[#94A7C4]">
                           IP Hash: {log.ipHash}
                         </p>
                       )}
                     </td>
                     <td className="py-3 pr-4">
-                      <span className="inline-block rounded-md border border-[#4E6E9E] bg-[#12213F] px-2 py-0.5 text-xs font-semibold text-[#F1F5FB]">
+                      <span className="inline-block rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs font-semibold text-[#041E42] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB]">
                         {log.entityType}
                       </span>
                       {log.entityId && (
-                        <p className="mt-0.5 font-mono text-[10px] text-[#94A7C4]">
+                        <p className="mt-0.5 font-mono text-[10px] text-[#5A6E85] dark:text-[#94A7C4]">
                           ID: {log.entityId}
                         </p>
                       )}
                     </td>
                     <td className="py-3 pr-4">
-                      <p className="text-xs font-semibold text-[#F1F5FB]">
+                      <p className="text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB]">
                         {log.userName}
                       </p>
                       {log.userEmail && (
-                        <p className="text-[11px] text-[#94A7C4]">
+                        <p className="text-[11px] text-[#5A6E85] dark:text-[#94A7C4]">
                           {log.userEmail}
                         </p>
                       )}
                     </td>
-                    <td className="py-3 pr-4 text-xs text-[#94A7C4]">
+                    <td className="py-3 pr-4 text-xs text-[#5A6E85] dark:text-[#94A7C4]">
                       {log.summaryText}
                     </td>
-                    <td className="py-3 text-right text-xs tabular-nums text-[#94A7C4]">
+                    <td className="py-3 text-right text-xs tabular-nums text-[#5A6E85] dark:text-[#94A7C4]">
                       {dateTimeFormatter.format(new Date(log.createdAt))}
                     </td>
                   </tr>
