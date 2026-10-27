@@ -4,11 +4,17 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { CheckCircledIcon } from "@radix-ui/react-icons";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
-import { PORTFOLIO_CASES } from "../data/portfolioData";
+import type { PublicPortfolioDTO } from "@/lib/public-content";
+import { toPortfolioCases } from "@/lib/live-content-adapters";
 
 type CategoryFilter = "all" | "webapp" | "website" | "mobile";
 
-export function PortfolioCaseStudies() {
+export function PortfolioCaseStudies({
+  portfolios,
+}: {
+  portfolios?: PublicPortfolioDTO[] | null;
+}) {
+  const PORTFOLIO_CASES = toPortfolioCases(portfolios);
   const [activeCategory, setActiveCategory] = useState<CategoryFilter>("all");
 
   const filterTabs: { label: string; value: CategoryFilter }[] = [
@@ -60,13 +66,15 @@ export function PortfolioCaseStudies() {
             >
               <div>
                 <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-100 dark:bg-slate-800 border-b border-[#E6F0FD] dark:border-slate-800">
-                  <Image
-                    src={item.image}
-                    alt={item.imageAlt}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-                  />
+                  {item.image && (
+                    <Image
+                      src={item.image}
+                      alt={item.imageAlt}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                    />
+                  )}
                   <div className="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between gap-2">
                     <span className="inline-flex items-center gap-1.5 rounded-full bg-[#041E42] text-white px-3 py-1 text-[11px] font-bold shadow-md">
                       {item.icon}

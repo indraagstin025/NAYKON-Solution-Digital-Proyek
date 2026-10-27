@@ -4,9 +4,11 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { PlusIcon, MinusIcon, ArrowRightIcon, ChatBubbleIcon } from "@radix-ui/react-icons";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
-import { FAQ_ITEMS } from "../data/homeData";
+import type { PublicFaqDTO } from "@/lib/public-content";
+import { toFaqItems } from "@/lib/live-content-adapters";
 
-export function FaqSection() {
+export function FaqSection({ faqs }: { faqs?: PublicFaqDTO[] | null }) {
+  const FAQ_ITEMS = toFaqItems(faqs);
   const [openId, setOpenId] = useState<string | null>(FAQ_ITEMS[0]?.id ?? null);
 
   const toggleItem = (id: string) => {

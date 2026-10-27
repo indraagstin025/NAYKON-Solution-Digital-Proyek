@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { PortfolioPage } from "@/features/portfolio";
+import { getPublicPortfolios } from "@/lib/public-content";
 
 export const metadata: Metadata = {
   title: "Portofolio & Studi Kasus - NAIKON Digital Solution",
@@ -7,6 +8,7 @@ export const metadata: Metadata = {
     "Studi kasus dan konsep solusi implementasi teknologi web serta mobile NAIKON Digital Solution.",
 };
 
-export default function Page() {
-  return <PortfolioPage />;
+export default async function Page() {
+  const portfolios = await getPublicPortfolios();
+  return <PortfolioPage portfolios={portfolios} />;
 }

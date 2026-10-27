@@ -3,6 +3,12 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import type {
+  PublicFaqDTO,
+  PublicPortfolioDTO,
+  PublicPricingPlanDTO,
+  PublicServiceDTO,
+} from "@/lib/public-content";
 import { HeroSection } from "../components/HeroSection";
 import { AboutSection } from "../components/AboutSection";
 import { ServicesSection } from "../components/ServicesSection";
@@ -12,7 +18,14 @@ import { PricingSection } from "../components/PricingSection";
 import { FaqSection } from "../components/FaqSection";
 import { ContactSection } from "../components/ContactSection";
 
-export function HomePage() {
+export interface HomePageProps {
+  services?: PublicServiceDTO[] | null;
+  portfolios?: PublicPortfolioDTO[] | null;
+  pricing?: PublicPricingPlanDTO[] | null;
+  faqs?: PublicFaqDTO[] | null;
+}
+
+export function HomePage({ services, portfolios, pricing, faqs }: HomePageProps) {
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
@@ -32,11 +45,11 @@ export function HomePage() {
       <main>
         <HeroSection />
         <AboutSection />
-        <ServicesSection />
+        <ServicesSection services={services} />
         <WorkflowSection />
-        <PortfolioSection />
-        <PricingSection />
-        <FaqSection />
+        <PortfolioSection portfolios={portfolios} />
+        <PricingSection plans={pricing} />
+        <FaqSection faqs={faqs} />
         <ContactSection />
       </main>
       <Footer />

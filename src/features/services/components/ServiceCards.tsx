@@ -9,8 +9,35 @@ import {
   CheckIcon,
 } from "@radix-ui/react-icons";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
+import type { PublicServiceDTO } from "@/lib/public-content";
+import { pickServiceCopy } from "@/lib/live-content-adapters";
 
-export function ServiceCards() {
+export function ServiceCards({ services }: { services?: PublicServiceDTO[] | null }) {
+  const web = pickServiceCopy(services, "pembuatan-website-bisnis", {
+    title: "Pembuatan Website Bisnis",
+    description:
+      "Website profil bisnis, company profile, dan landing page yang berfokus pada kredibilitas, konversi, dan pengalaman pengguna.",
+    tags: ["Company Profile", "Landing Page", "Optimasi SEO", "Panel Admin / CMS"],
+  });
+  const redesign = pickServiceCopy(services, "redesign-optimalisasi-website", {
+    title: "Redesign & Optimalisasi Website",
+    description:
+      "Memodernisasi tampilan dan kode website lama yang lambat, tidak responsif, atau usang menjadi antarmuka modern dengan skor kecepatan Google PageSpeed tinggi.",
+    tags: ["Penyegaran UI/UX", "Kecepatan Loading", "Mobile-First", "Migrasi Konten Aman"],
+  });
+  const webapp = pickServiceCopy(services, "aplikasi-web-dashboard-kustom", {
+    title: "Aplikasi Web & Dashboard Kustom",
+    description:
+      "Pengembangan sistem internal berbasis web seperti dashboard operasional, inventaris pergudangan, portal karyawan, dan otomatisasi administrasi multi-cabang.",
+    tags: ["Dashboard Analitik", "Database Relasional", "Integrasi REST API", "Hak Akses"],
+  });
+  const mobile = pickServiceCopy(services, "pengembangan-aplikasi-mobile", {
+    title: "Pengembangan Aplikasi Mobile",
+    description:
+      "Pembuatan aplikasi Android dan iOS yang responsif, intuitif, dan terintegrasi dengan sistem alur kerja dan API server bisnis Anda.",
+    tags: ["Android & iOS", "Push Notification", "Integrasi Payment Gateway", "Sinkronisasi Real-Time"],
+  });
+
   return (
     <div className="space-y-6 lg:space-y-7">
       <div className="grid gap-6 lg:gap-7 lg:grid-cols-12 items-stretch">
@@ -28,20 +55,14 @@ export function ServiceCards() {
                 </div>
 
                 <h2 className="text-[20px] sm:text-[22px] font-extrabold tracking-[-0.015em] text-[#041E42] dark:text-white">
-                  Pembuatan Website Bisnis
+                  {web.title}
                 </h2>
                 <p className="mt-2.5 text-[13px] sm:text-[13.5px] leading-[1.68] text-[#4A5D78] dark:text-slate-300">
-                  Website profil bisnis, company profile, dan landing page yang berfokus pada kredibilitas,
-                  konversi, dan pengalaman pengguna.
+                  {web.description}
                 </p>
 
                 <div className="mt-5 grid grid-cols-2 gap-2 max-w-[340px]">
-                  {[
-                    "Company Profile",
-                    "Landing Page",
-                    "Optimasi SEO",
-                    "Panel Admin / CMS",
-                  ].map((tag) => (
+                  {web.tags.map((tag) => (
                     <span
                       key={tag}
                       className="inline-flex items-center gap-1.5 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-3 py-1.5 text-[11.5px] font-semibold text-[#0F172A] dark:text-slate-200 transition-colors group-hover:bg-slate-200 dark:group-hover:bg-slate-700"
@@ -169,20 +190,14 @@ export function ServiceCards() {
               </div>
 
               <h2 className="text-[20px] sm:text-[21px] font-extrabold tracking-[-0.015em] text-[#041E42] dark:text-white">
-                Redesign &amp; Optimalisasi Website
+                {redesign.title}
               </h2>
               <p className="mt-2.5 text-[13px] sm:text-[13.5px] leading-[1.68] text-[#4A5D78] dark:text-slate-300">
-                Memodernisasi tampilan dan kode website lama yang lambat, tidak responsif,
-                atau usang menjadi antarmuka modern dengan skor kecepatan Google PageSpeed tinggi.
+                {redesign.description}
               </p>
 
               <div className="mt-5 flex flex-wrap gap-2">
-                {[
-                  "Penyegaran UI/UX",
-                  "Kecepatan Loading",
-                  "Mobile-First",
-                  "Migrasi Konten Aman",
-                ].map((tag) => (
+                {redesign.tags.map((tag) => (
                   <span
                     key={tag}
                     className="rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-3.5 py-1.5 text-[11.5px] font-semibold text-[#0F172A] dark:text-slate-200 transition-colors group-hover:bg-slate-200 dark:group-hover:bg-slate-700"
@@ -220,21 +235,14 @@ export function ServiceCards() {
               </div>
 
               <h2 className="text-[20px] sm:text-[21px] font-extrabold tracking-[-0.015em] text-[#041E42] dark:text-white">
-                Aplikasi Web &amp; Dashboard Kustom
+                {webapp.title}
               </h2>
               <p className="mt-2.5 text-[13px] sm:text-[13.5px] leading-[1.68] text-[#4A5D78] dark:text-slate-300">
-                Pengembangan sistem internal berbasis web seperti dashboard operasional,
-                inventaris pergudangan, portal karyawan, dan otomatisasi administrasi
-                multi-cabang.
+                {webapp.description}
               </p>
 
               <div className="mt-5 flex flex-wrap gap-2">
-                {[
-                  "Dashboard Analitik",
-                  "Database Relasional",
-                  "Integrasi REST API",
-                  "Hak Akses",
-                ].map((tag) => (
+                {webapp.tags.map((tag) => (
                   <span
                     key={tag}
                     className="rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-3.5 py-1.5 text-[11.5px] font-semibold text-[#0F172A] dark:text-slate-200 transition-colors group-hover:bg-slate-200 dark:group-hover:bg-slate-700"
@@ -287,20 +295,14 @@ export function ServiceCards() {
                 </div>
 
                 <h2 className="text-[20px] sm:text-[22px] font-extrabold tracking-[-0.015em] text-white">
-                  Pengembangan Aplikasi Mobile
+                  {mobile.title}
                 </h2>
                 <p className="mt-2.5 text-[13px] sm:text-[13.5px] leading-[1.68] text-blue-50">
-                  Pembuatan aplikasi Android dan iOS yang responsif, intuitif, dan
-                  terintegrasi dengan sistem alur kerja dan API server bisnis Anda.
+                  {mobile.description}
                 </p>
 
                 <div className="mt-5 flex flex-wrap gap-2">
-                  {[
-                    "Android & iOS",
-                    "Push Notification",
-                    "Integrasi Payment Gateway",
-                    "Sinkronisasi Real-Time",
-                  ].map((tag) => (
+                  {mobile.tags.map((tag) => (
                     <span
                       key={tag}
                       className="rounded-full bg-[#08296B] border border-[#164294] px-3.5 py-1.5 text-[11.5px] font-semibold text-white transition-colors group-hover:bg-[#0D388E]"

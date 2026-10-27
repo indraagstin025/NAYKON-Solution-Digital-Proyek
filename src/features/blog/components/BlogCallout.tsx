@@ -13,11 +13,10 @@ export function BlogCallout() {
           </div>
           <div>
             <h3 className="text-[16px] sm:text-[17px] font-extrabold text-[#041E42] dark:text-white">
-              Ruang Artikel &amp; Dokumentasi Teknis NAIKON
+              Ada pertanyaan teknis dari artikel kami?
             </h3>
             <p className="mt-1 text-[13px] sm:text-[13.5px] text-[#4A5D78] dark:text-slate-300">
-              Halaman ini disiapkan oleh tim kami untuk publikasi artikel lengkap,
-              wawasan teknis, dan pembaruan produk NAIKON Digital Solution.
+              Ceritakan kebutuhan website atau sistem Anda, tim NAIKON akan membahasnya bersama Anda.
             </p>
           </div>
         </div>

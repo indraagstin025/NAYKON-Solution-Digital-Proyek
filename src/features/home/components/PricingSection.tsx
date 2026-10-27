@@ -7,9 +7,11 @@ import {
   ChatBubbleIcon,
 } from "@radix-ui/react-icons";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
-import { PRICING_PLANS } from "../data/homeData";
+import type { PublicPricingPlanDTO } from "@/lib/public-content";
+import { toPricingPlans } from "@/lib/live-content-adapters";
 
-export function PricingSection() {
+export function PricingSection({ plans }: { plans?: PublicPricingPlanDTO[] | null }) {
+  const PRICING_PLANS = toPricingPlans(plans);
   return (
     <section
       id="paket"

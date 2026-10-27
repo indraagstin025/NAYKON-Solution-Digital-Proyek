@@ -3,11 +3,16 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import type { PublicPortfolioDTO } from "@/lib/public-content";
 import { PortfolioHero } from "../components/PortfolioHero";
 import { PortfolioCaseStudies } from "../components/PortfolioCaseStudies";
 import { PortfolioCtaBanner } from "../components/PortfolioCtaBanner";
 
-export function PortfolioPage() {
+export function PortfolioPage({
+  portfolios,
+}: {
+  portfolios?: PublicPortfolioDTO[] | null;
+}) {
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
@@ -30,7 +35,7 @@ export function PortfolioPage() {
 
         <section className="relative isolate overflow-hidden bg-gradient-to-b from-[#FFFFFF] via-[#F8FBFF] to-[#F3F8FF] dark:from-[#030711] dark:via-[#061231] dark:to-[#091a45] py-16 sm:py-20">
           <div className="mx-auto w-full max-w-[1240px] px-6 sm:px-9 lg:px-14">
-            <PortfolioCaseStudies />
+            <PortfolioCaseStudies portfolios={portfolios} />
             <PortfolioCtaBanner />
           </div>
         </section>

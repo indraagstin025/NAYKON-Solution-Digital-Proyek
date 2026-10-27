@@ -7,9 +7,11 @@ import {
   ChatBubbleIcon,
 } from "@radix-ui/react-icons";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
-import { PRICING_PLANS } from "@/features/home/data/homeData";
+import type { PublicPricingPlanDTO } from "@/lib/public-content";
+import { toPricingPlans } from "@/lib/live-content-adapters";
 
-export function ServicePricing() {
+export function ServicePricing({ plans }: { plans?: PublicPricingPlanDTO[] | null }) {
+  const PRICING_PLANS = toPricingPlans(plans);
   return (
     <div id="paket-layanan" className="mt-20 pt-16 border-t border-[#DCEBFE] dark:border-slate-800 scroll-mt-24">
       <ScrollReveal className="text-center max-w-[760px] mx-auto">

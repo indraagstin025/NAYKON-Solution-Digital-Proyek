@@ -33,11 +33,26 @@ async function main() {
   // ---------------------------------------------------------------------------
   // 2. KATEGORI BLOG & TAG
   // ---------------------------------------------------------------------------
+  const legacyTypoCategory = await prisma.category.findUnique({
+    where: { slug: 'rekayasa-perangkat-lunar' },
+  });
+  if (legacyTypoCategory) {
+    const existingTarget = await prisma.category.findUnique({
+      where: { slug: 'rekayasa-perangkat-lunak' },
+    });
+    if (!existingTarget) {
+      await prisma.category.update({
+        where: { id: legacyTypoCategory.id },
+        data: { slug: 'rekayasa-perangkat-lunak' },
+      });
+    }
+  }
+
   const categoriesData = [
     { name: 'Umum', slug: 'umum', description: 'Kategori umum dan pengumuman NAIKON', color: '#64748b', sortOrder: 0 },
     { name: 'Arsitektur Web', slug: 'arsitektur-web', description: 'Wawasan arsitektur website modern dan performa tinggi', color: '#0284c7', sortOrder: 1 },
     { name: 'Sistem Internal', slug: 'sistem-internal', description: 'Pembahasan dasbor, otomatisasi bisnis, dan sistem manajemen data', color: '#8b5cf6', sortOrder: 2 },
-    { name: 'Rekayasa Perangkat Lunak', slug: 'rekayasa-perangkat-lunar', description: 'Praktik engineering bersih, keamanan, dan skalabilitas sistem', color: '#10b981', sortOrder: 3 },
+    { name: 'Rekayasa Perangkat Lunak', slug: 'rekayasa-perangkat-lunak', description: 'Praktik engineering bersih, keamanan, dan skalabilitas sistem', color: '#10b981', sortOrder: 3 },
   ];
 
   const categories: Record<string, { id: string }> = {};
@@ -60,12 +75,14 @@ async function main() {
     { name: 'B2B', slug: 'b2b' },
   ];
 
+  const tags: Record<string, { id: string }> = {};
   for (const tag of tagsData) {
-    await prisma.tag.upsert({
+    const record = await prisma.tag.upsert({
       where: { slug: tag.slug },
       update: tag,
       create: tag,
     });
+    tags[tag.slug] = record;
   }
   console.log(`✅ ${tagsData.length} Tag artikel tersimpan.`);
 
@@ -515,56 +532,179 @@ async function main() {
       title: 'Mengapa Kecepatan Loading Website Sangat Menentukan Konversi Bisnis B2B',
       slug: 'mengapa-kecepatan-loading-website-menentukan-konversi-b2b',
       excerpt: 'Memahami bagaimana performa Core Web Vitals dan arsitektur frontend modern berdampak langsung pada kredibilitas bisnis di mata calon klien.',
+      seoTitle: 'Kecepatan Loading Website & Konversi Bisnis B2B | NAIKON',
+      seoDescription: 'Analisis teknis hubungan Core Web Vitals (LCP, INP, CLS), render sisi server, dan optimasi aset terhadap tingkat konversi website B2B.',
       content: {
         type: 'doc',
-        body: 'Di era digital yang serba cepat, waktu tunggu lebih dari 3 detik dapat menyebabkan 53% calon pengunjung meninggalkan website. Bagi bisnis B2B, website bukan sekadar brosur digital, melainkan etalase kredibilitas pertama yang dinilai oleh calon mitra atau klien.',
+        blocks: [
+          {
+            type: 'paragraph',
+            text: 'Bagi perusahaan B2B dan institusi, website merupakan titik verifikasi teknis pertama sebelum calon mitra mengajukan permintaan penawaran. Ketika halaman spesifikasi produk atau portofolio lambat dimuat pada jaringan seluler, tim pengadaan cenderung menutup halaman sebelum membaca nilai layanan yang ditawarkan.',
+          },
+          {
+            type: 'heading',
+            level: 2,
+            text: 'Tiga Indikator Core Web Vitals yang Wajib Dijaga',
+          },
+          {
+            type: 'paragraph',
+            text: 'Standar Google Web Vitals menetapkan tiga ambang batas terukur untuk menilai kenyamanan pengguna nyata di lapangan:',
+          },
+          {
+            type: 'list',
+            items: [
+              'Largest Contentful Paint (LCP) maksimal 2,5 detik agar elemen utama halaman segera terbaca.',
+              'Interaction to Next Paint (INP) di bawah 200 milidetik supaya tombol navigasi dan formulir merespons ketukan tanpa jeda.',
+              'Cumulative Layout Shift (CLS) maksimal 0,1 agar tata letak tidak bergeser mendadak saat gambar atau font dimuat.',
+            ],
+          },
+          {
+            type: 'heading',
+            level: 2,
+            text: 'Keputusan Arsitektur yang Memangkas Waktu Muat',
+          },
+          {
+            type: 'paragraph',
+            text: 'Kecepatan halaman jarang selesai hanya dengan memasang plugin kompresi pada sistem lama. Tim rekayasa NAIKON menyusun ulang fondasi pemuatan sejak tahap arsitektur melalui Server Components di Next.js, sehingga peramban pengunjung hanya mengunduh HTML matang dan bundel JavaScript interaktif seperlunya.',
+          },
+          {
+            type: 'callout',
+            title: 'Prinsip Implementasi di NAIKON',
+            text: 'Kami memisahkan komponen statis dari logika formulir klien, menyajikan gambar dalam ukuran proporsional sesuai layar perangkat, serta membatasi kueri database hanya pada kolom yang benar-benar ditampilkan.',
+          },
+          {
+            type: 'paragraph',
+            text: 'Pendekatan ini menjaga waktu respons tetap stabil baik ketika dibuka melalui koneksi serat optik kantor maupun jaringan seluler di lapangan, sekaligus membantu halaman layanan lebih mudah diindeks mesin pencari.',
+          },
+        ],
       },
       categorySlug: 'arsitektur-web',
+      tagSlugs: ['web-development', 'nextjs', 'optimasi-seo', 'b2b'],
       coverAlt: 'Ilustrasi kecepatan loading website dan performa tinggi pada perangkat desktop dan mobile',
       readingTime: 5,
       status: ContentStatus.PUBLISHED,
-      publishedAt: new Date(),
+      publishedAt: new Date('2026-02-10T09:00:00+07:00'),
       authorId: admin.id,
     },
     {
       title: 'Kapan Bisnis Anda Perlu Beralih dari Spreadsheet ke Dashboard Kustom?',
       slug: 'kapan-bisnis-perlu-beralih-dari-spreadsheet-ke-dashboard-kustom',
       excerpt: 'Tanda-tanda operasional bisnis mulai membutuhkan sistem terpusat untuk menghindari duplikasi data dan mempercepat laporan lintas cabang.',
+      seoTitle: 'Kapan Beralih dari Spreadsheet ke Dashboard Web Kustom? | NAIKON',
+      seoDescription: 'Indikator operasional ketika bisnis multi-cabang membutuhkan aplikasi web internal dan database relasional menggantikan spreadsheet manual.',
       content: {
         type: 'doc',
-        body: 'Spreadsheet adalah alat yang hebat untuk tahap awal. Namun, saat tim bertambah dan kantor cabang meluas, risiko salah input, formula yang terhapus, serta lambatnya rekonsiliasi data menjadi hambatan besar yang membutuhkan sistem dasbor berbasis web terpusat.',
+        blocks: [
+          {
+            type: 'paragraph',
+            text: 'Spreadsheet sangat praktis untuk mencatat transaksi awal ketika tim operasional masih terdiri dari beberapa orang di satu lokasi. Namun saat jumlah gudang, cabang, atau staf administrasi bertambah, file yang disalin berulang kali lewat pesan instan mulai memicu selisih angka yang sulit ditelusuri.',
+          },
+          {
+            type: 'heading',
+            level: 2,
+            text: 'Empat Gejala Operasional Mulai Terhambat Spreadsheet',
+          },
+          {
+            type: 'list',
+            items: [
+              'Terdapat lebih dari satu versi file laporan harian dan tim harus mencocokkan baris secara manual setiap akhir pekan.',
+              'Rumus perhitungan tidak sengaja tertimpa tanpa jejak audit siapa yang mengubah data dan kapan perubahan terjadi.',
+              'Staf lapangan membutuhkan akses input dari ponsel, tetapi seluruh isi tabel sensitif ikut terbuka karena tidak ada pembagian hak akses per peran.',
+              'Proses rekapitulasi lintas cabang memakan waktu berhari-hari sebelum manajemen bisa mengambil keputusan pengadaan.',
+            ],
+          },
+          {
+            type: 'heading',
+            level: 2,
+            text: 'Bagaimana Dashboard Berbasis PostgreSQL Menyelesaikan Masalah Ini',
+          },
+          {
+            type: 'paragraph',
+            text: 'Dengan memindahkan sumber kebenaran data ke database relasional PostgreSQL, setiap transaksi divalidasi di sisi server sebelum tersimpan. Staf gudang hanya melihat formulir mutasi barang sesuai tugasnya, sementara tim keuangan dan manajemen memantau ringkasan kas serta stok secara langsung dari satu sumber data yang sama.',
+          },
+          {
+            type: 'callout',
+            title: 'Transisi Bertahap Tanpa Menghentikan Operasional',
+            text: 'Migrasi tidak harus mengganti seluruh proses sekaligus dalam satu malam. Tim kami biasanya memulai dari satu alur paling krusial seperti pencatatan stok atau persetujuan pesanan, lengkap dengan fitur impor dan ekspor CSV agar adaptasi staf berjalan mulus.',
+          },
+        ],
       },
       categorySlug: 'sistem-internal',
+      tagSlugs: ['web-development', 'postgresql', 'ui-ux', 'b2b'],
       coverAlt: 'Antarmuka dasbor analitik bisnis modern dengan visualisasi data real-time',
       readingTime: 6,
       status: ContentStatus.PUBLISHED,
-      publishedAt: new Date(),
+      publishedAt: new Date('2026-02-18T09:30:00+07:00'),
       authorId: admin.id,
     },
     {
       title: 'Panduan Memilih Teknologi Website Bisnis yang Aman dan Mudah Dikembangkan',
       slug: 'panduan-memilih-teknologi-website-bisnis-yang-aman-dan-skalabel',
       excerpt: 'Hal-hal teknis yang perlu diperhatikan manajemen saat merencanakan pembangunan ulang website agar investasi digital bertahan jangka panjang.',
+      seoTitle: 'Panduan Memilih Teknologi Website Bisnis yang Aman & Skalabel | NAIKON',
+      seoDescription: 'Kriteria pemilihan arsitektur website bisnis modern: keamanan validasi server, struktur database PostgreSQL, kemudahan pengelolaan CMS, dan pemeliharaan jangka panjang.',
       content: {
         type: 'doc',
-        body: 'Memilih fondasi teknologi bukan sekadar mengikuti tren. Arsitektur yang tepat seperti Next.js, database relasional PostgreSQL, dan type-safe TypeScript memastikan sistem Anda mudah dipelihara, aman dari kerentanan umum, dan siap diskalakan seiring pertumbuhan bisnis.',
+        blocks: [
+          {
+            type: 'paragraph',
+            text: 'Banyak organisasi baru menyadari keterbatasan teknis website lama ketika hendak menambahkan fitur baru seperti katalog terfilter, portal klien, atau dasbor analitik internal. Fondasi yang terlalu bergantung pada tumpukan plugin pihak ketiga sering kali sulit diperbarui tanpa merusak halaman lain.',
+          },
+          {
+            type: 'heading',
+            level: 2,
+            text: 'Kriteria Teknis yang Perlu Ditanyakan Sebelum Proyek Dimulai',
+          },
+          {
+            type: 'list',
+            items: [
+              'Pemisahan jelas antara antarmuka publik dan jalur pengelolaan konten agar permukaan serangan siber tetap minimal.',
+              'Validasi seluruh masukan formulir dan kueri berparameter di sisi server untuk mencegah injeksi SQL maupun skrip berbahaya.',
+              'Skema database terstruktur dengan relasi dan indeks yang jelas sehingga pencarian data tetap cepat saat jumlah artikel atau produk bertambah ribuan baris.',
+              'Kepemilikan penuh atas kode sumber dan skema migrasi sehingga tim internal tidak terkunci pada satu vendor tertutup.',
+            ],
+          },
+          {
+            type: 'heading',
+            level: 2,
+            text: 'Mengapa Kombinasi Next.js, TypeScript, dan PostgreSQL Efektif',
+          },
+          {
+            type: 'paragraph',
+            text: 'TypeScript menangkap ketidakcocokan struktur data sejak tahap kompilasi sebelum kode tayang ke produksi. Dipadukan dengan Next.js App Router dan PostgreSQL, perusahaan memperoleh halaman publik yang cepat sekaligus kesiapan penuh apabila di kemudian hari ingin menambahkan modul CMS mandiri maupun integrasi API internal.',
+          },
+          {
+            type: 'callout',
+            title: 'Evaluasi Kebutuhan Sebelum Menentukan Paket',
+            text: 'Pilih teknologi berdasarkan target pemakaian dua hingga tiga tahun ke depan. Website profil sederhana tetap layak dibangun di atas fondasi kode bersih agar biaya pengembangan lanjutan tidak mengulang dari nol.',
+          },
+        ],
       },
-      categorySlug: 'rekayasa-perangkat-lunar',
+      categorySlug: 'rekayasa-perangkat-lunak',
+      tagSlugs: ['web-development', 'nextjs', 'postgresql', 'optimasi-seo'],
       coverAlt: 'Arsitektur perangkat lunak modern dan diagram alur sistem web terintegrasi',
       readingTime: 7,
       status: ContentStatus.PUBLISHED,
-      publishedAt: new Date(),
+      publishedAt: new Date('2026-02-25T10:00:00+07:00'),
       authorId: admin.id,
     },
   ];
 
+  const savedArticles: Record<string, { id: string }> = {};
   for (const art of articlesData) {
     const category = categories[art.categorySlug] || categories['umum'];
-    await prisma.article.upsert({
+    const tagConnections = art.tagSlugs
+      .map((slug) => tags[slug])
+      .filter((t): t is { id: string } => Boolean(t))
+      .map((t) => ({ id: t.id }));
+
+    const record = await prisma.article.upsert({
       where: { slug: art.slug },
       update: {
         title: art.title,
         excerpt: art.excerpt,
+        seoTitle: art.seoTitle,
+        seoDescription: art.seoDescription,
         content: art.content,
         coverAlt: art.coverAlt,
         readingTime: art.readingTime,
@@ -572,11 +712,14 @@ async function main() {
         publishedAt: art.publishedAt,
         authorId: art.authorId,
         categoryId: category.id,
+        tags: { set: tagConnections },
       },
       create: {
         title: art.title,
         slug: art.slug,
         excerpt: art.excerpt,
+        seoTitle: art.seoTitle,
+        seoDescription: art.seoDescription,
         content: art.content,
         coverAlt: art.coverAlt,
         readingTime: art.readingTime,
@@ -584,37 +727,206 @@ async function main() {
         publishedAt: art.publishedAt,
         authorId: art.authorId,
         categoryId: category.id,
+        tags: { connect: tagConnections },
+      },
+    });
+    savedArticles[art.slug] = record;
+  }
+
+  const perfArticle = savedArticles['mengapa-kecepatan-loading-website-menentukan-konversi-b2b'];
+  const stackArticle = savedArticles['panduan-memilih-teknologi-website-bisnis-yang-aman-dan-skalabel'];
+  if (perfArticle && stackArticle) {
+    await prisma.articleRelated.upsert({
+      where: {
+        articleId_relatedId: {
+          articleId: perfArticle.id,
+          relatedId: stackArticle.id,
+        },
+      },
+      update: { sortOrder: 1 },
+      create: {
+        articleId: perfArticle.id,
+        relatedId: stackArticle.id,
+        sortOrder: 1,
       },
     });
   }
-  console.log(`✅ ${articlesData.length} Artikel Blog perdana tersimpan.`);
+  console.log(`✅ ${articlesData.length} Artikel Blog perdana beserta relasi tag tersimpan.`);
 
   // ---------------------------------------------------------------------------
-  // 8. SITE SETTING (PENGATURAN UMUM SITUS)
+  // 8. HALAMAN STATIS CMS (KEBIJAKAN PRIVASI) & SITE SETTING
   // ---------------------------------------------------------------------------
+  await prisma.page.upsert({
+    where: { slug: 'kebijakan-privasi' },
+    update: {
+      title: 'Kebijakan Privasi',
+      seoTitle: 'Kebijakan Privasi - NAIKON Digital Solution',
+      seoDescription:
+        'Kebijakan resmi NAIKON Digital Solution terkait perlindungan data formulir konsultasi, keamanan penyimpanan PostgreSQL, dan analitik agregat tanpa cookie pelacak.',
+      status: ContentStatus.PUBLISHED,
+      publishedAt: new Date('2026-01-15T09:00:00+07:00'),
+      content: {
+        type: 'doc',
+        updatedLabel: '15 Januari 2026',
+        blocks: [
+          {
+            type: 'paragraph',
+            text: 'NAIKON Digital Solution menghargai privasi setiap pengunjung dan calon mitra bisnis yang berinteraksi melalui situs resmi kami. Dokumen ini menjelaskan secara terbuka data apa saja yang kami kumpulkan, bagaimana data tersebut diproses, serta langkah pengamanan teknis yang kami terapkan.',
+          },
+          {
+            type: 'heading',
+            level: 2,
+            text: '1. Informasi yang Kami Kumpulkan',
+          },
+          {
+            type: 'paragraph',
+            text: 'Kami hanya mengumpulkan informasi yang relevan untuk menindaklanjuti permintaan diskusi proyek dan menjaga keandalan layanan situs:',
+          },
+          {
+            type: 'list',
+            items: [
+              'Data Formulir Konsultasi: nama lengkap, alamat email bisnis atau personal, kategori layanan yang dipilih, serta ringkasan kebutuhan proyek yang Anda kirimkan secara sukarela.',
+              'Metadata Keamanan Pengiriman: tanda waktu pengiriman, halaman asal formulir, serta hash alamat IP satu arah (HMAC-SHA256) yang digunakan semata-mata untuk pembatasan laju pengiriman otomatis (anti-spam).',
+              'Analitik Kunjungan Agregat Internal: statistik halaman populer dan jenis perangkat secara agregat tanpa memasang cookie pelacak iklan lintas situs.',
+            ],
+          },
+          {
+            type: 'heading',
+            level: 2,
+            text: '2. Tujuan Penggunaan Data',
+          },
+          {
+            type: 'list',
+            items: [
+              'Meninjau spesifikasi kebutuhan teknis dan mengirimkan tanggapan atau estimasi pengerjaan proyek melalui saluran komunikasi resmi.',
+              'Melindungi infrastruktur formulir publik dari penyalahgunaan otomatis, percobaan spam, maupun pengiriman berulang yang merugikan.',
+              'Mengevaluasi kejelasan informasi layanan berdasarkan halaman yang paling sering dibaca pengunjung.',
+            ],
+          },
+          {
+            type: 'heading',
+            level: 2,
+            text: '3. Penyimpanan dan Pengamanan Teknis',
+          },
+          {
+            type: 'paragraph',
+            text: 'Seluruh pesan konsultasi disimpan di dalam database PostgreSQL terenkripsi saat transit (TLS) dengan pembatasan hak akses berbasis peran (Role-Based Access Control). Kami tidak menjual, menyewakan, atau mempertukarkan daftar kontak klien kepada pihak ketiga mana pun untuk kepentingan pemasaran.',
+          },
+          {
+            type: 'heading',
+            level: 2,
+            text: '4. Masa Retensi dan Hak Pemilik Data',
+          },
+          {
+            type: 'paragraph',
+            text: 'Anda berhak meminta salinan, pembaruan, maupun penghapusan data korespondensi konsultasi yang pernah dikirimkan melalui formulir situs ini. Permintaan penghapusan akan diproses oleh tim pengelola data kami setelah verifikasi kepemilikan alamat email terkait.',
+          },
+          {
+            type: 'callout',
+            title: 'Kontak Pengelolaan Privasi Data',
+            text: 'Untuk pertanyaan, koreksi, atau permintaan penghapusan data konsultasi, silakan hubungi tim kami melalui email resmi contact@naykon.id pada jam kerja operasional Senin - Jumat, 09.00 - 18.00 WIB.',
+          },
+        ],
+      },
+    },
+    create: {
+      slug: 'kebijakan-privasi',
+      title: 'Kebijakan Privasi',
+      seoTitle: 'Kebijakan Privasi - NAIKON Digital Solution',
+      seoDescription:
+        'Kebijakan resmi NAIKON Digital Solution terkait perlindungan data formulir konsultasi, keamanan penyimpanan PostgreSQL, dan analitik agregat tanpa cookie pelacak.',
+      status: ContentStatus.PUBLISHED,
+      publishedAt: new Date('2026-01-15T09:00:00+07:00'),
+      content: {
+        type: 'doc',
+        updatedLabel: '15 Januari 2026',
+        blocks: [
+          {
+            type: 'paragraph',
+            text: 'NAIKON Digital Solution menghargai privasi setiap pengunjung dan calon mitra bisnis yang berinteraksi melalui situs resmi kami. Dokumen ini menjelaskan secara terbuka data apa saja yang kami kumpulkan, bagaimana data tersebut diproses, serta langkah pengamanan teknis yang kami terapkan.',
+          },
+          {
+            type: 'heading',
+            level: 2,
+            text: '1. Informasi yang Kami Kumpulkan',
+          },
+          {
+            type: 'paragraph',
+            text: 'Kami hanya mengumpulkan informasi yang relevan untuk menindaklanjuti permintaan diskusi proyek dan menjaga keandalan layanan situs:',
+          },
+          {
+            type: 'list',
+            items: [
+              'Data Formulir Konsultasi: nama lengkap, alamat email bisnis atau personal, kategori layanan yang dipilih, serta ringkasan kebutuhan proyek yang Anda kirimkan secara sukarela.',
+              'Metadata Keamanan Pengiriman: tanda waktu pengiriman, halaman asal formulir, serta hash alamat IP satu arah (HMAC-SHA256) yang digunakan semata-mata untuk pembatasan laju pengiriman otomatis (anti-spam).',
+              'Analitik Kunjungan Agregat Internal: statistik halaman populer dan jenis perangkat secara agregat tanpa memasang cookie pelacak iklan lintas situs.',
+            ],
+          },
+          {
+            type: 'heading',
+            level: 2,
+            text: '2. Tujuan Penggunaan Data',
+          },
+          {
+            type: 'list',
+            items: [
+              'Meninjau spesifikasi kebutuhan teknis dan mengirimkan tanggapan atau estimasi pengerjaan proyek melalui saluran komunikasi resmi.',
+              'Melindungi infrastruktur formulir publik dari penyalahgunaan otomatis, percobaan spam, maupun pengiriman berulang yang merugikan.',
+              'Mengevaluasi kejelasan informasi layanan berdasarkan halaman yang paling sering dibaca pengunjung.',
+            ],
+          },
+          {
+            type: 'heading',
+            level: 2,
+            text: '3. Penyimpanan dan Pengamanan Teknis',
+          },
+          {
+            type: 'paragraph',
+            text: 'Seluruh pesan konsultasi disimpan di dalam database PostgreSQL terenkripsi saat transit (TLS) dengan pembatasan hak akses berbasis peran (Role-Based Access Control). Kami tidak menjual, menyewakan, atau mempertukarkan daftar kontak klien kepada pihak ketiga mana pun untuk kepentingan pemasaran.',
+          },
+          {
+            type: 'heading',
+            level: 2,
+            text: '4. Masa Retensi dan Hak Pemilik Data',
+          },
+          {
+            type: 'paragraph',
+            text: 'Anda berhak meminta salinan, pembaruan, maupun penghapusan data korespondensi konsultasi yang pernah dikirimkan melalui formulir situs ini. Permintaan penghapusan akan diproses oleh tim pengelola data kami setelah verifikasi kepemilikan alamat email terkait.',
+          },
+          {
+            type: 'callout',
+            title: 'Kontak Pengelolaan Privasi Data',
+            text: 'Untuk pertanyaan, koreksi, atau permintaan penghapusan data konsultasi, silakan hubungi tim kami melalui email resmi contact@naykon.id pada jam kerja operasional Senin - Jumat, 09.00 - 18.00 WIB.',
+          },
+        ],
+      },
+    },
+  });
+  console.log(`✅ Halaman statis Kebijakan Privasi tersimpan.`);
+
   await prisma.siteSetting.upsert({
     where: { key: 'site_profile' },
     update: {
       value: {
-        name: 'NAYKON Solution Digital',
-        tagline: 'Solusi Teknologi & Rekayasa Perangkat Lunak',
+        name: 'NAIKON Digital Solution',
+        tagline: 'Mengakselerasi Inovasi, Mewujudkan Karya Digital',
         email: 'contact@naykon.id',
         workHours: 'Senin - Jumat, 09.00 - 18.00 WIB',
-        responseCommitment: 'Balasan maksimal dalam 1x24 jam kerja',
-        whatsapp: '+6282212345678',
-        location: 'Bandung, Jawa Barat, Indonesia',
+        responseCommitment: 'Tinjauan spesifikasi & estimasi dalam 1x24 jam kerja',
+        whatsapp: null,
+        location: 'Indonesia',
       },
     },
     create: {
       key: 'site_profile',
       value: {
-        name: 'NAYKON Solution Digital',
-        tagline: 'Solusi Teknologi & Rekayasa Perangkat Lunak',
+        name: 'NAIKON Digital Solution',
+        tagline: 'Mengakselerasi Inovasi, Mewujudkan Karya Digital',
         email: 'contact@naykon.id',
         workHours: 'Senin - Jumat, 09.00 - 18.00 WIB',
-        responseCommitment: 'Balasan maksimal dalam 1x24 jam kerja',
-        whatsapp: '+6282212345678',
-        location: 'Bandung, Jawa Barat, Indonesia',
+        responseCommitment: 'Tinjauan spesifikasi & estimasi dalam 1x24 jam kerja',
+        whatsapp: null,
+        location: 'Indonesia',
       },
     },
   });

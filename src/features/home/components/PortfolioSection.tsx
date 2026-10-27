@@ -5,12 +5,18 @@ import Image from "next/image";
 import Link from "next/link";
 import { CheckCircledIcon, ArrowRightIcon } from "@radix-ui/react-icons";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
-import { PORTFOLIO_TEASERS } from "../data/homeData";
+import type { PublicPortfolioDTO } from "@/lib/public-content";
+import { toPortfolioTeasers } from "@/lib/live-content-adapters";
 
 type CategoryFilter = "all" | "webapp" | "website" | "mobile";
 
-export function PortfolioSection() {
+export function PortfolioSection({
+  portfolios,
+}: {
+  portfolios?: PublicPortfolioDTO[] | null;
+}) {
   const [activeCategory, setActiveCategory] = useState<CategoryFilter>("all");
+  const PORTFOLIO_TEASERS = toPortfolioTeasers(portfolios);
 
   const filterTabs: { label: string; value: CategoryFilter }[] = [
     { label: "Semua Proyek", value: "all" },
@@ -103,13 +109,15 @@ export function PortfolioSection() {
               >
                 <div>
                   <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-100 dark:bg-slate-800 border-b border-[#E6F0FD] dark:border-slate-800">
-                    <Image
-                      src={item.image}
-                      alt={item.imageAlt}
-                      fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-                    />
+                    {item.image && (
+                      <Image
+                        src={item.image}
+                        alt={item.imageAlt}
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                      />
+                    )}
                     <div className="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between gap-2">
                       <span className="inline-flex items-center gap-1.5 rounded-full bg-[#041E42] text-white px-3 py-1 text-[11px] font-bold shadow-md">
                         {item.icon}

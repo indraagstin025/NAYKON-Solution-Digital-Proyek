@@ -1,77 +1,159 @@
-'use server';
+"use server";
 
-import { prisma } from '@/lib/db';
+import { unstable_rethrow } from "next/navigation";
+import { prisma } from "@/lib/db";
+import {
+  DatabaseTimeoutError,
+  verifySameOriginMutation,
+  withServerTimeout,
+} from "@/lib/request-security";
+import { getRequestIpHash, isRateLimited, recordRateLimitHit } from "@/lib/rate-limit";
+import { recordAuditLog } from "@/lib/audit";
+import {
+  contactMessageSchema,
+  extractContactFieldErrors,
+  type ContactMessageInput,
+  type SubmitContactResult,
+} from "./schema";
 
-export interface SubmitContactInput {
-  name: string;
-  email: string;
-  service?: string;
-  message: string;
-  sourcePage?: string;
-}
+const WINDOW_SECONDS = 15 * 60;
+const MAX_PER_IP = 5;
+const MAX_PER_EMAIL = 3;
+const CONTACT_DB_TIMEOUT_MS = 10_000;
 
-export interface SubmitContactResult {
-  success: boolean;
-  message: string;
+const GENERIC_SUCCESS =
+  "Terima kasih! Pesan Anda telah kami terima. Tim NAIKON akan menghubungi Anda dalam waktu 1x24 jam kerja.";
+
+function isTransientDatabaseError(error: unknown): boolean {
+  if (error instanceof DatabaseTimeoutError) return true;
+  if (!(error instanceof Error)) return false;
+  const code = (error as { code?: string }).code;
+  if (code && ["P1001", "P1002", "P1008", "P1017"].includes(code)) return true;
+  return /can't reach database|connection.*closed|timed? out|econnreset|etimedout|enotfound/i.test(
+    error.message
+  );
 }
 
 export async function submitContactMessage(
-  data: SubmitContactInput
+  input: ContactMessageInput
 ): Promise<SubmitContactResult> {
-  const { name, email, service, message, sourcePage = '/kontak' } = data;
-
-  // 1. Validasi server-side
-  if (!name || name.trim().length === 0) {
-    return { success: false, message: 'Nama wajib diisi.' };
-  }
-  if (!email || !email.includes('@') || email.trim().length < 5) {
-    return { success: false, message: 'Format email tidak valid.' };
-  }
-  if (!message || message.trim().length < 5) {
-    return { success: false, message: 'Pesan minimal 5 karakter.' };
-  }
-
-  // 2. Simpan ke database via Prisma
-  try {
-    await prisma.contactMessage.create({
-      data: {
-        name: name.trim().slice(0, 100),
-        email: email.trim().toLowerCase().slice(0, 100),
-        service: service?.trim().slice(0, 50) || null,
-        message: message.trim().slice(0, 2000),
-        sourcePage: sourcePage.slice(0, 100),
-        status: 'NEW',
-      },
-    });
-
+  if (typeof input !== "object" || input === null) {
     return {
-      success: true,
-      message:
-        'Terima kasih! Pesan Anda telah kami terima dan tersimpan di database. Tim NAIKON akan menghubungi Anda dalam waktu 1x24 jam kerja.',
+      success: false,
+      errorKind: "validation",
+      message: "Format pengiriman formulir tidak valid.",
     };
-  } catch (error: unknown) {
-    console.error('Gagal menyimpan pesan kontak ke database:', error);
+  }
 
-    // Jika database belum tersambung (masih dummy connection string), beri pesan informatif
-    const isConnectionError =
-      error instanceof Error &&
-      (error.message.includes('Can\'t reach database server') ||
-        error.message.includes('authentication failed') ||
-        error.message.includes('P1001') ||
-        error.message.includes('P1000'));
-
-    if (isConnectionError) {
+  try {
+    const originCheck = await verifySameOriginMutation();
+    if (!originCheck.allowed) {
       return {
         success: false,
+        errorKind: "csrf",
         message:
-          'Koneksi database PostgreSQL/Neon belum terhubung. Pastikan DATABASE_URL di .env.local sudah diisi dengan benar.',
+          "Permintaan ditolak karena asal halaman tidak terverifikasi. Muat ulang halaman lalu coba kembali.",
       };
     }
 
+    const ipHash = await getRequestIpHash();
+    const ipKey = `contact:ip:${ipHash}`;
+
+    const ipCheck = await withServerTimeout(
+      isRateLimited(ipKey, MAX_PER_IP),
+      CONTACT_DB_TIMEOUT_MS,
+      "contactIpRateCheck"
+    );
+    if (ipCheck.limited) {
+      const waitMinutes = Math.max(1, Math.ceil(ipCheck.retryAfterSeconds / 60));
+      return {
+        success: false,
+        errorKind: "locked",
+        retryAfterSeconds: ipCheck.retryAfterSeconds,
+        message: `Terlalu banyak pesan dari jaringan ini. Coba kembali dalam ${waitMinutes} menit.`,
+      };
+    }
+
+    // Bots fill hidden fields. Report success so they learn nothing, count the
+    // hit against the IP, and store nothing.
+    if (typeof input.websiteUrl === "string" && input.websiteUrl.trim().length > 0) {
+      await recordRateLimitHit(ipKey, WINDOW_SECONDS);
+      await recordAuditLog({
+        action: "contact.bot_blocked",
+        entityType: "ContactMessage",
+        summary: { reason: "honeypot_triggered" },
+        ipHash,
+      });
+      return { success: true, message: GENERIC_SUCCESS };
+    }
+
+    const parsed = contactMessageSchema.safeParse(input);
+    if (!parsed.success) {
+      return {
+        success: false,
+        errorKind: "validation",
+        message: "Periksa kembali isian formulir Anda.",
+        fieldErrors: extractContactFieldErrors(parsed.error.issues),
+      };
+    }
+
+    const { name, email, service, message, sourcePage } = parsed.data;
+    const emailKey = `contact:email:${email}`;
+
+    const emailCheck = await withServerTimeout(
+      isRateLimited(emailKey, MAX_PER_EMAIL),
+      CONTACT_DB_TIMEOUT_MS,
+      "contactEmailRateCheck"
+    );
+    if (emailCheck.limited) {
+      const waitMinutes = Math.max(1, Math.ceil(emailCheck.retryAfterSeconds / 60));
+      return {
+        success: false,
+        errorKind: "locked",
+        retryAfterSeconds: emailCheck.retryAfterSeconds,
+        message: `Email ini sudah mengirim beberapa pesan. Coba kembali dalam ${waitMinutes} menit.`,
+      };
+    }
+
+    await withServerTimeout(
+      Promise.all([
+        prisma.contactMessage.create({
+          data: { name, email, service, message, sourcePage, ipHash, status: "NEW" },
+          select: { id: true },
+        }),
+        recordRateLimitHit(ipKey, WINDOW_SECONDS),
+        recordRateLimitHit(emailKey, WINDOW_SECONDS),
+      ]),
+      CONTACT_DB_TIMEOUT_MS,
+      "saveContactMessage"
+    );
+
+    return { success: true, message: GENERIC_SUCCESS };
+  } catch (error) {
+    unstable_rethrow(error);
+
+    if (isTransientDatabaseError(error)) {
+      console.error(
+        "Transient database failure while saving contact message:",
+        error instanceof Error ? error.message : "unknown"
+      );
+      return {
+        success: false,
+        errorKind: "timeout",
+        message:
+          "Koneksi ke server sedang melambat. Isian Anda tetap tersimpan di formulir, silakan kirim ulang beberapa detik lagi.",
+      };
+    }
+
+    console.error(
+      "Failed to save contact message:",
+      error instanceof Error ? error.message : "unknown"
+    );
     return {
       success: false,
+      errorKind: "server",
       message:
-        'Mohon maaf, terjadi kendala saat menyimpan pesan Anda. Silakan coba kembali sesaat lagi atau hubungi via WhatsApp.',
+        "Mohon maaf, pesan belum dapat disimpan. Silakan coba lagi sesaat lagi atau hubungi kami lewat email resmi.",
     };
   }
 }

@@ -6,8 +6,9 @@ import Footer from "@/components/Footer";
 import { BlogHero } from "../components/BlogHero";
 import { BlogGrid } from "../components/BlogGrid";
 import { BlogCallout } from "../components/BlogCallout";
+import type { PublicArticleSummaryDTO } from "@/lib/public-content";
 
-export function BlogPage() {
+export function BlogPage({ articles }: { articles: PublicArticleSummaryDTO[] | null }) {
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
@@ -30,7 +31,7 @@ export function BlogPage() {
 
         <section className="relative isolate overflow-hidden bg-gradient-to-b from-[#FFFFFF] via-[#F8FBFF] to-[#F3F8FF] dark:from-[#030711] dark:via-[#061231] dark:to-[#091a45] py-16 sm:py-20">
           <div className="mx-auto w-full max-w-[1240px] px-6 sm:px-9 lg:px-14">
-            <BlogGrid />
+            <BlogGrid articles={articles} />
             <BlogCallout />
           </div>
         </section>

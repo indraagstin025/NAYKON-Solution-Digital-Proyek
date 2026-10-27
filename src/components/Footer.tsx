@@ -140,11 +140,16 @@ export default function Footer() {
             &copy; 2026 NAIKON Digital Solution. Hak cipta dilindungi undang-undang.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-5 font-medium">
-            <span>Tim Rekayasa Perangkat Lunak</span>
+            <Link
+              href="/kebijakan-privasi"
+              className="inline-flex min-h-11 items-center font-semibold text-[#0052CC] underline-offset-2 hover:underline dark:text-blue-400"
+            >
+              Kebijakan Privasi
+            </Link>
             <span className="hidden sm:inline text-[#B8D0F0] dark:text-slate-700">
               &bull;
             </span>
-            <span>Keamanan &amp; Skalabilitas Teruji</span>
+            <span>Tim Rekayasa Perangkat Lunak</span>
           </div>
         </div>
       </div>

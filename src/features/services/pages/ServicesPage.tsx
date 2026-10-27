@@ -3,12 +3,19 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import type { PublicPricingPlanDTO, PublicServiceDTO } from "@/lib/public-content";
 import { ServicesHero } from "../components/ServicesHero";
 import { ServiceCards } from "../components/ServiceCards";
 import { ServicePricing } from "../components/ServicePricing";
 import { ServiceWorkflow } from "../components/ServiceWorkflow";
 
-export function ServicesPage() {
+export function ServicesPage({
+  services,
+  pricing,
+}: {
+  services?: PublicServiceDTO[] | null;
+  pricing?: PublicPricingPlanDTO[] | null;
+}) {
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
@@ -31,8 +38,8 @@ export function ServicesPage() {
 
         <section className="relative isolate overflow-hidden bg-gradient-to-b from-[#FFFFFF] via-[#F7FAFF] to-[#F3F8FF] dark:from-[#030711] dark:via-[#061231] dark:to-[#091a45] py-16 sm:py-20">
           <div className="mx-auto w-full max-w-[1240px] px-6 sm:px-9 lg:px-14">
-            <ServiceCards />
-            <ServicePricing />
+            <ServiceCards services={services} />
+            <ServicePricing plans={pricing} />
             <ServiceWorkflow />
           </div>
         </section>
