@@ -9,6 +9,7 @@ import {
   Cross1Icon,
   ArrowRightIcon,
 } from "@radix-ui/react-icons";
+import PortalAccessBar from "@/features/auth/components/PortalAccessBar";
 
 const NAV_ITEMS = [
   { label: "Beranda", href: "/" },
@@ -23,6 +24,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isPortalOpen, setIsPortalOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -52,12 +54,13 @@ export default function Navbar() {
   return (
     <header
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
-        isScrolled
+        isScrolled || isPortalOpen
           ? "bg-white/95 dark:bg-[#030711]/95 backdrop-blur-md shadow-[0_4px_20px_-4px_rgba(10,30,63,0.08)] border-b border-slate-200/80 dark:border-blue-900/40"
           : "bg-transparent border-b border-transparent"
       }`}
       suppressHydrationWarning
     >
+      <PortalAccessBar onVisibilityChange={setIsPortalOpen} />
       <div className="mx-auto flex md:grid md:grid-cols-[1fr_auto_1fr] w-full max-w-[1240px] min-h-[68px] lg:min-h-[76px] items-center justify-between gap-4 px-6 sm:px-9 lg:px-14 py-2">
         <Link
           href="/"

@@ -10,7 +10,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 <!-- antislop:start -->
 ## antislop
-For UI, copy, people, mobile layout, or code comments work, read `antislop.md` (core) and then the skill for the task:
+For UI, copy, people, mobile layout, or code comments work, read `.agents/skills/antislop/SKILL.md` (core) and then the skill for the task:
 - UI / visual: `.agents/skills/antislop-ui/SKILL.md`
 - Copy & text: `.agents/skills/antislop-copywriting/SKILL.md`
 - People: `.agents/skills/antislop-human/SKILL.md`
