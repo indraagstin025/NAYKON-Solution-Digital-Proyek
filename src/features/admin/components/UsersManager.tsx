@@ -16,7 +16,6 @@ import {
 import { useAdminMutation } from "@/components/admin/useAdminMutation";
 import { AdminFeedbackBanner } from "@/components/admin/AdminFeedbackBanner";
 import { RadixConfirmDialog } from "@/components/admin/ui/RadixConfirmDialog";
-import { Tooltip } from "@/components/admin/ui/RadixTooltip";
 
 const ROLE_LABELS: Record<Role, string> = {
   ADMIN: "Administrator",

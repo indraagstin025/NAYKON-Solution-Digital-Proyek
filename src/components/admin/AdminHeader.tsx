@@ -79,9 +79,21 @@ export function AdminHeader({
       <div className="flex items-center gap-2 sm:gap-3">
         {/* System Health Badge */}
         <div className="hidden md:inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-[11px] font-semibold text-emerald-800 dark:border-emerald-900/60 dark:bg-emerald-950/40 dark:text-emerald-300">
-          <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" aria-hidden="true" />
+          <CheckCircledIcon className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" aria-hidden="true" />
           <span>Sistem Operasional</span>
         </div>
+
+        {/* User Identity Chip */}
+        <Tooltip content={`Sesi terverifikasi: ${userName} (${userRole})`}>
+          <div className="hidden xl:inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs dark:border-[#1E3358] dark:bg-[#071225]">
+            <div className="flex h-6 w-6 items-center justify-center rounded-lg bg-[#0066FF] text-[11px] font-bold text-white">
+              {userName.charAt(0).toUpperCase()}
+            </div>
+            <span className="max-w-[120px] truncate font-semibold text-[#041E42] dark:text-[#F1F5FB]">
+              {userName}
+            </span>
+          </div>
+        </Tooltip>
 
         {/* Unread Message Notification */}
         {unreadMessagesCount > 0 ? (

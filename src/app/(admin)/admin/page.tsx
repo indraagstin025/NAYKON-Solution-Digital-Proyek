@@ -10,10 +10,7 @@ import {
   FilePlusIcon,
   FileTextIcon,
   LayersIcon,
-  LockClosedIcon,
   PersonIcon,
-  PlusIcon,
-  QuestionMarkCircledIcon,
 } from "@radix-ui/react-icons";
 import { requirePermission } from "@/server/security/auth";
 import { hasPermission } from "@/server/security/permissions";

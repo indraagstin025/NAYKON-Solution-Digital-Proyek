@@ -28,7 +28,6 @@ import { useAdminMutation } from "@/components/admin/useAdminMutation";
 import { AdminFeedbackBanner } from "@/components/admin/AdminFeedbackBanner";
 import { Tabs, TabsList, TabsTrigger } from "@/components/admin/ui/RadixTabs";
 import { RadixConfirmDialog } from "@/components/admin/ui/RadixConfirmDialog";
-import { Tooltip } from "@/components/admin/ui/RadixTooltip";
 
 function toClientSlug(input: string): string {
   return input
