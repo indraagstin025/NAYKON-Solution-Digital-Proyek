@@ -18,6 +18,8 @@ import {
 } from "@/server/modules/faqs/actions";
 import { useAdminMutation } from "@/components/admin/useAdminMutation";
 import { AdminFeedbackBanner } from "@/components/admin/AdminFeedbackBanner";
+import { Tabs, TabsList, TabsTrigger } from "@/components/admin/ui/RadixTabs";
+import { RadixConfirmDialog } from "@/components/admin/ui/RadixConfirmDialog";
 
 const STATUS_LABELS: Record<ContentStatus, string> = {
   DRAFT: "Draf",
@@ -73,6 +75,7 @@ export function FaqsManager({
   const [pageStatus, setPageStatus] = useState<ContentStatus>(
     firstPage?.status ?? "PUBLISHED"
   );
+  const [isTrashFaqOpen, setIsTrashFaqOpen] = useState(false);
 
   const loadFaq = (item: AdminFaqDTO) => {
     setFaqId(item.id);
@@ -158,39 +161,19 @@ export function FaqsManager({
       />
 
       <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-xs dark:border-[#1E3358] dark:bg-[#0B1730]">
-        <div
-          role="tablist"
-          aria-label="Submodul FAQ dan halaman statis"
-          className="flex flex-wrap items-center gap-2"
+        <Tabs
+          value={activeTab}
+          onValueChange={(val) => setActiveTab(val as "faqs" | "pages")}
         >
-          <button
-            type="button"
-            role="tab"
-            aria-selected={activeTab === "faqs"}
-            onClick={() => setActiveTab("faqs")}
-            className={`inline-flex min-h-11 items-center rounded-xl border px-4 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8] ${
-              activeTab === "faqs"
-                ? "border-[#0066FF] bg-blue-50/70 text-[#0066FF] dark:border-[#60A5FA] dark:bg-[#12213F] dark:text-[#F1F5FB]"
-                : "border-slate-200 bg-white text-[#5A6E85] hover:bg-slate-50 dark:border-[#4E6E9E] dark:bg-[#0B1730] dark:text-[#94A7C4] dark:hover:bg-[#12213F]"
-            }`}
-          >
-            Pertanyaan FAQ ({faqs.length})
-          </button>
-
-          <button
-            type="button"
-            role="tab"
-            aria-selected={activeTab === "pages"}
-            onClick={() => setActiveTab("pages")}
-            className={`inline-flex min-h-11 items-center rounded-xl border px-4 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8] ${
-              activeTab === "pages"
-                ? "border-[#0066FF] bg-blue-50/70 text-[#0066FF] dark:border-[#60A5FA] dark:bg-[#12213F] dark:text-[#F1F5FB]"
-                : "border-slate-200 bg-white text-[#5A6E85] hover:bg-slate-50 dark:border-[#4E6E9E] dark:bg-[#0B1730] dark:text-[#94A7C4] dark:hover:bg-[#12213F]"
-            }`}
-          >
-            Halaman Statis ({pages.length})
-          </button>
-        </div>
+          <TabsList aria-label="Submodul FAQ dan halaman statis">
+            <TabsTrigger value="faqs">
+              Pertanyaan FAQ ({faqs.length})
+            </TabsTrigger>
+            <TabsTrigger value="pages">
+              Halaman Statis ({pages.length})
+            </TabsTrigger>
+          </TabsList>
+        </Tabs>
 
         {activeTab === "faqs" && canCreate && (
           <button
@@ -368,26 +351,49 @@ export function FaqsManager({
                 )}
 
                 {currentFaq && canDelete && (
-                  <button
-                    type="button"
-                    disabled={isPending}
-                    onClick={() =>
-                      execute(() =>
-                        toggleFaqTrashAction({
-                          id: currentFaq.id,
-                          restore: Boolean(currentFaq.deletedAt),
-                        })
-                      )
-                    }
-                    className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-rose-200 bg-white px-3.5 text-xs font-semibold text-rose-600 hover:bg-rose-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-500 dark:border-[#F87171]/60 dark:bg-[#0B1730] dark:text-[#FCA5A5] dark:hover:bg-[#12213F]"
-                  >
-                    <TrashIcon className="h-4 w-4" aria-hidden="true" />
-                    <span>
-                      {currentFaq.deletedAt
-                        ? "Pulihkan dari Sampah"
-                        : "Pindahkan ke Sampah"}
-                    </span>
-                  </button>
+                  <>
+                    <button
+                      type="button"
+                      disabled={isPending}
+                      onClick={() => setIsTrashFaqOpen(true)}
+                      className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-rose-200 bg-white px-3.5 text-xs font-semibold text-rose-600 hover:bg-rose-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-500 dark:border-[#F87171]/60 dark:bg-[#0B1730] dark:text-[#FCA5A5] dark:hover:bg-[#12213F]"
+                    >
+                      <TrashIcon className="h-4 w-4" aria-hidden="true" />
+                      <span>
+                        {currentFaq.deletedAt
+                          ? "Pulihkan dari Sampah"
+                          : "Pindahkan ke Sampah"}
+                      </span>
+                    </button>
+
+                    <RadixConfirmDialog
+                      open={isTrashFaqOpen}
+                      onOpenChange={setIsTrashFaqOpen}
+                      title={
+                        currentFaq.deletedAt
+                          ? "Pulihkan Pertanyaan FAQ"
+                          : "Pindahkan Pertanyaan FAQ ke Sampah"
+                      }
+                      description={
+                        currentFaq.deletedAt
+                          ? `Pertanyaan FAQ "${currentFaq.question}" akan dipulihkan kembali ke daftar aktif.`
+                          : `Pertanyaan FAQ "${currentFaq.question}" akan dipindahkan ke folder sampah.`
+                      }
+                      confirmLabel={
+                        currentFaq.deletedAt ? "Pulihkan" : "Pindahkan ke Sampah"
+                      }
+                      isDestructive={!currentFaq.deletedAt}
+                      isPending={isPending}
+                      onConfirm={() =>
+                        execute(() =>
+                          toggleFaqTrashAction({
+                            id: currentFaq.id,
+                            restore: Boolean(currentFaq.deletedAt),
+                          })
+                        )
+                      }
+                    />
+                  </>
                 )}
               </div>
             </form>

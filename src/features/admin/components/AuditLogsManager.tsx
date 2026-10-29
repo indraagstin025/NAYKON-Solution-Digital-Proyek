@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import type { AdminAuditLogDTO } from "@/server/modules/audit/queries";
+import { Tabs, TabsList, TabsTrigger } from "@/components/admin/ui/RadixTabs";
 
 const dateTimeFormatter = new Intl.DateTimeFormat("id-ID", {
   dateStyle: "medium",
@@ -40,25 +41,15 @@ export function AuditLogsManager({ logs, entityTypes }: AuditLogsManagerProps) {
     <div className="space-y-6">
       <div className="rounded-2xl border border-slate-200 bg-white p-4 sm:p-5 shadow-xs space-y-4 dark:border-[#1E3358] dark:bg-[#0B1730]">
         <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-          <div className="flex flex-wrap items-center gap-1.5">
-            {entityTypes.map((entity) => {
-              const active = entityFilter === entity;
-              return (
-                <button
-                  key={entity}
-                  type="button"
-                  onClick={() => setEntityFilter(entity)}
-                  className={`inline-flex min-h-11 items-center rounded-xl border px-3 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8] ${
-                    active
-                      ? "border-[#0066FF] bg-blue-50/70 text-[#0066FF] dark:border-[#60A5FA] dark:bg-[#12213F] dark:text-[#F1F5FB]"
-                      : "border-slate-200 bg-white text-[#5A6E85] hover:bg-slate-50 dark:border-[#4E6E9E] dark:bg-[#0B1730] dark:text-[#94A7C4] dark:hover:bg-[#12213F]"
-                  }`}
-                >
+          <Tabs value={entityFilter} onValueChange={setEntityFilter}>
+            <TabsList aria-label="Filter entitas log audit">
+              {entityTypes.map((entity) => (
+                <TabsTrigger key={entity} value={entity}>
                   {entity === "ALL" ? "Semua Entitas" : entity}
-                </button>
-              );
-            })}
-          </div>
+                </TabsTrigger>
+              ))}
+            </TabsList>
+          </Tabs>
 
           <div className="relative w-full lg:w-72">
             <label htmlFor="audit-search" className="sr-only">

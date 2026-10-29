@@ -1,10 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import * as DialogPrimitive from "@radix-ui/react-dialog";
 import {
+  CaretSortIcon,
   CardStackIcon,
   Cross1Icon,
   DashboardIcon,
@@ -18,6 +20,15 @@ import {
   QuestionMarkCircledIcon,
 } from "@radix-ui/react-icons";
 import { AdminThemeToggle } from "./AdminThemeToggle";
+import { Tooltip } from "./ui/RadixTooltip";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "./ui/RadixDropdownMenu";
 import LogoutForm from "@/features/auth/components/LogoutForm";
 
 export interface AdminSidebarProps {
@@ -133,17 +144,6 @@ export function AdminSidebar({
     },
   ];
 
-  useEffect(() => {
-    if (!mobileOpen) return;
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setMobileOpen(false);
-      }
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [mobileOpen]);
-
   const isItemActive = (item: NavItem) => {
     if (item.exact) {
       return pathname === item.href;
@@ -158,7 +158,7 @@ export function AdminSidebar({
         <div className="flex items-center justify-between border-b border-slate-200 dark:border-[#1E3358] pb-4">
           <Link
             href="/admin"
-            className="flex items-center gap-2.5 transition-transform hover:opacity-90"
+            className="flex items-center gap-2.5 transition-transform hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8] rounded-lg"
             onClick={() => setMobileOpen(false)}
           >
             <Image
@@ -175,23 +175,64 @@ export function AdminSidebar({
           </span>
         </div>
 
-        {/* User Profile Card */}
-        <div className="rounded-2xl border border-slate-200 dark:border-[#1E3358] bg-slate-50/80 dark:bg-[#071225] p-3.5 flex items-center gap-3">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#0066FF] to-[#1D4ED8] text-white font-bold text-sm shadow-xs">
-            {userName.charAt(0).toUpperCase()}
-          </div>
-          <div className="min-w-0 flex-1">
-            <p className="truncate text-xs font-bold text-[#041E42] dark:text-[#F1F5FB]">
-              {userName}
-            </p>
-            <div className="flex items-center gap-1.5 mt-0.5">
-              <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#10B981]" />
-              <span className="truncate text-[11px] text-[#5A6E85] dark:text-[#94A7C4]">
-                {ROLE_LABELS[userRole] || userRole}
-              </span>
+        {/* User Profile Card with Radix DropdownMenu */}
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <button
+              type="button"
+              className="w-full text-left rounded-2xl border border-slate-200 dark:border-[#1E3358] bg-slate-50/80 hover:bg-slate-100 dark:bg-[#071225] dark:hover:bg-[#12213F] p-3 flex items-center justify-between gap-2.5 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
+            >
+              <div className="flex items-center gap-3 min-w-0">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#0066FF] to-[#1D4ED8] text-white font-bold text-sm shadow-xs">
+                  {userName.charAt(0).toUpperCase()}
+                </div>
+                <div className="min-w-0 flex-1">
+                  <p className="truncate text-xs font-bold text-[#041E42] dark:text-[#F1F5FB]">
+                    {userName}
+                  </p>
+                  <div className="flex items-center gap-1.5 mt-0.5">
+                    <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#10B981]" />
+                    <span className="truncate text-[11px] text-[#5A6E85] dark:text-[#94A7C4]">
+                      {ROLE_LABELS[userRole] || userRole}
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <CaretSortIcon className="h-4 w-4 shrink-0 text-[#5A6E85] dark:text-[#94A7C4]" />
+            </button>
+          </DropdownMenuTrigger>
+
+          <DropdownMenuContent align="start" className="w-64">
+            <DropdownMenuLabel>Akun Pengguna</DropdownMenuLabel>
+            <div className="px-3 py-1.5 text-xs">
+              <p className="font-semibold text-[#041E42] dark:text-[#F1F5FB] truncate">
+                {userName}
+              </p>
+              <p className="text-[11px] text-[#5A6E85] dark:text-[#94A7C4] truncate">
+                {userEmail}
+              </p>
             </div>
-          </div>
-        </div>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem asChild>
+              <Link href="/" className="flex items-center gap-2">
+                <ExternalLinkIcon className="h-4 w-4" />
+                <span>Lihat Situs Publik</span>
+              </Link>
+            </DropdownMenuItem>
+            {canManageUsers && (
+              <DropdownMenuItem asChild>
+                <Link href="/admin/pengguna" className="flex items-center gap-2">
+                  <PersonIcon className="h-4 w-4" />
+                  <span>Manajemen Pengguna</span>
+                </Link>
+              </DropdownMenuItem>
+            )}
+            <DropdownMenuSeparator />
+            <div className="p-1">
+              <LogoutForm />
+            </div>
+          </DropdownMenuContent>
+        </DropdownMenu>
 
         {/* Navigation Sections */}
         <nav aria-label="Navigasi admin utama" className="space-y-5">
@@ -251,14 +292,15 @@ export function AdminSidebar({
       <div className="border-t border-slate-200 dark:border-[#1E3358] pt-4 space-y-2.5">
         <div className="flex items-center justify-between gap-2">
           <AdminThemeToggle className="flex-1" />
-          <Link
-            href="/"
-            title="Lihat Situs Publik"
-            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-white dark:bg-[#12213F] text-[#5A6E85] dark:text-[#94A7C4] transition-colors hover:bg-slate-100 dark:hover:bg-[#192D54] hover:text-[#041E42] dark:hover:text-[#F1F5FB] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
-          >
-            <ExternalLinkIcon className="h-4 w-4" aria-hidden="true" />
-            <span className="sr-only">Buka Situs Publik</span>
-          </Link>
+          <Tooltip content="Lihat Situs Publik">
+            <Link
+              href="/"
+              className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-white dark:bg-[#12213F] text-[#5A6E85] dark:text-[#94A7C4] transition-colors hover:bg-slate-100 dark:hover:bg-[#192D54] hover:text-[#041E42] dark:hover:text-[#F1F5FB] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
+            >
+              <ExternalLinkIcon className="h-4 w-4" aria-hidden="true" />
+              <span className="sr-only">Buka Situs Publik</span>
+            </Link>
+          </Tooltip>
         </div>
 
         <div className="w-full">
@@ -270,25 +312,41 @@ export function AdminSidebar({
 
   return (
     <>
-      {/* Mobile Top Header */}
+      {/* Mobile Top Header with Radix Dialog Drawer */}
       <header className="lg:hidden sticky top-0 z-40 flex min-h-[64px] items-center justify-between border-b border-slate-200 dark:border-[#1E3358] bg-white/95 dark:bg-[#0B1730]/95 px-5 backdrop-blur-md">
         <div className="flex items-center gap-3">
-          <button
-            type="button"
-            onClick={() => setMobileOpen((prev) => !prev)}
-            aria-expanded={mobileOpen}
-            aria-controls="admin-drawer"
-            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-white dark:bg-[#12213F] text-[#041E42] dark:text-[#F1F5FB] hover:bg-slate-100 dark:hover:bg-[#192D54] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
-          >
-            {mobileOpen ? (
-              <Cross1Icon className="h-5 w-5" aria-hidden="true" />
-            ) : (
-              <HamburgerMenuIcon className="h-5 w-5" aria-hidden="true" />
-            )}
-            <span className="sr-only">
-              {mobileOpen ? "Tutup Menu Sidebar" : "Buka Menu Sidebar"}
-            </span>
-          </button>
+          <DialogPrimitive.Root open={mobileOpen} onOpenChange={setMobileOpen}>
+            <DialogPrimitive.Trigger asChild>
+              <button
+                type="button"
+                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-white dark:bg-[#12213F] text-[#041E42] dark:text-[#F1F5FB] hover:bg-slate-100 dark:hover:bg-[#192D54] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
+              >
+                <HamburgerMenuIcon className="h-5 w-5" aria-hidden="true" />
+                <span className="sr-only">Buka Menu Navigasi Admin</span>
+              </button>
+            </DialogPrimitive.Trigger>
+
+            <DialogPrimitive.Portal>
+              <DialogPrimitive.Overlay className="fixed inset-0 z-50 bg-[#041E42]/60 backdrop-blur-xs animate-in fade-in-0 dark:bg-black/75" />
+              <DialogPrimitive.Content
+                className="fixed inset-y-0 left-0 z-50 w-72 max-w-[85vw] border-r border-slate-200 bg-white shadow-2xl animate-in slide-in-from-left duration-200 dark:border-[#1E3358] dark:bg-[#0B1730]"
+              >
+                <div className="sr-only">
+                  <DialogPrimitive.Title>Menu Navigasi Admin NAIKON</DialogPrimitive.Title>
+                  <DialogPrimitive.Description>
+                    Pilihan menu ruang kerja CMS dan konfigurasi sistem.
+                  </DialogPrimitive.Description>
+                </div>
+                <div className="absolute right-3 top-4 z-10">
+                  <DialogPrimitive.Close className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-slate-50 text-[#5A6E85] hover:bg-slate-100 dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#94A7C4] dark:hover:bg-[#192D54]">
+                    <Cross1Icon className="h-4 w-4" />
+                    <span className="sr-only">Tutup Navigasi</span>
+                  </DialogPrimitive.Close>
+                </div>
+                {navContent}
+              </DialogPrimitive.Content>
+            </DialogPrimitive.Portal>
+          </DialogPrimitive.Root>
 
           <Link href="/admin" className="flex items-center">
             <Image
@@ -315,26 +373,6 @@ export function AdminSidebar({
           <AdminThemeToggle showLabel={false} />
         </div>
       </header>
-
-      {/* Mobile Drawer Backdrop */}
-      {mobileOpen && (
-        <div
-          role="presentation"
-          onClick={() => setMobileOpen(false)}
-          className="lg:hidden fixed inset-0 z-40 bg-slate-900/60 dark:bg-black/70 backdrop-blur-xs transition-opacity"
-        />
-      )}
-
-      {/* Mobile Slide-over Drawer */}
-      <aside
-        id="admin-drawer"
-        aria-label="Menu navigasi samping mobile"
-        className={`lg:hidden fixed inset-y-0 left-0 z-50 w-72 max-w-[85vw] border-r border-slate-200 dark:border-[#1E3358] bg-white dark:bg-[#0B1730] shadow-2xl transition-transform duration-300 ease-in-out ${
-          mobileOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
-      >
-        {navContent}
-      </aside>
 
       {/* Desktop Fixed Sidebar */}
       <aside

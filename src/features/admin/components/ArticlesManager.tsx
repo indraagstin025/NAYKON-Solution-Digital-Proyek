@@ -26,6 +26,9 @@ import {
 } from "@/server/modules/articles/actions";
 import { useAdminMutation } from "@/components/admin/useAdminMutation";
 import { AdminFeedbackBanner } from "@/components/admin/AdminFeedbackBanner";
+import { Tabs, TabsList, TabsTrigger } from "@/components/admin/ui/RadixTabs";
+import { RadixConfirmDialog } from "@/components/admin/ui/RadixConfirmDialog";
+import { Tooltip } from "@/components/admin/ui/RadixTooltip";
 
 function toClientSlug(input: string): string {
   return input
@@ -111,6 +114,17 @@ export function ArticlesManager({
 
   const [tagName, setTagName] = useState("");
   const [tagSlug, setTagSlug] = useState("");
+
+  const [isTrashDialogOpen, setIsTrashDialogOpen] = useState(false);
+  const [isRestoreRevisionOpen, setIsRestoreRevisionOpen] = useState(false);
+  const [deleteCatTarget, setDeleteCatTarget] = useState<{
+    id: string;
+    name: string;
+  } | null>(null);
+  const [deleteTagTarget, setDeleteTagTarget] = useState<{
+    id: string;
+    name: string;
+  } | null>(null);
 
   const filteredArticles = useMemo(() => {
     return articles.filter((art) => {
@@ -276,41 +290,21 @@ export function ArticlesManager({
       />
 
       <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-slate-200 dark:border-[#1E3358] bg-white dark:bg-[#0B1730] p-4 shadow-xs">
-        <div
-          role="tablist"
-          aria-label="Submodul manajemen artikel"
-          className="flex flex-wrap items-center gap-2"
+        <Tabs
+          value={activeTab}
+          onValueChange={(val) => setActiveTab(val as "articles" | "taxonomy")}
         >
-          <button
-            type="button"
-            role="tab"
-            aria-selected={activeTab === "articles"}
-            onClick={() => setActiveTab("articles")}
-            className={`inline-flex min-h-11 items-center gap-2 rounded-xl border px-4 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8] ${
-              activeTab === "articles"
-                ? "border-[#0066FF] bg-[#0066FF]/10 text-[#0066FF] dark:border-[#60A5FA] dark:bg-[#12213F] dark:text-[#F1F5FB]"
-                : "border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#0B1730] text-[#5A6E85] dark:text-[#94A7C4] hover:bg-slate-100 dark:hover:bg-[#12213F] hover:text-[#041E42] dark:hover:text-[#F1F5FB]"
-            }`}
-          >
-            <span>Editor & Daftar Artikel ({articles.length})</span>
-          </button>
-
-          <button
-            type="button"
-            role="tab"
-            aria-selected={activeTab === "taxonomy"}
-            onClick={() => setActiveTab("taxonomy")}
-            className={`inline-flex min-h-11 items-center gap-2 rounded-xl border px-4 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8] ${
-              activeTab === "taxonomy"
-                ? "border-[#0066FF] bg-[#0066FF]/10 text-[#0066FF] dark:border-[#60A5FA] dark:bg-[#12213F] dark:text-[#F1F5FB]"
-                : "border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#0B1730] text-[#5A6E85] dark:text-[#94A7C4] hover:bg-slate-100 dark:hover:bg-[#12213F] hover:text-[#041E42] dark:hover:text-[#F1F5FB]"
-            }`}
-          >
-            <span>
-              Kategori ({categories.length}) & Tag ({tags.length})
-            </span>
-          </button>
-        </div>
+          <TabsList aria-label="Submodul manajemen artikel">
+            <TabsTrigger value="articles" className="gap-2">
+              <span>Editor & Daftar Artikel ({articles.length})</span>
+            </TabsTrigger>
+            <TabsTrigger value="taxonomy" className="gap-2">
+              <span>
+                Kategori ({categories.length}) & Tag ({tags.length})
+              </span>
+            </TabsTrigger>
+          </TabsList>
+        </Tabs>
 
         <div className="flex items-center gap-2 text-xs text-[#5A6E85] dark:text-[#94A7C4]">
           <span className="rounded-xl border border-slate-200 dark:border-[#1E3358] bg-slate-50 dark:bg-[#12213F] px-3 py-1.5 tabular-nums">
@@ -332,24 +326,20 @@ export function ArticlesManager({
       {activeTab === "articles" ? (
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 items-start">
           <div className="lg:col-span-5 rounded-2xl border border-slate-200 dark:border-[#1E3358] bg-white dark:bg-[#0B1730] p-4 space-y-4 shadow-xs">
-            <div className="flex flex-wrap items-center gap-1.5">
-              {(
-                ["ALL", "PUBLISHED", "DRAFT", "REVIEW", "ARCHIVED"] as const
-              ).map((st) => (
-                <button
-                  key={st}
-                  type="button"
-                  onClick={() => setStatusFilter(st)}
-                  className={`inline-flex min-h-11 items-center rounded-xl border px-3 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8] ${
-                    statusFilter === st
-                      ? "border-[#0066FF] bg-[#0066FF]/10 text-[#0066FF] dark:border-[#60A5FA] dark:bg-[#12213F] dark:text-[#F1F5FB]"
-                      : "border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#0B1730] text-[#5A6E85] dark:text-[#94A7C4] hover:bg-slate-100 dark:hover:bg-[#12213F]"
-                  }`}
-                >
-                  {st === "ALL" ? "Semua" : STATUS_LABELS[st]}
-                </button>
-              ))}
-            </div>
+            <Tabs
+              value={statusFilter}
+              onValueChange={(val) => setStatusFilter(val as ContentStatus | "ALL")}
+            >
+              <TabsList aria-label="Filter status artikel">
+                {(
+                  ["ALL", "PUBLISHED", "DRAFT", "REVIEW", "ARCHIVED"] as const
+                ).map((st) => (
+                  <TabsTrigger key={st} value={st}>
+                    {st === "ALL" ? "Semua" : STATUS_LABELS[st]}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+            </Tabs>
 
             <div className="divide-y divide-slate-100 dark:divide-[#1E3358] border-t border-slate-200 dark:border-[#1E3358]">
               {filteredArticles.length === 0 ? (
@@ -675,43 +665,79 @@ export function ArticlesManager({
                   <div className="flex flex-wrap items-center gap-2">
                     {canRestoreRevision &&
                       currentArticle.latestRevisionId && (
-                        <button
-                          type="button"
-                          disabled={isPending}
-                          onClick={() =>
-                            handleRestoreRevision(
-                              currentArticle.id,
-                              currentArticle.latestRevisionId!
-                            )
-                          }
-                          className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] px-3.5 text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] hover:bg-slate-100 dark:hover:bg-[#192D54] disabled:opacity-60"
-                        >
-                          <ResetIcon className="h-3.5 w-3.5" aria-hidden="true" />
-                          <span>
-                            Pulihkan Snapshot ({currentArticle.revisionCount})
-                          </span>
-                        </button>
+                        <>
+                          <button
+                            type="button"
+                            disabled={isPending}
+                            onClick={() => setIsRestoreRevisionOpen(true)}
+                            className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] px-3.5 text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] hover:bg-slate-100 dark:hover:bg-[#192D54] disabled:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
+                          >
+                            <ResetIcon className="h-3.5 w-3.5" aria-hidden="true" />
+                            <span>
+                              Pulihkan Snapshot ({currentArticle.revisionCount})
+                            </span>
+                          </button>
+
+                          <RadixConfirmDialog
+                            open={isRestoreRevisionOpen}
+                            onOpenChange={setIsRestoreRevisionOpen}
+                            title="Pulihkan Snapshot Artikel"
+                            description={`Artikel akan dikembalikan ke isi snapshot revisi terakhir (${currentArticle.revisionCount} revisi tersimpan).`}
+                            confirmLabel="Pulihkan Snapshot"
+                            isDestructive={false}
+                            isPending={isPending}
+                            onConfirm={() =>
+                              handleRestoreRevision(
+                                currentArticle.id,
+                                currentArticle.latestRevisionId!
+                              )
+                            }
+                          />
+                        </>
                       )}
 
                     {canDelete && (
-                      <button
-                        type="button"
-                        disabled={isPending}
-                        onClick={() =>
-                          handleToggleTrash(
-                            currentArticle.id,
-                            Boolean(currentArticle.deletedAt)
-                          )
-                        }
-                        className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-rose-200 dark:border-[#F87171]/60 bg-white dark:bg-[#0B1730] px-3.5 text-xs font-semibold text-rose-600 dark:text-[#FCA5A5] hover:bg-rose-50 dark:hover:bg-[#12213F] disabled:opacity-60"
-                      >
-                        <TrashIcon className="h-4 w-4" aria-hidden="true" />
-                        <span>
-                          {currentArticle.deletedAt
-                            ? "Pulihkan dari Sampah"
-                            : "Pindahkan ke Sampah"}
-                        </span>
-                      </button>
+                      <>
+                        <button
+                          type="button"
+                          disabled={isPending}
+                          onClick={() => setIsTrashDialogOpen(true)}
+                          className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-rose-200 dark:border-[#F87171]/60 bg-white dark:bg-[#0B1730] px-3.5 text-xs font-semibold text-rose-600 dark:text-[#FCA5A5] hover:bg-rose-50 dark:hover:bg-[#12213F] disabled:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-500"
+                        >
+                          <TrashIcon className="h-4 w-4" aria-hidden="true" />
+                          <span>
+                            {currentArticle.deletedAt
+                              ? "Pulihkan dari Sampah"
+                              : "Pindahkan ke Sampah"}
+                          </span>
+                        </button>
+
+                        <RadixConfirmDialog
+                          open={isTrashDialogOpen}
+                          onOpenChange={setIsTrashDialogOpen}
+                          title={
+                            currentArticle.deletedAt
+                              ? "Pulihkan Artikel"
+                              : "Pindahkan Artikel ke Sampah"
+                          }
+                          description={
+                            currentArticle.deletedAt
+                              ? `Artikel "${currentArticle.title}" akan dipulihkan kembali ke daftar aktif.`
+                              : `Artikel "${currentArticle.title}" akan dipindahkan ke folder sampah. Halaman publik tidak akan lagi menampilkan artikel ini.`
+                          }
+                          confirmLabel={
+                            currentArticle.deletedAt ? "Pulihkan" : "Pindahkan ke Sampah"
+                          }
+                          isDestructive={!currentArticle.deletedAt}
+                          isPending={isPending}
+                          onConfirm={() =>
+                            handleToggleTrash(
+                              currentArticle.id,
+                              Boolean(currentArticle.deletedAt)
+                            )
+                          }
+                        />
+                      </>
                     )}
                   </div>
                 )}
@@ -863,8 +889,10 @@ export function ArticlesManager({
                           <button
                             type="button"
                             disabled={isPending}
-                            onClick={() => handleDeleteCategory(cat.id)}
-                            className="inline-flex min-h-11 items-center gap-1 rounded-xl border border-rose-200 dark:border-[#F87171]/60 bg-white dark:bg-[#0B1730] px-3 text-xs font-semibold text-rose-600 dark:text-[#FCA5A5] hover:bg-rose-50 dark:hover:bg-[#12213F] disabled:opacity-50"
+                            onClick={() =>
+                              setDeleteCatTarget({ id: cat.id, name: cat.name })
+                            }
+                            className="inline-flex min-h-11 items-center gap-1 rounded-xl border border-rose-200 dark:border-[#F87171]/60 bg-white dark:bg-[#0B1730] px-3 text-xs font-semibold text-rose-600 dark:text-[#FCA5A5] hover:bg-rose-50 dark:hover:bg-[#12213F] disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-500"
                           >
                             <TrashIcon className="h-3.5 w-3.5" aria-hidden="true" />
                             <span>Hapus</span>
@@ -964,8 +992,10 @@ export function ArticlesManager({
                     <button
                       type="button"
                       disabled={isPending}
-                      onClick={() => handleDeleteTag(tag.id)}
-                      className="inline-flex min-h-11 items-center gap-1 rounded-xl border border-rose-200 dark:border-[#F87171]/60 bg-white dark:bg-[#0B1730] px-3 text-xs font-semibold text-rose-600 dark:text-[#FCA5A5] hover:bg-rose-50 dark:hover:bg-[#12213F]"
+                      onClick={() =>
+                        setDeleteTagTarget({ id: tag.id, name: tag.name })
+                      }
+                      className="inline-flex min-h-11 items-center gap-1 rounded-xl border border-rose-200 dark:border-[#F87171]/60 bg-white dark:bg-[#0B1730] px-3 text-xs font-semibold text-rose-600 dark:text-[#FCA5A5] hover:bg-rose-50 dark:hover:bg-[#12213F] disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-500"
                     >
                       <TrashIcon className="h-3.5 w-3.5" aria-hidden="true" />
                       <span>Hapus</span>
@@ -974,6 +1004,34 @@ export function ArticlesManager({
                 </li>
               ))}
             </ul>
+
+            <RadixConfirmDialog
+              open={deleteCatTarget !== null}
+              onOpenChange={(open) => !open && setDeleteCatTarget(null)}
+              title="Hapus Kategori Artikel"
+              description={`Kategori "${deleteCatTarget?.name}" akan dihapus dari sistem. Pastikan tidak ada artikel aktif yang masih terhubung.`}
+              confirmLabel="Hapus Kategori"
+              isPending={isPending}
+              onConfirm={() => {
+                if (deleteCatTarget) {
+                  return handleDeleteCategory(deleteCatTarget.id);
+                }
+              }}
+            />
+
+            <RadixConfirmDialog
+              open={deleteTagTarget !== null}
+              onOpenChange={(open) => !open && setDeleteTagTarget(null)}
+              title="Hapus Tag Artikel"
+              description={`Tag #${deleteTagTarget?.name} akan dihapus dari sistem.`}
+              confirmLabel="Hapus Tag"
+              isPending={isPending}
+              onConfirm={() => {
+                if (deleteTagTarget) {
+                  return handleDeleteTag(deleteTagTarget.id);
+                }
+              }}
+            />
           </section>
         </div>
       )}

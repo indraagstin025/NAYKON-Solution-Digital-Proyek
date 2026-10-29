@@ -15,6 +15,9 @@ import {
 } from "@/server/modules/messages/actions";
 import { useAdminMutation } from "@/components/admin/useAdminMutation";
 import { AdminFeedbackBanner } from "@/components/admin/AdminFeedbackBanner";
+import { Tabs, TabsList, TabsTrigger } from "@/components/admin/ui/RadixTabs";
+import { RadixConfirmDialog } from "@/components/admin/ui/RadixConfirmDialog";
+import { Tooltip } from "@/components/admin/ui/RadixTooltip";
 
 const STATUS_OPTIONS: Array<{
   value: MessageStatus | "ALL";
@@ -54,7 +57,7 @@ export function MessagesManager({
   const { isOnline, isPending, feedback, clearFeedback, execute } =
     useAdminMutation();
 
-  const [statusFilter, setStatusFilter] = useState<MessageStatus | "ALL">("ALL");
+  const [statusFilter, setStatusFilter] = useState<string>("ALL");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedId, setSelectedId] = useState<string | null>(
     initialItems[0]?.id ?? null
@@ -106,13 +109,12 @@ export function MessagesManager({
   const [draftNote, setDraftNote] = useState<string>(
     selectedMessage?.internalNote ?? ""
   );
-  const [confirmDeleteId, setConfirmDeleteId] = useState<string | null>(null);
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
 
   const selectMessage = (msg: ContactMessageItemDTO) => {
     setSelectedId(msg.id);
     setDraftStatus(msg.status);
     setDraftNote(msg.internalNote ?? "");
-    setConfirmDeleteId(null);
     clearFeedback();
   };
 
@@ -143,7 +145,6 @@ export function MessagesManager({
         }),
       {
         onSuccess: () => {
-          setConfirmDeleteId(null);
           const remaining = initialItems.filter((item) => item.id !== id);
           const next = remaining[0] ?? null;
           setSelectedId(next?.id ?? null);
@@ -166,35 +167,21 @@ export function MessagesManager({
 
       <div className="rounded-2xl border border-slate-200 dark:border-[#1E3358] bg-white dark:bg-[#0B1730] p-4 sm:p-5 shadow-xs space-y-4">
         <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-          <div
-            role="tablist"
-            aria-label="Filter status pesan masuk"
-            className="flex flex-wrap items-center gap-2"
-          >
-            {STATUS_OPTIONS.map((tab) => {
-              const active = statusFilter === tab.value;
-              const count = counts[tab.value];
-              return (
-                <button
-                  key={tab.value}
-                  type="button"
-                  role="tab"
-                  aria-selected={active}
-                  onClick={() => setStatusFilter(tab.value)}
-                  className={`inline-flex min-h-11 items-center gap-2 rounded-xl border px-3.5 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8] ${
-                    active
-                      ? "border-[#0066FF] bg-[#0066FF]/10 text-[#0066FF] dark:border-[#60A5FA] dark:bg-[#12213F] dark:text-[#F1F5FB]"
-                      : "border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#0B1730] text-[#5A6E85] dark:text-[#94A7C4] hover:bg-slate-100 dark:hover:bg-[#12213F] hover:text-[#041E42] dark:hover:text-[#F1F5FB]"
-                  }`}
-                >
-                  <span>{tab.label}</span>
-                  <span className="rounded-md bg-slate-200 dark:bg-[#030711] px-1.5 py-0.5 text-[11px] tabular-nums text-slate-700 dark:text-[#94A7C4]">
-                    {count}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
+          <Tabs value={statusFilter} onValueChange={setStatusFilter}>
+            <TabsList aria-label="Filter status pesan masuk">
+              {STATUS_OPTIONS.map((tab) => {
+                const count = counts[tab.value];
+                return (
+                  <TabsTrigger key={tab.value} value={tab.value} className="gap-2">
+                    <span>{tab.label}</span>
+                    <span className="rounded-md bg-slate-200 dark:bg-[#030711] px-1.5 py-0.5 text-[11px] tabular-nums text-slate-700 dark:text-[#94A7C4]">
+                      {count}
+                    </span>
+                  </TabsTrigger>
+                );
+              })}
+            </TabsList>
+          </Tabs>
 
           <div className="relative w-full lg:w-72">
             <label htmlFor="message-search" className="sr-only">
@@ -305,19 +292,21 @@ export function MessagesManager({
                   </p>
                 </div>
 
-                <a
-                  href={`mailto:${encodeURIComponent(
-                    selectedMessage.email
-                  )}?subject=${encodeURIComponent(
-                    `Tindak Lanjut Konsultasi NAIKON: ${
-                      selectedMessage.service || "Kebutuhan Proyek Digital"
-                    }`
-                  )}`}
-                  className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#0066FF] hover:bg-[#0052CC] dark:bg-[#2563EB] dark:hover:bg-[#1D4ED8] px-4 text-xs font-semibold text-white transition-colors shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
-                >
-                  <EnvelopeClosedIcon className="h-4 w-4" aria-hidden="true" />
-                  <span>Balas via Email</span>
-                </a>
+                <Tooltip content="Buka aplikasi email klien untuk membalas pengirim">
+                  <a
+                    href={`mailto:${encodeURIComponent(
+                      selectedMessage.email
+                    )}?subject=${encodeURIComponent(
+                      `Tindak Lanjut Konsultasi NAIKON: ${
+                        selectedMessage.service || "Kebutuhan Proyek Digital"
+                      }`
+                    )}`}
+                    className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#0066FF] hover:bg-[#0052CC] dark:bg-[#2563EB] dark:hover:bg-[#1D4ED8] px-4 text-xs font-semibold text-white transition-colors shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
+                  >
+                    <EnvelopeClosedIcon className="h-4 w-4" aria-hidden="true" />
+                    <span>Balas via Email</span>
+                  </a>
+                </Tooltip>
               </div>
 
               <div className="space-y-2">
@@ -393,38 +382,27 @@ export function MessagesManager({
                   )}
 
                   {canDelete && (
-                    <div className="flex items-center gap-2">
-                      {confirmDeleteId === selectedMessage.id ? (
-                        <>
-                          <button
-                            type="button"
-                            disabled={isPending}
-                            onClick={() => handleDelete(selectedMessage.id)}
-                            className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-rose-300 dark:border-[#F87171] bg-rose-50 dark:bg-[#12213F] px-3.5 text-xs font-semibold text-rose-700 dark:text-[#FCA5A5] transition-colors hover:bg-rose-100 dark:hover:bg-[#192D54] disabled:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-500"
-                          >
-                            <span>Konfirmasi Hapus Permanen</span>
-                          </button>
-                          <button
-                            type="button"
-                            disabled={isPending}
-                            onClick={() => setConfirmDeleteId(null)}
-                            className="inline-flex min-h-11 items-center rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-white dark:bg-[#0B1730] px-3 text-xs font-medium text-[#5A6E85] dark:text-[#94A7C4] hover:bg-slate-100 dark:hover:bg-[#12213F]"
-                          >
-                            Batal
-                          </button>
-                        </>
-                      ) : (
-                        <button
-                          type="button"
-                          disabled={isPending}
-                          onClick={() => setConfirmDeleteId(selectedMessage.id)}
-                          className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-rose-200 dark:border-[#F87171]/60 bg-white dark:bg-[#0B1730] px-3.5 text-xs font-semibold text-rose-600 dark:text-[#FCA5A5] transition-colors hover:bg-rose-50 dark:hover:bg-[#12213F] disabled:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-500"
-                        >
-                          <TrashIcon className="h-4 w-4" aria-hidden="true" />
-                          <span>Hapus Pesan</span>
-                        </button>
-                      )}
-                    </div>
+                    <>
+                      <button
+                        type="button"
+                        disabled={isPending}
+                        onClick={() => setIsDeleteDialogOpen(true)}
+                        className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-rose-200 dark:border-[#F87171]/60 bg-white dark:bg-[#0B1730] px-3.5 text-xs font-semibold text-rose-600 dark:text-[#FCA5A5] transition-colors hover:bg-rose-50 dark:hover:bg-[#12213F] disabled:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-500"
+                      >
+                        <TrashIcon className="h-4 w-4" aria-hidden="true" />
+                        <span>Hapus Pesan</span>
+                      </button>
+
+                      <RadixConfirmDialog
+                        open={isDeleteDialogOpen}
+                        onOpenChange={setIsDeleteDialogOpen}
+                        title="Hapus Pesan Masuk"
+                        description={`Pesan dari ${selectedMessage.name} (${selectedMessage.email}) akan dihapus secara permanen dari basis data. Tindakan ini tidak dapat dibatalkan.`}
+                        confirmLabel="Hapus Permanen"
+                        isPending={isPending}
+                        onConfirm={() => handleDelete(selectedMessage.id)}
+                      />
+                    </>
                   )}
                 </div>
               </form>

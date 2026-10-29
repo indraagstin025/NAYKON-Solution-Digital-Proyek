@@ -15,6 +15,8 @@ import {
 } from "@/server/modules/portfolios/actions";
 import { useAdminMutation } from "@/components/admin/useAdminMutation";
 import { AdminFeedbackBanner } from "@/components/admin/AdminFeedbackBanner";
+import { RadixSwitch } from "@/components/admin/ui/RadixSwitch";
+import { RadixConfirmDialog } from "@/components/admin/ui/RadixConfirmDialog";
 
 function toClientSlug(input: string): string {
   return input
@@ -73,6 +75,7 @@ export function PortfoliosManager({
   const [status, setStatus] = useState<ContentStatus>(
     first?.status ?? "PUBLISHED"
   );
+  const [isTrashDialogOpen, setIsTrashDialogOpen] = useState(false);
 
   const loadPortfolio = (item: AdminPortfolioDTO) => {
     setEditingId(item.id);
@@ -459,21 +462,14 @@ export function PortfoliosManager({
               </div>
             </div>
 
-            <div className="flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 p-3.5 dark:border-[#4E6E9E] dark:bg-[#12213F]">
-              <input
+            <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 dark:border-[#4E6E9E] dark:bg-[#12213F]">
+              <RadixSwitch
                 id="port-featured"
-                type="checkbox"
                 checked={featured}
-                onChange={(e) => setFeatured(e.target.checked)}
-                className="h-4 w-4 rounded border-slate-300 accent-[#0066FF] dark:border-[#4E6E9E] dark:accent-[#2563EB]"
+                onCheckedChange={setFeatured}
+                label="Tampilkan pada seksi Sorotan Portofolio di Beranda"
+                description="Maksimal 3 studi kasus dengan status Terbit yang ditampilkan pada halaman Beranda."
               />
-              <label
-                htmlFor="port-featured"
-                className="text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB]"
-              >
-                Tampilkan pada seksi Sorotan Portofolio di halaman Beranda
-                (Maksimal 3 item terbit).
-              </label>
             </div>
 
             <div className="flex flex-wrap items-center justify-between gap-3 pt-2">
@@ -491,26 +487,49 @@ export function PortfoliosManager({
               )}
 
               {currentPortfolio && canDelete && (
-                <button
-                  type="button"
-                  disabled={isPending}
-                  onClick={() =>
-                    execute(() =>
-                      togglePortfolioTrashAction({
-                        id: currentPortfolio.id,
-                        restore: Boolean(currentPortfolio.deletedAt),
-                      })
-                    )
-                  }
-                  className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-rose-200 bg-white px-3.5 text-xs font-semibold text-rose-600 hover:bg-rose-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-500 dark:border-[#F87171]/60 dark:bg-[#0B1730] dark:text-[#FCA5A5] dark:hover:bg-[#12213F]"
-                >
-                  <TrashIcon className="h-4 w-4" aria-hidden="true" />
-                  <span>
-                    {currentPortfolio.deletedAt
-                      ? "Pulihkan dari Sampah"
-                      : "Pindahkan ke Sampah"}
-                  </span>
-                </button>
+                <>
+                  <button
+                    type="button"
+                    disabled={isPending}
+                    onClick={() => setIsTrashDialogOpen(true)}
+                    className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-rose-200 bg-white px-3.5 text-xs font-semibold text-rose-600 hover:bg-rose-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-500 dark:border-[#F87171]/60 dark:bg-[#0B1730] dark:text-[#FCA5A5] dark:hover:bg-[#12213F]"
+                  >
+                    <TrashIcon className="h-4 w-4" aria-hidden="true" />
+                    <span>
+                      {currentPortfolio.deletedAt
+                        ? "Pulihkan dari Sampah"
+                        : "Pindahkan ke Sampah"}
+                    </span>
+                  </button>
+
+                  <RadixConfirmDialog
+                    open={isTrashDialogOpen}
+                    onOpenChange={setIsTrashDialogOpen}
+                    title={
+                      currentPortfolio.deletedAt
+                        ? "Pulihkan Studi Kasus"
+                        : "Pindahkan ke Sampah"
+                    }
+                    description={
+                      currentPortfolio.deletedAt
+                        ? `Studi kasus "${currentPortfolio.title}" akan dipulihkan kembali ke daftar aktif.`
+                        : `Studi kasus "${currentPortfolio.title}" akan dipindahkan ke folder sampah. Anda dapat memulihkannya kembali kapan saja.`
+                    }
+                    confirmLabel={
+                      currentPortfolio.deletedAt ? "Pulihkan" : "Pindahkan ke Sampah"
+                    }
+                    isDestructive={!currentPortfolio.deletedAt}
+                    isPending={isPending}
+                    onConfirm={() =>
+                      execute(() =>
+                        togglePortfolioTrashAction({
+                          id: currentPortfolio.id,
+                          restore: Boolean(currentPortfolio.deletedAt),
+                        })
+                      )
+                    }
+                  />
+                </>
               )}
             </div>
           </form>

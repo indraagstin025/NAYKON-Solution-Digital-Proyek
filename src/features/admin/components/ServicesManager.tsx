@@ -20,6 +20,9 @@ import {
 } from "@/server/modules/services/actions";
 import { useAdminMutation } from "@/components/admin/useAdminMutation";
 import { AdminFeedbackBanner } from "@/components/admin/AdminFeedbackBanner";
+import { Tabs, TabsList, TabsTrigger } from "@/components/admin/ui/RadixTabs";
+import { RadixSwitch } from "@/components/admin/ui/RadixSwitch";
+import { RadixConfirmDialog } from "@/components/admin/ui/RadixConfirmDialog";
 
 function toClientSlug(input: string): string {
   return input
@@ -115,6 +118,8 @@ export function ServicesManager({
   const [planStatus, setPlanStatus] = useState<ContentStatus>(
     firstPlan?.status ?? "PUBLISHED"
   );
+  const [isTrashSvcOpen, setIsTrashSvcOpen] = useState(false);
+  const [isTrashPlanOpen, setIsTrashPlanOpen] = useState(false);
 
   const loadService = (svc: AdminServiceDTO) => {
     setSvcId(svc.id);
@@ -248,39 +253,19 @@ export function ServicesManager({
       />
 
       <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-slate-200 dark:border-[#1E3358] bg-white dark:bg-[#0B1730] p-4 shadow-xs">
-        <div
-          role="tablist"
-          aria-label="Submodul layanan dan harga"
-          className="flex flex-wrap items-center gap-2"
+        <Tabs
+          value={activeTab}
+          onValueChange={(val) => setActiveTab(val as "services" | "pricing")}
         >
-          <button
-            type="button"
-            role="tab"
-            aria-selected={activeTab === "services"}
-            onClick={() => setActiveTab("services")}
-            className={`inline-flex min-h-11 items-center rounded-xl border px-4 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8] ${
-              activeTab === "services"
-                ? "border-[#0066FF] bg-[#0066FF]/10 text-[#0066FF] dark:border-[#60A5FA] dark:bg-[#12213F] dark:text-[#F1F5FB]"
-                : "border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#0B1730] text-[#5A6E85] dark:text-[#94A7C4] hover:bg-slate-100 dark:hover:bg-[#12213F]"
-            }`}
-          >
-            Daftar Layanan ({services.length})
-          </button>
-
-          <button
-            type="button"
-            role="tab"
-            aria-selected={activeTab === "pricing"}
-            onClick={() => setActiveTab("pricing")}
-            className={`inline-flex min-h-11 items-center rounded-xl border px-4 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8] ${
-              activeTab === "pricing"
-                ? "border-[#0066FF] bg-[#0066FF]/10 text-[#0066FF] dark:border-[#60A5FA] dark:bg-[#12213F] dark:text-[#F1F5FB]"
-                : "border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#0B1730] text-[#5A6E85] dark:text-[#94A7C4] hover:bg-slate-100 dark:hover:bg-[#12213F]"
-            }`}
-          >
-            Paket Harga ({pricingPlans.length})
-          </button>
-        </div>
+          <TabsList aria-label="Submodul layanan dan harga">
+            <TabsTrigger value="services">
+              Daftar Layanan ({services.length})
+            </TabsTrigger>
+            <TabsTrigger value="pricing">
+              Paket Harga ({pricingPlans.length})
+            </TabsTrigger>
+          </TabsList>
+        </Tabs>
 
         {canCreate && (
           <button
@@ -571,26 +556,49 @@ export function ServicesManager({
                 )}
 
                 {currentService && canDelete && (
-                  <button
-                    type="button"
-                    disabled={isPending}
-                    onClick={() =>
-                      execute(() =>
-                        toggleServiceTrashAction({
-                          id: currentService.id,
-                          restore: Boolean(currentService.deletedAt),
-                        })
-                      )
-                    }
-                    className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-rose-200 dark:border-[#F87171]/60 bg-white dark:bg-[#0B1730] px-3.5 text-xs font-semibold text-rose-600 dark:text-[#FCA5A5] hover:bg-rose-50 dark:hover:bg-[#12213F]"
-                  >
-                    <TrashIcon className="h-4 w-4" aria-hidden="true" />
-                    <span>
-                      {currentService.deletedAt
-                        ? "Pulihkan dari Sampah"
-                        : "Pindahkan ke Sampah"}
-                    </span>
-                  </button>
+                  <>
+                    <button
+                      type="button"
+                      disabled={isPending}
+                      onClick={() => setIsTrashSvcOpen(true)}
+                      className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-rose-200 dark:border-[#F87171]/60 bg-white dark:bg-[#0B1730] px-3.5 text-xs font-semibold text-rose-600 dark:text-[#FCA5A5] hover:bg-rose-50 dark:hover:bg-[#12213F] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-500"
+                    >
+                      <TrashIcon className="h-4 w-4" aria-hidden="true" />
+                      <span>
+                        {currentService.deletedAt
+                          ? "Pulihkan dari Sampah"
+                          : "Pindahkan ke Sampah"}
+                      </span>
+                    </button>
+
+                    <RadixConfirmDialog
+                      open={isTrashSvcOpen}
+                      onOpenChange={setIsTrashSvcOpen}
+                      title={
+                        currentService.deletedAt
+                          ? "Pulihkan Layanan Digital"
+                          : "Pindahkan Layanan ke Sampah"
+                      }
+                      description={
+                        currentService.deletedAt
+                          ? `Layanan "${currentService.title}" akan dipulihkan kembali ke katalog aktif.`
+                          : `Layanan "${currentService.title}" akan dipindahkan ke folder sampah. Halaman publik tidak akan lagi menampilkan layanan ini.`
+                      }
+                      confirmLabel={
+                        currentService.deletedAt ? "Pulihkan" : "Pindahkan ke Sampah"
+                      }
+                      isDestructive={!currentService.deletedAt}
+                      isPending={isPending}
+                      onConfirm={() =>
+                        execute(() =>
+                          toggleServiceTrashAction({
+                            id: currentService.id,
+                            restore: Boolean(currentService.deletedAt),
+                          })
+                        )
+                      }
+                    />
+                  </>
                 )}
               </div>
             </form>
@@ -747,21 +755,14 @@ export function ServicesManager({
                 />
               </div>
 
-              <div className="flex items-center gap-3 rounded-xl border border-slate-200 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] p-3.5">
-                <input
+              <div className="rounded-xl border border-slate-200 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] p-4">
+                <RadixSwitch
                   id="plan-popular"
-                  type="checkbox"
                   checked={planPopular}
-                  onChange={(e) => setPlanPopular(e.target.checked)}
-                  className="h-4 w-4 rounded border-slate-300 dark:border-[#4E6E9E] accent-[#0066FF]"
+                  onCheckedChange={setPlanPopular}
+                  label="Tandai sebagai Paket Terpopuler"
+                  description="Paket ini akan ditampilkan dengan sorotan khusus di halaman publik. Paket lain otomatis dilepas dari penanda ini."
                 />
-                <label
-                  htmlFor="plan-popular"
-                  className="text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB]"
-                >
-                  Jadikan paket ini sebagai rekomendasi utama (&ldquo;Paling
-                  Populer&rdquo;). Paket lain otomatis dilepas dari penanda ini.
-                </label>
               </div>
 
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-4">
@@ -855,26 +856,49 @@ export function ServicesManager({
                 )}
 
                 {currentPlan && canDelete && (
-                  <button
-                    type="button"
-                    disabled={isPending}
-                    onClick={() =>
-                      execute(() =>
-                        togglePricingPlanTrashAction({
-                          id: currentPlan.id,
-                          restore: Boolean(currentPlan.deletedAt),
-                        })
-                      )
-                    }
-                    className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-rose-200 dark:border-[#F87171]/60 bg-white dark:bg-[#0B1730] px-3.5 text-xs font-semibold text-rose-600 dark:text-[#FCA5A5] hover:bg-rose-50 dark:hover:bg-[#12213F]"
-                  >
-                    <TrashIcon className="h-4 w-4" aria-hidden="true" />
-                    <span>
-                      {currentPlan.deletedAt
-                        ? "Pulihkan dari Sampah"
-                        : "Pindahkan ke Sampah"}
-                    </span>
-                  </button>
+                  <>
+                    <button
+                      type="button"
+                      disabled={isPending}
+                      onClick={() => setIsTrashPlanOpen(true)}
+                      className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-rose-200 dark:border-[#F87171]/60 bg-white dark:bg-[#0B1730] px-3.5 text-xs font-semibold text-rose-600 dark:text-[#FCA5A5] hover:bg-rose-50 dark:hover:bg-[#12213F] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-500"
+                    >
+                      <TrashIcon className="h-4 w-4" aria-hidden="true" />
+                      <span>
+                        {currentPlan.deletedAt
+                          ? "Pulihkan dari Sampah"
+                          : "Pindahkan ke Sampah"}
+                      </span>
+                    </button>
+
+                    <RadixConfirmDialog
+                      open={isTrashPlanOpen}
+                      onOpenChange={setIsTrashPlanOpen}
+                      title={
+                        currentPlan.deletedAt
+                          ? "Pulihkan Paket Harga"
+                          : "Pindahkan Paket ke Sampah"
+                      }
+                      description={
+                        currentPlan.deletedAt
+                          ? `Paket "${currentPlan.name}" akan dipulihkan kembali ke daftar aktif.`
+                          : `Paket "${currentPlan.name}" akan dipindahkan ke folder sampah.`
+                      }
+                      confirmLabel={
+                        currentPlan.deletedAt ? "Pulihkan" : "Pindahkan ke Sampah"
+                      }
+                      isDestructive={!currentPlan.deletedAt}
+                      isPending={isPending}
+                      onConfirm={() =>
+                        execute(() =>
+                          togglePricingPlanTrashAction({
+                            id: currentPlan.id,
+                            restore: Boolean(currentPlan.deletedAt),
+                          })
+                        )
+                      }
+                    />
+                  </>
                 )}
               </div>
             </form>

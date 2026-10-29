@@ -2,6 +2,7 @@
 
 import { useSyncExternalStore } from "react";
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
+import { Tooltip } from "@/components/admin/ui/RadixTooltip";
 
 const THEME_KEY = "nk-theme-preference";
 
@@ -39,13 +40,12 @@ export function AdminThemeToggle({
     window.dispatchEvent(new Event("storage"));
   };
 
-  return (
+  const button = (
     <button
       type="button"
       onClick={toggleTheme}
       aria-label={isDark ? "Beralih ke mode terang" : "Beralih ke mode gelap"}
-      title={isDark ? "Ganti ke Mode Terang" : "Ganti ke Mode Gelap"}
-      className={`inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-white dark:bg-[#12213F] px-3.5 py-2 text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] transition-colors hover:bg-slate-100 dark:hover:bg-[#192D54] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8] ${className}`}
+      className={`inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-3.5 py-2 text-xs font-semibold text-[#041E42] transition-colors hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:hover:bg-[#192D54] dark:focus-visible:outline-[#38BDF8] ${className}`}
     >
       {isDark ? (
         <SunIcon className="h-4 w-4 text-[#FBBF24]" aria-hidden="true" />
@@ -57,4 +57,14 @@ export function AdminThemeToggle({
       )}
     </button>
   );
+
+  if (!showLabel) {
+    return (
+      <Tooltip content={isDark ? "Ganti ke Mode Terang" : "Ganti ke Mode Gelap"}>
+        {button}
+      </Tooltip>
+    );
+  }
+
+  return button;
 }
