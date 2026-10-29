@@ -13,7 +13,6 @@ import {
   EnvelopeClosedIcon,
   ExternalLinkIcon,
   FileTextIcon,
-  HamburgerMenuIcon,
   LayersIcon,
   LockClosedIcon,
   PersonIcon,
@@ -40,6 +39,8 @@ export interface AdminSidebarProps {
   canViewContent: boolean;
   canManageUsers: boolean;
   canViewAudit: boolean;
+  mobileOpen?: boolean;
+  onMobileOpenChange?: (open: boolean) => void;
 }
 
 interface NavItem {
@@ -72,9 +73,20 @@ export function AdminSidebar({
   canViewContent,
   canManageUsers,
   canViewAudit,
+  mobileOpen: controlledMobileOpen,
+  onMobileOpenChange,
 }: AdminSidebarProps) {
   const pathname = usePathname();
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [internalMobileOpen, setInternalMobileOpen] = useState(false);
+
+  const isMobileOpen = controlledMobileOpen !== undefined ? controlledMobileOpen : internalMobileOpen;
+  const setMobileOpen = (open: boolean) => {
+    if (onMobileOpenChange) {
+      onMobileOpenChange(open);
+    } else {
+      setInternalMobileOpen(open);
+    }
+  };
 
   const sections: NavSection[] = [
     {
@@ -256,9 +268,9 @@ export function AdminSidebar({
                         href={item.href}
                         onClick={() => setMobileOpen(false)}
                         aria-current={active ? "page" : undefined}
-                        className={`flex min-h-11 items-center justify-between rounded-xl px-3 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8] ${
+                        className={`flex min-h-11 items-center justify-between rounded-xl px-3 text-xs font-semibold transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8] ${
                           active
-                            ? "bg-[#0066FF]/10 text-[#0066FF] border border-[#0066FF]/25 dark:bg-[#12213F] dark:text-[#F1F5FB] dark:border-[#60A5FA]"
+                            ? "bg-blue-50 text-[#0066FF] font-bold border-l-4 border-l-[#0066FF] rounded-r-xl rounded-l-none pl-3 dark:bg-[#12213F] dark:text-[#60A5FA] dark:border-l-[#38BDF8]"
                             : "border border-transparent text-[#5A6E85] dark:text-[#94A7C4] hover:bg-slate-100 dark:hover:bg-[#12213F] hover:text-[#041E42] dark:hover:text-[#F1F5FB]"
                         }`}
                       >
@@ -312,67 +324,27 @@ export function AdminSidebar({
 
   return (
     <>
-      {/* Mobile Top Header with Radix Dialog Drawer */}
-      <header className="lg:hidden sticky top-0 z-40 flex min-h-[64px] items-center justify-between border-b border-slate-200 dark:border-[#1E3358] bg-white/95 dark:bg-[#0B1730]/95 px-5 backdrop-blur-md">
-        <div className="flex items-center gap-3">
-          <DialogPrimitive.Root open={mobileOpen} onOpenChange={setMobileOpen}>
-            <DialogPrimitive.Trigger asChild>
-              <button
-                type="button"
-                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-white dark:bg-[#12213F] text-[#041E42] dark:text-[#F1F5FB] hover:bg-slate-100 dark:hover:bg-[#192D54] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
-              >
-                <HamburgerMenuIcon className="h-5 w-5" aria-hidden="true" />
-                <span className="sr-only">Buka Menu Navigasi Admin</span>
-              </button>
-            </DialogPrimitive.Trigger>
-
-            <DialogPrimitive.Portal>
-              <DialogPrimitive.Overlay className="fixed inset-0 z-50 bg-[#041E42]/60 backdrop-blur-xs animate-in fade-in-0 dark:bg-black/75" />
-              <DialogPrimitive.Content
-                className="fixed inset-y-0 left-0 z-50 w-72 max-w-[85vw] border-r border-slate-200 bg-white shadow-2xl animate-in slide-in-from-left duration-200 dark:border-[#1E3358] dark:bg-[#0B1730]"
-              >
-                <div className="sr-only">
-                  <DialogPrimitive.Title>Menu Navigasi Admin NAIKON</DialogPrimitive.Title>
-                  <DialogPrimitive.Description>
-                    Pilihan menu ruang kerja CMS dan konfigurasi sistem.
-                  </DialogPrimitive.Description>
-                </div>
-                <div className="absolute right-3 top-4 z-10">
-                  <DialogPrimitive.Close className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-slate-50 text-[#5A6E85] hover:bg-slate-100 dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#94A7C4] dark:hover:bg-[#192D54]">
-                    <Cross1Icon className="h-4 w-4" />
-                    <span className="sr-only">Tutup Navigasi</span>
-                  </DialogPrimitive.Close>
-                </div>
-                {navContent}
-              </DialogPrimitive.Content>
-            </DialogPrimitive.Portal>
-          </DialogPrimitive.Root>
-
-          <Link href="/admin" className="flex items-center">
-            <Image
-              src="/logo-navbar.png"
-              alt="Logo NAIKON"
-              width={140}
-              height={32}
-              priority
-              className="h-[24px] w-auto object-contain dark:brightness-150"
-            />
-          </Link>
-        </div>
-
-        <div className="flex items-center gap-2">
-          {unreadMessagesCount > 0 && (
-            <Link
-              href="/admin/pesan"
-              className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-amber-300 dark:border-[#FBBF24]/60 bg-amber-50 dark:bg-[#12213F] px-2.5 text-xs font-bold text-amber-700 dark:text-[#FBBF24]"
-            >
-              <EnvelopeClosedIcon className="h-3.5 w-3.5" />
-              <span>{unreadMessagesCount}</span>
-            </Link>
-          )}
-          <AdminThemeToggle showLabel={false} />
-        </div>
-      </header>
+      {/* Mobile Drawer via Radix Dialog */}
+      <DialogPrimitive.Root open={isMobileOpen} onOpenChange={setMobileOpen}>
+        <DialogPrimitive.Portal>
+          <DialogPrimitive.Overlay className="fixed inset-0 z-50 bg-[#041E42]/60 backdrop-blur-xs animate-in fade-in-0 dark:bg-black/75" />
+          <DialogPrimitive.Content className="fixed inset-y-0 left-0 z-50 w-72 max-w-[85vw] border-r border-slate-200 bg-white shadow-2xl animate-in slide-in-from-left duration-200 dark:border-[#1E3358] dark:bg-[#0B1730]">
+            <div className="sr-only">
+              <DialogPrimitive.Title>Menu Navigasi Admin NAIKON</DialogPrimitive.Title>
+              <DialogPrimitive.Description>
+                Pilihan menu ruang kerja CMS dan konfigurasi sistem.
+              </DialogPrimitive.Description>
+            </div>
+            <div className="absolute right-3 top-4 z-10">
+              <DialogPrimitive.Close className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-slate-50 text-[#5A6E85] hover:bg-slate-100 dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#94A7C4] dark:hover:bg-[#192D54]">
+                <Cross1Icon className="h-4 w-4" />
+                <span className="sr-only">Tutup Navigasi</span>
+              </DialogPrimitive.Close>
+            </div>
+            {navContent}
+          </DialogPrimitive.Content>
+        </DialogPrimitive.Portal>
+      </DialogPrimitive.Root>
 
       {/* Desktop Fixed Sidebar */}
       <aside

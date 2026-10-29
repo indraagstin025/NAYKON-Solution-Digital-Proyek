@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useSyncExternalStore } from "react";
+import React, { useState, useSyncExternalStore } from "react";
 import { AdminSidebar, type AdminSidebarProps } from "./AdminSidebar";
+import { AdminHeader } from "./AdminHeader";
 import { TooltipProvider } from "@/components/admin/ui/RadixTooltip";
 
 const THEME_KEY = "nk-theme-preference";
@@ -41,6 +42,7 @@ export function AdminShell({
   canViewAudit,
 }: AdminShellProps) {
   const isDark = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
     <TooltipProvider delayDuration={150}>
@@ -69,14 +71,25 @@ export function AdminShell({
           canViewContent={canViewContent}
           canManageUsers={canManageUsers}
           canViewAudit={canViewAudit}
+          mobileOpen={mobileOpen}
+          onMobileOpenChange={setMobileOpen}
         />
 
-        <main
-          id="workspace-main"
-          className="flex-1 min-w-0 px-5 sm:px-8 lg:px-10 py-6 sm:py-8 lg:py-10 max-w-[1360px] mx-auto w-full"
-        >
-          {children}
-        </main>
+        <div className="flex-1 min-w-0 flex flex-col">
+          <AdminHeader
+            userName={userName}
+            userRole={userRole}
+            unreadMessagesCount={unreadMessagesCount}
+            onOpenMobileMenu={() => setMobileOpen(true)}
+          />
+
+          <main
+            id="workspace-main"
+            className="flex-1 min-w-0 px-4 sm:px-6 lg:px-8 py-6 sm:py-8 max-w-[1440px] w-full mx-auto"
+          >
+            {children}
+          </main>
+        </div>
       </div>
     </TooltipProvider>
   );
