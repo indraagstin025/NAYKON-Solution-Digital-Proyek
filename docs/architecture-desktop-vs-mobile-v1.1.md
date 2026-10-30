@@ -1,7 +1,7 @@
 # Panduan & Arsitektur Peran: Desktop Web vs Aplikasi Mobile
 **Next Karya Digital Solutions**  
 *Cetak Biru Pembagian Fitur Antara Pusat Komando Desktop dan Pendamping Mobile*  
-*Versi: 1.1-2 Kanonik (Action-First Companion & Emergency Toolkit)*  
+*Versi: 1.1 Kanonik (Action-First Companion & Emergency Toolkit)*  
 *Tanggal: 31 Oktober 2026*
 
 > [!IMPORTANT]
@@ -151,8 +151,8 @@ Dengan menerapkan arsitektur pemisahan ini:
 
 ## 7. Riwayat Pembaruan Dokumen (*Changelog*)
 
-### Versi 1.1-2 Kanonik (31 Oktober 2026)
+### Versi 1.1 Kanonik (31 Oktober 2026)
 * Menyelaraskan status pemutusan sesi darurat HP hilang (`REVOKE_SESSION`) menjadi cakupan resmi Fase 1 (MVP) berbasis `tokenVersion` dan cache Redis.
 * Memutakhirkan rujukan arsitektur backend ke layanan Express.js (TypeScript) dengan Prisma ORM & Raw SQL, database PostgreSQL, dan partisi `site_id: "nextkarya-main"`.
-* Menyatakan berkas ini sebagai dokumen arsitektur komparatif kanonik (`architecture-desktop-vs-mobile-v1.1-2.md`).
+* Menyatakan berkas ini sebagai dokumen arsitektur komparatif kanonik (`architecture-desktop-vs-mobile-v1.1.md`).
 

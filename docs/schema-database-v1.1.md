@@ -1,7 +1,7 @@
 # Spesifikasi Skema Basis Data PostgreSQL & Prisma (Single Source of Truth)
 **Next Karya Digital Solutions**  
 *Cetak Biru Struktur 20 Tabel Relasional, Indeks, Konkurensi, Prisma ORM & Raw SQL*  
-*Versi: 1.1-3 Kanonik (Struktur Tabel Relasional PostgreSQL & Prisma ORM)*  
+*Versi: 1.1 Kanonik (Struktur Tabel Relasional PostgreSQL & Prisma ORM)*  
 *Tanggal Berlaku: 31 Oktober 2026*
 
 > [!IMPORTANT]
@@ -25,7 +25,7 @@ Dokumen ini merupakan satu-satunya sumber kebenaran (*single source of truth*) u
 
 ### 1.3 Standar Waktu & Pemisahan Tanggal
 * **Stempel Waktu Transaksi:** Seluruh stempel waktu transaksi (`occurredAt`, `createdAt`, `updatedAt`, `publishedAt`) disimpan dalam format UTC menggunakan tipe PostgreSQL `TIMESTAMPTZ(3)`.
-* **Kolom Tanggal Murni (DATE):** Kolom penanggalan murni kalender tanpa jam (`nextFollowUpDate` pada `leads`, serta `startDate`, `targetEndDate`, dan `warrantyExpiryDate` pada `project_schedules`) disimpan menggunakan tipe data `DATE`.
+* **Kolom Tanggal Murni (DATE):** Kolom penanggalan murni kalender tanpa jam (`nextFollowUpDate` dan `warrantyExpiryDate` pada `leads`, serta `startDate` dan `endDate` pada `project_schedules`) disimpan menggunakan tipe data `DATE`.
 * Lapisan antarmuka pengguna (Next.js Desktop Web dan Flutter Mobile) bertugas mengonversi waktu UTC menjadi Waktu Indonesia Barat (WIB / UTC+7) saat disajikan kepada staf.
 
 ### 1.4 Satu Peran Tunggal yang Setara (*Single Role: STAFF*)
@@ -1388,20 +1388,20 @@ WHERE "id" IN (
 
 ## 8. Riwayat Perubahan Skema (Changelog)
 
-### Versi 1.1-3 Kanonik (31 Oktober 2026)
-* Penetapan status berkas sebagai Skema Basis Data Kanonik (`schema-database-v1.1-3.md`) yang menjadi acuan tunggal struktur 20 tabel sistem.
+### Versi 1.1 Kanonik (31 Oktober 2026)
+* Penetapan status berkas sebagai Skema Basis Data Kanonik (`schema-database-v1.1.md`) yang menjadi acuan tunggal struktur 20 tabel sistem.
 * Menetapkan Prisma ORM sebagai ORM utama backend Express.js (TypeScript), dengan pendekatan hibrida Raw SQL (`prisma.$queryRaw` / `prisma.$executeRaw`) untuk kalkulasi analitik dan maintenance.
 * Memperbaiki daftar 20 tabel entitas relasional sebenarnya di sistem:
   - Identitas & Multi-Tenant: `sites`, `users`.
-  - CMS Konten: `categories`, `posts`, `services`, `faqs`, `testimonials`, `pages`, `content_snapshots`.
+  - CMS Konten: `categories`, `posts`, `portfolios`, `services`, `faqs`, `testimonials`, `pages`, `content_snapshots`.
   - SEO & Redirects: `redirects`.
   - Media: `media`.
   - CRM Prospek & Proyek: `leads`, `interaction_logs`, `activity_logs`, `project_schedules`.
   - Analitik Ringan: `analytics_events`, `analytics_daily`.
   - Keamanan & Tanggap Darurat: `rate_limits`, `emergency_audit_logs`.
-* Menegaskan pemisahan tipe waktu: `TIMESTAMPTZ(3)` untuk stempel waktu transaksi UTC, dan `DATE` untuk tanggal kalender (`nextFollowUpDate` dan `warrantyExpiryDate`).
+* Menegaskan pemisahan tipe waktu: `TIMESTAMPTZ(3)` untuk stempel waktu transaksi UTC, dan `DATE` untuk tanggal kalender (`nextFollowUpDate` dan `warrantyExpiryDate` pada `leads`, serta `startDate` dan `endDate` pada `project_schedules`).
 * Menegaskan bahwa 17 dari 20 tabel memuat kolom `site_id` (mengecualikan `sites`, `users`, dan `rate_limits`).
-* Menyelaraskan seluruh tautan dan nilai enum dengan kontrak resmi [`docs/api-contracts-v1.0-6.md`](./api-contracts-v1.0-6.md) dan [`docs/system-architecture-v1.0.md`](./system-architecture-v1.0.md).
+* Menyelaraskan seluruh tautan dan nilai enum dengan kontrak resmi [`docs/api-contracts-v1.0.md`](./api-contracts-v1.0.md) dan [`docs/system-architecture-v1.0.md`](./system-architecture-v1.0.md).
 
 ### Versi 1.1 (30 Oktober 2026)
 * Penyusunan skema database PostgreSQL dan model Prisma awal sebagai fondasi struktur data.

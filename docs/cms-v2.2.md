@@ -1,7 +1,7 @@
 # Spesifikasi Sistem CMS (Headless & Multi-Tenant Ready)
 **Next Karya Digital Solutions**  
 *Dokumen Arsitektur & Perencanaan Fitur Sistem Manajemen Konten*  
-*Dokumen Versi: v2.2-2 Kanonik (Final)*  
+*Dokumen Versi: v2.2 Kanonik (Final)*  
 *Tanggal Berlaku: 31 Oktober 2026*
 
 > **Batas Lingkup Fase 1 (Internal vs Klien):**  
@@ -171,7 +171,7 @@ Karena pada tahap awal (MVP) diterapkan sistem **1 Role Tunggal** di mana semua 
       "action": "update"
     }
     ```
-  - **Catatan Penyelarasan Kontrak:** Nilai `"action": "update"` dikunci baku dan selaras 100% dengan kontrak REST API kanonik terbaru ([`./api-contracts-v1.0-6.md`](./api-contracts-v1.0-6.md) Bab 5.6).
+  - **Catatan Penyelarasan Kontrak:** Nilai `"action": "update"` dikunci baku dan selaras 100% dengan kontrak REST API kanonik terbaru ([`./api-contracts-v1.0.md`](./api-contracts-v1.0.md) Bab 5.6).
   - **Kriteria Selesai & Toleransi Kegagalan (Failure Handling):**
     - Cache di website Next.js wajib terhapus dalam waktu maksimal **3 detik** setelah webhook diterima.
     - Jika server Next.js gagal merespons atau timeout, backend CMS secara otomatis melakukan **retry sebanyak 3 kali dengan jeda eksponensial (*exponential backoff: 2s, 4s, 8s*)** dan mencatat status kegagalan di log sistem.

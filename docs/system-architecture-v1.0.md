@@ -17,12 +17,12 @@ Seluruh pengembangan rekayasa perangkat lunak, pemodelan basis data, kontrak ant
 | No | Nama Berkas Kanonik | Status Versi | Cakupan Domain Arsitektur | Target Pengguna & Perangkat |
 | :---: | :--- | :---: | :--- | :--- |
 | **1** | [`system-architecture-v1.0.md`](./system-architecture-v1.0.md) | **v1.0 Final** | Cetak Biru Arsitektur 5 Pilar (Express.js, Prisma, Postgres, Redis, Next.js, Flutter), Topologi, & SLA. | Seluruh Tim Rekayasa & Arsitek |
-| **2** | [`schema-database-v1.1-3.md`](./schema-database-v1.1-3.md) | **v1.1-3 Kanonik** | Struktur 20 Tabel PostgreSQL, Model Prisma, Raw SQL CTE Rollup, Indeks Konkurensi, & Maintenance. | Pengembang Backend & Database |
-| **3** | [`api-contracts-v1.0-6.md`](./api-contracts-v1.0-6.md) | **v1.0-6 Kanonik** | Kontrak REST API `/api/v1`, Format Respons Tunggal, Skema Validasi Zod TypeScript, & Integrasi. | Seluruh Tim Pengembang (Backend, Web & Mobile) |
-| **4** | [`cms-v2.2-2.md`](./cms-v2.2-2.md) | **v2.2-2 Kanonik** | Manajemen Konten Headless, Snapshot FIFO 5 Versi, Webhook Cache (`action: "update"`), & Takedown. | Tim Internal (Desktop & Mobile) |
+| **2** | [`schema-database-v1.1.md`](./schema-database-v1.1.md) | **v1.1 Kanonik** | Struktur 20 Tabel PostgreSQL, Model Prisma, Raw SQL CTE Rollup, Indeks Konkurensi, & Maintenance. | Pengembang Backend & Database |
+| **3** | [`api-contracts-v1.0.md`](./api-contracts-v1.0.md) | **v1.0 Kanonik** | Kontrak REST API `/api/v1`, Format Respons Tunggal, Skema Validasi Zod TypeScript, & Integrasi. | Seluruh Tim Pengembang (Backend, Web & Mobile) |
+| **4** | [`cms-v2.2.md`](./cms-v2.2.md) | **v2.2 Kanonik** | Manajemen Konten Headless, Snapshot FIFO 5 Versi, Webhook Cache (`action: "update"`), & Takedown. | Tim Internal (Desktop & Mobile) |
 | **5** | [`analytics-v2.2.md`](./analytics-v2.2.md) | **v2.2 Kanonik** | Mesin Pengukur Trafik Ringan (< 2 KB), Proteksi Bot, Konversi WA, Ingesti Redis, & Rollup Jam. | Tim Internal (Desktop & Mobile) |
 | **6** | [`crm-v2.2.md`](./crm-v2.2.md) | **v2.2 Kanonik** | Kotak Masuk Prospek (*Leads*), Agenda Follow-Up Harian, Pipeline 5 Tahap, & Timeline Proyek. | Tim Internal (Desktop & Mobile) |
-| **7** | [`architecture-desktop-vs-mobile-v1.1-2.md`](./architecture-desktop-vs-mobile-v1.1-2.md) | **v1.1-2 Kanonik** | Pembagian Peran Desktop Web vs Mobile Flutter (*Action Companion*), Emergency Toolkit Fase 1. | Seluruh Tim Pengembang (Web & Mobile Flutter) |
+| **7** | [`architecture-desktop-vs-mobile-v1.1.md`](./architecture-desktop-vs-mobile-v1.1.md) | **v1.1 Kanonik** | Pembagian Peran Desktop Web vs Mobile Flutter (*Action Companion*), Emergency Toolkit Fase 1. | Seluruh Tim Pengembang (Web & Mobile Flutter) |
 
 ---
 
@@ -98,7 +98,7 @@ Backend dibangun menggunakan runtime Node.js dengan framework **Express.js** ber
   - Memeriksa keabsahan `tokenVersion` secara mikrodetik ke Redis pada setiap request terproteksi.
   - Menolak akses dengan status HTTP `403 Forbidden` jika `tokenVersion` pada klaim JWT lebih rendah dari nilai aktif di Redis/DB (fitur pemutusan darurat sesi HP hilang `REVOKE_SESSION`).
 * **Validasi Masukan Baku dengan Zod:**
-  - Seluruh payload request divalidasi ketat menggunakan skema Zod di lapisan middleware Express.js (selaras penuh dengan kontrak kanonik [`api-contracts-v1.0-6.md`](./api-contracts-v1.0-6.md)).
+  - Seluruh payload request divalidasi ketat menggunakan skema Zod di lapisan middleware Express.js (selaras penuh dengan kontrak kanonik [`api-contracts-v1.0.md`](./api-contracts-v1.0.md)).
   - Sanitasi string terhadap potensi XSS, pemangkasan spasi liar, dan penolakan payload tak dikenal.
 * **Proteksi Bot & Anti-Spam Publik:**
   - Memeriksa field honeypot tersembunyi `website_url` pada endpoint kontak publik. Request otomatis diabaikan secara senyap (*silent reject*) jika field terisi string.
@@ -166,7 +166,7 @@ PostgreSQL bertindak sebagai repositori data permanen sistem dengan konfigurasi 
   3. `rate_limits`: Merupakan tabel operasional teknis berbasis kombinasi IP dan endpoint.
 * **Standar Waktu Murni UTC & Pemisahan Tanggal:**
   - Kolom stempel waktu operasional (`createdAt`, `updatedAt`, `publishedAt`, `occurredAt`) disimpan dalam tipe `TIMESTAMPTZ(3)` berbasis UTC murni (`Z`).
-  - Kolom penanggalan murni kalender tanpa jam (`nextFollowUpDate` pada `leads`, serta `startDate`, `targetEndDate`, dan `warrantyExpiryDate` pada `project_schedules`) disimpan menggunakan tipe data `DATE`.
+  - Kolom penanggalan murni kalender tanpa jam (`nextFollowUpDate` dan `warrantyExpiryDate` pada `leads`, serta `startDate` dan `endDate` pada `project_schedules`) disimpan menggunakan tipe data `DATE`.
   - Seluruh penyesuaian zona waktu Indonesia Barat (WIB / UTC+7) ditangani di lapisan antarmuka pengguna (Next.js dan Flutter).
 * **Indeks Konkurensi & Performa Tinggi:**
   - CRM: Indeks komposit `[site_id, nextFollowUpDate, status, assignedToId]` untuk query agenda follow-up berkecepatan < 10ms.
@@ -240,7 +240,7 @@ Aplikasi mobile dibangun dengan framework Flutter (Dart) sebagai alat aksi cepat
 | **Tanggap Darurat (Revoke)** | • Logika endpoint revoke<br>• Naikkan tokenVersion | • Redis: INCR tokenVersion O(1)<br>• Postgres: Catat audit entitas USER | • Tampilan audit log darurat di dashboard desktop | • **Tombol aksi darurat putus sesi HP hilang (Fase 1 MVP)** |
 | **Katalog Konten (CMS)** | • Validasi Zod schema<br>• Optimistic Locking check<br>• Picu Webhook Revalidate | • Postgres: 7 tabel konten, FIFO 5 snapshot<br>• Redis: Cache daftar kueri publik | • Desktop: Studio editor, pratinjau konten<br>• Publik: ISR render & SEO | • Pemantauan status terbit<br>• 1-Tap Emergency Unpublish |
 | **Prospek & Timeline (CRM)** | • Validasi Zod prospek<br>• Anti-spam bot honeypot<br>• Hitung beban tugas staf | • Postgres: 4 tabel CRM (`leads`, `interaction_logs`, `activity_logs`, `project_schedules`) | • Desktop: Visual pipeline penjualan & Gantt Chart lebar | • **Agenda Follow-Up Hari Ini**<br>• **1-Klik Chat WhatsApp**<br>• Kartu tugas harian vertikal |
-| **Trafik & Metrik (Analitik)** | • Intake beacon pelacak<br>• Raw SQL Rollup harian<br>• Raw SQL purge data > 90 hari | • Redis: Buffer ingesti 30s/100 event<br>• Postgres: Raw events (TTL 90h) & Daily Rollup | • Desktop: Grafik tren multi-minggu & analisis saluran | • Sekilas 4 angka metrik hari ini (*Quick Pulse Check*) |
+| **Trafik & Metrik (Analitik)** | • Intake beacon pelacak<br>• Raw SQL Rollup harian<br>• Raw SQL purge data > 90 hari | • Redis: Buffer ingesti 30s/100 event<br>• Postgres: Raw events (TTL 90 hari) & Daily Rollup | • Desktop: Grafik tren multi-minggu & analisis saluran | • Sekilas 4 angka metrik hari ini (*Quick Pulse Check*) |
 | **Proteksi Spam & Rate Limit** | • Evaluasi honeypot website_url<br>• Penolakan bot otomatis | • Redis: Counter live sliding-window<br>• Postgres: Tabel rate_limits (cadangan/audit) | • Tampilan form publik aman | • Notifikasi internal & sakelar kunci form darurat |
 
 ---
@@ -298,7 +298,7 @@ Format respons gagal (*Error Response*):
 
 ## 6. Standar Kinerja, Toleransi & Service Level Agreement (SLA)
 
-Untuk menjamin kepastian performa teknis, batas SLA dipisahkan secara tegas antara latensi kueri database internal dan waktu respons endpoint HTTP penuh (selaras dengan target pada [`api-contracts-v1.0-6.md`](./api-contracts-v1.0-6.md)):
+Untuk menjamin kepastian performa teknis, batas SLA dipisahkan secara tegas antara latensi kueri database internal dan waktu respons endpoint HTTP penuh (selaras dengan target pada [`api-contracts-v1.0.md`](./api-contracts-v1.0.md)):
 
 1. **Latensi Operasi Data Internal (Database & Cache):**
    - Kueri baca ter-cache di Redis: **< 15 milidetik**.
@@ -308,7 +308,7 @@ Untuk menjamin kepastian performa teknis, batas SLA dipisahkan secara tegas anta
    - Endpoint kueri baca ter-cache (`GET /api/v1/posts`, `GET /api/v1/services`): **< 30 milidetik**.
    - Endpoint kueri baca database terproteksi internal: **< 80 milidetik**.
    - Endpoint penerimaan formulir prospek publik (`POST /api/v1/leads`): **< 100 milidetik** penuh (termasuk verifikasi honeypot, rate limit Redis, dan insert PostgreSQL via Prisma). Target endpoint < 100ms ini mengikat dan tidak boleh dikalahkan oleh angka latensi database write umum.
-   - Endpoint penerimaan beacon analitik (`POST /api/v1/analytics/collect`): **< 50 milidetik** (diterima ke antrean buffer Redis O(1)).
+   - Endpoint penerimaan beacon analitik (`POST /api/v1/analytics/event`): **< 50 milidetik** (diterima ke antrean buffer Redis O(1)).
 3. **Pembersihan Cache Website Publik Next.js:**
    - Webhook revalidasi cache wajib tuntas dalam waktu **< 3 detik** sejak tombol terbit/simpan ditekan di CMS.
 4. **Eksekusi Tindakan Darurat Mobile (*Emergency Toolkit*):**
@@ -322,7 +322,7 @@ Untuk menjamin kepastian performa teknis, batas SLA dipisahkan secara tegas anta
 
 ## 7. Roadmap Transisi Menuju Fase 2 (Kesiapan Multi-Tenant Klien)
 
-Arsitektur Fase 1 (MVP) sengaja mengunci akses hanya untuk internal Next Karya dengan `site_id: "nextkarya-main"`. Daftar pada kontrak kanonik [`api-contracts-v1.0-6.md`](./api-contracts-v1.0-6.md) Bab 7 bersifat otoritatif untuk fitur-fitur yang dialokasikan ke Fase 2:
+Arsitektur Fase 1 (MVP) sengaja mengunci akses hanya untuk internal Next Karya dengan `site_id: "nextkarya-main"`. Daftar pada kontrak kanonik [`api-contracts-v1.0.md`](./api-contracts-v1.0.md) Bab 7 bersifat otoritatif untuk fitur-fitur yang dialokasikan ke Fase 2:
 
 1. **Multi-Tenancy Penuh:**
    Penyediaan `site_id` baru untuk klien eksternal (contoh: `site_id: "klien-sekolah-01"`).

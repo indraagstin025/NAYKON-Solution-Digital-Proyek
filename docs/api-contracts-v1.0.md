@@ -1,7 +1,7 @@
 # Spesifikasi Kontrak REST API & Integrasi Klien (Web & Mobile Flutter)
 **Next Karya Digital Solutions**  
 *Cetak Biru Rute REST API Express.js, Skema Validasi Zod TypeScript, Format Respons Standar, dan Pengamanan Endpoint*  
-*Versi: 1.0-6 Kanonik (Express.js TypeScript Backend & Multiplatform Consumer)*  
+*Versi: 1.0 Kanonik (Express.js TypeScript Backend & Multiplatform Consumer)*  
 *Tanggal: 31 Oktober 2026*
 
 > [!IMPORTANT]
@@ -29,7 +29,7 @@ Tujuh prinsip di bawah ini merupakan ketetapan arsitektur yang dikunci untuk rut
   - Dilarang keras menuliskan `siteId` pada endpoint apa pun.
 
 ### 1.4 Keselarasan Nilai Enum Baku
-* Nilai enum dikunci identik 100% dengan skema basis data kanonik [`schema-database-v1.1-3.md`](./schema-database-v1.1-3.md) (Bab 2.5, Tabel 20, dan representasi tipe Go):
+* Nilai enum dikunci identik 100% dengan skema basis data kanonik [`schema-database-v1.1.md`](./schema-database-v1.1.md) (Bab 2.5, Tabel 20, dan model Prisma):
   - `ContentStatus`: `DRAFT`, `PUBLISHED`, `ARCHIVED`
   - `LeadStatus`: `BARU`, `DIHUBUNGI`, `PROPOSAL`, `DEAL`, `BATAL`
   - `ProjectStatus`: `PERSIAPAN`, `AKTIF`, `REVISI`, `SELESAI`
@@ -743,7 +743,7 @@ Ini adalah halaman kerja operasional pagi hari yang dibuka oleh ketiga anggota t
   "action": "update"
 }
 ```
-* **Catatan Penyelarasan Spesifikasi:** Nilai `"action": "update"` dikunci baku dan selaras 100% dengan dokumen spesifikasi CMS kanonik ([`docs/cms-v2.2-2.md`](./cms-v2.2-2.md) Pilar 5).
+* **Catatan Penyelarasan Spesifikasi:** Nilai `"action": "update"` dikunci baku dan selaras 100% dengan dokumen spesifikasi CMS kanonik ([`docs/cms-v2.2.md`](./cms-v2.2.md) Pilar 5).
 * **Kebijakan Percobaan Ulang (*Retry & Backoff*):**
   - Jika webhook mengembalikan status non-2xx atau waktu tunggu habis, sistem otomatis mencoba ulang maksimal 3 kali dengan jeda waktu eksponensial: 2 detik, 4 detik, dan 8 detik.
   - Target batas waktu pembersihan cache website publik: **< 3 detik**.
@@ -821,9 +821,9 @@ Jika selama masa pengerjaan Fase 1 terdapat permintaan untuk fitur-fitur di bawa
 
 ## 8. Riwayat Pembaruan (*Changelog*)
 
-### Versi 1.0-6 Kanonik (31 Oktober 2026)
+### Versi 1.0 Kanonik (31 Oktober 2026)
 * Menyelaraskan seluruh spesifikasi rute, validasi middleware Zod, dan model request body ke arsitektur backend Express.js (Node.js / TypeScript).
-* Menegaskan rujukan dokumen kanonik ke [`schema-database-v1.1-3.md`](./schema-database-v1.1-3.md), [`cms-v2.2-2.md`](./cms-v2.2-2.md), [`architecture-desktop-vs-mobile-v1.1-2.md`](./architecture-desktop-vs-mobile-v1.1-2.md), dan [`system-architecture-v1.0.md`](./system-architecture-v1.0.md).
+* Menegaskan rujukan dokumen kanonik ke [`schema-database-v1.1.md`](./schema-database-v1.1.md), [`cms-v2.2.md`](./cms-v2.2.md), [`architecture-desktop-vs-mobile-v1.1.md`](./architecture-desktop-vs-mobile-v1.1.md), dan [`system-architecture-v1.0.md`](./system-architecture-v1.0.md).
 * Mengonfirmasi sinkronisasi penuh enum `REVOKE_SESSION` dan muatan webhook `"action": "update"`.
 
 ### Versi 1.0 (30 Oktober 2026)
@@ -832,5 +832,5 @@ Jika selama masa pengerjaan Fase 1 terdapat permintaan untuk fitur-fitur di bawa
 * Menyediakan kontrak lengkap untuk 8 endpoint publik, 2 endpoint intake publik dengan proteksi berlapis, serta seluruh endpoint terproteksi internal (Auth, CMS, Media, CRM, Analitik, dan Emergency Toolkit).
 * Menstandarkan aturan `heartbeat` dan `durationSec` pada analitik untuk menjamin akurasi data agregasi.
 * Mengunci batas ukuran berkas media dan MIME types resmi.
-* Menegaskan keselarasan enum `REVOKE_SESSION` dengan `docs/schema-database-v1.1-3.md` Bab 2.5 dan Tabel 20, serta payload webhook `"action": "update"` dengan `docs/cms-v2.2-2.md` Pilar 5.
+* Menegaskan keselarasan enum `REVOKE_SESSION` dengan `docs/schema-database-v1.1.md` Bab 2.5 dan Tabel 20, serta payload webhook `"action": "update"` dengan `docs/cms-v2.2.md` Pilar 5.
 * Mengunci daftar fitur Fase 2 dan kriteria selesai kinerja per kelompok endpoint.
