@@ -12,7 +12,7 @@
 
 ## 1. Tujuh Keputusan Beku Arsitektur API (*Frozen Decisions*)
 
-Tujuh prinsip di bawah ini merupakan ketetapan arsitektur yang dikunci untuk rute `/api/v1`. Seluruh tim pengembang backend Next.js maupun frontend Web dan mobile Flutter wajib mengikutinya tanpa deviasi:
+Tujuh prinsip di bawah ini merupakan ketetapan arsitektur yang dikunci untuk rute `/api/v1`. Seluruh tim pengembang backend Golang maupun frontend Web Next.js dan mobile Flutter wajib mengikutinya tanpa deviasi:
 
 ### 1.1 Base URL & Kebijakan Versi Rute
 * Seluruh endpoint pada dokumen ini berada di bawah rute dasar: `/api/v1`.

@@ -53,7 +53,8 @@ Dokumen ini merupakan satu-satunya sumber kebenaran (*single source of truth*) u
 
 ### 1.9 Pemutusan Sesi Login HP (*Session Revocation*)
 * Kolom `tokenVersion` bertipe integer pada tabel `users` digunakan sebagai mekanisme pemutus sesi cepat di Fase 1 (MVP).
-* Jika salah satu ponsel staf hilang atau dicuri, menaikkan nilai `tokenVersion` pada database akan otomatis membatalkan seluruh token JWT yang beredar untuk staf tersebut pada request berikutnya, tanpa ketergantungan pada layanan Redis eksternal. Di Fase 2, Redis dapat ditambahkan untuk manajemen sesi real-time berbasis server.
+* Nilai `tokenVersion` aktif disimpan secara paralel pada cache Redis (`auth:token_ver:{userId}`) untuk verifikasi token JWT O(1) pada setiap request API ke backend Golang.
+* Jika salah satu ponsel staf hilang atau tertinggal, menaikkan nilai `tokenVersion` (via endpoint `POST /api/v1/users/:id/revoke-sessions`) akan memperbarui Redis dan database seketika, membatalkan seluruh token JWT yang beredar untuk staf tersebut pada request milidetik berikutnya.
 
 ### 1.10 Kebijakan Hapus Situs (*Cascading vs Restricting*)
 * Jika sebuah situs dihapus (misal situs klien di Fase 2 yang sudah selesai kontrak):

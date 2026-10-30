@@ -12,10 +12,11 @@
 
 ## 1. Daftar Dokumen Aktif (*Single Source of Truth*)
 
-Seluruh pengembangan fitur, pemodelan skema database, penulisan API, dan perancangan antarmuka mengacu secara tunggal pada 6 dokumen aktif di bawah ini:
+Seluruh pengembangan fitur, pemodelan skema database, penulisan API, dan perancangan antarmuka mengacu secara tunggal pada 7 dokumen aktif di bawah ini:
 
 | Nama Berkas | Versi | Cakupan Sistem | Target Pengguna & Perangkat |
 | :--- | :---: | :--- | :--- |
+| [system-architecture-v1.0.md](./system-architecture-v1.0.md) | **v1.0** | Cetak Biru Arsitektur Terintegrasi (Backend Golang, Postgres, Redis, Web Next.js, Mobile Flutter). | Seluruh Tim Rekayasa & Arsitek |
 | [schema-database-v1.1.md](./schema-database-v1.1.md) | **v1.1** | Struktur Tabel PostgreSQL, Model Prisma Lengkap, Relasi, Indeks Konkurensi, dan Seed Data. | Pengembang Backend & Database |
 | [api-contracts-v1.0.md](./api-contracts-v1.0.md) | **v1.0** | Cetak Biru Kontrak REST API /api/v1, Skema Zod, Format Respons Tunggal, dan Integrasi Mobile. | Seluruh Tim Pengembang (Backend, Web & Mobile) |
 | [cms-v2.2.md](./cms-v2.2.md) | **v2.2** | Manajemen Konten, Galeri Portofolio, Snapshot Riwayat, Pembersihan Cache Webhook, dan Takedown Darurat. | Tim Internal (Desktop & Mobile) |
