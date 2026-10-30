@@ -120,7 +120,7 @@ Alur kerja prospek dibuat sangat jelas dan tanpa tahapan birokrasi yang berbelit
   - Contoh format: "30 Okt: Diskusi via WhatsApp lancar, klien minta revisi fitur pembayaran online, proposal final dikirim besok siang".
 * **Aksi Cepat 1-Klik (*One-Click Actions*):**
   - **Tombol "Chat di WhatsApp":** Langsung membuka WhatsApp Web atau aplikasi WhatsApp di HP menuju nomor klien dengan template sapaan pembuka otomatis dari Next Karya Digital Solutions.
-  - **Tombol "Kirim Email":** Membuka aplikasi email dengan subjek resmi konsultasi (`contact@nextkarya.web.id`).
+  - **Tombol "Kirim Email":** Membuka aplikasi email dengan subjek resmi konsultasi (`nextkarya@gmail.com`).
 
 ---
 
@@ -222,7 +222,7 @@ Dirancang khusus agar 3 orang anggota tim dapat bekerja bersamaan di CRM secara 
 ## 5. Kesimpulan
 
 Dengan spesifikasi ini, **Sistem CRM Next Karya Digital Solutions**:
-1. Menggunakan identitas resmi brand `nextkarya.web.id` dan alamat kontak `contact@nextkarya.web.id`.
+1. Menggunakan identitas resmi brand `nextkarya.web.id` dan alamat kontak `nextkarya@gmail.com`.
 2. Menjamin kolaborasi 3 orang anggota tim berjalan aman, sinkron, dan bebas bentrok data (*concurrency-safe* via Optimistic Locking).
 3. Menghadirkan halaman kerja harian **"Agenda Follow-Up Hari Ini"** di MVP, sehingga tidak ada prospek yang terlewat meskipun notifikasi push HP dialokasikan untuk Fase 2.
 4. Terlindungi dari serangan bot melalui Honeypot, validasi Origin bertingkat, dan Rate Limiting.

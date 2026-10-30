@@ -3,7 +3,7 @@
 Platform digital dan sistem terpadu **Next Karya Digital Solutions** (`nextkarya.web.id`): Mitra rekayasa perangkat lunak modern, pembuatan website performa tinggi, sistem CMS, dan aplikasi mobile untuk bisnis dan UMKM.
 
 Domain Resmi: [https://nextkarya.web.id](https://nextkarya.web.id)  
-Kontak Resmi: [contact@nextkarya.web.id](mailto:contact@nextkarya.web.id)
+Kontak Resmi: [nextkarya@gmail.com](mailto:nextkarya@gmail.com)
 
 ---
 

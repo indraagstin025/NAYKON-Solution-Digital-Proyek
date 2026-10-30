@@ -34,7 +34,7 @@ Seluruh pengembangan fitur, pemodelan skema database, penulisan API, dan peranca
 Pembaruan dari versi 2.0 ke 2.2 dilakukan untuk menyelaraskan kebutuhan operasional riil agensi, memperjelas batas implementasi Fase 1, serta menambal celah keamanan dan inkonsistensi antar-dokumen:
 
 ### 2.1 Standardisasi Identitas Brand & Domain Resmi
-* Seluruh referensi domain lama `naykon.id` dan kontak lama diperbarui seragam menjadi `Next Karya Digital Solutions`, domain resmi `nextkarya.web.id`, dan kontak `contact@nextkarya.web.id`.
+* Seluruh referensi domain lama `naykon.id` dan kontak lama diperbarui seragam menjadi `Next Karya Digital Solutions`, domain resmi `nextkarya.web.id`, dan kontak resmi `nextkarya@gmail.com`.
 
 ### 2.2 Penegasan Batas Lingkup: Internal vs Klien
 * **Masalah pada v2.0:** Terdapat ambiguitas di mana dokumen menyebutkan sistem hanya untuk internal, tetapi di modul analitik sudah mencantumkan login khusus akun klien di Fase 1.
