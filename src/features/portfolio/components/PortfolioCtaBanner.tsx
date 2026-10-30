@@ -6,12 +6,12 @@ import { ScrollReveal } from "@/components/ui/ScrollReveal";
 export function PortfolioCtaBanner() {
   return (
     <ScrollReveal delayMs={120}>
-      <div className="mt-12 rounded-[24px] bg-white dark:bg-slate-900 border border-[#E6F0FD] dark:border-slate-800 p-8 sm:p-10 shadow-[0_14px_38px_-10px_rgba(10,35,80,0.06)] flex flex-col md:flex-row items-center justify-between gap-6 transition-all duration-300 hover:border-[#0066FF] dark:hover:border-blue-500 hover:shadow-[0_22px_48px_-12px_rgba(0,102,255,0.14)]">
+      <div className="mt-12 rounded-[24px] bg-gradient-to-r from-[#002857] via-[#013565] to-[#01427C] border border-[#014F90] p-8 sm:p-10 shadow-[0_18px_42px_-10px_rgba(0,40,87,0.35)] flex flex-col md:flex-row items-center justify-between gap-6">
         <div>
-          <h3 className="text-[20px] sm:text-[22px] font-extrabold text-[#041E42] dark:text-white">
+          <h3 className="text-[20px] sm:text-[22px] font-extrabold text-white">
             Ingin mendiskusikan rancangan proyek serupa untuk bisnis Anda?
           </h3>
-          <p className="mt-1.5 text-[13.5px] sm:text-[14px] text-[#4A5D78] dark:text-slate-300">
+          <p className="mt-1.5 text-[13.5px] sm:text-[14px] text-slate-200">
             Tim kami siap membantu memetakan kebutuhan fitur dan estimasi pengerjaan
             secara transparan.
           </p>

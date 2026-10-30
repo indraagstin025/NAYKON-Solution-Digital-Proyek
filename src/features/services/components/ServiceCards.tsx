@@ -50,7 +50,7 @@ export function ServiceCards({ services }: { services?: PublicServiceDTO[] | nul
     <div className="space-y-6 lg:space-y-7">
       <div className="grid gap-6 lg:gap-7 lg:grid-cols-12 items-stretch">
         <ScrollReveal className="lg:col-span-7 h-full">
-          <article className="h-full flex flex-col justify-between rounded-[30px] bg-white dark:bg-slate-900 border-2 border-[#3B82F6] dark:border-blue-500/70 p-7 sm:p-9 shadow-[0_16px_40px_-10px_rgba(0,102,255,0.08)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_24px_50px_-10px_rgba(0,102,255,0.22)] hover:border-[#0066FF] group">
+          <article className="h-full flex flex-col justify-between rounded-[30px] bg-white dark:bg-slate-900 border-2 border-[#0066FF] dark:border-blue-500/70 p-7 sm:p-9 shadow-[0_16px_40px_-10px_rgba(0,102,255,0.08)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_24px_50px_-10px_rgba(0,102,255,0.22)] hover:border-[#0066FF] group">
             <div className="grid gap-6 md:grid-cols-[1.1fr_0.9fr] items-center">
               <div>
                 <div className="flex items-center gap-3 mb-5">
@@ -186,7 +186,7 @@ export function ServiceCards({ services }: { services?: PublicServiceDTO[] | nul
         </ScrollReveal>
 
         <ScrollReveal delayMs={90} className="lg:col-span-5 h-full">
-          <article className="h-full relative overflow-hidden flex flex-col justify-between rounded-[30px] bg-white dark:bg-slate-900 border border-[#E6F0FD] dark:border-slate-800 p-7 sm:p-9 shadow-[0_14px_38px_-10px_rgba(10,35,80,0.07)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_22px_45px_-10px_rgba(0,102,255,0.15)] hover:border-[#0066FF] group">
+          <article className="h-full relative overflow-hidden flex flex-col justify-between rounded-[30px] bg-white dark:bg-slate-900 border border-[#E4F2FD] dark:border-slate-800 p-7 sm:p-9 shadow-[0_14px_38px_-10px_rgba(10,35,80,0.07)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_22px_45px_-10px_rgba(0,102,255,0.15)] hover:border-[#0066FF] group">
             <div>
               <div className="flex items-center justify-between mb-5">
                 <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#0066FF] text-white shadow-sm transition-transform duration-300 group-hover:scale-105 group-hover:rotate-45">
@@ -231,7 +231,7 @@ export function ServiceCards({ services }: { services?: PublicServiceDTO[] | nul
 
       <div className="grid gap-6 lg:gap-7 lg:grid-cols-12 items-stretch">
         <ScrollReveal delayMs={60} className="lg:col-span-5 h-full">
-          <article className="h-full relative overflow-hidden flex flex-col justify-between rounded-[30px] bg-white dark:bg-slate-900 border border-[#E6F0FD] dark:border-slate-800 p-7 sm:p-9 shadow-[0_14px_38px_-10px_rgba(10,35,80,0.07)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_22px_45px_-10px_rgba(0,102,255,0.15)] hover:border-[#0066FF] group">
+          <article className="h-full relative overflow-hidden flex flex-col justify-between rounded-[30px] bg-white dark:bg-slate-900 border border-[#E4F2FD] dark:border-slate-800 p-7 sm:p-9 shadow-[0_14px_38px_-10px_rgba(10,35,80,0.07)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_22px_45px_-10px_rgba(0,102,255,0.15)] hover:border-[#0066FF] group">
             <div>
               <div className="flex items-center justify-between mb-5">
                 <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#0066FF] text-white shadow-sm transition-transform duration-300 group-hover:scale-105">
@@ -290,14 +290,14 @@ export function ServiceCards({ services }: { services?: PublicServiceDTO[] | nul
         </ScrollReveal>
 
         <ScrollReveal delayMs={150} className="lg:col-span-7 h-full">
-          <article className="h-full relative overflow-hidden flex flex-col justify-between rounded-[30px] bg-gradient-to-br from-[#1258DB] via-[#104CC4] to-[#0A389C] p-7 sm:p-9 shadow-[0_18px_48px_-10px_rgba(16,76,196,0.38)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_26px_60px_-10px_rgba(16,76,196,0.52)] group">
+          <article className="h-full relative overflow-hidden flex flex-col justify-between rounded-[30px] bg-gradient-to-br from-[#0066FF] via-[#0052CC] to-[#002857] p-7 sm:p-9 shadow-[0_18px_48px_-10px_rgba(0,102,255,0.38)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_26px_60px_-10px_rgba(0,102,255,0.52)] group">
             <div className="grid gap-6 md:grid-cols-[1.1fr_0.9fr] items-center">
               <div>
                 <div className="flex items-center gap-3 mb-5">
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#08296B] text-white border border-[#164294] shadow-sm transition-transform duration-300 group-hover:scale-105">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#002857] text-white border border-[#013565] shadow-sm transition-transform duration-300 group-hover:scale-105">
                     <MobileIcon className="h-5 w-5" />
                   </div>
-                  <span className="rounded-full bg-[#08296B] border border-[#164294] px-3.5 py-1 text-[11.5px] font-semibold text-white">
+                  <span className="rounded-full bg-[#002857] border border-[#013565] px-3.5 py-1 text-[11.5px] font-semibold text-white">
                     Mobile App
                   </span>
                 </div>
@@ -313,7 +313,7 @@ export function ServiceCards({ services }: { services?: PublicServiceDTO[] | nul
                   {mobile.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="rounded-full bg-[#08296B] border border-[#164294] px-3.5 py-1.5 text-[11.5px] font-semibold text-white transition-colors group-hover:bg-[#0D388E]"
+                      className="rounded-full bg-[#002857] border border-[#013565] px-3.5 py-1.5 text-[11.5px] font-semibold text-white transition-colors group-hover:bg-[#003875]"
                     >
                       {tag}
                     </span>
@@ -411,7 +411,7 @@ export function ServiceCards({ services }: { services?: PublicServiceDTO[] | nul
         <div className="grid gap-6 lg:gap-7 md:grid-cols-2">
           {extraServices.map((svc) => (
             <ScrollReveal key={svc.slug} className="h-full">
-              <article className="h-full flex flex-col justify-between rounded-[30px] bg-white dark:bg-slate-900 border border-[#E6F0FD] dark:border-slate-800 p-7 sm:p-9 shadow-[0_14px_38px_-10px_rgba(10,35,80,0.07)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#0066FF] group">
+              <article className="h-full flex flex-col justify-between rounded-[30px] bg-white dark:bg-slate-900 border border-[#E4F2FD] dark:border-slate-800 p-7 sm:p-9 shadow-[0_14px_38px_-10px_rgba(10,35,80,0.07)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#0066FF] group">
                 <div>
                   <div className="flex items-center justify-between mb-5">
                     <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#0066FF] text-white shadow-sm">

@@ -33,32 +33,8 @@ export function PortfolioSection({
   return (
     <section
       id="portofolio"
-      className="relative isolate overflow-hidden bg-gradient-to-b from-[#F4F9FF] via-[#F9FCFF] to-[#F3F8FF] dark:from-[#030711] dark:via-[#061231] dark:to-[#091a45] py-16 sm:py-20 lg:py-24 border-t border-slate-200/50 dark:border-blue-900/30"
+      className="relative isolate overflow-hidden bg-[#F7FAFC] dark:bg-[#030711] py-16 sm:py-20 lg:py-24 border-t border-[#E4F2FD] dark:border-blue-900/30"
     >
-      <svg
-        viewBox="0 0 260 260"
-        fill="none"
-        aria-hidden="true"
-        className="pointer-events-none absolute top-0 left-0 h-[180px] w-[180px] sm:h-[230px] sm:w-[230px] -z-10"
-      >
-        <circle
-          cx="15"
-          cy="15"
-          r="135"
-          fill="#DCEEFF"
-          fillOpacity="0.7"
-          className="dark:opacity-15"
-        />
-        <circle
-          cx="15"
-          cy="15"
-          r="164"
-          stroke="#1D7AFC"
-          strokeOpacity="0.6"
-          strokeWidth="1.3"
-        />
-        <circle cx="144.2" cy="116" r="5.5" fill="#0066FF" />
-      </svg>
 
       <div className="relative z-10 mx-auto w-full max-w-[1240px] px-6 sm:px-9 lg:px-14">
         <ScrollReveal className="text-center max-w-[740px] mx-auto">
@@ -105,10 +81,10 @@ export function PortfolioSection({
           {filteredItems.map((item, idx) => (
             <ScrollReveal key={`${activeCategory}-${item.id}`} delayMs={idx * 75} className="h-full">
               <article
-                className="nk-card-enter h-full flex flex-col justify-between overflow-hidden rounded-[26px] bg-white dark:bg-slate-900 border border-[#E6F0FD] dark:border-slate-800 shadow-[0_14px_38px_-10px_rgba(10,35,80,0.07)] transition-all duration-300 hover:-translate-y-2 hover:border-[#0066FF] dark:hover:border-blue-500 hover:shadow-[0_24px_50px_-12px_rgba(0,102,255,0.18)] group"
+                className="nk-card-enter h-full flex flex-col justify-between overflow-hidden rounded-[26px] bg-white dark:bg-slate-900 border border-[#E4F2FD] dark:border-slate-800 shadow-[0_14px_38px_-10px_rgba(10,35,80,0.07)] transition-all duration-300 hover:-translate-y-2 hover:border-[#0066FF] dark:hover:border-blue-500 hover:shadow-[0_24px_50px_-12px_rgba(0,102,255,0.18)] group"
               >
                 <div>
-                  <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-100 dark:bg-slate-800 border-b border-[#E6F0FD] dark:border-slate-800">
+                  <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-100 dark:bg-slate-800 border-b border-[#E4F2FD] dark:border-slate-800">
                     {item.image && (
                       <Image
                         src={item.image}

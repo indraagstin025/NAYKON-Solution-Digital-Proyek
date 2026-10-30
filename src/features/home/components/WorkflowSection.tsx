@@ -6,32 +6,8 @@ export function WorkflowSection() {
   return (
     <section
       id="alur"
-      className="relative isolate overflow-hidden bg-gradient-to-b from-[#F8FBFF] via-[#FFFFFF] to-[#F5F9FF] dark:from-[#030711] dark:via-[#061231] dark:to-[#091a45] py-16 sm:py-20 lg:py-24 border-t border-slate-200/50 dark:border-blue-900/30"
+      className="relative isolate overflow-hidden bg-white dark:bg-[#030711] py-16 sm:py-20 lg:py-24 border-t border-[#E4F2FD] dark:border-blue-900/30"
     >
-      <svg
-        viewBox="0 0 260 260"
-        fill="none"
-        aria-hidden="true"
-        className="pointer-events-none absolute top-0 right-0 h-[180px] w-[180px] sm:h-[230px] sm:w-[230px] -z-10"
-      >
-        <circle
-          cx="245"
-          cy="15"
-          r="135"
-          fill="#DCEEFF"
-          fillOpacity="0.7"
-          className="dark:opacity-15"
-        />
-        <circle
-          cx="245"
-          cy="15"
-          r="164"
-          stroke="#1D7AFC"
-          strokeOpacity="0.6"
-          strokeWidth="1.3"
-        />
-        <circle cx="115.8" cy="116" r="5.5" fill="#0066FF" />
-      </svg>
 
       <div className="relative z-10 mx-auto w-full max-w-[1240px] px-6 sm:px-9 lg:px-14">
         <ScrollReveal className="text-center max-w-[740px] mx-auto">
@@ -53,7 +29,7 @@ export function WorkflowSection() {
         <div className="mt-10 sm:mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {WORKFLOW_STEPS.map((step, idx) => (
             <ScrollReveal key={step.stepNumber} delayMs={idx * 80} className="h-full">
-              <article className="relative overflow-hidden h-full flex flex-col justify-between rounded-[24px] bg-white dark:bg-slate-900 border border-[#E6F0FD] dark:border-slate-800 p-6 sm:p-7 shadow-[0_14px_38px_-10px_rgba(10,35,80,0.07)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#0066FF] dark:hover:border-blue-500 hover:shadow-[0_20px_44px_-10px_rgba(0,102,255,0.14)] group">
+              <article className="relative overflow-hidden h-full flex flex-col justify-between rounded-[24px] bg-white dark:bg-slate-900 border border-[#E4F2FD] dark:border-slate-800 p-6 sm:p-7 shadow-[0_14px_38px_-10px_rgba(10,35,80,0.07)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#0066FF] dark:hover:border-blue-500 hover:shadow-[0_20px_44px_-10px_rgba(0,102,255,0.14)] group">
                 <div>
                   <div className="flex items-center justify-between mb-5">
                     <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#0066FF] text-white shadow-sm transition-transform duration-300 group-hover:scale-110">

@@ -18,7 +18,7 @@ export function FaqSection({ faqs }: { faqs?: PublicFaqDTO[] | null }) {
   return (
     <section
       id="faq"
-      className="relative isolate overflow-hidden bg-gradient-to-b from-[#F5F9FF] via-[#FFFFFF] to-[#F8FBFF] dark:from-[#030711] dark:via-[#061231] dark:to-[#091a45] py-16 sm:py-20 lg:py-24 border-t border-slate-200/50 dark:border-blue-900/30"
+      className="relative isolate overflow-hidden bg-[#F7FAFC] dark:bg-[#030711] py-16 sm:py-20 lg:py-24 border-t border-[#E4F2FD] dark:border-blue-900/30"
     >
       <div className="relative z-10 mx-auto w-full max-w-[980px] px-6 sm:px-9 lg:px-14">
         <ScrollReveal className="text-center max-w-[700px] mx-auto">
@@ -49,7 +49,7 @@ export function FaqSection({ faqs }: { faqs?: PublicFaqDTO[] | null }) {
                   className={`overflow-hidden rounded-2xl bg-white dark:bg-slate-900 border shadow-[0_8px_24px_-8px_rgba(10,35,80,0.05)] transition-all duration-300 ${
                     isOpen
                       ? "border-[#0066FF] shadow-[0_14px_34px_-10px_rgba(0,102,255,0.14)]"
-                      : "border-[#E6F0FD] dark:border-slate-800 hover:border-[#0066FF] dark:hover:border-blue-500"
+                      : "border-[#E4F2FD] dark:border-slate-800 hover:border-[#0066FF] dark:hover:border-blue-500"
                   }`}
                 >
                   <button

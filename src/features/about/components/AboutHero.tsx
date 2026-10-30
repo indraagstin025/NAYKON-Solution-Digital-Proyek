@@ -2,45 +2,25 @@ import React from "react";
 
 export function AboutHero() {
   return (
-    <section className="relative isolate overflow-hidden bg-gradient-to-b from-[#F4F9FF] via-[#F9FCFF] to-[#FFFFFF] dark:from-[#030711] dark:via-[#061231] dark:to-[#030711] py-14 sm:py-18 border-b border-[#E6F0FD] dark:border-blue-900/40">
-      <svg
-        viewBox="0 0 260 260"
-        fill="none"
+    <section className="relative isolate overflow-hidden bg-gradient-to-r from-[#002857] via-[#013565] to-[#01427C] text-white py-16 sm:py-20 border-b border-[#014F90]">
+      <div
         aria-hidden="true"
-        className="pointer-events-none absolute top-0 right-0 h-[190px] w-[190px] sm:h-[240px] sm:w-[240px] -z-10"
-      >
-        <circle
-          cx="245"
-          cy="15"
-          r="140"
-          fill="#DCEEFF"
-          fillOpacity="0.7"
-          className="dark:opacity-15"
-        />
-        <circle
-          cx="245"
-          cy="15"
-          r="168"
-          stroke="#1D7AFC"
-          strokeOpacity="0.6"
-          strokeWidth="1.3"
-        />
-        <circle cx="112.6" cy="118.5" r="5.5" fill="#0066FF" />
-      </svg>
+        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-500/20 via-transparent to-transparent"
+      />
 
       <div className="mx-auto w-full max-w-[1240px] px-6 sm:px-9 lg:px-14 text-center">
-        <p className="nk-hero-enter text-[11px] sm:text-xs font-extrabold uppercase tracking-[0.24em] text-[#0066FF] dark:text-blue-400">
+        <p className="nk-hero-enter text-[11px] sm:text-xs font-extrabold uppercase tracking-[0.24em] text-[#38BDF8]">
           TENTANG TIM KAMI
         </p>
-        <h1 className="nk-hero-enter nk-hero-delay-1 mt-3 text-[30px] sm:text-[40px] lg:text-[44px] font-extrabold leading-[1.15] tracking-[-0.02em] text-[#041E42] dark:text-white">
-          Mitra rekayasa digital untuk{" "}
-          <span className="text-[#0066FF] dark:text-[#38BDF8]">
-            pertumbuhan jangka panjang
+        <h1 className="nk-hero-enter nk-hero-delay-1 mt-3 text-[30px] sm:text-[40px] lg:text-[44px] font-extrabold leading-[1.15] tracking-[-0.02em] text-white">
+          Mengenal Next Karya{" "}
+          <span className="text-[#38BDF8]">
+            Lebih Dekat
           </span>
         </h1>
-        <p className="nk-hero-enter nk-hero-delay-2 mx-auto mt-4 max-w-[660px] text-[14px] sm:text-[15px] leading-[1.7] text-[#4A5D78] dark:text-slate-300">
-          Mengenal lebih dekat filosofi kerja, standar teknis, dan tim di balik
-          Next Karya Digital Solutions.
+        <p className="nk-hero-enter nk-hero-delay-2 mx-auto mt-4 max-w-[660px] text-[14px] sm:text-[15px] leading-[1.7] text-slate-200">
+          Kami adalah tim yang berdedikasi untuk menghadirkan solusi digital terbaik
+          bagi bisnis Anda dengan komitmen hasil yang nyata dan berkelanjutan.
         </p>
       </div>
     </section>

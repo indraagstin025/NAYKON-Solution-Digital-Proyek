@@ -9,7 +9,7 @@ import {
 
 export default function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-gradient-to-b from-[#F5F9FF] to-[#EAF3FF] dark:from-[#030711] dark:to-[#050C1D] border-t border-[#DCEBFE] dark:border-blue-900/40 pt-14 pb-10">
+    <footer className="relative overflow-hidden bg-[#F7FAFC] dark:bg-[#030711] border-t border-[#E4F2FD] dark:border-blue-900/40 pt-14 pb-10">
       <div className="mx-auto w-full max-w-[1240px] px-6 sm:px-9 lg:px-14">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.35fr_0.75fr_1fr_1fr] lg:gap-8">
           <div>

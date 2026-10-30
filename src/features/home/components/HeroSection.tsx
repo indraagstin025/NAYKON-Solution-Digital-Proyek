@@ -8,8 +8,9 @@ export function HeroSection() {
   return (
     <section
       id="beranda"
-      className="relative isolate overflow-hidden pt-[68px] lg:pt-[76px] bg-gradient-to-b from-[#F8FBFF] via-[#FFFFFF] to-[#F3F9FF] dark:from-[#030711] dark:via-[#061231] dark:to-[#091a45] min-h-[auto] lg:min-h-dvh flex items-center"
+      className="relative isolate overflow-hidden pt-[68px] lg:pt-[76px] bg-gradient-to-b from-[#F7FAFC] via-[#FFFFFF] to-[#EFF6FC] dark:from-[#030711] dark:via-[#061231] dark:to-[#091a45] min-h-[auto] lg:min-h-dvh flex items-center"
     >
+      {/* Background Tech Waves matching Brand Colors (Navy & Primary Blue) */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 bottom-0 h-[115px] sm:h-[155px] lg:h-[190px] w-full overflow-hidden -z-10"
@@ -18,7 +19,7 @@ export function HeroSection() {
           viewBox="0 0 1440 240"
           fill="none"
           preserveAspectRatio="none"
-          className="w-full h-full opacity-95 dark:opacity-25"
+          className="w-full h-full opacity-70 dark:opacity-20"
         >
           <path
             d="M0 75 C210 95, 370 185, 620 220 C880 250, 1180 140, 1440 70 L1440 240 L0 240 Z"
@@ -34,18 +35,18 @@ export function HeroSection() {
           />
           <defs>
             <linearGradient id="heroWaveBack" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#C4E1FF" stopOpacity="0.65" />
-              <stop offset="48%" stopColor="#E5F2FF" stopOpacity="0.4" />
-              <stop offset="100%" stopColor="#D2E8FF" stopOpacity="0.6" />
+              <stop offset="0%" stopColor="#0066FF" stopOpacity="0.14" />
+              <stop offset="48%" stopColor="#0052CC" stopOpacity="0.08" />
+              <stop offset="100%" stopColor="#002857" stopOpacity="0.12" />
             </linearGradient>
             <linearGradient id="heroWaveLeft" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#8EC5FF" stopOpacity="0.78" />
-              <stop offset="65%" stopColor="#BADBFF" stopOpacity="0.55" />
-              <stop offset="100%" stopColor="#E1F0FF" stopOpacity="0.15" />
+              <stop offset="0%" stopColor="#0066FF" stopOpacity="0.18" />
+              <stop offset="65%" stopColor="#0D90DE" stopOpacity="0.10" />
+              <stop offset="100%" stopColor="#002857" stopOpacity="0.04" />
             </linearGradient>
             <linearGradient id="heroWaveRight" x1="100%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="#C8E3FF" stopOpacity="0.65" />
-              <stop offset="100%" stopColor="#EDF6FF" stopOpacity="0.1" />
+              <stop offset="0%" stopColor="#0D90DE" stopOpacity="0.15" />
+              <stop offset="100%" stopColor="#0052CC" stopOpacity="0.05" />
             </linearGradient>
           </defs>
         </svg>
@@ -97,7 +98,7 @@ export function HeroSection() {
                     <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#0066FF] text-white shadow-sm transition-transform duration-300 group-hover:scale-110">
                       {item.icon}
                     </div>
-                    <span className="text-xs sm:text-[12.5px] font-semibold text-[#0A192F] dark:text-slate-200">
+                    <span className="text-xs sm:text-[12.5px] font-semibold text-[#041E42] dark:text-slate-200">
                       {item.label}
                     </span>
                   </div>
@@ -106,6 +107,7 @@ export function HeroSection() {
             </div>
           </div>
 
+          {/* Right Column: 3D Stage with Logo Gabungan */}
           <div className="nk-hero-enter nk-hero-delay-2 group relative flex items-center justify-center w-full max-w-[550px] mx-auto min-h-[280px] sm:min-h-[360px] lg:min-h-[430px]">
             <svg
               viewBox="0 0 700 540"
@@ -114,34 +116,36 @@ export function HeroSection() {
               className="pointer-events-none absolute inset-0 w-full h-full transition-transform duration-700 ease-out group-hover:scale-[1.02]"
             >
               <defs>
+                {/* Aura using Brand Primary & Navy colors instead of pale baby blue */}
                 <linearGradient id="heroAuraOval" x1="15%" y1="5%" x2="85%" y2="95%">
-                  <stop offset="0%" stopColor="#D6EBFF" stopOpacity="0.72" />
-                  <stop offset="55%" stopColor="#EBF5FF" stopOpacity="0.42" />
-                  <stop offset="100%" stopColor="#B8DCFF" stopOpacity="0.58" />
+                  <stop offset="0%" stopColor="#0066FF" stopOpacity="0.12" />
+                  <stop offset="55%" stopColor="#0D90DE" stopOpacity="0.06" />
+                  <stop offset="100%" stopColor="#002857" stopOpacity="0.09" />
                 </linearGradient>
 
                 <radialGradient id="heroBottomGlow" cx="52%" cy="76%" r="38%">
-                  <stop offset="0%" stopColor="#9ED0FF" stopOpacity="0.55" />
-                  <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0" />
+                  <stop offset="0%" stopColor="#0066FF" stopOpacity="0.22" />
+                  <stop offset="100%" stopColor="#0066FF" stopOpacity="0" />
                 </radialGradient>
 
                 <linearGradient id="primaryOrbitStroke" x1="0%" y1="100%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#6DB1FF" stopOpacity="0.45" />
-                  <stop offset="45%" stopColor="#2B86FF" stopOpacity="0.75" />
-                  <stop offset="80%" stopColor="#0066FF" stopOpacity="0.95" />
-                  <stop offset="100%" stopColor="#6DB1FF" stopOpacity="0.5" />
+                  <stop offset="0%" stopColor="#0D90DE" stopOpacity="0.45" />
+                  <stop offset="45%" stopColor="#0066FF" stopOpacity="0.80" />
+                  <stop offset="80%" stopColor="#0052CC" stopOpacity="0.95" />
+                  <stop offset="100%" stopColor="#002857" stopOpacity="0.45" />
                 </linearGradient>
 
                 <linearGradient id="innerOrbitStroke" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#A6D1FF" stopOpacity="0.45" />
-                  <stop offset="50%" stopColor="#DCEEFF" stopOpacity="0.2" />
-                  <stop offset="100%" stopColor="#8BC2FF" stopOpacity="0.5" />
+                  <stop offset="0%" stopColor="#0066FF" stopOpacity="0.40" />
+                  <stop offset="50%" stopColor="#0D90DE" stopOpacity="0.15" />
+                  <stop offset="100%" stopColor="#0052CC" stopOpacity="0.35" />
                 </linearGradient>
 
+                {/* 3D Sphere using brand gradient */}
                 <radialGradient id="iceSphere3D" cx="72%" cy="72%" r="68%" fx="72%" fy="72%">
-                  <stop offset="0%" stopColor="#F5FAFF" />
-                  <stop offset="52%" stopColor="#D4E8FF" />
-                  <stop offset="100%" stopColor="#B5D6FC" />
+                  <stop offset="0%" stopColor="#EAF4FC" />
+                  <stop offset="45%" stopColor="#0D90DE" />
+                  <stop offset="100%" stopColor="#002857" />
                 </radialGradient>
               </defs>
 
@@ -198,6 +202,7 @@ export function HeroSection() {
               />
             </svg>
 
+            {/* Logo Gabungan inside Stage */}
             <div className="relative z-10 w-[72%] sm:w-[75%] max-w-[390px] transition-transform duration-500 ease-out group-hover:scale-[1.03] group-hover:-translate-y-1">
               <Image
                 src="/logo/logo-gabungan.png"
@@ -205,7 +210,7 @@ export function HeroSection() {
                 width={960}
                 height={304}
                 priority
-                className="w-full h-auto object-contain drop-shadow-[0_10px_24px_rgba(0,60,150,0.08)]"
+                className="w-full h-auto object-contain drop-shadow-[0_14px_32px_rgba(0,102,255,0.14)] dark:drop-shadow-[0_14px_32px_rgba(0,102,255,0.30)]"
               />
             </div>
           </div>

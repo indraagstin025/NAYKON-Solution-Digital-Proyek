@@ -30,7 +30,7 @@ export function ContactFormCard({ sourcePage = "/kontak" }: { sourcePage?: strin
     <form
       id="contact-form"
       onSubmit={handleSubmit}
-      className="relative overflow-hidden rounded-[24px] bg-white dark:bg-slate-900 border border-[#E6F0FD] dark:border-slate-800 p-6 sm:p-8 lg:p-9 shadow-[0_18px_46px_-12px_rgba(10,35,80,0.08)] transition-colors duration-300 hover:border-[#BBD7FE] dark:hover:border-slate-700"
+      className="relative overflow-hidden rounded-[24px] bg-white dark:bg-slate-900 border border-[#E4F2FD] dark:border-slate-800 p-6 sm:p-8 lg:p-9 shadow-[0_18px_46px_-12px_rgba(10,35,80,0.08)] transition-colors duration-300 hover:border-[#BBD7FE] dark:hover:border-slate-700"
       noValidate
       aria-busy={sending}
     >

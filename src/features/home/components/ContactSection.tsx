@@ -7,32 +7,8 @@ export function ContactSection() {
   return (
     <section
       id="kontak"
-      className="relative isolate overflow-hidden bg-gradient-to-b from-[#F8FBFF] via-[#FFFFFF] to-[#F3F8FF] dark:from-[#030711] dark:via-[#061231] dark:to-[#091a45] py-16 sm:py-20 lg:py-24 border-t border-slate-200/50 dark:border-blue-900/30"
+      className="relative isolate overflow-hidden bg-[#F7FAFC] dark:bg-[#030711] py-16 sm:py-20 lg:py-24 border-t border-[#E4F2FD] dark:border-blue-900/30"
     >
-      <svg
-        viewBox="0 0 260 260"
-        fill="none"
-        aria-hidden="true"
-        className="pointer-events-none absolute bottom-0 left-0 h-[180px] w-[180px] sm:h-[230px] sm:w-[230px] -z-10"
-      >
-        <circle
-          cx="15"
-          cy="245"
-          r="135"
-          fill="#DCEEFF"
-          fillOpacity="0.7"
-          className="dark:opacity-15"
-        />
-        <circle
-          cx="15"
-          cy="245"
-          r="164"
-          stroke="#1D7AFC"
-          strokeOpacity="0.6"
-          strokeWidth="1.3"
-        />
-        <circle cx="147.7" cy="148.6" r="5.5" fill="#0066FF" />
-      </svg>
 
       <div className="relative z-10 mx-auto w-full max-w-[1240px] px-6 sm:px-9 lg:px-14 grid items-start gap-12 lg:grid-cols-[0.92fr_1.08fr] lg:gap-14">
         <ScrollReveal direction="left">
@@ -55,7 +31,7 @@ export function ContactSection() {
           <div className="mt-8 space-y-4">
             {CONTACT_INFO_ITEMS.map((item, idx) => (
               <ScrollReveal key={item.title} delayMs={idx * 70}>
-                <div className="group flex items-center gap-4 rounded-2xl bg-white dark:bg-slate-900 border border-[#E6F0FD] dark:border-slate-800 p-4 sm:p-5 shadow-[0_12px_32px_-10px_rgba(10,35,80,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-[#0066FF] dark:hover:border-blue-500 hover:shadow-[0_18px_38px_-10px_rgba(0,102,255,0.14)]">
+                <div className="group flex items-center gap-4 rounded-2xl bg-white dark:bg-slate-900 border border-[#E4F2FD] dark:border-slate-800 p-4 sm:p-5 shadow-[0_12px_32px_-10px_rgba(10,35,80,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-[#0066FF] dark:hover:border-blue-500 hover:shadow-[0_18px_38px_-10px_rgba(0,102,255,0.14)]">
                   <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#0066FF] text-white shadow-sm transition-transform duration-300 group-hover:scale-110">
                     {item.icon}
                   </div>

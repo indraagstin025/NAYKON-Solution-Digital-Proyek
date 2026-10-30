@@ -2,7 +2,7 @@ import React from "react";
 
 export function BlogHero() {
   return (
-    <section className="relative isolate overflow-hidden bg-gradient-to-b from-[#F4F9FF] via-[#F9FCFF] to-[#FFFFFF] dark:from-[#030711] dark:via-[#061231] dark:to-[#030711] py-14 sm:py-18 border-b border-[#E6F0FD] dark:border-blue-900/40">
+    <section className="relative isolate overflow-hidden bg-gradient-to-b from-[#F7FAFC] via-[#FFFFFF] to-[#EFF6FC] dark:from-[#030711] dark:via-[#061231] dark:to-[#030711] py-14 sm:py-18 border-b border-[#E4F2FD] dark:border-blue-900/40">
       <svg
         viewBox="0 0 260 260"
         fill="none"
@@ -13,16 +13,16 @@ export function BlogHero() {
           cx="15"
           cy="15"
           r="145"
-          fill="#DCEEFF"
-          fillOpacity="0.7"
+          fill="#EAF4FC"
+          fillOpacity="0.8"
           className="dark:opacity-15"
         />
         <circle
           cx="15"
           cy="15"
           r="172"
-          stroke="#1D7AFC"
-          strokeOpacity="0.65"
+          stroke="#0066FF"
+          strokeOpacity="0.45"
           strokeWidth="1.3"
         />
         <circle cx="154.2" cy="116.1" r="5.5" fill="#0066FF" />

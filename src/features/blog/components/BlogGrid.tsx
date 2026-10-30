@@ -58,7 +58,7 @@ export function BlogGrid({
     <div className="grid gap-6 lg:gap-7 md:grid-cols-3">
       {articles.map((post, idx) => (
         <ScrollReveal key={post.id} delayMs={idx * 80} className="h-full">
-          <article className="relative overflow-hidden h-full flex flex-col justify-between rounded-[24px] bg-white dark:bg-slate-900 border border-[#E6F0FD] dark:border-slate-800 p-6 sm:p-7 shadow-[0_14px_38px_-10px_rgba(10,35,80,0.07)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#0066FF] dark:hover:border-blue-500 hover:shadow-[0_22px_46px_-10px_rgba(0,102,255,0.15)] group">
+          <article className="relative overflow-hidden h-full flex flex-col justify-between rounded-[24px] bg-white dark:bg-slate-900 border border-[#E4F2FD] dark:border-slate-800 p-6 sm:p-7 shadow-[0_14px_38px_-10px_rgba(10,35,80,0.07)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#0066FF] dark:hover:border-blue-500 hover:shadow-[0_22px_46px_-10px_rgba(0,102,255,0.15)] group">
             <div>
               <div className="flex items-center justify-between mb-5">
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#0066FF] text-white shadow-sm transition-transform duration-300 group-hover:scale-110">

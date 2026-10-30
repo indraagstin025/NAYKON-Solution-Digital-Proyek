@@ -36,7 +36,7 @@ export function ServicesPage({
       <main className="flex-1 pt-[68px] lg:pt-[76px]">
         <ServicesHero />
 
-        <section className="relative isolate overflow-hidden bg-gradient-to-b from-[#FFFFFF] via-[#F7FAFF] to-[#F3F8FF] dark:from-[#030711] dark:via-[#061231] dark:to-[#091a45] py-16 sm:py-20">
+        <section className="relative isolate overflow-hidden bg-[#F7FAFC] dark:bg-[#030711] py-16 sm:py-20">
           <div className="mx-auto w-full max-w-[1240px] px-6 sm:px-9 lg:px-14">
             <ServiceCards services={services} />
             <ServicePricing plans={pricing} />

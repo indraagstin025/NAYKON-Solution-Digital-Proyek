@@ -38,6 +38,16 @@ export function AboutProfile() {
       </ScrollReveal>
 
       <ScrollReveal direction="right">
+        <div className="mb-4">
+          <Image
+            src="/logo/logo-gabungan.png"
+            alt="Next Karya Digital Solutions"
+            width={260}
+            height={82}
+            className="h-[32px] sm:h-[38px] w-auto object-contain"
+          />
+        </div>
+
         <h2 className="text-[24px] sm:text-[32px] font-extrabold leading-[1.2] tracking-[-0.02em] text-[#041E42] dark:text-white">
           Solusi digital yang dibangun berdasarkan kebutuhan{" "}
           <span className="text-[#0066FF] dark:text-[#38BDF8]">riil bisnis Anda.</span>
@@ -49,7 +59,7 @@ export function AboutProfile() {
           efisien.
         </p>
 
-        <div className="mt-6 divide-y divide-[#D8E6F8] dark:divide-slate-800">
+        <div className="mt-6 divide-y divide-[#E4F2FD] dark:divide-slate-800">
           {ABOUT_APPROACH_ITEMS.map((item) => (
             <div
               key={item.title}
