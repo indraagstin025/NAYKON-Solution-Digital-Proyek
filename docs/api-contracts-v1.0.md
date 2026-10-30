@@ -326,6 +326,7 @@ Backend memverifikasi keabsahan JWT dan mencocokkan `tokenVersion` di dalam klai
 
 #### `POST /api/v1/auth/login`
 * **Deskripsi:** Masuk ke sistem untuk 3 staf internal.
+* **Masa Berlaku Token:** Token JWT menggunakan masa kedaluwarsa `expiresIn: 86400` (24 jam) tanpa sistem refresh token di Fase 1. Setelah 24 jam token kedaluwarsa dan staf wajib melakukan login ulang. Dilarang mengarang rute refresh token di Fase 1.
 * **Body:** `{ "email": "programmer@nextkarya.id", "password": "..." }`
 * **Format Respons Berhasil (200 OK):**
 ```json
@@ -350,13 +351,15 @@ Backend memverifikasi keabsahan JWT dan mencocokkan `tokenVersion` di dalam klai
 
 #### `POST /api/v1/users/:id/revoke-sessions` (Pemutusan Sesi HP Hilang Fase 1)
 * **Deskripsi:** Menaikkan nilai `tokenVersion` staf tersebut di database. Seketika seluruh token JWT yang beredar pada perangkat lama staf tersebut menjadi tidak sah pada request berikutnya.
+* **Pencatatan Audit Log:** Aksi keamanan ini otomatis dicatat ke dalam tabel `emergency_audit_logs` dengan `actionType: "REVOKE_SESSION"`, `targetEntity: "USER"`, `targetId: id`, dan `reason: "Pencabutan darurat sesi HP hilang/tertinggal"`.
 * **Format Respons Berhasil (200 OK):**
 ```json
 {
   "success": true,
   "data": {
     "message": "Seluruh sesi perangkat untuk staf ini berhasil dicabut.",
-    "newTokenVersion": 1
+    "newTokenVersion": 1,
+    "auditLogged": true
   },
   "meta": null,
   "error": null
@@ -365,9 +368,9 @@ Backend memverifikasi keabsahan JWT dan mencocokkan `tokenVersion` di dalam klai
 
 ---
 
-### 5.2 Modul CMS (Konten & Optimistic Locking)
+### 5.2 Modul CMS (Konten, Optimistic Locking & Pengecualian Entitas)
 
-Berlaku untuk seluruh entitas CMS: `posts`, `portfolios`, `services`, `faqs`, `testimonials`, `pages`.
+Mendukung manajemen konten untuk seluruh 6 entitas CMS dengan mekanisme *Optimistic Locking* wajib.
 
 #### Aturan Wajib Optimistic Locking pada Update:
 Setiap kali melakukan mutasi pembaruan (`PUT`, `PATCH`, `publish`, `archive`), klien **wajib menyertakan kolom `updatedAt`** yang didapatkan dari pembacaan data terakhir.
@@ -391,25 +394,84 @@ Setiap kali melakukan mutasi pembaruan (`PUT`, `PATCH`, `publish`, `archive`), k
 }
 ```
 
-#### Rute CMS Posts:
-* `POST /api/v1/posts` (Membuat draf baru)
-* `GET /api/v1/posts` (Daftar posting internal dengan filter status `DRAFT`, `PUBLISHED`, `ARCHIVED`)
-* `GET /api/v1/posts/:id`
-* `PATCH /api/v1/posts/:id` (Simpan perubahan draf dengan validasi `updatedAt`)
-* `POST /api/v1/posts/:id/publish`
-  - **Alur Kerja:** Membuat rekaman snapshot cadangan otomatis pada `content_snapshots` (maksimal 5 versi FIFO), mengubah status menjadi `PUBLISHED`, memperbarui `publishedAt`, dan otomatis memicu webhook revalidasi cache publik Next.js.
-* `POST /api/v1/posts/:id/archive` (Soft delete ke status `ARCHIVED`)
-* `POST /api/v1/content-snapshots/:id/restore` (Mengembalikan konten ke versi snapshot tersebut)
+#### Rincian Rute per Entitas CMS:
+
+1. **Artikel (`posts`), Portofolio (`portfolios`), Layanan (`services`), dan Halaman (`pages`):**
+   - Mengikuti siklus hidup konten lengkap: Draf -> Publikasi -> Arsip.
+   - `POST /api/v1/{posts|portfolios|services|pages}`: Membuat draf konten baru (`status: DRAFT`).
+   - `GET /api/v1/{posts|portfolios|services|pages}`: Mengambil daftar internal dengan filter status `?status=DRAFT|PUBLISHED|ARCHIVED`.
+   - `GET /api/v1/{posts|portfolios|services|pages}/:id`: Detail konten internal.
+   - `PATCH /api/v1/{posts|portfolios|services|pages}/:id`: Menyimpan perubahan draf (wajib menyertakan `updatedAt`).
+   - `POST /api/v1/{posts|portfolios|services|pages}/:id/publish`:
+     - Alur Kerja: Menyimpan snapshot otomatis ke `content_snapshots` (maksimal 5 versi FIFO), mengubah status menjadi `PUBLISHED`, memperbarui `publishedAt`, dan otomatis memicu webhook revalidasi cache publik Next.js.
+   - `POST /api/v1/{posts|portfolios|services|pages}/:id/archive`: Soft delete konten ke status `ARCHIVED` (tidak tampil di publik, data tetap utuh di database).
+   - `POST /api/v1/content-snapshots/:id/restore`: Memulihkan konten ke versi snapshot tersebut.
+
+2. **Pertanyaan Umum (`faqs`) [Pengecualian: Tanpa Publish/Archive]:**
+   - FAQ tidak menggunakan alur draf/publish/archive yang berbelit, melainkan menggunakan sakelar boolean `isActive`.
+   - `POST /api/v1/faqs`: Membuat pertanyaan FAQ baru (default `isActive: true`, `category: "Umum"`).
+   - `GET /api/v1/faqs`: Daftar seluruh FAQ internal (aktif maupun nonaktif).
+   - `GET /api/v1/faqs/:id`: Detail FAQ.
+   - `PATCH /api/v1/faqs/:id`: Memperbarui teks pertanyaan/jawaban atau mengubah toggle keaktifan (`isActive: boolean`) dengan validasi `updatedAt`.
+   - `DELETE /api/v1/faqs/:id`: Menghapus FAQ secara permanen atau soft toggle `isActive: false`.
+   - *Catatan:* Tidak ada endpoint `/publish` atau `/archive` untuk FAQs.
+
+3. **Ulasan Klien (`testimonials`) [Pengecualian: Default PUBLISHED]:**
+   - Testimoni secara default berstatus `PUBLISHED` karena merupakan kutipan yang telah dikurasi dan disetujui klien sebelumnya.
+   - `POST /api/v1/testimonials`: Membuat ulasan baru (default status `PUBLISHED`, opsional `DRAFT`).
+   - `GET /api/v1/testimonials`: Mengambil daftar testimoni internal.
+   - `PATCH /api/v1/testimonials/:id`: Memperbarui isi ulasan, rating, atau relasi portofolio dengan validasi `updatedAt`.
+   - `POST /api/v1/testimonials/:id/archive`: Mengarsipkan ulasan agar tidak lagi tampil di website publik.
 
 ---
 
-### 5.3 Modul Media (Unggah Berkas)
+### 5.3 Modul Media (Unggah & Galeri Berkas)
 
-#### `POST /api/v1/media` (Unggah Multipart Form Data)
+#### 1. `GET /api/v1/media` (Pustaka Galeri Berkas)
+* **Deskripsi:** Mengambil daftar pustaka media untuk dipilih di editor CMS atau galeri portofolio.
+* **Query Parameters:**
+  - `site_id` (Wajib, string): Contoh `"nextkarya-main"`.
+  - `search` (Opsional, string): Mencari nama berkas (`originalName`) atau teks alt (`altText`).
+  - `mimeType` (Opsional, string): Filter tipe berkas (contoh: `image/webp`, `application/pdf`).
+  - `page` (Opsional, integer): Default 1.
+  - `limit` (Opsional, integer): Default 20, maksimal 100.
+  - `sortBy` (Opsional, string): Default `createdAt`.
+  - `sortOrder` (Opsional, string): Default `desc`.
+* **Format Respons Berhasil (200 OK):**
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "id": "clxmed01",
+      "site_id": "nextkarya-main",
+      "fileName": "sec-thumb-1730304000.webp",
+      "originalName": "header-banner.png",
+      "mimeType": "image/webp",
+      "fileSize": 245000,
+      "width": 1920,
+      "height": 1080,
+      "url": "https://nextkarya.id/uploads/sec-thumb-1730304000.webp",
+      "altText": "Desain antarmuka Next Karya",
+      "uploadedBy": { "fullName": "Staf B (Desainer)" },
+      "createdAt": "2026-10-30T16:25:00.000Z"
+    }
+  ],
+  "meta": {
+    "page": 1,
+    "limit": 20,
+    "total": 1,
+    "totalPages": 1
+  },
+  "error": null
+}
+```
+
+#### 2. `POST /api/v1/media` (Unggah Multipart Form Data)
 * **Batasan Ukuran & Format Eksplisit:**
   - Gambar: Maksimal **5 MB**. Tipe yang diizinkan: `image/webp`, `image/png`, `image/jpeg`, `image/svg+xml`.
   - Dokumen PDF: Maksimal **10 MB**. Tipe yang diizinkan: `application/pdf`.
-  - File dengan tipe di luar daftar di atas langsung ditolak dengan status 400 Bad Request.
+  - Berkas di luar tipe di atas langsung ditolak dengan status 400 Bad Request.
 * **Header:** `Content-Type: multipart/form-data`
 * **Form Fields:** `site_id`, `file` (Binary), `altText` (Opsional).
 * **Format Respons Berhasil (201 Created):**
@@ -434,14 +496,65 @@ Setiap kali melakukan mutasi pembaruan (`PUT`, `PATCH`, `publish`, `archive`), k
 }
 ```
 
+#### 3. `DELETE /api/v1/media/:id` (Hapus Berkas)
+* **Deskripsi:** Menghapus berkas media jika tidak lagi digunakan. Jika media masih terikat pada artikel publik atau portofolio aktif, penghapusan ditolak dengan status 400 Bad Request.
+
 ---
 
 ### 5.4 Modul CRM & Beban Kerja Tim
 
-#### `GET /api/v1/crm/follow-up-today` (Halaman Agenda Kerja Harian)
+#### 1. `POST /api/v1/crm/leads` (Input Manual Internal Staf)
+* **Deskripsi:** Endpoint khusus staf internal untuk memasukkan data prospek yang datang dari jalur luar website (misal: telepon langsung, kenalan pribadi, atau temu tatap muka).
+* **Perbedaan dari Endpoint Publik:**
+  - Terproteksi dengan header Bearer JWT (role `STAFF`).
+  - Tidak memerlukan perangkap honeypot `website_url`.
+  - Tidak terikat pada rate limit publik (5 req/15 menit).
+  - Staf dapat langsung memilih `assignedToId`, memasukkan `dealValue`, status pipeline, dan tanggal `nextFollowUpDate`.
+  - Otomatis mencatat entri baru ke tabel `activity_logs`.
+* **Skema Request Body (Zod Schema):**
+```typescript
+const CreateLeadInternalSchema = z.object({
+  site_id: z.string().min(1).default("nextkarya-main"),
+  clientName: z.string().trim().min(2).max(255),
+  companyName: z.string().trim().max(255).optional().nullable(),
+  whatsappNumber: z.string().regex(/^(\+62|62|0)8[1-9][0-9]{6,11}$/, "Format nomor WhatsApp tidak valid"),
+  email: z.string().email().optional().nullable(),
+  serviceRequested: z.string().min(1),
+  message: z.string().trim().min(5).max(2000),
+  dealValue: z.number().int().min(0).default(0),
+  status: z.enum(["BARU", "DIHUBUNGI", "PROPOSAL", "DEAL", "BATAL"]).default("BARU"),
+  assignedToId: z.string().optional().nullable(),
+  nextFollowUpDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Format YYYY-MM-DD").optional().nullable()
+});
+```
+* **Format Respons Berhasil (201 Created):**
+```json
+{
+  "success": true,
+  "data": {
+    "id": "clxlead02",
+    "site_id": "nextkarya-main",
+    "clientName": "Bapak Hendra",
+    "companyName": "CV Maju Bersama",
+    "whatsappNumber": "081398765432",
+    "dealValue": 15000000,
+    "status": "BARU",
+    "assignedToId": "clxuser01",
+    "nextFollowUpDate": "2026-10-31",
+    "createdAt": "2026-10-30T16:30:00.000Z"
+  },
+  "meta": null,
+  "error": null
+}
+```
+
+#### 2. `GET /api/v1/crm/follow-up-today` (Halaman Agenda Kerja Harian)
 Ini adalah halaman kerja operasional pagi hari yang dibuka oleh ketiga anggota tim. Menampilkan seluruh prospek yang harus dihubungi hari ini atau yang sudah terlewat.
 * **Kueri Database:** Memanfaatkan indeks gabungan `[site_id, nextFollowUpDate, status, assignedToId]`.
 * **Kriteria Penyaringan:** `status IN ('BARU', 'DIHUBUNGI', 'PROPOSAL') AND nextFollowUpDate <= CURRENT_DATE`. Diurutkan berdasarkan `nextFollowUpDate ASC`.
+* **Aturan Penentuan Kolom `priority`:**
+  - Jika `nextFollowUpDate == CURRENT_DATE` (Waktu Indonesia Barat) -> `priority = "DUE_TODAY"`.
+  - Jika `nextFollowUpDate < CURRENT_DATE` (Waktu Indonesia Barat) -> `priority = "OVERDUE"`.
 * **Format Respons Berhasil (200 OK):**
 ```json
 {
@@ -459,6 +572,19 @@ Ini adalah halaman kerja operasional pagi hari yang dibuka oleh ketiga anggota t
       "nextFollowUpDate": "2026-10-30",
       "assignedTo": { "id": "clxuser01", "fullName": "Staf A (Programmer)" },
       "lastInteractionNote": "28 Okt: Menunggu konfirmasi anggaran manajemen klinik."
+    },
+    {
+      "id": "clxlead00",
+      "clientName": "Bapak Anton",
+      "companyName": "PT Logistik Sentosa",
+      "whatsappNumber": "081299887766",
+      "serviceRequested": "Website Bisnis Instan",
+      "dealValue": 8000000,
+      "status": "BARU",
+      "priority": "OVERDUE",
+      "nextFollowUpDate": "2026-10-28",
+      "assignedTo": { "id": "clxuser03", "fullName": "Staf C (Project Lead)" },
+      "lastInteractionNote": "Pesan masuk 2 hari lalu, belum sempat dihubungi."
     }
   ],
   "meta": null,
@@ -466,11 +592,11 @@ Ini adalah halaman kerja operasional pagi hari yang dibuka oleh ketiga anggota t
 }
 ```
 
-#### Endpoint CRM Lainnya:
-* `GET /api/v1/crm/leads`: Mengambil daftar prospek dengan filter `status`, `assignedToId`, dan pagination. Visual pipeline penjualan di frontend dibentuk dengan memfilter endpoint ini per status.
+#### 3. Endpoint CRM Lainnya:
+* `GET /api/v1/crm/leads`: Mengambil daftar prospek dengan filter `status`, `assignedToId`, dan pagination. Visual pipeline penjualan di frontend dibentuk dengan memfilter endpoint ini per status (tidak memerlukan endpoint `/crm/pipeline` terpisah).
 * `GET /api/v1/crm/leads/:id`: Detail prospek lengkap dengan riwayat `interactionLogs` dan `activityLogs`.
 * `PATCH /api/v1/crm/leads/:id`: Pembaruan status pipeline, deal value, penanggung jawab, jadwal follow up, didukung validasi `updatedAt`.
-* `POST /api/v1/crm/leads/:id/notes`: Menambahkan catatan interaksi hasil diskusi WhatsApp/telepon.
+* `POST /api/v1/crm/leads/:id/notes`: Menambahkan catatan interaksi kualitatif hasil diskusi WhatsApp atau telepon.
 * `GET /api/v1/crm/schedules`: Daftar timeline beban kerja tim Gantt (`startDate`, `endDate`, `assignedToId`, `status`).
 * `POST /api/v1/crm/schedules`: Menambah penugasan proyek baru.
 * `PATCH /api/v1/crm/schedules/:id`: Memperbarui jadwal kerja dengan validasi `updatedAt`.
@@ -480,16 +606,127 @@ Ini adalah halaman kerja operasional pagi hari yang dibuka oleh ketiga anggota t
 ### 5.5 Modul Dashboard Analitik (Read-Only Staf)
 
 #### Aturan Pengambilan Data Dashboard:
-* **Kartu Indikator Utama (*Top-Line Overview*):** Data total pengunjung, total sesi, total tayangan, rata-rata durasi, dan total konversi **wajib dibaca dari baris `analytics_daily` dengan nilai `path = '*'`**. Dilarang menjumlahkan baris-baris per halaman agar tidak terjadi overcount pengunjung unik.
+* **Kartu Indikator Utama (*Top-Line Overview*):** Data total pengunjung unik, total sesi, total tayangan, rata-rata durasi, dan total konversi **wajib dibaca dari baris `analytics_daily` dengan nilai `path = '*'`**. Dilarang menjumlahkan baris-baris per halaman agar tidak terjadi overcount pengunjung unik.
 * **Tabel Halaman Terpopuler (*Top Pages Table*):** Dibaca dari baris `analytics_daily` dengan `path != '*'`.
+* **Rumus Resmi Turunan:**
+  - $\text{Rata-rata Durasi (detik)} = \frac{\text{durationSec}}{\text{sessions}}$
+  - $\text{Bounce Rate (\%)} = \left( \frac{\text{bounces}}{\text{sessions}} \right) \times 100\%$
+  - $\text{Conversion Rate (\%)} = \left( \frac{\text{whatsappClicks} + \text{formSubmits}}{\text{visitors}} \right) \times 100\%$ (Penyebut: *Total Daily Unique Visitors* dari baris `path = '*'`).
 
-#### Rute Analitik:
-* `GET /api/v1/analytics/overview?site_id=nextkarya-main&from=2026-10-01&to=2026-10-30`
-  - Mengembalikan angka ringkasan tren dan perbandingan persentase terhadap periode sebelumnya.
-* `GET /api/v1/analytics/pages?site_id=nextkarya-main&from=2026-10-01&to=2026-10-30&limit=10`
-  - Mengembalikan peringkat halaman terpopuler berdasarkan views dan rasio konversi.
-* `GET /api/v1/analytics/sources?site_id=nextkarya-main&from=2026-10-01&to=2026-10-30`
-  - Mengembalikan proporsi sumber rujukan (Google, Media Sosial, Direct, Referral).
+#### 1. `GET /api/v1/analytics/overview` (Ringkasan Tren Utama)
+* **Query Parameters:** `?site_id=nextkarya-main&from=2026-10-01&to=2026-10-30`
+* **Format Respons Berhasil (200 OK):**
+```json
+{
+  "success": true,
+  "data": {
+    "site_id": "nextkarya-main",
+    "period": { "from": "2026-10-01", "to": "2026-10-30" },
+    "metrics": {
+      "visitors": 4250,
+      "visitorsChange": 14.8,
+      "sessions": 5120,
+      "sessionsChange": 11.2,
+      "pageviews": 18450,
+      "pageviewsChange": 22.4,
+      "averageDurationSec": 145,
+      "averageDurationChange": 5.0,
+      "bounceRate": 38.2,
+      "bounceRateChange": -2.4,
+      "whatsappClicks": 210,
+      "formSubmits": 85,
+      "conversions": 295,
+      "conversionsChange": 18.5,
+      "conversionRate": 6.94,
+      "conversionRateChange": 0.22
+    }
+  },
+  "meta": null,
+  "error": null
+}
+```
+
+#### 2. `GET /api/v1/analytics/pages` (Peringkat Halaman Terpopuler)
+* **Query Parameters:** `?site_id=nextkarya-main&from=2026-10-01&to=2026-10-30&limit=10`
+* **Format Respons Berhasil (200 OK):**
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "path": "/",
+      "pageviews": 7520,
+      "visitors": 3100,
+      "bounceRate": 32.1,
+      "conversions": 140,
+      "conversionRate": 4.52
+    },
+    {
+      "path": "/layanan",
+      "pageviews": 3840,
+      "visitors": 1950,
+      "bounceRate": 28.4,
+      "conversions": 95,
+      "conversionRate": 4.87
+    },
+    {
+      "path": "/portofolio",
+      "pageviews": 2910,
+      "visitors": 1420,
+      "bounceRate": 35.0,
+      "conversions": 42,
+      "conversionRate": 2.96
+    }
+  ],
+  "meta": null,
+  "error": null
+}
+```
+
+#### 3. `GET /api/v1/analytics/sources` (Saluran Rujukan Trafik)
+* **Query Parameters:** `?site_id=nextkarya-main&from=2026-10-01&to=2026-10-30`
+* **Format Respons Berhasil (200 OK):**
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "source": "google",
+      "label": "Pencarian Organik (Google)",
+      "pageviews": 8200,
+      "visitors": 2100,
+      "conversions": 125,
+      "sharePercentage": 49.4
+    },
+    {
+      "source": "direct",
+      "label": "Langsung (Direct)",
+      "pageviews": 5100,
+      "visitors": 1250,
+      "conversions": 90,
+      "sharePercentage": 29.4
+    },
+    {
+      "source": "instagram",
+      "label": "Media Sosial (Instagram)",
+      "pageviews": 3400,
+      "visitors": 680,
+      "conversions": 62,
+      "sharePercentage": 16.0
+    },
+    {
+      "source": "referral",
+      "label": "Tautan Rujukan Mitra",
+      "pageviews": 1750,
+      "visitors": 220,
+      "conversions": 18,
+      "sharePercentage": 5.2
+    }
+  ],
+  "meta": null,
+  "error": null
+}
+```
 
 ---
 
@@ -528,6 +765,7 @@ Seluruh endpoint darurat di bawah ini dapat diakses oleh ketiga staf internal (r
    - **Body:** `{ "site_id": "nextkarya-main", "reason": "Sistem proteksi rate limit sudah diperketat." }`
 4. `POST /api/v1/emergency/banner`
    - **Tindakan:** Mengaktifkan atau menonaktifkan strip banner darurat website.
+   - **Pemetaan Log Audit:** Jika `isActive: true` dicatat dengan `actionType: "SET_ALERT_BANNER"`; jika `isActive: false` dicatat dengan `actionType: "REMOVE_ALERT_BANNER"`.
    - **Body:** `{ "site_id": "nextkarya-main", "isActive": true, "alertBanner": "Layanan tatap muka ditutup sementara hingga pukul 13.00 WIB", "reason": "Pemadaman listrik lokal di kantor pusat." }`
 5. `POST /api/v1/crm/leads/:id/reassign`
    - **Tindakan:** Mengalihkan penanggung jawab prospek saat staf awal berhalangan/sakit.
@@ -584,7 +822,7 @@ Jika selama masa pengerjaan Fase 1 terdapat permintaan untuk fitur-fitur di bawa
 
 ### Versi 1.0 (30 Oktober 2026)
 * Penyusunan cetak biru kontrak REST API resmi untuk rute `/api/v1`.
-* Berlandaskan penuh pada `docs/schema-database-v1.1.md`, spesifikasi `docs/cms-v2.2.md`, `docs/analytics-v2.2.md`, `docs/crm-v2.2.md`, dan arsitektur `docs/architecture-desktop-vs-mobile-v1.1.md`.
+* Berlandaskan penuh pada [`docs/schema-database-v1.1.md`](file:///C:/Users/Indra/Documents/Documents/Proyek-NAYKON/docs/schema-database-v1.1.md), spesifikasi [`docs/cms-v2.2.md`](file:///C:/Users/Indra/Documents/Documents/Proyek-NAYKON/docs/cms-v2.2.md), [`docs/analytics-v2.2.md`](file:///C:/Users/Indra/Documents/Documents/Proyek-NAYKON/docs/analytics-v2.2.md), [`docs/crm-v2.2.md`](file:///C:/Users/Indra/Documents/Documents/Proyek-NAYKON/docs/crm-v2.2.md), dan arsitektur [`docs/architecture-desktop-vs-mobile-v1.1.md`](file:///C:/Users/Indra/Documents/Documents/Proyek-NAYKON/docs/architecture-desktop-vs-mobile-v1.1.md).
 * Mengunci 7 keputusan arsitektur beku pada halaman pertama.
 * Menyediakan kontrak lengkap untuk 8 endpoint publik, 2 endpoint intake publik dengan proteksi berlapis, serta seluruh endpoint terproteksi internal (Auth, CMS, Media, CRM, Analitik, dan Emergency Toolkit).
 * Menstandarkan aturan `heartbeat` dan `durationSec` pada analitik untuk menjamin akurasi data agregasi.

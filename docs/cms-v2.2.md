@@ -168,7 +168,7 @@ Karena pada tahap awal (MVP) diterapkan sistem **1 Role Tunggal** di mana semua 
     
     {
       "tag": "articles",
-      "action": "update"
+      "action": "revalidate"
     }
     ```
   - **Kriteria Selesai & Toleransi Kegagalan (Failure Handling):**
