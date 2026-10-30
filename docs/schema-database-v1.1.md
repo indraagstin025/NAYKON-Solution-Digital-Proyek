@@ -320,7 +320,7 @@ Menampung ulasan kepuasan klien dengan relasi opsional ke portofolio hasil proye
 | `rating` | `INTEGER` | `Int` | - | Tidak | `5` | Nilai bintang (skala 1 - 5) |
 | `portfolioId` | `VARCHAR(64)?` | `String?` | - | Ya | `null` | Tautan relasi opsional ke portofolio terkait |
 | `sortOrder` | `INTEGER` | `Int` | - | Tidak | `0` | Urutan rotasi kartu |
-| `status` | `VARCHAR(32)` | `ContentStatus` | - | Tidak | `PUBLISHED` | DRAFT, PUBLISHED, ARCHIVED |
+| `status` | `VARCHAR(32)` | `ContentStatus` | - | Tidak | `PUBLISHED` | Status default `PUBLISHED` karena data testimoni yang diinputkan staf adalah hasil kurasi yang telah disetujui sebelumnya oleh klien untuk langsung tayang di website publik (berbeda dengan draf artikel/halaman yang masih dalam proses penulisan) |
 | `lastEditedById`| `VARCHAR(64)` | `String` | - | Tidak | - | Staf pengubah terakhir |
 | `createdAt` | `TIMESTAMPTZ(3)` | `DateTime` | - | Tidak | `now()` | Waktu pembuatan (UTC) |
 | `updatedAt` | `TIMESTAMPTZ(3)` | `DateTime` | `@updatedAt` | Tidak | - | Kunci Optimistic Locking (UTC) |
@@ -367,7 +367,7 @@ Menampung salinan cadangan konten sebelum perubahan atau penerbitan.
 | :--- | :--- | :--- | :--- | :---: | :--- | :--- |
 | `id` | `VARCHAR(64)` | `String` | `@id @default(cuid())` | Tidak | CUID | ID unik snapshot |
 | `site_id` | `VARCHAR(64)` | `String` | - | Tidak | `nextkarya-main` | Identitas situs |
-| `entityType` | `VARCHAR(50)` | `String` | - | Tidak | - | Tipe entitas: `POST`, `PORTFOLIO`, `SERVICE`, `PAGE` |
+| `entityType` | `VARCHAR(50)` | `String` | - | Tidak | - | Tipe entitas: `POST`, `PORTFOLIO`, `SERVICE`, `PAGE`, `FAQ`, `TESTIMONIAL` |
 | `entityId` | `VARCHAR(64)` | `String` | - | Tidak | - | ID entitas konten asal |
 | `version` | `INTEGER` | `Int` | - | Tidak | `1` | Nomor urut versi (otomatis naik) |
 | `title` | `VARCHAR(255)` | `String` | - | Tidak | - | Judul konten pada versi ini |
@@ -561,12 +561,13 @@ Menampung alokasi pengerjaan proyek per anggota tim.
 ### Kelompok 4: Dashboard Analitik & Pengaman Anti-Spam
 
 #### Tabel 17: `analytics_events` (Raw Event Kunjungan, TTL 90 Hari)
-Menampung sinyal kunjungan mentah yang dikirim via `navigator.sendBeacon`. Bebas PII dan tidak ada kolom kota di Fase 1.
+Menampung sinyal kunjungan mentah yang dikirim via `navigator.sendBeacon`. Bebas PII dan tidak ada kolom kota di Fase 1. Dilengkapi `sessionId` dan `durationSec` untuk menjamin kalkulasi sesi dan rasio pantulan (*bounce*) 100% akurat.
 
 | Nama Kolom | Tipe PostgreSQL | Tipe Prisma | Atribut | Nullable | Default | Keterangan |
 | :--- | :--- | :--- | :--- | :---: | :--- | :--- |
 | `id` | `BIGSERIAL` | `BigInt` | `@id @default(autoincrement())` | Tidak | Auto | ID autoincrement efisien |
 | `site_id` | `VARCHAR(64)` | `String` | - | Tidak | `nextkarya-main` | Identitas situs |
+| `sessionId` | `VARCHAR(64)` | `String` | - | Tidak | - | ID sesi peramban (direset jika tidak aktif > 30 menit) |
 | `eventName` | `VARCHAR(50)` | `String` | - | Tidak | - | `pageview`, `whatsapp_click`, `form_submit` |
 | `path` | `VARCHAR(255)` | `String` | - | Tidak | - | Path URL yang dikunjungi (contoh: `/layanan`) |
 | `referrer` | `VARCHAR(500)?`| `String?` | - | Ya | `null` | Rujukan URL asal pengunjung |
@@ -574,6 +575,7 @@ Menampung sinyal kunjungan mentah yang dikirim via `navigator.sendBeacon`. Bebas
 | `device` | `VARCHAR(20)` | `String` | - | Tidak | `unknown` | `mobile`, `desktop`, `tablet` |
 | `browser` | `VARCHAR(50)?` | `String?` | - | Ya | `null` | Chrome, Safari, Edge, Firefox |
 | `os` | `VARCHAR(50)?` | `String?` | - | Ya | `null` | Android, iOS, Windows, macOS |
+| `durationSec` | `INTEGER` | `Int` | - | Tidak | `0` | Durasi aktif halaman (detik) dari detak beacon |
 | `visitorIdHash` | `VARCHAR(64)` | `String` | - | Tidak | - | Hash anonim (IP + UA + salt harian) |
 | `occurredAt` | `TIMESTAMPTZ(3)` | `DateTime` | - | Tidak | `now()` | Waktu sinyal diterima (UTC) |
 
@@ -581,6 +583,7 @@ Menampung sinyal kunjungan mentah yang dikirim via `navigator.sendBeacon`. Bebas
 * Primary Key: `[id]`
 * Foreign Key: `site_id` merujuk ke `sites(id)` ON DELETE CASCADE
 * Index: `[site_id, occurredAt]` (Pembersihan harian TTL 90 hari pada pukul 02:00 WIB)
+* Index: `[site_id, sessionId, occurredAt]` (Mendukung pengelompokan sesi akurat)
 * Index: `[site_id, eventName, occurredAt]`
 * Index: `[site_id, visitorIdHash, occurredAt]`
 * Index: `[site_id, os, browser, occurredAt]` (Mendukung kueri demografi 30 hari)
@@ -588,20 +591,20 @@ Menampung sinyal kunjungan mentah yang dikirim via `navigator.sendBeacon`. Bebas
 ---
 
 #### Tabel 18: `analytics_daily` (Agregasi Harian Cepat Dashboard)
-Menampung data teragregasi untuk menyajikan kueri grafik 30 hari secara instan (< 100 milidetik), dengan pemisahan konversi WhatsApp vs Formulir.
+Menampung data teragregasi untuk menyajikan kueri grafik 30 hari secara instan (< 100 milidetik). Memuat baris per-halaman untuk analisis konten populer serta baris khusus tingkat situs (`path = '*'`) yang menyimpan angka pengunjung unik dan sesi yang sudah terdeduplikasi murni.
 
 | Nama Kolom | Tipe PostgreSQL | Tipe Prisma | Atribut | Nullable | Default | Keterangan |
 | :--- | :--- | :--- | :--- | :---: | :--- | :--- |
 | `id` | `BIGSERIAL` | `BigInt` | `@id @default(autoincrement())` | Tidak | Auto | ID autoincrement |
 | `site_id` | `VARCHAR(64)` | `String` | - | Tidak | `nextkarya-main` | Identitas situs |
 | `date` | `DATE` | `DateTime` | `@db.Date` | Tidak | - | Tanggal agregasi (UTC Date) |
-| `path` | `VARCHAR(255)` | `String` | - | Tidak | - | Path halaman |
-| `source` | `VARCHAR(50)` | `String` | - | Tidak | `direct` | Saluran rujukan trafik |
-| `device` | `VARCHAR(20)` | `String` | - | Tidak | `unknown` | Jenis perangkat |
+| `path` | `VARCHAR(255)` | `String` | - | Tidak | - | Path halaman atau `'*'` untuk total situs |
+| `source` | `VARCHAR(50)` | `String` | - | Tidak | `direct` | Saluran rujukan trafik (atau `'all'` pada ringkasan) |
+| `device` | `VARCHAR(20)` | `String` | - | Tidak | `unknown` | Jenis perangkat (atau `'all'` pada ringkasan) |
 | `pageviews` | `INTEGER` | `Int` | - | Tidak | `0` | Akumulasi total tayangan halaman |
-| `visitors` | `INTEGER` | `Int` | - | Tidak | `0` | Total Daily Unique Visitors pada hari tersebut |
-| `sessions` | `INTEGER` | `Int` | - | Tidak | `0` | Total sesi aktif |
-| `bounces` | `INTEGER` | `Int` | - | Tidak | `0` | Jumlah kunjungan 1 halaman saja |
+| `visitors` | `INTEGER` | `Int` | - | Tidak | `0` | Total Daily Unique Visitors pada dimensi tersebut |
+| `sessions` | `INTEGER` | `Int` | - | Tidak | `0` | Total sesi aktif (`COUNT(DISTINCT sessionId)`) |
+| `bounces` | `INTEGER` | `Int` | - | Tidak | `0` | Sesi 1 tayangan dengan durasi < 10 detik |
 | `durationSec` | `INTEGER` | `Int` | - | Tidak | `0` | Akumulasi durasi waktu aktif (detik) |
 | `whatsappClicks`| `INTEGER` | `Int` | - | Tidak | `0` | Total klik WhatsApp konsultasi |
 | `formSubmits` | `INTEGER` | `Int` | - | Tidak | `0` | Total pengiriman form konsultasi |
@@ -613,6 +616,7 @@ Menampung data teragregasi untuk menyajikan kueri grafik 30 hari secara instan (
 * **Indeks Unik Agregasi Wajib:**  
   `[site_id, date, path, source, device]`
 * Index: `[site_id, date]` (Kueri rentang filter dashboard: 7 hari, 30 hari)
+* Index: `[site_id, date, path]` (Kueri instan kartu metrik ringkasan via `path = '*'`)
 
 ---
 
@@ -662,39 +666,107 @@ Mencatat seluruh aksi takedown konten, penguncian form, banner darurat, dan peng
 
 ## 4. Mekanisme Agregasi Harian Analitik (*Analytics Daily Rollup*)
 
-Agar tabel `analytics_daily` terisi secara otomatis dan menjaga waktu respon dashboard di bawah 100 milidetik, backend Next.js menjalankan proses rollup berkala:
+Agar tabel `analytics_daily` terisi secara akurat dan menjaga waktu respon dashboard di bawah 100 milidetik, backend Next.js menjalankan proses rollup berkala dengan aturan kalkulasi yang presisi:
 
-1. **Jadwal Eksekusi Rollup:**
-   - **Rollup Inkremental (Per Jam):** Mengagregasi data raw event 2 jam terakhir untuk memperbarui metrik hari berjalan (*Today's Pulse*).
-   - **Rollup Konsolidasi Malam (Pukul 01:00 WIB):** Mengagregasi seluruh raw event hari kemarin secara final tepat 1 jam sebelum jadwal pembersihan data mentah (pukul 02:00 WIB).
-2. **Kueri SQL Idempotent (Upsert):**
+### 4.1 Definisi Perhitungan Metrik Kritis
+1. **Sesi Kunjungan (`sessions`):**  
+   Dihitung dari `COUNT(DISTINCT "sessionId")`. Sesi dihasilkan oleh skrip pelacak di peramban dan diperbarui dengan ID sesi baru jika pengunjung tidak beraktivitas selama lebih dari 30 menit.
+2. **Kunjungan Memantul (`bounces`):**  
+   Sebuah sesi diklasifikasikan sebagai *bounce* jika dalam sesi tersebut hanya terjadi tepat 1 event tayangan (`COUNT(*) = 1` dalam sesi) dan `durationSec < 10` detik.
+3. **Durasi Kunjungan (`durationSec`):**  
+   Akumulasi durasi waktu aktif tab peramban yang dikirimkan melalui sinyal detak (*beacon heartbeat*) setiap 15 detik atau saat tab ditutup (*visibilitychange / pagehide*).
+4. **Pencegahan Duplikasi Pengunjung Unik Tingkat Situs (*Site-Wide Deduplication*):**  
+   - Jika pengunjung unik V membuka halaman `/`, `/layanan`, dan `/kontak` dalam satu hari, pengunjung V akan tercatat di 3 baris path yang berbeda. Menjumlahkan `SUM(visitors)` dari seluruh baris path akan menghasilkan angka berlebih (*overcount*).
+   - Solusi Resmi: Kueri rollup menghasilkan dua kategori data:
+     - **Baris per Path (`path != '*'`):** Untuk tabel peringkat Halaman Terpopuler (*Top Pages*).
+     - **Baris Ringkasan Situs (`path = '*'`):** Untuk kartu metrik ringkasan atas (*Top-Line Overview Cards*). Pada baris `path = '*'`:
+       - `visitors` dihitung dari `COUNT(DISTINCT "visitorIdHash")` murni di seluruh event pada tanggal tersebut.
+       - `sessions` dihitung dari `COUNT(DISTINCT "sessionId")` murni di seluruh event pada tanggal tersebut.
+
+### 4.2 Strategi Rollup: Re-Agregasi Kumulatif Hari Berjalan
+* **Jadwal Eksekusi Rollup per Jam (Inkremental Kumulatif):**  
+  Rollup per jam **selalu mere-agregasi seluruh rentang hari berjalan (*Current Full Day*: dari 00:00:00 UTC sampai waktu berjalan)**. Re-agregasi satu hari penuh untuk situs agensi/klien (berkisar ribuan baris) memakan waktu < 50 milidetik di PostgreSQL. Dengan mere-agregasi satu hari penuh kumulatif, klausul `DO UPDATE SET ... = EXCLUDED...` **selalu mencerminkan total kumulatif riil hari tersebut hingga jam berjalan** tanpa risiko angka terpotong atau tertimpa data parsial.
+* **Jadwal Konsolidasi Final (Pukul 01:00 WIB):**  
+  Mengagregasi seluruh event hari kemarin secara final dan menguncinya di `analytics_daily` tepat 1 jam sebelum jadwal pembersihan data mentah (*raw purge*) pada pukul 02:00 WIB.
+
+### 4.3 Kueri SQL Rollup Lengkap & Idempotent
 ```sql
+WITH session_summary AS (
+  -- 1. Evaluasi karakteristik per sesi (apakah bounce atau bukan)
+  SELECT 
+    site_id,
+    DATE("occurredAt") AS date,
+    "sessionId",
+    "visitorIdHash",
+    source,
+    device,
+    MIN(path) AS entry_path,
+    COUNT(*) AS event_count,
+    MAX("durationSec") AS session_duration
+  FROM analytics_events
+  WHERE "occurredAt" >= $1 AND "occurredAt" < $2
+  GROUP BY site_id, DATE("occurredAt"), "sessionId", "visitorIdHash", source, device
+),
+page_rollup AS (
+  -- 2. Agregasi tingkat halaman individual (path != '*')
+  SELECT 
+    e.site_id,
+    DATE(e."occurredAt") AS date,
+    e.path,
+    e.source,
+    e.device,
+    COUNT(*) FILTER (WHERE e."eventName" = 'pageview') AS pageviews,
+    COUNT(DISTINCT e."visitorIdHash") AS visitors,
+    COUNT(DISTINCT e."sessionId") AS sessions,
+    COUNT(DISTINCT s."sessionId") FILTER (WHERE s.event_count = 1 AND s.session_duration < 10 AND s.entry_path = e.path) AS bounces,
+    COALESCE(SUM(e."durationSec"), 0) AS durationSec,
+    COUNT(*) FILTER (WHERE e."eventName" = 'whatsapp_click') AS whatsappClicks,
+    COUNT(*) FILTER (WHERE e."eventName" = 'form_submit') AS formSubmits,
+    COUNT(*) FILTER (WHERE e."eventName" IN ('whatsapp_click', 'form_submit')) AS conversions
+  FROM analytics_events e
+  LEFT JOIN session_summary s 
+    ON e.site_id = s.site_id AND e."sessionId" = s."sessionId"
+  WHERE e."occurredAt" >= $1 AND e."occurredAt" < $2
+  GROUP BY e.site_id, DATE(e."occurredAt"), e.path, e.source, e.device
+),
+site_total_rollup AS (
+  -- 3. Agregasi tingkat situs menyeluruh (path = '*', source = 'all', device = 'all')
+  SELECT 
+    site_id,
+    date,
+    '*' AS path,
+    'all' AS source,
+    'all' AS device,
+    COUNT(*) FILTER (WHERE "eventName" = 'pageview') AS pageviews,
+    COUNT(DISTINCT "visitorIdHash") AS visitors,
+    COUNT(DISTINCT "sessionId") AS sessions,
+    COUNT(DISTINCT "sessionId") FILTER (WHERE "sessionId" IN (
+      SELECT "sessionId" FROM session_summary WHERE event_count = 1 AND session_duration < 10
+    )) AS bounces,
+    COALESCE(SUM("durationSec"), 0) AS durationSec,
+    COUNT(*) FILTER (WHERE "eventName" = 'whatsapp_click') AS whatsappClicks,
+    COUNT(*) FILTER (WHERE "eventName" = 'form_submit') AS formSubmits,
+    COUNT(*) FILTER (WHERE "eventName" IN ('whatsapp_click', 'form_submit')) AS conversions
+  FROM analytics_events
+  WHERE "occurredAt" >= $1 AND "occurredAt" < $2
+  GROUP BY site_id, date
+)
+-- 4. Simpan hasil rollup ke tabel analytics_daily dengan klausul penimpaan kumulatif
 INSERT INTO analytics_daily (
   site_id, date, path, source, device,
   pageviews, visitors, sessions, bounces, durationSec,
   whatsappClicks, formSubmits, conversions
 )
-SELECT 
-  site_id,
-  DATE("occurredAt") AS date,
-  path,
-  source,
-  device,
-  COUNT(*) FILTER (WHERE "eventName" = 'pageview') AS pageviews,
-  COUNT(DISTINCT "visitorIdHash") AS visitors,
-  COUNT(DISTINCT "visitorIdHash") AS sessions,
-  0 AS bounces,
-  0 AS durationSec,
-  COUNT(*) FILTER (WHERE "eventName" = 'whatsapp_click') AS whatsappClicks,
-  COUNT(*) FILTER (WHERE "eventName" = 'form_submit') AS formSubmits,
-  COUNT(*) FILTER (WHERE "eventName" IN ('whatsapp_click', 'form_submit')) AS conversions
-FROM analytics_events
-WHERE "occurredAt" >= $1 AND "occurredAt" < $2
-GROUP BY site_id, DATE("occurredAt"), path, source, device
+SELECT * FROM page_rollup
+UNION ALL
+SELECT * FROM site_total_rollup
 ON CONFLICT (site_id, date, path, source, device)
 DO UPDATE SET
   pageviews = EXCLUDED.pageviews,
   visitors = EXCLUDED.visitors,
+  sessions = EXCLUDED.sessions,
+  bounces = EXCLUDED.bounces,
+  durationSec = EXCLUDED.durationSec,
   whatsappClicks = EXCLUDED.whatsappClicks,
   formSubmits = EXCLUDED.formSubmits,
   conversions = EXCLUDED.conversions;
@@ -1166,6 +1238,7 @@ model ProjectSchedule {
 model AnalyticsEvent {
   id            BigInt   @id @default(autoincrement())
   site_id       String   @default("nextkarya-main") @db.VarChar(64)
+  sessionId     String   @db.VarChar(64)
   eventName     String   @db.VarChar(50)
   path          String   @db.VarChar(255)
   referrer      String?  @db.VarChar(500)
@@ -1173,12 +1246,14 @@ model AnalyticsEvent {
   device        String   @default("unknown") @db.VarChar(20)
   browser       String?  @db.VarChar(50)
   os            String?  @db.VarChar(50)
+  durationSec   Int      @default(0)
   visitorIdHash String   @db.VarChar(64)
   occurredAt    DateTime @default(now()) @db.Timestamptz(3)
 
   site Site @relation(fields: [site_id], references: [id], onDelete: Cascade)
 
   @@index([site_id, occurredAt])
+  @@index([site_id, sessionId, occurredAt])
   @@index([site_id, eventName, occurredAt])
   @@index([site_id, visitorIdHash, occurredAt])
   @@index([site_id, os, browser, occurredAt])
