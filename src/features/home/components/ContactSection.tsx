@@ -7,8 +7,32 @@ export function ContactSection() {
   return (
     <section
       id="kontak"
-      className="relative isolate overflow-hidden bg-[#F8FAFC] dark:bg-[#030711] py-16 sm:py-20 lg:py-24 border-t border-[#E2E8F0] dark:border-blue-900/30"
+      className="relative isolate overflow-hidden bg-gradient-to-b from-[#EFF6FB] via-[#F8FAFC] to-[#FFFFFF] dark:from-[#030711] dark:via-[#061231] dark:to-[#08183A] py-16 sm:py-20 lg:py-24 border-t border-[#E2E8F0] dark:border-blue-900/30"
     >
+      <svg
+        viewBox="0 0 260 260"
+        fill="none"
+        aria-hidden="true"
+        className="pointer-events-none absolute bottom-0 left-0 h-[180px] w-[180px] sm:h-[230px] sm:w-[230px] -z-10"
+      >
+        <circle
+          cx="15"
+          cy="245"
+          r="135"
+          fill="#005090"
+          fillOpacity="0.05"
+          className="dark:opacity-15"
+        />
+        <circle
+          cx="15"
+          cy="245"
+          r="164"
+          stroke="#005090"
+          strokeOpacity="0.25"
+          strokeWidth="1.3"
+        />
+        <circle cx="147.7" cy="148.6" r="5.5" fill="#0986C8" />
+      </svg>
 
       <div className="relative z-10 mx-auto w-full max-w-[1240px] px-6 sm:px-9 lg:px-14 grid items-start gap-12 lg:grid-cols-[0.92fr_1.08fr] lg:gap-14">
         <ScrollReveal direction="left">

@@ -6,8 +6,32 @@ export function WorkflowSection() {
   return (
     <section
       id="alur"
-      className="relative isolate overflow-hidden bg-white dark:bg-[#030711] py-16 sm:py-20 lg:py-24 border-t border-[#E2E8F0] dark:border-blue-900/30"
+      className="relative isolate overflow-hidden bg-gradient-to-b from-[#FFFFFF] via-[#F8FAFC] to-[#EFF6FB] dark:from-[#030711] dark:via-[#061231] dark:to-[#08183A] py-16 sm:py-20 lg:py-24 border-t border-[#E2E8F0] dark:border-blue-900/30"
     >
+      <svg
+        viewBox="0 0 260 260"
+        fill="none"
+        aria-hidden="true"
+        className="pointer-events-none absolute top-0 right-0 h-[180px] w-[180px] sm:h-[230px] sm:w-[230px] -z-10"
+      >
+        <circle
+          cx="245"
+          cy="15"
+          r="135"
+          fill="#0986C8"
+          fillOpacity="0.05"
+          className="dark:opacity-15"
+        />
+        <circle
+          cx="245"
+          cy="15"
+          r="164"
+          stroke="#005090"
+          strokeOpacity="0.25"
+          strokeWidth="1.3"
+        />
+        <circle cx="115.8" cy="116" r="5.5" fill="#005090" />
+      </svg>
 
       <div className="relative z-10 mx-auto w-full max-w-[1240px] px-6 sm:px-9 lg:px-14">
         <ScrollReveal className="text-center max-w-[740px] mx-auto">
