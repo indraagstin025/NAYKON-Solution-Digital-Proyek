@@ -1,7 +1,7 @@
 # Spesifikasi & Daftar Fitur CRM (Tahap Awal & Multiplatform)
 **Next Karya Digital Solutions**  
 *Dokumen Arsitektur & Perencanaan Fitur Sistem Manajemen Hubungan Klien & Jadwal Proyek*  
-*Versi: 2.1 (Agenda Follow-up Hari Ini, Anti-Spam Leads, & Resource Timeline)*  
+*Versi: 2.2 (Multi-User Concurrency, Anti-Collision, & Resource Timeline)*  
 *Tanggal: 30 Oktober 2026*
 
 ---
@@ -12,9 +12,10 @@ Sistem CRM (Customer Relationship Management) Next Karya Digital Solutions diran
 
 Fokus utamanya bukan birokrasi penjualan yang rumit, melainkan:
 1. **Menutup Kesepakatan Lebih Cepat (*Fast Deal Closing*):** Merespons calon klien dari website resmi `nextkarya.id` dan WhatsApp dengan cepat tanpa ada prospek yang terlewat.
-2. **Agenda Follow-Up Harian Terpantau (*Daily Follow-Up Discipline*):** Menyediakan halaman kerja khusus setiap pagi agar tim langsung tahu siapa calon klien yang harus dihubungi hari ini.
-3. **Visibilitas Beban Kerja Tim (*Team Resource Timeline*):** Mengetahui ketersediaan jadwal tim pengembang dan desainer secara visual agar estimasi waktu ke klien selalu akurat dan tidak terjadi bentrok pengerjaan.
-4. **Penyimpanan Riwayat Klien Terpusat (*Single Client Profile*):** Menampung data kontak, catatan diskusi, nilai proyek, status pengerjaan, hingga batas akhir garansi purnajual dalam satu kartu klien.
+2. **Kolaborasi Multi-Akun Tanpa Bentrok (*Safe Multi-User Concurrency*):** Memastikan 3 orang anggota tim dapat membuka data prospek, mencatat hasil diskusi, dan mengatur jadwal proyek secara bersamaan di perangkat masing-masing dengan aman.
+3. **Agenda Follow-Up Harian Terpantau (*Daily Follow-Up Discipline*):** Menyediakan halaman kerja khusus setiap pagi agar tim langsung tahu siapa calon klien yang harus dihubungi hari ini.
+4. **Visibilitas Beban Kerja Tim (*Team Resource Timeline*):** Mengetahui ketersediaan jadwal tim pengembang dan desainer secara visual agar estimasi waktu ke klien selalu akurat dan tidak terjadi bentrok pengerjaan.
+5. **Penyimpanan Riwayat Klien Terpusat (*Single Client Profile*):** Menampung data kontak, catatan diskusi, nilai proyek, status pengerjaan, hingga batas akhir garansi purnajual dalam satu kartu klien.
 
 ```
                          ┌────────────────────────────────────────────────────────┐
@@ -24,8 +25,9 @@ Fokus utamanya bukan birokrasi penjualan yang rumit, melainkan:
                                                      │
                                                      ▼
 ┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
-│  AGENDA FOLLOW-UP HARI INI (DIBUKA TIM SETIAP PAGI)                                              │
+│  AGENDA FOLLOW-UP HARI INI (DIBUKA 3 ANGGOTA TIM SETIAP PAGI)                                    │
 │  - Daftar Prospek Jatuh Tempo Hari Ini (Due Today) & Terlewat (Overdue)                          │
+│  - Penanda Penanggung Jawab (Assignee) Mencegah Duplikasi Follow-Up                              │
 │  - Tombol 1-Klik: Chat WhatsApp / Kirim Email / Jadwalkan Ulang                                  │
 └────────────────────────────────────────────┬─────────────────────────────────────────────────────┘
                                              │
@@ -34,6 +36,7 @@ Fokus utamanya bukan birokrasi penjualan yang rumit, melainkan:
 │  ALUR STATUS PENJUALAN (SALES PIPELINE)                                                          │
 │  [ 1. BARU ] ──▶ [ 2. DIHUBUNGI ] ──▶ [ 3. PROPOSAL ] ──▶ [ 4. DEAL / MENANG ]                  │
 │                                                      └──▶ [ 5. BATAL ]                           │
+│  - Dilengkapi Optimistic Locking agar Status Pipeline Tidak Tertimpa Saat Diedit Bersamaan       │
 └────────────────────────────────────────────┬─────────────────────────────────────────────────────┘
                                              │ Prospek Deal / Resmi Jadi Proyek
                                              ▼
@@ -151,21 +154,44 @@ Setelah proyek klien berhasil diluncurkan (*Go-Live*), data tetap dipantau untuk
 
 ---
 
+### Pilar 7: Kolaborasi Multi-Akun & Penanganan Akses Bersamaan (*Multi-User Concurrency*)
+
+Dirancang khusus agar 3 orang anggota tim dapat bekerja bersamaan di CRM secara aman dan sinkron:
+
+#### 7.1 Sesi Mandiri Tanpa Konflik (*Isolated Sessions*)
+* Ketiga anggota tim memiliki akun masing-masing dengan email resmi (`nama@nextkarya.id`).
+* Masing-masing staf dapat membuka CRM di laptop maupun HP secara bersamaan tanpa saling memutuskan sesi login (*tidak saling tendang*).
+
+#### 7.2 Penanda Penanggung Jawab (*Lead Assignee*)
+* Setiap prospek yang masuk dapat diberikan label penanggung jawab utama (*Assigned To: Nama Anggota Tim*).
+* Menghindari duplikasi komunikasi: Rekan tim lain dapat langsung melihat bahwa prospek tersebut sudah dipegang oleh rekan kerjanya, sehingga klien tidak dihubungi dua kali oleh orang yang berbeda.
+
+#### 7.3 Pencegahan Konflik Status Pipeline (*Optimistic Locking*)
+* Jika dua anggota tim membuka kartu prospek yang sama pada detik yang sama, sistem menggunakan stempel waktu `updatedAt`.
+* Jika Staf A sudah mengubah status prospek menjadi *"Kirim Proposal"*, dan Staf B mencoba mengubahnya menjadi *"Batal"* tanpa memuat ulang layar, sistem menampilkan pemberitahuan ramah:
+  > *"Perhatian: Status prospek ini baru saja diperbarui oleh [Nama Rekan]. Silakan muat ulang halaman untuk melihat status terkini."*
+
+#### 7.4 Jejak Riwayat Tindakan (*Activity Log*)
+* Setiap perubahan status prospek, penambahan catatan follow-up, pengubahan nominal nilai proyek, atau penggeseran balok timeline proyek otomatis mencatat nama staf yang melakukan tindakan tersebut.
+
+---
+
 ## 3. Matriks Prioritas Rilis Fitur CRM
 
 | No | Modul / Fitur | Prioritas | Manfaat bagi Bisnis |
 | :--- | :--- | :---: | :--- |
 | **1** | Kotak Masuk Prospek (*Leads Inbox*) | **Fase 1 (MVP)** | Menampung calon klien dari website publik |
-| **2** | Pengamanan Anti-Spam (Honeypot & Rate Limit) | **Fase 1 (MVP)** | Mencegah form website dibanjiri pesan spam bot |
-| **3** | Agenda Follow-Up Hari Ini (*Due Today*) | **Fase 1 (MVP)** | Menjamin tidak ada calon klien yang lupa dihubungi |
-| **4** | 5 Tahapan Alur Status (*Pipeline*) | **Fase 1 (MVP)** | Memantau posisi negosiasi dengan klien |
-| **5** | Tombol Chat WhatsApp 1-Klik | **Fase 1 (MVP)** | Mempercepat waktu respons tim ke calon klien |
-| **6** | Catatan Singkat & Nilai Proyek (*Deal Value*) | **Fase 1 (MVP)** | Mencatat hasil diskusi dan estimasi omset |
-| **7** | Timeline Beban Kerja Tim (*Schedule View*) | **Fase 1 (MVP)** | Mengetahui alokasi jadwal tim pengembang |
-| **8** | Pelacak Masa Garansi Purnajual | **Fase 1 (MVP)** | Menjaga kepuasan klien dan peluang perpanjangan |
-| **9** | Filter & Pencarian Cepat | **Fase 1 (MVP)** | Menemukan data kontak klien seketika |
-| **10** | Notifikasi Pengingat Otomatis via HP/Email | **Fase 2** | Notifikasi jadwal follow-up ke ponsel staf |
-| **11** | Pembuatan Invoice & Faktur Otomatis | **Fase 2** | Otomasi tagihan termin pembayaran proyek |
+| **2** | Kolaborasi Multi-Akun & Anti-Bentrok | **Fase 1 (MVP)** | Menjamin akses paralel aman bagi 3 anggota tim |
+| **3** | Pengamanan Anti-Spam (Honeypot & Rate Limit) | **Fase 1 (MVP)** | Mencegah form website dibanjiri pesan spam bot |
+| **4** | Agenda Follow-Up Hari Ini (*Due Today*) | **Fase 1 (MVP)** | Menjamin tidak ada calon klien yang lupa dihubungi |
+| **5** | 5 Tahapan Alur Status (*Pipeline*) | **Fase 1 (MVP)** | Memantau posisi negosiasi dengan klien |
+| **6** | Tombol Chat WhatsApp 1-Klik | **Fase 1 (MVP)** | Mempercepat waktu respons tim ke calon klien |
+| **7** | Catatan Singkat & Nilai Proyek (*Deal Value*) | **Fase 1 (MVP)** | Mencatat hasil diskusi dan estimasi omset |
+| **8** | Timeline Beban Kerja Tim (*Schedule View*) | **Fase 1 (MVP)** | Mengetahui alokasi jadwal tim pengembang |
+| **9** | Pelacak Masa Garansi Purnajual | **Fase 1 (MVP)** | Menjaga kepuasan klien dan peluang perpanjangan |
+| **10** | Filter & Pencarian Cepat | **Fase 1 (MVP)** | Menemukan data kontak klien seketika |
+| **11** | Notifikasi Pengingat Otomatis via HP/Email | **Fase 2** | Notifikasi jadwal follow-up ke ponsel staf |
+| **12** | Pembuatan Invoice & Faktur Otomatis | **Fase 2** | Otomasi tagihan termin pembayaran proyek |
 
 ---
 
@@ -173,6 +199,7 @@ Setelah proyek klien berhasil diluncurkan (*Go-Live*), data tetap dipantau untuk
 
 Dengan spesifikasi yang disempurnakan ini, **Sistem CRM Next Karya Digital Solutions**:
 1. Menggunakan identitas resmi brand `nextkarya.id` dan `contact@nextkarya.id`.
-2. Menghadirkan halaman kerja harian **"Agenda Follow-Up Hari Ini"** di MVP, sehingga tidak ada prospek yang terlewat meskipun belum ada push notification HP.
-3. Terlindungi dari spam bot melalui Honeypot, validasi Origin, dan Rate Limiting.
-4. Memberikan visibilitas alokasi pengerjaan proyek yang jelas bagi tim melalui **Timeline Beban Kerja Tim**.
+2. Menjamin kolaborasi 3 orang anggota tim berjalan aman, sinkron, dan bebas bentrok (*concurrency-safe*).
+3. Menghadirkan halaman kerja harian **"Agenda Follow-Up Hari Ini"** di MVP, sehingga tidak ada prospek yang terlewat meskipun belum ada push notification HP.
+4. Terlindungi dari spam bot melalui Honeypot, validasi Origin, dan Rate Limiting.
+5. Memberikan visibilitas alokasi pengerjaan proyek yang jelas bagi tim melalui **Timeline Beban Kerja Tim**.

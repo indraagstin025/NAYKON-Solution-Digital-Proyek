@@ -1,7 +1,7 @@
 # Spesifikasi & Daftar Fitur CMS (Headless & Multi-Tenant Ready)
 **Next Karya Digital Solutions**  
 *Dokumen Arsitektur & Perencanaan Fitur Sistem Manajemen Konten*  
-*Versi: 2.1 (Multi-Tenant Ready, Snapshot Pengaman, & Anti-Spam)*  
+*Versi: 2.2 (Multi-Tenant Ready, Concurrency Safe, & Snapshot Pengaman)*  
 *Tanggal: 30 Oktober 2026*
 
 ---
@@ -157,17 +157,29 @@ Karena pada tahap awal (MVP) diterapkan sistem **1 Role Tunggal** di mana semua 
 
 ---
 
-### Pilar 6: Sistem Pengguna & Hak Akses Sederhana (*Single Role Access*)
+### Pilar 6: Sistem Pengguna & Kolaborasi Multi-Akun (*Multi-User Concurrency*)
 
-Untuk menjaga sistem tetap gesit, efisien, dan bebas dari *overengineering*:
+Dirancang khusus untuk tim Next Karya Digital Solutions (saat ini 3 akun aktif) agar dapat bekerja bersamaan secara aman tanpa risiko data rusak atau tertimpa:
 
-* **Model 1 Role Tunggal (*Flat Access*):**
-  - Seluruh anggota tim Next Karya Digital Solutions yang memiliki akun terdaftar memiliki hak akses penuh dan setara.
-  - Setiap staf dapat membuat draf, mengunggah media, mengedit konten, dan langsung mempublikasikan data tanpa alur birokrasi persetujuan berbelit.
-  - Perlindungan konten diamankan oleh sistem **Snapshot Otomatis** dan **Soft Delete** pada Pilar 2.
-* **Keamanan Akun:**
-  - Login menggunakan alamat email kerja (`nama@nextkarya.id`) dan kata sandi yang di-hash dengan standar keamanan industri (Argon2id atau Bcrypt).
-  - Manajemen sesi login yang aman dengan perlindungan *brute-force lockout*.
+#### 6.1 Sesi Mandiri (*Isolated User Sessions*)
+* Setiap anggota tim memiliki akun login sendiri dengan email kerja masing-masing (`nama@nextkarya.id`) dan password terenkripsi.
+* Sesi login dikelola secara terisolasi dengan token mandiri. Tidak ada bentrok sesi atau kejadian *ter-logout otomatis* saat ketiga anggota tim membuka dashboard bersamaan di laptop atau ponsel masing-masing.
+
+#### 6.2 Integritas Transaksi Database (ACID Compliance)
+* PostgreSQL mengisolasi setiap query pembacaan dan penulisan data secara paralel.
+* Jika Anggota Tim 1 sedang mengedit Layanan, Anggota Tim 2 sedang mengunggah gambar portofolio, dan Anggota Tim 3 sedang menulis artikel, database memproses transaksi masing-masing di baris (*row*) terpisah tanpa risiko korupsi data.
+
+#### 6.3 Pencegahan Konflik Pengeditan Bersamaan (*Optimistic Locking*)
+Jika dua anggota tim secara kebetulan membuka dan mengedit artikel yang sama di waktu bersamaan:
+1. Setiap entitas artikel dan portofolio memuat stempel waktu perubahan `updatedAt`.
+2. Saat Anggota Tim A menyimpan perubahan, nilai `updatedAt` diperbarui.
+3. Saat Anggota Tim B mencoba menyimpan perubahan dari layar yang belum di-refresh, sistem membandingkan stempel waktu awal dan stempel waktu terkini.
+4. Karena data sudah berubah, sistem menolak penimpaan buta dan menampilkan dialog peringatan:
+   > *"Perhatian: Konten ini baru saja diperbarui oleh [Nama Rekan] beberapa saat yang lalu. Silakan muat ulang (refresh) halaman untuk melihat perubahan terkini sebelum menyimpan."*
+5. Editan Anggota Tim A tidak hilang, dan Anggota Tim B dapat menggabungkan revisinya dengan aman.
+
+#### 6.4 Jejak Pengubah Terakhir (*Last Edited By*)
+* Setiap artikel, portofolio, dan layanan mencatat identitas nama staf yang terakhir melakukan pembaruan (`lastEditedById`) dan waktu perubahannya, sehingga transparansi koordinasi tim tetap terjaga.
 
 ---
 
@@ -176,16 +188,16 @@ Untuk menjaga sistem tetap gesit, efisien, dan bebas dari *overengineering*:
 | No | Modul / Fitur | Prioritas | Keterangan |
 | :--- | :--- | :---: | :--- |
 | **1** | Multi-Tenancy Dasar (`site_id` di database) | **Fase 1 (MVP)** | Menjamin sistem siap dipakai internal maupun klien |
-| **2** | Artikel & Blog (Editor, Cover, Kategori, Tag) | **Fase 1 (MVP)** | Pemasaran konten & SEO Google |
-| **3** | Portofolio & Studi Kasus Bisnis | **Fase 1 (MVP)** | Etalase karya dan bukti kredibilitas bagi calon klien |
-| **4** | Katalog Layanan & Paket Harga | **Fase 1 (MVP)** | Menampilkan penawaran jasa dan struktur harga |
-| **5** | FAQ & Testimoni Klien | **Fase 1 (MVP)** | Menjawab pertanyaan umum & bukti sosial |
-| **6** | Snapshot Pengaman Sebelum Publish | **Fase 1 (MVP)** | Pengaman anti-konten tertimpa pada sistem 1 role |
-| **7** | Soft Delete (Arsip Pengaman) | **Fase 1 (MVP)** | Mencegah konten terhapus permanen tanpa sengaja |
-| **8** | Pengamanan API (Rate Limit & Origin Check) | **Fase 1 (MVP)** | Mencegah serangan spam dan request liar |
-| **9** | Pengelola Media (Cloud R2 / S3) | **Fase 1 (MVP)** | Media penyimpanan terpusat gambar dan mockup |
-| **10** | Headless API & Webhook Next.js | **Fase 1 (MVP)** | Jalur distribusi data ke website publik dan mobile app |
-| **11** | Akun Tim 1 Role Tunggal | **Fase 1 (MVP)** | Akses langsung tanpa hierarki berbelit |
+| **2** | Kolaborasi Multi-Akun & Optimistic Locking | **Fase 1 (MVP)** | Menjamin keamanan akses paralel bagi 3 anggota tim |
+| **3** | Artikel & Blog (Editor, Cover, Kategori, Tag) | **Fase 1 (MVP)** | Pemasaran konten & SEO Google |
+| **4** | Portofolio & Studi Kasus Bisnis | **Fase 1 (MVP)** | Etalase karya dan bukti kredibilitas bagi calon klien |
+| **5** | Katalog Layanan & Paket Harga | **Fase 1 (MVP)** | Menampilkan penawaran jasa dan struktur harga |
+| **6** | FAQ & Testimoni Klien | **Fase 1 (MVP)** | Menjawab pertanyaan umum & bukti sosial |
+| **7** | Snapshot Pengaman Sebelum Publish | **Fase 1 (MVP)** | Pengaman anti-konten tertimpa pada sistem 1 role |
+| **8** | Soft Delete (Arsip Pengaman) | **Fase 1 (MVP)** | Mencegah konten terhapus permanen tanpa sengaja |
+| **9** | Pengamanan API (Rate Limit & Origin Check) | **Fase 1 (MVP)** | Mencegah serangan spam dan request liar |
+| **10** | Pengelola Media (Cloud R2 / S3) | **Fase 1 (MVP)** | Media penyimpanan terpusat gambar dan mockup |
+| **11** | Headless API & Webhook Next.js | **Fase 1 (MVP)** | Jalur distribusi data ke website publik dan mobile app |
 | **12** | Penjadwalan Terbit Otomatis | **Fase 2** | Otomasi tanggal dan jam terbit di masa depan |
 | **13** | Riwayat Revisi Lengkap Berjenjang | **Fase 2** | Audit trail multi-versi dengan visual diff |
 | **14** | Otomatisasi 301 Redirects | **Fase 2** | Pencegah tautan rusak jika slug URL diganti |
@@ -194,8 +206,8 @@ Untuk menjaga sistem tetap gesit, efisien, dan bebas dari *overengineering*:
 
 ## 4. Kesimpulan
 
-Dengan penyempurnaan ini, **Sistem CMS Next Karya Digital Solutions**:
-1. Menghilangkan seluruh jejak penamaan brand lama dan menggunakan domain resmi `nextkarya.id`.
-2. Siap melayani website Next Karya sekaligus siap dijual ke klien (*Multi-Tenant Ready*) sejak hari pertama melalui partisi `site_id`.
-3. Memiliki pengaman konten yang kuat (Snapshot Otomatis & Soft Delete) meskipun menggunakan 1 role tim.
+Dengan spesifikasi ini, **Sistem CMS Next Karya Digital Solutions**:
+1. Menghilangkan seluruh jejak penamaan brand lama dan beroperasi di domain resmi `nextkarya.id`.
+2. Siap digunakan oleh seluruh anggota tim (3 akun) secara paralel dengan aman berkat *Optimistic Locking* dan *Auto-Snapshot*.
+3. Siap diperluas menjadi modul CMS untuk klien (*Multi-Tenant Ready*) sejak hari pertama.
 4. Terlindungi dari spam dan bot melalui Rate Limiting dan validasi Origin.
