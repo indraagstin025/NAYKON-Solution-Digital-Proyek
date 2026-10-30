@@ -1,7 +1,19 @@
 import React from "react";
-import { EnvelopeClosedIcon, ClockIcon, ChatBubbleIcon } from "@radix-ui/react-icons";
+import {
+  SewingPinIcon,
+  EnvelopeClosedIcon,
+  ClockIcon,
+  ChatBubbleIcon,
+} from "@radix-ui/react-icons";
 
 export const CONTACT_CHANNELS = [
+  {
+    icon: <SewingPinIcon className="h-5 w-5" />,
+    title: "Alamat Studio & Kantor",
+    content: "Jl. Karyawangi No. 116, Kec. Parongpong, Kabupaten Bandung Barat, Jawa Barat 40559",
+    isLink: true,
+    linkHref: "https://maps.google.com/?q=Jl.+Karyawangi+No.+116,+Kec.+Parongpong,+Kabupaten+Bandung+Barat,+Jawa+Barat",
+  },
   {
     icon: <EnvelopeClosedIcon className="h-5 w-5" />,
     title: "Email Resmi Konsultasi",

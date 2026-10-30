@@ -1,5 +1,6 @@
 import React from "react";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
+import { GoogleMapsEmbed } from "@/components/GoogleMapsEmbed";
 import { CONTACT_INFO_ITEMS } from "../data/homeData";
 import { ConsultationForm } from "./ConsultationForm";
 
@@ -66,7 +67,9 @@ export function ContactSection() {
                     {item.isLink && item.linkHref ? (
                       <a
                         href={item.linkHref}
-                        className="mt-0.5 inline-block text-[15px] sm:text-base font-extrabold text-[#005090] dark:text-[#0986C8] hover:underline"
+                        target={item.linkHref.startsWith("http") ? "_blank" : undefined}
+                        rel={item.linkHref.startsWith("http") ? "noopener noreferrer" : undefined}
+                        className="mt-0.5 inline-block text-[13.5px] sm:text-[14.5px] font-bold text-[#005090] dark:text-[#0986C8] hover:underline"
                       >
                         {item.content}
                       </a>
@@ -84,6 +87,12 @@ export function ContactSection() {
 
         <ScrollReveal direction="right" delayMs={100}>
           <ConsultationForm />
+        </ScrollReveal>
+      </div>
+
+      <div className="relative z-10 mx-auto w-full max-w-[1240px] px-6 sm:px-9 lg:px-14 mt-12 sm:mt-16">
+        <ScrollReveal direction="up" delayMs={120}>
+          <GoogleMapsEmbed />
         </ScrollReveal>
       </div>
     </section>

@@ -64,7 +64,7 @@ export function ContactFormCard({ sourcePage = "/kontak" }: { sourcePage?: strin
             value={formData.name}
             onChange={handleChange}
             autoComplete="name"
-            placeholder="Nama Anda"
+            placeholder="Contoh: Budi Pratama"
             required
             maxLength={100}
             aria-invalid={Boolean(fieldErrors.name)}
@@ -84,7 +84,7 @@ export function ContactFormCard({ sourcePage = "/kontak" }: { sourcePage?: strin
             value={formData.email}
             onChange={handleChange}
             autoComplete="email"
-            placeholder="nama@email.com"
+            placeholder="nama@perusahaan.com atau email aktif"
             required
             maxLength={120}
             aria-invalid={Boolean(fieldErrors.email)}
@@ -126,7 +126,7 @@ export function ContactFormCard({ sourcePage = "/kontak" }: { sourcePage?: strin
           rows={4}
           value={formData.message}
           onChange={handleChange}
-          placeholder="Jelaskan kebutuhan proyek Anda atau fitur yang ingin dibangun..."
+          placeholder="Ceritakan rencana proyek website atau kendala sistem yang ingin Anda selesaikan..."
           required
           maxLength={2000}
           aria-invalid={Boolean(fieldErrors.message)}

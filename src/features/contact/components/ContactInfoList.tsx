@@ -27,7 +27,9 @@ export function ContactInfoList() {
                 {item.isLink && item.linkHref ? (
                   <a
                     href={item.linkHref}
-                    className="mt-0.5 inline-block text-[15px] sm:text-base font-extrabold text-[#005090] dark:text-[#0986C8] hover:underline"
+                    target={item.linkHref.startsWith("http") ? "_blank" : undefined}
+                    rel={item.linkHref.startsWith("http") ? "noopener noreferrer" : undefined}
+                    className="mt-0.5 inline-block text-[13.5px] sm:text-[14.5px] font-bold text-[#005090] dark:text-[#0986C8] hover:underline"
                   >
                     {item.content}
                   </a>

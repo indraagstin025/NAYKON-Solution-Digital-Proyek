@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
+  SewingPinIcon,
   EnvelopeClosedIcon,
   ClockIcon,
   ArrowRightIcon,
@@ -92,6 +93,24 @@ export default function Footer() {
               Kontak Resmi
             </h3>
             <ul className="mt-4 space-y-3 text-[13.5px] text-[#4A5D78] dark:text-slate-300">
+              <li className="flex items-start gap-2.5">
+                <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-[#005090] text-white mt-0.5">
+                  <SewingPinIcon className="h-3.5 w-3.5" />
+                </div>
+                <div>
+                  <span className="block text-[11.5px] font-semibold text-[#4A5D78] dark:text-slate-400">
+                    Alamat Studio &amp; Kantor
+                  </span>
+                  <a
+                    href="https://maps.google.com/?q=Jl.+Karyawangi+No.+116,+Kec.+Parongpong,+Kabupaten+Bandung+Barat,+Jawa+Barat"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-0.5 block font-medium text-[12.5px] sm:text-[13px] leading-snug text-[#041E42] dark:text-slate-200 hover:text-[#005090] dark:hover:text-[#0986C8] hover:underline"
+                  >
+                    Jl. Karyawangi No. 116, Kec. Parongpong, Kabupaten Bandung Barat, Jawa Barat 40559
+                  </a>
+                </div>
+              </li>
               <li className="flex items-start gap-2.5">
                 <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-[#005090] text-white mt-0.5">
                   <EnvelopeClosedIcon className="h-3.5 w-3.5" />
