@@ -44,27 +44,27 @@ export const HERO_HIGHLIGHTS: HighlightItem[] = [
 export const ABOUT_FEATURES = [
   {
     icon: <TargetIcon className="h-5 w-5" />,
-    title: "Pendekatan Berbasis Solusi Nyata",
+    title: "Dimulai dari Masalah Anda, Bukan dari Teknologi",
     description:
-      "Kami memahami proses bisnis Anda terlebih dahulu sebelum menulis baris kode pertama, memastikan teknologi yang dibuat memecahkan kendala operasional riil.",
+      "Kami dengarkan dulu kendala bisnis Anda, baru kami bangun solusinya. Jadi setiap fitur ada alasannya, dan setiap biaya yang Anda keluarkan terasa manfaatnya.",
   },
   {
     icon: <LightningBoltIcon className="h-5 w-5" />,
-    title: "Metodologi Agile & Iteratif",
+    title: "Anda Tidak Perlu Menebak-nebak Progresnya",
     description:
-      "Pengembangan bertahap dengan update berkala dan transparansi progres, sehingga Anda selalu tahu setiap perkembangan dan sistem fleksibel terhadap perubahan.",
+      "Setiap tahap kami kabari. Anda bisa melihat, mengoreksi, dan meminta penyesuaian sebelum terlambat, tanpa drama revisi di akhir proyek.",
   },
   {
     icon: <CodeIcon className="h-5 w-5" />,
-    title: "Standar Kode Teruji & Skalabilitas Tinggi",
+    title: "Dibangun untuk Jangka Panjang, Bukan Sekadar Rilis",
     description:
-      "Arsitektur modern yang cepat, aman dari celah kerentanan, dan mudah dikembangkan untuk kebutuhan jangka panjang bisnis Anda.",
+      "Kode yang rapi, cepat, dan aman, sehingga website Anda siap ditambah fiturnya kapan pun bisnis Anda berkembang, tanpa harus dibangun ulang dari awal.",
   },
   {
     icon: <CheckCircledIcon className="h-5 w-5" />,
-    title: "Transparansi Biaya & Garansi Purnajual",
+    title: "Harga Jelas di Awal, Tenang Setelah Rilis",
     description:
-      "Biaya jelas dan pasti di awal tanpa biaya tersembunyi, disertai garansi perbaikan bug dan pendampingan teknis setelah sistem resmi dirilis.",
+      "Tidak ada biaya tiba-tiba. Setelah website live, bug kami perbaiki dan tim kami tetap mendampingi Anda.",
   },
 ];
 

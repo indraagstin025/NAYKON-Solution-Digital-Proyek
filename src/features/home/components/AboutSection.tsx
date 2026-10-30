@@ -30,19 +30,17 @@ export function AboutSection() {
               </span>
             </div>
 
-            <h2 className="mt-4 text-[26px] sm:text-[32px] lg:text-[35px] font-extrabold leading-[1.18] tracking-[-0.02em] text-[#041E42] dark:text-white">
-              Solusi digital yang dibangun
-              <br className="hidden sm:inline" /> berdasarkan kebutuhan{" "}
+            <h2 className="mt-4 text-[25px] sm:text-[30px] lg:text-[33px] font-extrabold leading-[1.22] tracking-[-0.02em] text-[#041E42] dark:text-white">
+              Kami tidak sekadar membuat website.
+              <br className="hidden sm:inline" />{" "}
+              Kami membuat website yang{" "}
               <span className="text-[#005090] dark:text-[#0986C8]">
-                riil bisnis Anda.
+                bekerja untuk bisnis Anda.
               </span>
             </h2>
 
             <p className="mt-3.5 text-[13.5px] sm:text-[14.5px] leading-[1.7] text-[#4A5D78] dark:text-slate-300">
-              Next Karya Digital Solutions adalah tim rekayasa web dan aplikasi yang berfokus
-              pada hasil terukur. Tim kami merancang arsitektur website dan sistem yang
-              cepat, aman, dan mudah dioperasikan agar bisnis Anda dapat berkembang secara
-              efisien.
+              Bayangkan calon pelanggan menemukan bisnis Anda di Google, langsung paham apa yang Anda tawarkan, dan langsung menghubungi Anda, tanpa bingung dan tanpa menunggu loading lama. Itulah yang kami bangun, untuk UMKM, perusahaan, dan organisasi.
             </p>
           </div>
 
@@ -60,17 +58,17 @@ export function AboutSection() {
                 className="h-[210px] sm:h-[235px] lg:h-[230px] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
               />
 
-              <div className="absolute bottom-3 left-3 right-3 sm:right-auto sm:max-w-[360px] rounded-xl border border-white/40 dark:border-slate-700/60 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md px-3.5 py-2.5 shadow-[0_10px_25px_-5px_rgba(10,35,80,0.18)] flex items-center gap-3 transition-transform duration-300 group-hover:-translate-y-0.5">
+              <div className="absolute bottom-3 left-3 right-3 sm:right-auto sm:max-w-[400px] rounded-xl border border-white/40 dark:border-slate-700/60 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md px-3.5 py-2.5 shadow-[0_10px_25px_-5px_rgba(10,35,80,0.18)] flex items-center gap-3 transition-transform duration-300 group-hover:-translate-y-0.5">
                 <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#005090] text-white shadow-xs">
                   <PersonIcon className="h-4.5 w-4.5" />
                 </div>
                 <div className="h-7 w-[1px] bg-[#CBD5E1] dark:bg-slate-700 shrink-0" />
                 <div>
-                  <p className="text-[10.5px] font-extrabold uppercase tracking-[0.05em] text-[#005090] dark:text-[#0986C8]">
-                    KOMITMEN REKAYASA
+                  <p className="text-[10px] sm:text-[10.5px] font-extrabold uppercase tracking-[0.05em] text-[#005090] dark:text-[#0986C8]">
+                    Bukan Sekadar Vendor, Tapi Mitra Pertumbuhan Anda
                   </p>
                   <p className="text-[11px] leading-tight text-[#4A5D78] dark:text-slate-300 font-normal">
-                    Tim kami hadir sebagai mitra jangka panjang untuk kesuksesan digital bisnis Anda.
+                    Tim kami mendampingi bisnis Anda jauh setelah website dirilis.
                   </p>
                 </div>
               </div>
@@ -90,7 +88,7 @@ export function AboutSection() {
                   <div className="flex h-10 w-10 sm:h-11 sm:w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#005090] to-[#002857] text-white shadow-xs transition-transform duration-300 group-hover:scale-105 mb-3.5">
                     {item.icon}
                   </div>
-                  <h3 className="text-[13.5px] sm:text-[14.5px] font-bold text-[#041E42] dark:text-white transition-colors duration-200 group-hover:text-[#005090] dark:group-hover:text-[#0986C8] leading-snug min-h-[40px] flex items-center">
+                  <h3 className="text-[13.5px] sm:text-[14.5px] font-bold text-[#041E42] dark:text-white transition-colors duration-200 group-hover:text-[#005090] dark:group-hover:text-[#0986C8] leading-snug min-h-[44px] flex items-center">
                     {item.title}
                   </h3>
                   <p className="mt-2 text-xs sm:text-[12.5px] leading-[1.65] text-[#4A5D78] dark:text-slate-300">
