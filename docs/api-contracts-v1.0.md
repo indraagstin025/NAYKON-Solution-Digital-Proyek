@@ -740,10 +740,10 @@ Ini adalah halaman kerja operasional pagi hari yang dibuka oleh ketiga anggota t
 ```json
 {
   "tag": "articles",
-  "action": "revalidate"
+  "action": "update"
 }
 ```
-* **Catatan Penyelarasan Spesifikasi:** Nilai `"action": "revalidate"` dikunci baku dan selaras 100% dengan dokumen spesifikasi CMS ([`docs/cms-v2.2.md`](./cms-v2.2.md) Pilar 5).
+* **Catatan Penyelarasan Spesifikasi:** Nilai `"action": "update"` dikunci baku dan selaras 100% dengan dokumen spesifikasi CMS ([`docs/cms-v2.2.md`](./cms-v2.2.md) Pilar 5).
 * **Kebijakan Percobaan Ulang (*Retry & Backoff*):**
   - Jika webhook mengembalikan status non-2xx atau waktu tunggu habis, sistem otomatis mencoba ulang maksimal 3 kali dengan jeda waktu eksponensial: 2 detik, 4 detik, dan 8 detik.
   - Target batas waktu pembersihan cache website publik: **< 3 detik**.
@@ -828,5 +828,5 @@ Jika selama masa pengerjaan Fase 1 terdapat permintaan untuk fitur-fitur di bawa
 * Menyediakan kontrak lengkap untuk 8 endpoint publik, 2 endpoint intake publik dengan proteksi berlapis, serta seluruh endpoint terproteksi internal (Auth, CMS, Media, CRM, Analitik, dan Emergency Toolkit).
 * Menstandarkan aturan `heartbeat` dan `durationSec` pada analitik untuk menjamin akurasi data agregasi.
 * Mengunci batas ukuran berkas media dan MIME types resmi.
-* Menegaskan keselarasan enum `REVOKE_SESSION` dengan `docs/schema-database-v1.1.md` Bab 2.5 dan Tabel 20, serta payload webhook `"action": "revalidate"` dengan `docs/cms-v2.2.md` Pilar 5.
+* Menegaskan keselarasan enum `REVOKE_SESSION` dengan `docs/schema-database-v1.1.md` Bab 2.5 dan Tabel 20, serta payload webhook `"action": "update"` dengan `docs/cms-v2.2.md` Pilar 5.
 * Mengunci daftar fitur Fase 2 dan kriteria selesai kinerja per kelompok endpoint.
