@@ -16,7 +16,7 @@ export function BlogCallout() {
               Ada pertanyaan teknis dari artikel kami?
             </h3>
             <p className="mt-1 text-[13px] sm:text-[13.5px] text-[#4A5D78] dark:text-slate-300">
-              Ceritakan kebutuhan website atau sistem Anda, tim NAIKON akan membahasnya bersama Anda.
+              Ceritakan kebutuhan website atau sistem Anda, tim Next Karya akan membahasnya bersama Anda.
             </p>
           </div>
         </div>

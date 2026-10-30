@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Halaman Tidak Ditemukan | NAIKON",
+  title: "Halaman Tidak Ditemukan | Next Karya",
   robots: {
     index: false,
     follow: false,
@@ -27,7 +27,7 @@ export default function NotFound() {
 
         <p className="mt-3 max-w-lg text-sm sm:text-base leading-relaxed text-[#425776] dark:text-[#94A7C4]">
           Periksa kembali penulisan alamat URL di bilah peramban, atau kembali ke
-          halaman utama untuk menelusuri layanan dan portofolio NAIKON.
+          halaman utama untuk menelusuri layanan dan portofolio Next Karya.
         </p>
 
         <div className="mt-7 flex flex-wrap items-center gap-3">
@@ -42,7 +42,7 @@ export default function NotFound() {
             href="/kontak"
             className="inline-flex min-h-11 items-center justify-center rounded-xl border border-[#5B789E] bg-white px-5 py-2.5 text-sm font-semibold text-[#041E42] transition-colors hover:bg-[#EEF4FC] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0052CC] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:hover:bg-[#192D54] dark:focus-visible:outline-[#38BDF8]"
           >
-            Hubungi Tim NAIKON
+            Hubungi Tim Next Karya
           </Link>
         </div>
       </main>

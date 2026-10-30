@@ -32,7 +32,7 @@ export function PricingSection({ plans }: { plans?: PublicPricingPlanDTO[] | nul
           </h2>
           <p className="mx-auto mt-3.5 max-w-[680px] text-[13.5px] sm:text-[14.5px] leading-[1.68] text-[#4A5D78] dark:text-slate-300">
             Estimasi biaya awal transparan dan sudah termasuk Dashboard Analitik buatan
-            tim NAIKON Digital Solution untuk memantau performa dan kunjungan website
+            tim Next Karya Digital Solutions untuk memantau performa dan kunjungan website
             secara mandiri.
           </p>
         </ScrollReveal>
@@ -122,7 +122,7 @@ export function PricingSection({ plans }: { plans?: PublicPricingPlanDTO[] | nul
               </div>
               <div>
                 <h4 className="text-[16px] sm:text-[17px] font-extrabold text-[#041E42] dark:text-white">
-                  Termasuk Dashboard Analitik NAIKON
+                  Termasuk Dashboard Analitik Next Karya
                 </h4>
                 <p className="mt-1.5 text-xs sm:text-[13px] leading-relaxed text-[#4A5D78] dark:text-slate-300">
                   Setiap paket website sudah dilengkapi modul pelacakan performa agregat

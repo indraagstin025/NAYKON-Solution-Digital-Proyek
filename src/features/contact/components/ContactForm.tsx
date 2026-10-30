@@ -39,7 +39,7 @@ export function ContactFormCard({ sourcePage = "/kontak" }: { sourcePage?: strin
           Formulir Konsultasi Proyek
         </h3>
         <p className="mt-1 text-xs sm:text-[13px] text-[#4A5D78] dark:text-slate-400">
-          Isi detail singkat di bawah ini untuk menjadwalkan diskusi bersama tim rekayasa NAIKON.
+          Isi detail singkat di bawah ini untuk menjadwalkan diskusi bersama tim rekayasa Next Karya.
         </p>
       </div>
 

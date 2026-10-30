@@ -322,7 +322,7 @@ export default function PortalAccessBar({
   return (
     <div
       role="region"
-      aria-label="Akses Portal Internal NAIKON"
+      aria-label="Akses Portal Internal Next Karya"
       className="w-full bg-[#0B1730] text-[#F1F5FB] border-b border-[#1E3358] max-h-[85dvh] overflow-y-auto"
     >
       <div className="mx-auto w-full max-w-[1240px] px-6 sm:px-9 lg:px-14 py-3.5 pb-5 lg:py-3">

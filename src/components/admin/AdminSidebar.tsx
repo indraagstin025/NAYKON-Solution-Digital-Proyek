@@ -174,12 +174,12 @@ export function AdminSidebar({
             onClick={() => setMobileOpen(false)}
           >
             <Image
-              src="/logo-navbar.png"
-              alt="Logo NAIKON"
+              src="/logo/logo-gabungan.png"
+              alt="Logo Next Karya Digital Solutions"
               width={160}
-              height={36}
+              height={50}
               priority
-              className="h-[28px] w-auto object-contain dark:brightness-150"
+              className="h-[28px] w-auto object-contain"
             />
           </Link>
           <span className="rounded-md border border-blue-200 dark:border-[#4E6E9E] bg-blue-50 dark:bg-[#12213F] px-2 py-0.5 text-[10px] font-bold text-[#0066FF] dark:text-[#94A7C4]">
@@ -330,7 +330,7 @@ export function AdminSidebar({
           <DialogPrimitive.Overlay className="fixed inset-0 z-50 bg-[#041E42]/60 backdrop-blur-xs animate-in fade-in-0 dark:bg-black/75" />
           <DialogPrimitive.Content className="fixed inset-y-0 left-0 z-50 w-72 max-w-[85vw] border-r border-slate-200 bg-white shadow-2xl animate-in slide-in-from-left duration-200 dark:border-[#1E3358] dark:bg-[#0B1730]">
             <div className="sr-only">
-              <DialogPrimitive.Title>Menu Navigasi Admin NAIKON</DialogPrimitive.Title>
+              <DialogPrimitive.Title>Menu Navigasi Admin Next Karya</DialogPrimitive.Title>
               <DialogPrimitive.Description>
                 Pilihan menu ruang kerja CMS dan konfigurasi sistem.
               </DialogPrimitive.Description>

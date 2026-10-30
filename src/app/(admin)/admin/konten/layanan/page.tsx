@@ -21,7 +21,7 @@ export default async function AdminServicesPage() {
         </h1>
         <p className="mt-1 text-sm text-[#5A6E85] dark:text-[#94A7C4]">
           Perbarui cakupan layanan rekayasa perangkat lunak serta struktur paket
-          investasi publik NAIKON.
+          investasi publik Next Karya.
         </p>
       </div>
 

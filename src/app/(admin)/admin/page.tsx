@@ -82,7 +82,7 @@ export default async function AdminOverviewPage() {
             </h1>
 
             <p className="text-sm leading-relaxed text-[#5A6E85] dark:text-[#94A7C4]">
-              Pusat komando operasional NAIKON CMS. Pantau pesan prospek konsultasi yang masuk,
+              Pusat komando operasional Next Karya CMS. Pantau pesan prospek konsultasi yang masuk,
               publikasikan materi wawasan teknologi, dan awasi integritas sistem.
             </p>
           </div>

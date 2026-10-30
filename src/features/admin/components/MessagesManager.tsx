@@ -297,7 +297,7 @@ export function MessagesManager({
                     href={`mailto:${encodeURIComponent(
                       selectedMessage.email
                     )}?subject=${encodeURIComponent(
-                      `Tindak Lanjut Konsultasi NAIKON: ${
+                      `Tindak Lanjut Konsultasi Next Karya: ${
                         selectedMessage.service || "Kebutuhan Proyek Digital"
                       }`
                     )}`}

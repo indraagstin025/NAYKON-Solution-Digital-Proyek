@@ -8,10 +8,10 @@ const SLUG = "kebijakan-privasi";
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getPublicPage(SLUG);
   return {
-    title: page?.seoTitle || "Kebijakan Privasi - NAIKON Digital Solution",
+    title: page?.seoTitle || "Kebijakan Privasi | Next Karya Digital Solutions",
     description:
       page?.seoDescription ||
-      "Kebijakan privasi NAIKON Digital Solution terkait data formulir konsultasi dan keamanan penyimpanan.",
+      "Kebijakan privasi Next Karya Digital Solutions terkait data formulir konsultasi dan keamanan penyimpanan.",
     alternates: { canonical: `/${SLUG}` },
   };
 }

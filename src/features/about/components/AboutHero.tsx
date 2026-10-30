@@ -40,7 +40,7 @@ export function AboutHero() {
         </h1>
         <p className="nk-hero-enter nk-hero-delay-2 mx-auto mt-4 max-w-[660px] text-[14px] sm:text-[15px] leading-[1.7] text-[#4A5D78] dark:text-slate-300">
           Mengenal lebih dekat filosofi kerja, standar teknis, dan tim di balik
-          NAIKON Digital Solution.
+          Next Karya Digital Solutions.
         </p>
       </div>
     </section>

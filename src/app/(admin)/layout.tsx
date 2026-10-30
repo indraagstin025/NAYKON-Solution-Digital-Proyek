@@ -8,8 +8,8 @@ export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: {
-    default: "Ruang Kerja CMS | NAIKON Digital Solution",
-    template: "%s | NAIKON CMS",
+    default: "Ruang Kerja CMS | Next Karya Digital Solutions",
+    template: "%s | Next Karya CMS",
   },
   robots: {
     index: false,

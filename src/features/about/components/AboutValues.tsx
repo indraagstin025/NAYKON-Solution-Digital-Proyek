@@ -35,7 +35,7 @@ export function AboutValues() {
               </h3>
               <p className="mt-2 text-[13.5px] leading-[1.68] text-[#4A5D78] dark:text-slate-300">
                 Diskusikan rencana pengembangan website atau sistem internal bisnis
-                Anda bersama tim teknis NAIKON.
+                Anda bersama tim teknis Next Karya.
               </p>
             </div>
             <div className="mt-5">

@@ -16,7 +16,7 @@ export function AboutSection() {
             <div className="relative overflow-hidden rounded-[26px] border-[5px] border-white dark:border-slate-800 bg-white shadow-[0_22px_50px_-12px_rgba(10,35,80,0.15)] transition-shadow duration-300 group-hover:shadow-[0_28px_60px_-12px_rgba(0,102,255,0.18)]">
               <Image
                 src="/team-naikon.jpg"
-                alt="Tim programmer NAIKON Digital Solution berkolaborasi merancang arsitektur sistem"
+                alt="Tim programmer Next Karya Digital Solutions berkolaborasi merancang arsitektur sistem"
                 width={960}
                 height={680}
                 className="h-[310px] sm:h-[380px] md:h-[410px] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
@@ -43,11 +43,11 @@ export function AboutSection() {
         <ScrollReveal direction="right">
           <div className="mb-4">
             <Image
-              src="/logo-navbar.png"
-              alt="NAIKON Digital Solution"
-              width={220}
-              height={46}
-              className="h-[30px] sm:h-[34px] w-auto object-contain dark:brightness-150"
+              src="/logo/logo-gabungan.png"
+              alt="Next Karya Digital Solutions"
+              width={260}
+              height={82}
+              className="h-[32px] sm:h-[38px] w-auto object-contain"
             />
           </div>
 
@@ -68,7 +68,7 @@ export function AboutSection() {
           </h2>
 
           <p className="mt-4 text-[13.5px] sm:text-[14.5px] leading-[1.7] text-[#4A5D78] dark:text-slate-300">
-            NAIKON Digital Solution adalah tim rekayasa web dan aplikasi yang berfokus
+            Next Karya Digital Solutions adalah tim rekayasa web dan aplikasi yang berfokus
             pada hasil terukur. Tim kami merancang arsitektur website dan sistem yang
             cepat, aman, dan mudah dioperasikan agar bisnis Anda dapat berkembang secara
             efisien.

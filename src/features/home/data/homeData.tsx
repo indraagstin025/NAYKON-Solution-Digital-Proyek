@@ -279,7 +279,7 @@ export const PRICING_PLANS: PricingPlan[] = [
       "Desain visual responsif mobile & desktop sesuai identitas brand",
       "Integrasi tombol WhatsApp resmi & formulir kontak langsung",
       "Optimasi dasar judul halaman & metadata SEO Google",
-      "Termasuk Dashboard Analitik Tingkat Dasar buatan NAIKON",
+      "Termasuk Dashboard Analitik Tingkat Dasar buatan Next Karya",
       "Lacak klik tombol WhatsApp & grafik kunjungan 30 hari",
       "Garansi teknis 14 hingga 30 hari & pendampingan penyesuaian konten",
     ],
@@ -301,7 +301,7 @@ export const PRICING_PLANS: PricingPlan[] = [
       "Integrasi tombol WhatsApp, formulir pesan, & media sosial",
       "Optimasi struktur SEO Google & Google Search Console",
       "Termasuk Dashboard Analitik Tingkat Dasar (Pantau layanan terpopuler)",
-      "Fleksibel di-upgrade langsung ke modul CMS NAIKON kapan saja",
+      "Fleksibel di-upgrade langsung ke modul CMS Next Karya kapan saja",
       "Garansi teknis 30 hari & pendampingan penyesuaian konten",
     ],
     ctaText: "Pilih Company Profile",
@@ -396,7 +396,7 @@ export const PRICING_PLANS: PricingPlan[] = [
 export const FAQ_ITEMS: FaqItem[] = [
   {
     id: "durasi-pengerjaan",
-    question: "Berapa lama estimasi waktu pengerjaan proyek di NAIKON?",
+    question: "Berapa lama estimasi waktu pengerjaan proyek di Next Karya?",
     answer:
       "Waktu pengerjaan bergantung pada skala proyek. Untuk paket Website Landing Page atau Portofolio Personal, pengerjaan biasanya berkisar antara 3 hingga 5 hari kerja. Untuk Website Company Profile, Komunitas, atau Sekolah berkisar 5 hingga 10 hari kerja. Sementara untuk Portal Berita CMS atau aplikasi kustom, jadwal disesuaikan dengan ruang lingkup yang disepakati bersama tim kami sejak awal.",
   },
@@ -404,7 +404,7 @@ export const FAQ_ITEMS: FaqItem[] = [
     id: "garansi-teknis",
     question: "Apakah ada garansi setelah website atau aplikasi selesai diluncurkan?",
     answer:
-      "Ya, setiap proyek NAIKON dilindungi garansi teknis resmi mulai dari 14 hingga 45 hari pasca-peluncuran sesuai paket layanan. Jika ditemukan kendala, bug, atau error dari kode yang tim kami bangun, kami akan memperbaikinya secara cepat tanpa biaya tambahan.",
+      "Ya, setiap proyek Next Karya dilindungi garansi teknis resmi mulai dari 14 hingga 45 hari pasca-peluncuran sesuai paket layanan. Jika ditemukan kendala, bug, atau error dari kode yang tim kami bangun, kami akan memperbaikinya secara cepat tanpa biaya tambahan.",
   },
   {
     id: "materi-klien",
@@ -420,7 +420,7 @@ export const FAQ_ITEMS: FaqItem[] = [
   },
   {
     id: "skema-pembayaran",
-    question: "Bagaimana skema pembayaran dan tahapan pengerjaan di NAIKON?",
+    question: "Bagaimana skema pembayaran dan tahapan pengerjaan di Next Karya?",
     answer:
       "Tim kami menerapkan skema pembayaran bertahap yang transparan dan aman bagi kedua pihak: Uang Muka (Down Payment) sebesar 40 hingga 50% saat proyek dimulai, dan pelunasan dilakukan setelah proses revisi disetujui serta website siap ditayangkan (Go-Live).",
   },
@@ -428,7 +428,7 @@ export const FAQ_ITEMS: FaqItem[] = [
     id: "kelola-mandiri",
     question: "Apakah saya bisa mengelola atau mengubah isi konten website sendiri?",
     answer:
-      "Bisa. Pada paket Website Portal Berita (CMS) maupun paket website yang ditambahkan modul CMS NAIKON, kami menyediakan panel admin intuitif sehingga Anda dapat mengubah teks, menambah galeri gambar, maupun menerbitkan artikel baru tanpa perlu memahami koding.",
+      "Bisa. Pada paket Website Portal Berita (CMS) maupun paket website yang ditambahkan modul CMS Next Karya, kami menyediakan panel admin intuitif sehingga Anda dapat mengubah teks, menambah galeri gambar, maupun menerbitkan artikel baru tanpa perlu memahami koding.",
   },
 ];
 

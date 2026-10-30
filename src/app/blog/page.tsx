@@ -3,7 +3,7 @@ import { BlogPage } from "@/features/blog";
 import { getPublicArticles } from "@/lib/public-content";
 
 export const metadata: Metadata = {
-  title: "Blog & Wawasan Teknologi - NAIKON Digital Solution",
+  title: "Blog & Wawasan Teknologi | Next Karya Digital Solutions",
   description:
     "Artikel, panduan teknis, dan wawasan seputar rekayasa website, aplikasi mobile, dan transformasi digital bisnis.",
   alternates: { canonical: "/blog" },

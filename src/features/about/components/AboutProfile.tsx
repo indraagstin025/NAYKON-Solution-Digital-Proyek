@@ -12,7 +12,7 @@ export function AboutProfile() {
           <div className="relative overflow-hidden rounded-[26px] border-[5px] border-white dark:border-slate-800 bg-white shadow-[0_22px_50px_-12px_rgba(10,35,80,0.15)] transition-shadow duration-300 group-hover:shadow-[0_28px_60px_-12px_rgba(0,102,255,0.18)]">
             <Image
               src="/team-naikon.jpg"
-              alt="Tim programmer NAIKON Digital Solution"
+              alt="Tim programmer Next Karya Digital Solutions"
               width={960}
               height={680}
               className="h-[310px] sm:h-[380px] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
@@ -43,7 +43,7 @@ export function AboutProfile() {
           <span className="text-[#0066FF] dark:text-[#38BDF8]">riil bisnis Anda.</span>
         </h2>
         <p className="mt-4 text-[13.5px] sm:text-[14.5px] leading-[1.7] text-[#4A5D78] dark:text-slate-300">
-          NAIKON Digital Solution adalah mitra rekayasa perangkat lunak dan website
+          Next Karya Digital Solutions adalah mitra rekayasa perangkat lunak dan website
           yang berfokus pada hasil terukur. Tim kami merancang arsitektur sistem yang
           cepat, aman, dan mudah dioperasikan agar bisnis Anda dapat berkembang secara
           efisien.

@@ -2,9 +2,13 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "NAYKON - Software House & Solusi Digital Indonesia",
+  title: "Next Karya Digital Solutions - Software House & Solusi Digital Indonesia",
   description:
     "Tim rekayasa digital terpercaya untuk pengembangan website, aplikasi web, dan aplikasi mobile modern di Indonesia.",
+  icons: {
+    icon: "/icon.png",
+    apple: "/icon.png",
+  },
 };
 
 export default function RootLayout({

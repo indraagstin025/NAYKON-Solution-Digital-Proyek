@@ -35,7 +35,7 @@ export function FaqSection({ faqs }: { faqs?: PublicFaqDTO[] | null }) {
           </h2>
           <p className="mx-auto mt-3.5 max-w-[620px] text-[13.5px] sm:text-[14.5px] leading-[1.68] text-[#4A5D78] dark:text-slate-300">
             Jawaban transparan mengenai durasi pengerjaan, garansi teknis, kesiapan materi,
-            serta tata cara memulai proyek bersama tim NAIKON.
+            serta tata cara memulai proyek bersama tim Next Karya.
           </p>
         </ScrollReveal>
 
@@ -111,7 +111,7 @@ export function FaqSection({ faqs }: { faqs?: PublicFaqDTO[] | null }) {
                   Masih memiliki pertanyaan teknis lainnya?
                 </h3>
                 <p className="text-xs sm:text-[13px] text-[#4A5D78] dark:text-slate-300">
-                  Tim rekayasa NAIKON siap berdiskusi langsung sesuai kebutuhan unik bisnis Anda.
+                  Tim rekayasa Next Karya siap berdiskusi langsung sesuai kebutuhan unik bisnis Anda.
                 </p>
               </div>
             </div>

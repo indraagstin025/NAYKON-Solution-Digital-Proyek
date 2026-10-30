@@ -22,7 +22,7 @@ const MAX_PER_EMAIL = 3;
 const CONTACT_DB_TIMEOUT_MS = 10_000;
 
 const GENERIC_SUCCESS =
-  "Terima kasih! Pesan Anda telah kami terima. Tim NAIKON akan menghubungi Anda dalam waktu 1x24 jam kerja.";
+  "Terima kasih! Pesan Anda telah kami terima. Tim Next Karya akan menghubungi Anda dalam waktu 1x24 jam kerja.";
 
 function isTransientDatabaseError(error: unknown): boolean {
   if (error instanceof DatabaseTimeoutError) return true;

@@ -20,7 +20,7 @@ export default async function AdminPortfoliosPage() {
           Manajemen Studi Kasus Portofolio
         </h1>
         <p className="mt-1 text-sm text-[#5A6E85] dark:text-[#94A7C4]">
-          Kelola studi kasus proyek digital NAIKON, cakupan teknologi, serta
+          Kelola studi kasus proyek digital Next Karya, cakupan teknologi, serta
           sorotan portofolio di halaman Beranda.
         </p>
       </div>

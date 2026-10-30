@@ -66,7 +66,7 @@ export function HeroSection() {
             </h1>
 
             <p className="nk-hero-enter nk-hero-delay-1 mt-4 max-w-[465px] text-[13.5px] sm:text-[15px] leading-[1.65] text-[#4A5D78] dark:text-[#b5c5dd] font-normal">
-              NAIKON Digital Solution adalah tim rekayasa website dan aplikasi yang
+              Next Karya Digital Solutions adalah tim rekayasa website dan aplikasi yang
               merancang solusi digital cerdas untuk membantu bisnis Anda tumbuh,
               beradaptasi, dan melangkah lebih jauh.
             </p>
@@ -198,14 +198,14 @@ export function HeroSection() {
               />
             </svg>
 
-            <div className="relative z-10 w-[63%] sm:w-[65%] max-w-[345px] transition-transform duration-500 ease-out group-hover:scale-[1.03] group-hover:-translate-y-1">
+            <div className="relative z-10 w-[72%] sm:w-[75%] max-w-[390px] transition-transform duration-500 ease-out group-hover:scale-[1.03] group-hover:-translate-y-1">
               <Image
-                src="/logo-hero.png"
-                alt="NAIKON Digital Solution - Mengakselerasi Inovasi, Mewujudkan Karya Digital"
+                src="/logo/logo-gabungan.png"
+                alt="Next Karya Digital Solutions - Mengakselerasi Inovasi, Mewujudkan Karya Digital"
                 width={960}
-                height={196}
+                height={304}
                 priority
-                className="w-full h-auto object-contain drop-shadow-[0_10px_24px_rgba(0,60,150,0.06)] dark:brightness-150"
+                className="w-full h-auto object-contain drop-shadow-[0_10px_24px_rgba(0,60,150,0.08)]"
               />
             </div>
           </div>

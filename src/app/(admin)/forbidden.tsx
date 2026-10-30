@@ -21,7 +21,7 @@ export default function AdminForbidden() {
       </h1>
 
       <p className="mt-2.5 text-sm leading-relaxed text-[#94A7C4]">
-        Hubungi Administrator NAIKON apabila pekerjaan Anda membutuhkan hak akses
+        Hubungi Administrator Next Karya apabila pekerjaan Anda membutuhkan hak akses
         tambahan pada bagian ini.
       </p>
 

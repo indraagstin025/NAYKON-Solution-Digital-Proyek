@@ -3,9 +3,9 @@ import { ServicesPage } from "@/features/services";
 import { getPublicPricing, getPublicServices } from "@/lib/public-content";
 
 export const metadata: Metadata = {
-  title: "Layanan & Paket Harga - NAIKON Digital Solution",
+  title: "Layanan & Paket Harga | Next Karya Digital Solutions",
   description:
-    "Layanan pembuatan website bisnis, daftar paket investasi website, redesign, aplikasi web kustom, dan aplikasi mobile Android & iOS.",
+    "Layanan pembuatan website bisnis, daftar paket investasi website, redesign, aplikasi web kustom, dan aplikasi mobile Android & iOS bersama Next Karya Digital Solutions.",
 };
 
 export default async function Page() {

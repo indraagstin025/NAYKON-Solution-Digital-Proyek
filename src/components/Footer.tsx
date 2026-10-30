@@ -18,15 +18,15 @@ export default function Footer() {
               className="inline-block transition-transform duration-200 hover:scale-[1.02]"
             >
               <Image
-                src="/logo-navbar.png"
-                alt="NAIKON Digital Solution"
-                width={250}
-                height={52}
-                className="h-[34px] sm:h-[38px] w-auto object-contain dark:brightness-150"
+                src="/logo/logo-gabungan.png"
+                alt="Next Karya Digital Solutions"
+                width={260}
+                height={82}
+                className="h-[36px] sm:h-[40px] w-auto object-contain"
               />
             </Link>
             <p className="mt-4 max-w-[340px] text-[13px] sm:text-[13.5px] leading-[1.7] text-[#4A5D78] dark:text-slate-300">
-              NAIKON Digital Solution adalah tim rekayasa perangkat lunak dan website
+              Next Karya Digital Solutions adalah tim rekayasa perangkat lunak dan website
               yang berfokus pada arsitektur modern, performa tinggi, dan dampak
               pertumbuhan nyata bagi bisnis Anda.
             </p>
@@ -137,7 +137,7 @@ export default function Footer() {
 
         <div className="mt-12 pt-6 border-t border-[#D5E6FC] dark:border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#4A5D78] dark:text-slate-400">
           <p className="text-center sm:text-left font-medium">
-            &copy; 2026 NAIKON Digital Solution. Hak cipta dilindungi undang-undang.
+            &copy; 2026 Next Karya Digital Solutions. Hak cipta dilindungi undang-undang.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-5 font-medium">
             <Link

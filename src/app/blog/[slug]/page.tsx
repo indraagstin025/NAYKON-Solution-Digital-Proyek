@@ -10,7 +10,7 @@ import { parsePublicSlug } from "@/lib/public-validators";
 
 type Props = { params: Promise<{ slug: string }> };
 
-const SITE_NAME = "NAIKON Digital Solution";
+const SITE_NAME = "Next Karya Digital Solutions";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const slug = parsePublicSlug((await params).slug);

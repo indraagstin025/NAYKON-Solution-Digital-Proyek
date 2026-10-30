@@ -19,7 +19,7 @@ export default async function AdminUsersPage() {
           Manajemen Pengguna & Keamanan Sesi
         </h1>
         <p className="mt-1 text-sm text-[#5A6E85] dark:text-[#94A7C4]">
-          Kelola akun internal NAIKON, hak akses berbasis peran (RBAC), status
+          Kelola akun internal Next Karya, hak akses berbasis peran (RBAC), status
           aktif akun, serta pencabutan sesi instan.
         </p>
       </div>

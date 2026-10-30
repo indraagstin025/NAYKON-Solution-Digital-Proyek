@@ -20,7 +20,7 @@ export default async function AdminFaqsPage() {
           Manajemen FAQ & Halaman Statis
         </h1>
         <p className="mt-1 text-sm text-[#5A6E85] dark:text-[#94A7C4]">
-          Perbarui tanya jawab seputar layanan NAIKON serta halaman dokumen
+          Perbarui tanya jawab seputar layanan Next Karya serta halaman dokumen
           kebijakan privasi.
         </p>
       </div>

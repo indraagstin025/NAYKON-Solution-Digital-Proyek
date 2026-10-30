@@ -68,16 +68,16 @@ export default function Navbar() {
         <Link
           href="/"
           className="flex min-w-0 items-center justify-self-start transition-transform hover:opacity-95 active:scale-[0.98] group shrink-0"
-          aria-label="NAIKON Digital Solution, kembali ke beranda"
+          aria-label="Next Karya Digital Solutions, kembali ke beranda"
         >
-          <div className="relative shrink-0 transition-transform duration-300 group-hover:scale-[1.02]">
+          <div className="relative shrink-0 transition-transform duration-300 group-hover:scale-[1.04]">
             <Image
-              src="/logo-navbar.png"
-              alt="Logo NAIKON Digital Solution"
-              width={260}
-              height={54}
+              src="/logo/single-logo.png"
+              alt="Next Karya Digital Solutions"
+              width={120}
+              height={92}
               priority
-              className="h-[28px] sm:h-[32px] md:h-[34px] lg:h-[37px] w-auto object-contain dark:brightness-150"
+              className="h-[34px] sm:h-[38px] md:h-[42px] w-auto object-contain"
             />
           </div>
         </Link>
