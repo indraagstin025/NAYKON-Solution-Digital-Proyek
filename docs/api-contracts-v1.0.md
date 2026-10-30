@@ -109,7 +109,7 @@ Seluruh endpoint di sistem mengembalikan amplop data yang seragam. Dilarang meng
 
 ## 3. Spesifikasi Endpoint Publik (Tanpa Autentikasi)
 
-Endpoint publik digunakan oleh antarmuka website resmi `nextkarya.id` untuk menampilkan katalog konten. Diberlakukan pembatasan laju (*Rate Limiting*) maksimal 120 permintaan per menit per IP.
+Endpoint publik digunakan oleh antarmuka website resmi `nextkarya.web.id` untuk menampilkan katalog konten. Diberlakukan pembatasan laju (*Rate Limiting*) maksimal 120 permintaan per menit per IP.
 
 ### 3.1 `GET /api/v1/articles` (Daftar Artikel Publik)
 * **Deskripsi:** Mengambil daftar artikel blog yang sudah berstatus terbit.
@@ -131,7 +131,7 @@ Endpoint publik digunakan oleh antarmuka website resmi `nextkarya.id` untuk mena
       "title": "Tren Desain Web Modern 2026 untuk Agensi Digital",
       "slug": "tren-desain-web-modern-2026",
       "excerpt": "Panduan lengkap mengenai tata kelola komponen visual dan performa situs.",
-      "coverUrl": "https://nextkarya.id/uploads/cover-01.webp",
+      "coverUrl": "https://nextkarya.web.id/uploads/cover-01.webp",
       "coverAlt": "Ilustrasi Tren Desain Web 2026",
       "tags": ["web-design", "technology"],
       "readingTimeMinutes": 4,
@@ -176,7 +176,7 @@ Endpoint publik digunakan oleh antarmuka website resmi `nextkarya.id` untuk mena
         { "type": "paragraph", "text": "Arsitektur frontend saat ini menitikberatkan pada kemudahan pemuatan data..." }
       ]
     },
-    "coverUrl": "https://nextkarya.id/uploads/cover-01.webp",
+    "coverUrl": "https://nextkarya.web.id/uploads/cover-01.webp",
     "coverAlt": "Ilustrasi Tren Desain Web 2026",
     "tags": ["web-design", "technology"],
     "readingTimeMinutes": 4,
@@ -327,7 +327,7 @@ Backend memverifikasi keabsahan JWT dan mencocokkan `tokenVersion` di dalam klai
 #### `POST /api/v1/auth/login`
 * **Deskripsi:** Masuk ke sistem untuk 3 staf internal.
 * **Masa Berlaku Token:** Token JWT menggunakan masa kedaluwarsa `expiresIn: 86400` (24 jam) tanpa sistem refresh token di Fase 1. Setelah 24 jam token kedaluwarsa dan staf wajib melakukan login ulang. Dilarang mengarang rute refresh token di Fase 1.
-* **Body:** `{ "email": "programmer@nextkarya.id", "password": "..." }`
+* **Body:** `{ "email": "programmer@nextkarya.web.id", "password": "..." }`
 * **Format Respons Berhasil (200 OK):**
 ```json
 {
@@ -337,7 +337,7 @@ Backend memverifikasi keabsahan JWT dan mencocokkan `tokenVersion` di dalam klai
     "expiresIn": 86400,
     "user": {
       "id": "clxuser01",
-      "email": "programmer@nextkarya.id",
+      "email": "programmer@nextkarya.web.id",
       "fullName": "Staf A (Programmer)",
       "jobTitle": "Full-Stack Developer",
       "role": "STAFF",
@@ -451,7 +451,7 @@ Setiap kali melakukan mutasi pembaruan (`PUT`, `PATCH`, `publish`, `archive`), k
       "fileSize": 245000,
       "width": 1920,
       "height": 1080,
-      "url": "https://nextkarya.id/uploads/sec-thumb-1730304000.webp",
+      "url": "https://nextkarya.web.id/uploads/sec-thumb-1730304000.webp",
       "altText": "Desain antarmuka Next Karya",
       "uploadedBy": { "fullName": "Staf B (Desainer)" },
       "createdAt": "2026-10-30T16:25:00.000Z"
@@ -487,7 +487,7 @@ Setiap kali melakukan mutasi pembaruan (`PUT`, `PATCH`, `publish`, `archive`), k
     "fileSize": 245000,
     "width": 1920,
     "height": 1080,
-    "url": "https://nextkarya.id/uploads/sec-thumb-1730304000.webp",
+    "url": "https://nextkarya.web.id/uploads/sec-thumb-1730304000.webp",
     "altText": "Desain antarmuka Next Karya",
     "createdAt": "2026-10-30T16:25:00.000Z"
   },
@@ -732,7 +732,7 @@ Ini adalah halaman kerja operasional pagi hari yang dibuka oleh ketiga anggota t
 
 ### 5.6 Webhook Pembersihan Cache Next.js (Server-to-Server)
 
-* **URL Sasaran:** `POST https://nextkarya.id/api/revalidate`
+* **URL Sasaran:** `POST https://nextkarya.web.id/api/revalidate`
 * **Keamanan Kredensial:** Kunci rahasia dikirimkan melalui HTTP Header resmi:
   `x-webhook-secret: <SECRET_KEY>`
   *(Dilarang keras menyematkan secret pada query string URL).*

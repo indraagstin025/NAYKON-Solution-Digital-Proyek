@@ -117,7 +117,7 @@ Menampung identitas situs web yang dikelola sistem.
 | :--- | :--- | :--- | :--- | :---: | :--- | :--- |
 | `id` | `VARCHAR(64)` | `String` | `@id` | Tidak | - | ID unik situs (contoh: `nextkarya-main`) |
 | `name` | `VARCHAR(255)` | `String` | - | Tidak | - | Nama situs (contoh: `Next Karya Digital Solutions`) |
-| `domain` | `VARCHAR(255)` | `String` | `@unique` | Tidak | - | Domain resmi (contoh: `nextkarya.id`) |
+| `domain` | `VARCHAR(255)` | `String` | `@unique` | Tidak | - | Domain resmi (contoh: `nextkarya.web.id`) |
 | `isActive` | `BOOLEAN` | `Boolean` | - | Tidak | `true` | Status keaktifan situs |
 | `isFormLocked` | `BOOLEAN` | `Boolean` | - | Tidak | `false` | Sakelar darurat penguncian form kontak |
 | `alertBanner` | `TEXT` | `String?` | - | Ya | `null` | Teks banner pengumuman darurat situs |
@@ -137,7 +137,7 @@ Menampung kredensial login bagi Staf A (Programmer), Staf B (Desainer), dan Staf
 | Nama Kolom | Tipe PostgreSQL | Tipe Prisma | Atribut | Nullable | Default | Keterangan |
 | :--- | :--- | :--- | :--- | :---: | :--- | :--- |
 | `id` | `VARCHAR(64)` | `String` | `@id @default(cuid())` | Tidak | CUID | ID unik staf |
-| `email` | `VARCHAR(255)` | `String` | `@unique` | Tidak | - | Email resmi staf (contoh: `nama@nextkarya.id`) |
+| `email` | `VARCHAR(255)` | `String` | `@unique` | Tidak | - | Email resmi staf (contoh: `nama@nextkarya.web.id`) |
 | `passwordHash` | `VARCHAR(255)` | `String` | - | Tidak | - | Hash sandi aman (bcrypt / argon2) |
 | `fullName` | `VARCHAR(255)` | `String` | - | Tidak | - | Nama lengkap staf |
 | `role` | `VARCHAR(32)` | `UserRole` | - | Tidak | `STAFF` | Hak akses operasional tunggal yang setara |
@@ -1338,7 +1338,7 @@ Saat inisialisasi basis data pertama kali, sistem akan menyuntikkan data awal wa
 {
   "id": "nextkarya-main",
   "name": "Next Karya Digital Solutions",
-  "domain": "nextkarya.id",
+  "domain": "nextkarya.web.id",
   "isActive": true,
   "isFormLocked": false,
   "isAlertActive": false
@@ -1346,13 +1346,13 @@ Saat inisialisasi basis data pertama kali, sistem akan menyuntikkan data awal wa
 ```
 
 ### 6.2 Tiga Akun Staf Internal (Seluruhnya Setara: `STAFF`)
-Seluruh akun staf internal menggunakan domain resmi `@nextkarya.id` dengan peran tunggal `STAFF`:
+Seluruh akun staf internal menggunakan domain resmi `@nextkarya.web.id` dengan peran tunggal `STAFF`:
 
 | Email | Nama Lengkap | Jabatan (*jobTitle*) | Role |
 | :--- | :--- | :--- | :--- |
-| `programmer@nextkarya.id` | Staf A (Programmer) | Full-Stack Developer | `STAFF` |
-| `designer@nextkarya.id` | Staf B (Desainer) | UI/UX & Visual Designer | `STAFF` |
-| `lead@nextkarya.id` | Staf C (Project Lead) | Project Lead & Client Relations | `STAFF` |
+| `programmer@nextkarya.web.id` | Staf A (Programmer) | Full-Stack Developer | `STAFF` |
+| `designer@nextkarya.web.id` | Staf B (Desainer) | UI/UX & Visual Designer | `STAFF` |
+| `lead@nextkarya.web.id` | Staf C (Project Lead) | Project Lead & Client Relations | `STAFF` |
 
 ---
 

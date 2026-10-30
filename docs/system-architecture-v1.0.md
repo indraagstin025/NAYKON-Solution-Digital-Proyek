@@ -117,7 +117,7 @@ Backend dibangun menggunakan runtime Node.js dengan framework **Express.js** ber
     - **Inkremental Tiap Jam:** Rollup analitik dari event mentah ke `analytics_daily` menggunakan Raw SQL CTE `session_summary`.
     - **Rolling FIFO 5 Versi:** Pemangkasan snapshot pada tabel `content_snapshots`.
 * **Pengiriman Webhook Revalidasi Cache:**
-  - Setiap kali ada data konten yang diterbitkan, diperbarui, atau diarsipkan, backend Express.js mengirimkan HTTP POST via `fetch` / `axios` ke endpoint website Next.js `https://nextkarya.id/api/revalidate` dengan header `x-webhook-secret` dan muatan baku:
+  - Setiap kali ada data konten yang diterbitkan, diperbarui, atau diarsipkan, backend Express.js mengirimkan HTTP POST via `fetch` / `axios` ke endpoint website Next.js `https://nextkarya.web.id/api/revalidate` dengan header `x-webhook-secret` dan muatan baku:
     ```json
     {
       "tag": "articles",
@@ -186,7 +186,7 @@ PostgreSQL bertindak sebagai repositori data permanen sistem dengan konfigurasi 
 ### 3.4 Frontend Web (Next.js App Router)
 Next.js menjalankan dua peran antarmuka komputer yang memanfaatkan keunggulan App Router:
 
-#### A. Website Profil Publik (`nextkarya.id`):
+#### A. Website Profil Publik (`nextkarya.web.id`):
 * **React Server Components (RSC):** Merender halaman secara server-side untuk memastikan skor performa Google Core Web Vitals optimal dan SEO metadata terindeks sempurna oleh mesin pencari.
 * **Incremental Static Regeneration (ISR):**
   - Halaman portofolio dan blog di-cache statis di edge/server.

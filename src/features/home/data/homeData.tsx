@@ -455,9 +455,9 @@ export const CONTACT_INFO_ITEMS: ContactInfoItem[] = [
   {
     icon: <EnvelopeClosedIcon className="h-5 w-5" />,
     title: "Email Resmi Konsultasi",
-    content: "contact@nextkarya.id",
+    content: "contact@nextkarya.web.id",
     isLink: true,
-    linkHref: "mailto:contact@nextkarya.id",
+    linkHref: "mailto:contact@nextkarya.web.id",
   },
   {
     icon: <ClockIcon className="h-5 w-5" />,

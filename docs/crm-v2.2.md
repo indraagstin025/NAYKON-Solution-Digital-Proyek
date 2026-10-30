@@ -15,7 +15,7 @@
 Sistem CRM (Customer Relationship Management) Next Karya Digital Solutions dirancang khusus untuk **tahap awal agensi digital yang bergerak lincah (*Lean & Agile Agency*)**. 
 
 Fokus utamanya bukan birokrasi penjualan yang rumit, melainkan:
-1. **Menutup Kesepakatan Lebih Cepat (*Fast Deal Closing*):** Merespons calon klien dari website resmi `nextkarya.id` dan WhatsApp dengan cepat tanpa ada prospek yang terlewat.
+1. **Menutup Kesepakatan Lebih Cepat (*Fast Deal Closing*):** Merespons calon klien dari website resmi `nextkarya.web.id` dan WhatsApp dengan cepat tanpa ada prospek yang terlewat.
 2. **Kolaborasi Multi-Akun Tanpa Bentrok (*Safe Multi-User Concurrency*):** Memastikan 3 orang anggota tim dapat membuka data prospek, mencatat hasil diskusi, dan mengatur jadwal proyek secara bersamaan di perangkat masing-masing dengan aman.
 3. **Agenda Follow-Up Harian Terpantau (*Daily Follow-Up Discipline*):** Menyediakan halaman kerja khusus setiap pagi agar tim langsung tahu siapa calon klien yang harus dihubungi hari ini.
 4. **Visibilitas Beban Kerja Tim (*Team Resource Timeline*):** Mengetahui ketersediaan jadwal tim pengembang dan desainer secara visual agar estimasi waktu ke klien selalu akurat dan tidak terjadi bentrok pengerjaan.
@@ -23,7 +23,7 @@ Fokus utamanya bukan birokrasi penjualan yang rumit, melainkan:
 
 ```
                          ┌────────────────────────────────────────────────────────┐
-                         │  LEADS MASUK (Website nextkarya.id, WhatsApp, Rujukan) │
+                         │  LEADS MASUK (Website nextkarya.web.id, WhatsApp, Rujukan) │
                          │  - Dilindungi Honeypot & Rate Limiter Anti-Spam        │
                          └───────────────────────────┬────────────────────────────┘
                                                      │
@@ -73,7 +73,7 @@ Menampung seluruh calon klien yang masuk secara otomatis dari formulir website, 
 * **Pengamanan Anti-Spam pada Endpoint `POST /api/v1/leads`:**
   - **Honeypot Protection:** Menyediakan field tersembunyi `website_url` yang tidak terlihat oleh pengunjung biasa. Jika bot spam mengisi field ini, pengiriman formulir langsung diabaikan secara otomatis tanpa memicu error di klien.
   - **Rate Limiting Ketat (Pertahanan Utama):** Maksimal 5 pengiriman pesan per IP per 15 menit untuk mencegah serangan spam banjir formulir.
-  - **Validasi Origin / Referer (Lapisan Pertahanan Tambahan):** Server memeriksa apakah pengiriman berasal dari domain resmi (`https://nextkarya.id`). Karena header Origin dapat hilang pada webview atau dimanipulasi, perlindungan utama tetap berpegang pada Honeypot dan Rate Limiting.
+  - **Validasi Origin / Referer (Lapisan Pertahanan Tambahan):** Server memeriksa apakah pengiriman berasal dari domain resmi (`https://nextkarya.web.id`). Karena header Origin dapat hilang pada webview atau dimanipulasi, perlindungan utama tetap berpegang pada Honeypot dan Rate Limiting.
   - **Validasi Skema Zod Express & Sanitasi Teks:** Mencegah injeksi kode berbahaya, memotong spasi berlebih, dan membatasi panjang teks pesan maksimal 2.000 karakter.
 
 ---
@@ -120,7 +120,7 @@ Alur kerja prospek dibuat sangat jelas dan tanpa tahapan birokrasi yang berbelit
   - Contoh format: "30 Okt: Diskusi via WhatsApp lancar, klien minta revisi fitur pembayaran online, proposal final dikirim besok siang".
 * **Aksi Cepat 1-Klik (*One-Click Actions*):**
   - **Tombol "Chat di WhatsApp":** Langsung membuka WhatsApp Web atau aplikasi WhatsApp di HP menuju nomor klien dengan template sapaan pembuka otomatis dari Next Karya Digital Solutions.
-  - **Tombol "Kirim Email":** Membuka aplikasi email dengan subjek resmi konsultasi (`contact@nextkarya.id`).
+  - **Tombol "Kirim Email":** Membuka aplikasi email dengan subjek resmi konsultasi (`contact@nextkarya.web.id`).
 
 ---
 
@@ -166,7 +166,7 @@ Setelah proyek klien berhasil diluncurkan (*Go-Live*), data tetap dipantau untuk
 Dirancang khusus agar 3 orang anggota tim dapat bekerja bersamaan di CRM secara aman dan sinkron:
 
 #### 7.1 Sesi Mandiri Tanpa Konflik (*Isolated Sessions*)
-* Ketiga anggota tim memiliki akun masing-masing dengan email resmi (`nama@nextkarya.id`).
+* Ketiga anggota tim memiliki akun masing-masing dengan email resmi (`nama@nextkarya.web.id`).
 * Masing-masing staf dapat membuka CRM di laptop maupun HP secara bersamaan tanpa saling memutuskan sesi login.
 
 #### 7.2 Penanda Penanggung Jawab (*Lead Assignee*)
@@ -222,7 +222,7 @@ Dirancang khusus agar 3 orang anggota tim dapat bekerja bersamaan di CRM secara 
 ## 5. Kesimpulan
 
 Dengan spesifikasi ini, **Sistem CRM Next Karya Digital Solutions**:
-1. Menggunakan identitas resmi brand `nextkarya.id` dan alamat kontak `contact@nextkarya.id`.
+1. Menggunakan identitas resmi brand `nextkarya.web.id` dan alamat kontak `contact@nextkarya.web.id`.
 2. Menjamin kolaborasi 3 orang anggota tim berjalan aman, sinkron, dan bebas bentrok data (*concurrency-safe* via Optimistic Locking).
 3. Menghadirkan halaman kerja harian **"Agenda Follow-Up Hari Ini"** di MVP, sehingga tidak ada prospek yang terlewat meskipun notifikasi push HP dialokasikan untuk Fase 2.
 4. Terlindungi dari serangan bot melalui Honeypot, validasi Origin bertingkat, dan Rate Limiting.

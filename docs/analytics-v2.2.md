@@ -12,7 +12,7 @@
 
 ## 1. Ringkasan Eksekutif & Filosofi Desain
 
-Sistem Dashboard Analitik Next Karya Digital Solutions dibangun untuk memberikan visibilitas performa trafik dan konversi bagi website resmi `nextkarya.id` maupun website klien yang sedang dikerjakan, tanpa mengorbankan kecepatan akses maupun privasi pengunjung.
+Sistem Dashboard Analitik Next Karya Digital Solutions dibangun untuk memberikan visibilitas performa trafik dan konversi bagi website resmi `nextkarya.web.id` maupun website klien yang sedang dikerjakan, tanpa mengorbankan kecepatan akses maupun privasi pengunjung.
 
 ### 1.1 Strategi Multi-Tenancy (Dimulai dari Hari Pertama)
 * Setiap event kunjungan dan konversi **wajib menyertakan parameter `site_id`** sejak hari pertama (contoh: `site_id: "nextkarya-main"` untuk website resmi perusahaan, atau `site_id: "klien-xxx"` untuk website klien).
@@ -33,7 +33,7 @@ Untuk menjaga integritas dan kejujuran data:
 
 ```
 ┌───────────────────────────────────────┐
-│ WEBSITE PUBLIK (nextkarya.id / Klien) │
+│ WEBSITE PUBLIK (nextkarya.web.id / Klien) │
 │ Skrip Pelacak Ringan (< 2 KB)         │
 └───────────────────┬───────────────────┘
                     │ Sinyal Event: POST /api/v1/analytics/event
@@ -101,7 +101,7 @@ Mengukur efektivitas website dalam menghasilkan calon klien (*leads*):
 * **Sumber Rujukan Trafik (*Traffic Sources & Referrers*):**
   - **Pencarian Organik (*Search Engine*):** Pengunjung yang menemukan website dari Google, Bing, atau Yahoo.
   - **Media Sosial (*Social Media*):** Trafik dari Instagram, LinkedIn, TikTok, Facebook, atau WhatsApp Web.
-  - **Langsung (*Direct*):** Pengunjung yang mengetik langsung domain resmi (`nextkarya.id`) atau membukanya dari bookmark.
+  - **Langsung (*Direct*):** Pengunjung yang mengetik langsung domain resmi (`nextkarya.web.id`) atau membukanya dari bookmark.
   - **Rujukan (*Referral*):** Tautan dari media rilis, direktori bisnis, atau website mitra luar.
 * **Pelacakan Kampanye Promosi (*UTM Campaign Tracking - Fase 2*):**
   - Mengurai parameter pelacak URL khusus saat promosi dibagikan (`utm_source`, `utm_medium`, `utm_campaign`).
@@ -188,7 +188,7 @@ Untuk melindungi endpoint dari serangan banjir bot, spam log, dan request palsu:
 3. **Validasi `site_id` Aktif:**
    - Server memverifikasi apakah `site_id` terdaftar dan berstatus aktif di database. Jika tidak valid, permintaan ditolak (HTTP 404/400).
 4. **Verifikasi Origin / Referer (Lapisan Pertahanan Tambahan):**
-   - Server mencocokkan header `Origin` atau `Referer` dengan daftar domain terdaftar untuk `site_id` tersebut (misal: `https://nextkarya.id` untuk `nextkarya-main`).
+   - Server mencocokkan header `Origin` atau `Referer` dengan daftar domain terdaftar untuk `site_id` tersebut (misal: `https://nextkarya.web.id` untuk `nextkarya-main`).
    - *Catatan Batasan Teknis:* Header Origin dan Referer dapat tidak terkirim pada beberapa aplikasi mobile webview atau dapat dipalsukan oleh bot tingkat lanjut. Oleh sebab itu, pemeriksaan Origin diposisikan sebagai **lapisan penyaring tambahan**, sedangkan Rate Limiting dan validasi skema tetap menjadi pertahanan utama.
 
 ### 3.3 Desain Database & Skema Agregasi (PostgreSQL & Prisma ORM / Raw SQL)
@@ -237,6 +237,6 @@ Untuk melindungi endpoint dari serangan banjir bot, spam log, dan request palsu:
 
 Dengan arsitektur ini, **Dashboard Analitik Next Karya Digital Solutions**:
 1. Menjamin 3 anggota tim internal dapat memantau performa situs secara bersamaan tanpa gangguan konflik sesi.
-2. Menggunakan identitas domain resmi `nextkarya.id` dan skema `site_id` sejak awal.
+2. Menggunakan identitas domain resmi `nextkarya.web.id` dan skema `site_id` sejak awal.
 3. Melindungi infrastruktur dari banjir bot dengan pertahanan berlapis (Rate Limiting 60 req/menit dan validasi skema).
 4. Menjunjung transparansi data dengan memposisikan metrik sebagai indikator tren pertumbuhan bisnis riil tanpa *overclaim*.

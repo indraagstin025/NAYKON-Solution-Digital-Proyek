@@ -33,7 +33,7 @@ Untuk menjawab kebutuhan jangka panjang tanpa migrasi data yang menyulitkan:
 ┌──────────────────────────────────────┐  ┌──────────────────────────────────────┐  ┌──────────────────────────────────────┐
 │  WEBSITE PUBLIK NEXT KARYA           │  │  WEBSITE KLIEN (CMS PORTAL / SEKOLAH)│  │  APLIKASI MOBILE (Android & iOS)     │
 │  - site_id: "nextkarya-main"         │  │  - site_id: "klien-portal-01"        │  │  - Konsumsi API per site_id          │
-│  - domain: nextkarya.id              │  │  - domain: portalberita.com (Fase 2) │  │  - Monitoring & Respon Darurat       │
+│  - domain: nextkarya.web.id              │  │  - domain: portalberita.com (Fase 2) │  │  - Monitoring & Respon Darurat       │
 └──────────────────────────────────────┘  └──────────────────────────────────────┘  └──────────────────────────────────────┘
 ```
 
@@ -162,7 +162,7 @@ Karena pada tahap awal (MVP) diterapkan sistem **1 Role Tunggal** di mana semua 
   - Secret key **TIDAK BOLEH** ditaruh pada query URL (?secret=...) karena rawan tercatat di log server.
   - Secret key dikirimkan melalui HTTP Header resmi:
     ```http
-    POST https://nextkarya.id/api/revalidate
+    POST https://nextkarya.web.id/api/revalidate
     Content-Type: application/json
     x-webhook-secret: KUNCI_RAHASIA_KOMUNIKASI
     
@@ -183,7 +183,7 @@ Karena pada tahap awal (MVP) diterapkan sistem **1 Role Tunggal** di mana semua 
 Dirancang khusus untuk tim Next Karya Digital Solutions (3 akun aktif) agar dapat bekerja bersamaan secara aman tanpa risiko data rusak atau tertimpa:
 
 #### 6.1 Sesi Mandiri (*Isolated User Sessions*)
-* Setiap anggota tim memiliki akun login sendiri dengan email kerja masing-masing (`nama@nextkarya.id`) dan password terenkripsi.
+* Setiap anggota tim memiliki akun login sendiri dengan email kerja masing-masing (`nama@nextkarya.web.id`) dan password terenkripsi.
 * Sesi login dikelola secara terisolasi dengan token mandiri. Tidak ada bentrok sesi atau kejadian *ter-logout otomatis* saat ketiga anggota tim membuka dashboard bersamaan di laptop atau ponsel masing-masing.
 
 #### 6.2 Integritas Transaksi Database (ACID Compliance)
@@ -235,6 +235,6 @@ Jika dua anggota tim secara kebetulan membuka dan mengedit artikel yang sama di 
 ## 4. Kesimpulan
 
 Dokumen ini menjadi standar implementasi resmi untuk Sistem CMS Next Karya Digital Solutions:
-1. Memastikan seluruh penamaan brand resmi adalah **Next Karya Digital Solutions** dengan domain **`nextkarya.id`**.
+1. Memastikan seluruh penamaan brand resmi adalah **Next Karya Digital Solutions** dengan domain **`nextkarya.web.id`**.
 2. Membatasi lingkup Fase 1 untuk internal tim Next Karya, sembari menyiapkan skema `site_id` untuk perluasan bisnis ke klien di Fase 2.
 3. Memberikan kepastian teknis melalui kriteria selesai, perlindungan snapshot rolling FIFO 5 versi, dan pengamanan webhook header.
