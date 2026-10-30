@@ -17,9 +17,9 @@ export const CONTACT_CHANNELS = [
   {
     icon: <EnvelopeClosedIcon className="h-5 w-5" />,
     title: "Email Resmi Konsultasi",
-    content: "contact@naykon.id",
+    content: "contact@nextkarya.id",
     isLink: true,
-    linkHref: "mailto:contact@naykon.id",
+    linkHref: "mailto:contact@nextkarya.id",
   },
   {
     icon: <ClockIcon className="h-5 w-5" />,

@@ -120,10 +120,10 @@ export default function Footer() {
                     Email Konsultasi
                   </span>
                   <a
-                    href="mailto:contact@naykon.id"
+                    href="mailto:contact@nextkarya.id"
                     className="font-bold text-[#005090] dark:text-[#0986C8] hover:underline"
                   >
-                    contact@naykon.id
+                    contact@nextkarya.id
                   </a>
                 </div>
               </li>

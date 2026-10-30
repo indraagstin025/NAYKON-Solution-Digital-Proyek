@@ -1,46 +1,53 @@
-# Spesifikasi & Daftar Fitur Dashboard Analitik
+# Spesifikasi & Daftar Fitur Dashboard Analitik (Multi-Tenant & Anti-Overclaim)
 **Next Karya Digital Solutions**  
 *Dokumen Arsitektur & Perencanaan Fitur Sistem Analitik Kunjungan & Konversi*  
-*Versi: 2.0 (Privacy-First, Multiplatform, & Business-Oriented)*  
+*Versi: 2.1 (Multi-Tenant site_id, Anti-Spam, & Transparansi Data Tren)*  
 *Tanggal: 30 Oktober 2026*
 
 ---
 
 ## 1. Ringkasan Eksekutif & Filosofi Desain
 
-Sistem Dashboard Analitik Next Karya dibangun untuk memberikan visibilitas penuh terhadap performa website dan aplikasi mobile tanpa mengorbankan kecepatan maupun privasi pengunjung. 
+Sistem Dashboard Analitik Next Karya Digital Solutions dibangun untuk memberikan visibilitas performa trafik dan konversi bagi website resmi `nextkarya.id` maupun website klien yang membeli paket digital, tanpa mengorbankan kecepatan akses maupun privasi pengunjung.
 
-Sistem ini menganut 3 prinsip utama:
+### 1.1 Strategi Multi-Tenancy (Dimulai dari Hari Pertama)
+* Setiap event kunjungan dan konversi **wajib menyertakan parameter `site_id`** sejak hari pertama (misal: `site_id: "nextkarya-main"` untuk website resmi, atau `site_id: "klien-xxx"` untuk website klien).
+* Mesin analitik ini dapat melayani banyak website sekaligus (*Multi-Tenant Architecture*). 
+* Tim Next Karya Digital Solutions dapat memantau seluruh performa situs klien melalui pemilih situs (*Site Selector*), sedangkan klien hanya dapat melihat dashboard yang terkunci ke `site_id` milik mereka.
 
-1. **Ramah Privasi & Bebas Banner Cookie (*Privacy-First & Cookie-Free*):**
-   - Tidak menggunakan pelacak pihak ketiga yang membebani browser (seperti Google Analytics lama).
-   - Tidak mengumpulkan data pribadi sensitif (PII). Identifikasi pengunjung menggunakan metode anonim (*daily salted IP hash*).
-   - Pengunjung mendapatkan pengalaman browsing yang bersih tanpa popup persetujuan cookie yang mengganggu.
-2. **Berorientasi pada Hasil Bisnis (*Business-Outcome Oriented*):**
-   - Fokus utama bukan sekadar jumlah klik mentah, melainkan **konversi bisnis riil**: berapa pengunjung yang menekan tombol WhatsApp, berapa yang mengisi formulir proyek, dan portofolio mana yang paling menghasilkan prospek klien (*leads*).
-3. **Performa Tinggi & Query Cepat (*High Performance Rollups*):**
-   - Skrip pelacak di Next.js berukuran sangat kecil (< 2 KB) sehingga tidak memperlambat skor Google Core Web Vitals.
-   - Menggunakan sistem agregasi data harian (*daily rollups*) sehingga dashboard terbuka secara instan dalam hitungan milidetik.
+### 1.2 Batasan Teknis & Transparansi Data Tren (Prinsip Anti-Overclaim)
+Untuk menjaga integritas dan kejujuran data di hadapan klien:
+1. **Bebas Cookie Pihak Ketiga (*Privacy-First*):**
+   - Menggunakan metode anonim *daily salted IP hash* tanpa cookie pelacak, sehingga website tidak memerlukan popup banner persetujuan cookie yang mengganggu.
+2. **Karakteristik Data Kunjungan Bulanan:**
+   - Karena salt diacak per hari demi privasi, pengunjung yang sama yang datang di hari Senin dan Rabu akan terhitung sebagai pengunjung unik pada masing-masing hari tersebut.
+   - Akumulasi metrik bulanan adalah **Total Daily Unique Visitors**, bukan angka mutlak individu perorangan (*Absolute Monthly Unique Individuals*).
+3. **Estimasi Durasi Kunjungan:**
+   - Durasi kunjungan yang dicatat dari sinyal *beacon* adalah estimasi heuristik waktu aktif tab browser, bukan pengukuran waktu tatap mata mutlak.
+4. **Fungsi Utama:**
+   - Metrik dashboard diposisikan sebagai **Indikator Tren Pertumbuhan (*Growth Trend Indicator*)** untuk melihat arah perkembangan bisnis dan perbandingan performa konten, bukan sebagai alat audit legal atau janji angka mutlak kepada klien.
 
 ```
-┌─────────────────────────────────┐
-│ WEBSITE NEXT.JS / MOBILE APP    │
-│ Skrip Pelacak Ringan (< 2 KB)   │
-└───────────────┬─────────────────┘
-                │ Kirim Event Ringkas (POST /api/v1/analytics/event)
-                ▼
-┌────────────────────────────────────────────────────────┐
-│ BACKEND API & MESIN AGREGASI                           │
-│ - Validasi Event & Anonimisasi IP                      │
-│ - Tabel Raw Event & Agregasi Harian (Daily Rollup)     │
-└───────────────┬────────────────────────────────────────┘
-                │ Data Agregasi Siap Tampil
-                ▼
-┌────────────────────────────────────────────────────────┐
-│ DASHBOARD ANALITIK (WEB ADMIN / MOBILE APP)            │
-│ - Visualisasi Tren Trafik & Konversi Leads             │
-│ - Laporan Sumber Pengunjung & Halaman Terpopuler       │
-└────────────────────────────────────────────────────────┘
+┌───────────────────────────────────────┐
+│ WEBSITE PUBLIK (nextkarya.id / Klien) │
+│ Skrip Pelacak Ringan (< 2 KB)         │
+└───────────────────┬───────────────────┘
+                    │ Sinyal Event: POST /api/v1/analytics/event
+                    │ Payload: { site_id: "nextkarya-main", eventName: "pageview", ... }
+                    ▼
+┌────────────────────────────────────────────────────────────────────────┐
+│ BACKEND ANALITIK & PENGAMAN SPAM                                       │
+│ 1. Rate Limiting per IP (Maks 60 req/menit)                            │
+│ 2. Validasi site_id & Allowlist Origin Domain                          │
+│ 3. Tabel Raw Event (TTL 90 Hari) & Agregasi Harian (Daily Rollup)      │
+└───────────────────┬────────────────────────────────────────────────────┘
+                    │ Data Siap Tampil per site_id
+                    ▼
+┌────────────────────────────────────────────────────────────────────────┐
+│ DASHBOARD ANALITIK (WEB ADMIN & PORTAL KLIEN)                          │
+│ - Tampilan Tren Trafik, Halaman Terpopuler & Saluran Rujukan           │
+│ - Pelacakan Konversi Riil: Klik Chat WhatsApp & Kirim Formulir         │
+└────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
@@ -49,18 +56,18 @@ Sistem ini menganut 3 prinsip utama:
 
 ### Pilar 1: Metrik Utama Trafik (*Top-Line Overview*)
 
-Kartu indikator utama di bagian atas dashboard yang dilengkapi persentase tren naik/turun dibanding periode sebelumnya:
+Kartu indikator tren di bagian atas dashboard dengan perbandingan persentase naik/turun dibanding periode sebelumnya:
 
-* **Pengunjung Unik (*Unique Visitors*):**
-  Jumlah perangkat atau individu unik yang mengunjungi situs dalam rentang waktu yang dipilih.
+* **Pengunjung Harian Unik (*Daily Unique Visitors*):**
+  Estimasi jumlah perangkat unik yang mengunjungi situs per hari dalam rentang waktu yang dipilih.
 * **Total Tayangan (*Pageviews*):**
   Akumulasi total berapa kali halaman website dibuka atau disegarkan (*refresh*).
 * **Sesi Kunjungan (*Sessions*):**
   Kunjungan aktif pengunjung (sesi dianggap selesai jika pengunjung tidak beraktivitas selama 30 menit).
 * **Rata-rata Durasi Kunjungan (*Average Visit Duration*):**
-  Durasi rata-rata yang dihabiskan pengunjung untuk membaca konten dan menjelajahi website.
+  Estimasi durasi rata-rata yang dihabiskan pengunjung untuk membaca konten website.
 * **Tingkat Pantulan (*Bounce Rate %*):**
-  Persentase pengunjung yang meninggalkan website setelah hanya membuka satu halaman tanpa melakukan interaksi lebih lanjut.
+  Persentase pengunjung yang meninggalkan website setelah hanya membuka satu halaman saja.
 
 ---
 
@@ -83,12 +90,12 @@ Mengukur efektivitas website dalam menghasilkan calon klien (*leads*):
 ### Pilar 3: Analisis Perilaku & Konten Populer (*Content & Behavior*)
 
 * **Halaman Terpopuler (*Top Pages*):**
-  - Tabel peringkat halaman berdasarkan jumlah tayangan (*views*), persentase kontribusi trafik, dan durasi rata-rata baca.
-  - Membantu tim konten melihat artikel blog apa atau studi kasus portofolio mana yang paling diminati pembaca.
+  - Tabel peringkat halaman berdasarkan jumlah tayangan (*views*), persentase kontribusi trafik, dan estimasi waktu baca.
+  - Membantu tim melihat artikel blog apa atau studi kasus portofolio mana yang paling diminati pembaca.
 * **Sumber Rujukan Trafik (*Traffic Sources & Referrers*):**
   - **Pencarian Organik (*Search Engine*):** Pengunjung yang menemukan website dari Google, Bing, atau Yahoo.
   - **Media Sosial (*Social Media*):** Trafik dari Instagram, LinkedIn, TikTok, Facebook, atau WhatsApp Web.
-  - **Langsung (*Direct*):** Pengunjung yang mengetik langsung domain `naykon.id` atau membuka dari bookmark browser.
+  - **Langsung (*Direct*):** Pengunjung yang mengetik langsung domain resmi (seperti `nextkarya.id`) atau membuka dari bookmark browser.
   - **Rujukan (*Referral*):** Tautan dari portal berita, direktori bisnis, atau website mitra luar.
 * **Pelacakan Kampanye Promosi (*UTM Campaign Tracking*):**
   - Mendeteksi parameter pelacak URL khusus saat tim membagikan link promosi:
@@ -114,6 +121,9 @@ Mengukur efektivitas website dalam menghasilkan calon klien (*leads*):
 
 ### Pilar 5: Visualisasi Data, Filter Waktu & Ekspor Laporan
 
+* **Pemilih Situs (*Site Selector*):**
+  - Untuk akun Next Karya Digital Solutions: dapat berpindah melihat analitik website utama maupun website milik klien.
+  - Untuk akun Klien: terkunci otomatis hanya dapat melihat `site_id` miliknya.
 * **Filter Rentang Waktu Fleksibel:**
   - Hari Ini (*Today*)
   - 7 Hari Terakhir (*Last 7 Days*)
@@ -129,43 +139,42 @@ Mengukur efektivitas website dalam menghasilkan calon klien (*leads*):
 
 ---
 
-## 3. Arsitektur Teknis Pengumpulan & Pengolahan Data
+## 3. Arsitektur Teknis & Pengamanan Anti-Spam
 
 ### 3.1 Skrip Pelacak di Sisi Klien (Next.js & Mobile)
 
-Skrip pelacak di Next.js berjalan tanpa memblokir proses rendering:
+Skrip pelacak di Next.js berjalan di latar belakang tanpa memblokir proses rendering:
 
 ```javascript
-// Contoh pemanggilan event dari sisi client (Web atau Mobile)
+// Contoh pengiriman event analitik dari website resmi Next Karya Digital Solutions
 navigator.sendBeacon('/api/v1/analytics/event', JSON.stringify({
+  site_id: 'nextkarya-main',
   eventName: 'pageview', // atau 'whatsapp_click', 'form_submit'
   path: window.location.pathname,
   referrer: document.referrer || null,
   screenWidth: window.innerWidth,
   utmSource: 'linkedin',
-  utmCampaign: 'q4_branding'
+  utmCampaign: 'branding_q4'
 }));
 ```
 
-### 3.2 Desain Database & Skema Agregasi (PostgreSQL)
+### 3.2 Pengamanan Endpoint `POST /api/v1/analytics/event`
+Untuk mencegah serangan bot, spam log, dan request palsu:
+1. **Rate Limiting Ketat:** Dibatasi maksimal 60 request per IP per menit.
+2. **Validasi `site_id`:** Request ditolak jika `site_id` tidak terdaftar aktif di database.
+3. **Validasi Origin / Referrer Header:**
+   - Server mencocokkan header `Origin` atau `Referer` dengan daftar domain resmi yang diizinkan untuk `site_id` tersebut (misal: `https://nextkarya.id` untuk `nextkarya-main`).
+   - Request dari domain asing atau tanpa header valid langsung di-drop dengan status 403 Forbidden.
+4. **Validasi Payload Zod:** Payload dibatasi maksimal 2 KB dan dilarang mengandung karakter kontrol anomali.
 
-Untuk menjamin dashboard tetap instan saat memuat rentang data tahunan, database memisahkan data mentah dan data agregasi:
+### 3.3 Desain Database & Skema Agregasi (PostgreSQL)
 
 1. **Tabel `AnalyticsEvent` (Data Mentah / Transaksional):**
-   - Menyimpan rekaman per event dengan waktu kedatangan (`occurredAt`).
-   - Dilengkapi *TTL / Retention Policy* (data mentah otomatis dibersihkan setelah 90 hari untuk menghemat storage database).
+   - Kolom: `id`, `site_id`, `eventName`, `path`, `referrer`, `source`, `device`, `city`, `visitorIdHash`, `occurredAt`.
+   - Dilengkapi *TTL / Retention Policy* 90 hari untuk menghemat storage.
 2. **Tabel `AnalyticsDaily` (Data Agregasi Harian):**
-   - Merangkum metrik harian per halaman, sumber rujukan, dan perangkat:
-     - `date`, `path`, `source`, `device`, `pageviews`, `visitors`, `sessions`, `bounces`, `conversions`.
-   - Data tabel ini berukuran sangat kecil dan dapat disimpan permanen hingga bertahun-tahun.
-
-### 3.3 Endpoint API Analitik
-
-* `POST /api/v1/analytics/event` (Menerima log event dari Next.js dan Mobile App)
-* `GET /api/v1/analytics/overview?from=YYYY-MM-DD&to=YYYY-MM-DD` (Mengambil data ringkasan metrik dashboard)
-* `GET /api/v1/analytics/pages?from=YYYY-MM-DD&to=YYYY-MM-DD` (Mengambil daftar top pages)
-* `GET /api/v1/analytics/sources?from=YYYY-MM-DD&to=YYYY-MM-DD` (Mengambil daftar sumber rujukan)
-* `GET /api/v1/analytics/export?format=csv&from=YYYY-MM-DD&to=YYYY-MM-DD` (Mengunduh file laporan)
+   - Kolom: `site_id`, `date`, `path`, `source`, `device`, `pageviews`, `visitors`, `sessions`, `bounces`, `conversions`.
+   - Diindeks unik pada `[site_id, date, path, source, device]` agar proses agregasi dan query dashboard berlangsung dalam hitungan milidetik.
 
 ---
 
@@ -173,18 +182,25 @@ Untuk menjamin dashboard tetap instan saat memuat rentang data tahunan, database
 
 | No | Modul / Fitur | Prioritas | Manfaat bagi Bisnis |
 | :--- | :--- | :---: | :--- |
-| **1** | Metrik Trafik Utama (Visitors, Views, Duration) | **Fase 1 (MVP)** | Mengetahui volume pengunjung harian |
-| **2** | Pelacakan Klik WhatsApp & Form Submit | **Fase 1 (MVP)** | Mengetahui jumlah konversi leads yang masuk |
-| **3** | Halaman Terpopuler (*Top Pages*) | **Fase 1 (MVP)** | Melihat artikel dan portofolio paling diminati |
-| **4** | Sumber Kunjungan (Google, Media Sosial, Direct) | **Fase 1 (MVP)** | Evaluasi saluran pemasaran yang paling efektif |
-| **5** | Proporsi Perangkat (Mobile vs Desktop) | **Fase 1 (MVP)** | Memastikan kenyamanan tampilan antarmuka |
-| **6** | Filter Rentang Waktu (Hari Ini, 7 & 30 Hari) | **Fase 1 (MVP)** | Analisis perbandingan performa berkala |
-| **7** | Sebaran Wilayah / Geografis Kota | **Fase 2** | Pemetaan persebaran lokasi calon klien |
-| **8** | Pelacakan UTM Parameters Detail | **Fase 2** | Pengukuran efektivitas kampanye promosi berbayar |
-| **9** | Ekspor Laporan CSV / Excel | **Fase 2** | Pelaporan berkala ke manajemen internal |
+| **1** | Multi-Tenancy Dasar (`site_id` di setiap event) | **Fase 1 (MVP)** | Siap dipakai website sendiri & website klien |
+| **2** | Metrik Trafik Utama (Visitors, Views, Duration) | **Fase 1 (MVP)** | Mengetahui volume tren pengunjung harian |
+| **3** | Pelacakan Klik WhatsApp & Form Submit | **Fase 1 (MVP)** | Mengetahui konversi prospek klien riil |
+| **4** | Pengamanan Anti-Spam (Rate Limit & Origin) | **Fase 1 (MVP)** | Melindungi endpoint dari bot dan request sampah |
+| **5** | Halaman Terpopuler (*Top Pages*) | **Fase 1 (MVP)** | Melihat artikel dan portofolio paling diminati |
+| **6** | Sumber Kunjungan (Google, Media Sosial, Direct) | **Fase 1 (MVP)** | Evaluasi saluran pemasaran yang paling efektif |
+| **7** | Proporsi Perangkat (Mobile vs Desktop) | **Fase 1 (MVP)** | Memastikan kenyamanan tampilan antarmuka |
+| **8** | Filter Rentang Waktu (Hari Ini, 7 & 30 Hari) | **Fase 1 (MVP)** | Analisis perbandingan performa berkala |
+| **9** | Pemilih Situs (*Site Selector* untuk Tim) | **Fase 1 (MVP)** | Kemudahan berpindah antara situs Next Karya dan klien |
+| **10** | Sebaran Wilayah / Geografis Kota | **Fase 2** | Pemetaan persebaran lokasi calon klien |
+| **11** | Pelacakan UTM Parameters Detail | **Fase 2** | Pengukuran efektivitas kampanye promosi berbayar |
+| **12** | Ekspor Laporan CSV / Excel | **Fase 2** | Pelaporan berkala ke manajemen internal |
 
 ---
 
 ## 5. Kesimpulan
 
-Dengan spesifikasi ini, **Dashboard Analitik** Next Karya akan menjadi alat ukur yang sangat tajam, ringan, dan bermanfaat langsung untuk pertumbuhan bisnis, tanpa memperlambat performa website publik Next.js sedikit pun.
+Dengan spesifikasi ini, **Dashboard Analitik Next Karya Digital Solutions**:
+1. Menghilangkan brand lama dan beroperasi penuh menggunakan domain resmi `nextkarya.id`.
+2. Menerapkan arsitektur multi-tenant `site_id` sejak hari pertama.
+3. Terlindungi dari spam bot melalui Rate Limiting dan verifikasi Origin domain.
+4. Menjunjung transparansi teknis dengan memposisikan data sebagai indikator tren pertumbuhan bisnis riil tanpa *overclaim*.

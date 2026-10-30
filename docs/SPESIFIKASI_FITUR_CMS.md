@@ -1,34 +1,37 @@
-# Spesifikasi & Daftar Fitur CMS (Headless & Multiplatform)
+# Spesifikasi & Daftar Fitur CMS (Headless & Multi-Tenant Ready)
 **Next Karya Digital Solutions**  
 *Dokumen Arsitektur & Perencanaan Fitur Sistem Manajemen Konten*  
-*Versi: 2.0 (Arsitektur Terpisah & Multiplatform Ready)*  
+*Versi: 2.1 (Multi-Tenant Ready, Snapshot Pengaman, & Anti-Spam)*  
 *Tanggal: 30 Oktober 2026*
 
 ---
 
-## 1. Ringkasan Eksekutif & Konsep Arsitektur
+## 1. Ringkasan Eksekutif & Strategi Multi-Tenancy
 
-Sistem CMS (Content Management System) Next Karya dirancang dengan pendekatan **Headless / Decoupled Architecture**. CMS ini berdiri sebagai **Web Aplikasi Terpisah** yang bertindak sebagai **Pusat Data (Central API Provider)** untuk melayani berbagai platform klien (*Multiplatform*):
+Sistem CMS (Content Management System) Next Karya Digital Solutions dirancang menggunakan pendekatan **Headless / Decoupled Architecture**. Sistem ini berdiri sebagai **Web Aplikasi Terpisah** yang bertindak sebagai **Pusat Data (Central API Provider)** untuk melayani website publik dan berbagai platform klien (*Multiplatform*).
 
-1. **Website Publik (Next.js):** Mengonsumsi data artikel, portofolio, layanan, dan FAQ berkecepatan tinggi melalui REST API publik dan sistem *cache* instan (*On-Demand Revalidation*).
-2. **Aplikasi Mobile (Android & iOS):** Mengakses data CMS dan operasional tim melalui REST API berotentikasi token.
-3. **Integrasi Eksternal:** Menghubungkan aset media ke *Cloud Object Storage* dan mengirimkan *webhook* pembaruan data secara *real-time*.
+### Strategi Multi-Tenancy (Dimulai dari Hari Pertama)
+Untuk menjawab kebutuhan jangka panjang tanpa migrasi data yang menyulitkan:
+1. **Fase Awal (Internal Next Karya):** CMS ini digunakan pertama kali untuk mengelola website Next Karya Digital Solutions sendiri dengan `site_id: "nextkarya-main"`.
+2. **Kesiapan Produk untuk Klien (*Multi-Tenant Ready*):** Sejak hari pertama, seluruh skema database (artikel, portofolio, layanan, media) dan endpoint API wajib memiliki partisi **`site_id`**.
+3. **Manfaat Bisnis:** Saat modul CMS ini dimasukkan ke dalam paket website klien (misalnya paket Website Sekolah, Komunitas, atau Portal Berita), sistem backend tidak perlu dirombak ulang. Sistem cukup membuat `site_id` baru (contoh: `site_id: "klien-sekolah-01"`) dengan domain yang terhubung masing-masing.
 
 ```
-                         ┌────────────────────────────────────────┐
-                         │  WEB CMS & BACKEND API TERPISAH        │
-                         │  (Pusat Database & Pengelolaan Konten) │
-                         └───────────────────┬────────────────────┘
-                                             │
-                          RESTful JSON API / Webhook Sinyal
-                                             │
-           ┌─────────────────────────────────┴─────────────────────────────────┐
-           ▼                                                                   ▼
-┌──────────────────────────────────────┐             ┌──────────────────────────────────────┐
-│  WEBSITE PUBLIK (Next.js)            │             │  APLIKASI MOBILE (Android & iOS)     │
-│  - Konsumen Konten Publik            │             │  - Platform Mobile Multiplatform     │
-│  - Rendering Ultra Cepat & Ramah SEO │             │  - Akses Tim & Pengelolaan Konten    │
-└──────────────────────────────────────┘             └──────────────────────────────────────┘
+                         ┌────────────────────────────────────────────────────────┐
+                         │  WEB CMS & BACKEND API (Next Karya Digital Solutions)  │
+                         │  - Database Terpusat dengan Partisi site_id           │
+                         │  - Manajemen Konten, Media & Hak Akses Tim            │
+                         └───────────────────────────┬────────────────────────────┘
+                                                     │
+                             RESTful JSON API / Webhook Sinyal
+                                                     │
+           ┌─────────────────────────────────────────┼─────────────────────────────────────────┐
+           ▼                                         ▼                                         ▼
+┌──────────────────────────────────────┐  ┌──────────────────────────────────────┐  ┌──────────────────────────────────────┐
+│  WEBSITE PUBLIK NEXT KARYA           │  │  WEBSITE KLIEN (CMS PORTAL / SEKOLAH)│  │  APLIKASI MOBILE (Android & iOS)     │
+│  - site_id: "nextkarya-main"         │  │  - site_id: "klien-portal-01"        │  │  - Konsumsi API per site_id          │
+│  - domain: nextkarya.id              │  │  - domain: portalberita.com          │  │  - Monitoring & Pengelolaan Tim      │
+└──────────────────────────────────────┘  └──────────────────────────────────────┘  └──────────────────────────────────────┘
 ```
 
 ---
@@ -37,7 +40,12 @@ Sistem CMS (Content Management System) Next Karya dirancang dengan pendekatan **
 
 ### Pilar 1: Manajemen Konten Inti (*Core Content Management*)
 
-#### 1.1 Artikel & Blog (*Technology Insights*)
+#### 1.1 Identitas Multi-Tenant per Konten
+* Setiap entitas konten (Artikel, Portofolio, Layanan, FAQ, Media) memiliki kolom identitas `site_id` yang terindeks (*indexed*) di database:
+  - `site_id: "nextkarya-main"` untuk website resmi Next Karya Digital Solutions.
+  - `site_id: "klien-xxx"` untuk situs klien yang menggunakan modul CMS.
+
+#### 1.2 Artikel & Blog (*Technology Insights*)
 * **Editor Teks Modern:** Mendukung format heading, teks tebal/miring, daftar berpoin/nomor, blok kutipan (*quotes*), penyisipan gambar, dan blok kode pemrograman (*code syntax*).
 * **Manajemen Metadata:**
   - Judul artikel dan slug URL yang otomatis terbuat ramah SEO.
@@ -48,7 +56,7 @@ Sistem CMS (Content Management System) Next Karya dirancang dengan pendekatan **
   - Estimasi waktu baca (*reading time*) yang dihitung otomatis dari jumlah kata.
   - Penulis artikel (*Author*) dan kurasi artikel terkait (*Related Articles*).
 
-#### 1.2 Portofolio & Studi Kasus Proyek (*Case Studies*)
+#### 1.3 Portofolio & Studi Kasus Proyek (*Case Studies*)
 * **Identitas Proyek:** Nama proyek, nama klien, dan sektor industri klien (*misal: FinTech, Kesehatan, E-Commerce, Manufaktur*).
 * **Kategori Solusi:** Website Bisnis, Portal CMS, Aplikasi Web Kustom, atau Mobile App.
 * **Dampak Bisnis (*Business Impact*):** Pernyataan ringkas dampak nyata solusi digital terhadap bisnis klien (*contoh: "Meningkatkan transaksi online sebesar 150%"*).
@@ -58,7 +66,7 @@ Sistem CMS (Content Management System) Next Karya dirancang dengan pendekatan **
 * **Proyek Unggulan (*Featured*):** Tombol sorotan agar proyek terpilih tampil otomatis di halaman depan beranda.
 * **Tautan Langsung:** URL demo langsung atau tautan website live klien.
 
-#### 1.3 Katalog Layanan & Paket Harga
+#### 1.4 Katalog Layanan & Paket Harga
 * **Katalog Layanan:**
   - Judul layanan, ikon representasi, dan deskripsi manfaat bisnis.
   - Daftar poin keunggulan layanan (*feature checklist*).
@@ -69,32 +77,36 @@ Sistem CMS (Content Management System) Next Karya dirancang dengan pendekatan **
   - Daftar fitur yang didapatkan klien pada paket tersebut.
   - Penanda paket rekomendasi (*Most Popular / Recommended Badge*).
 
-#### 1.4 FAQ (*Frequently Asked Questions*)
+#### 1.5 FAQ (*Frequently Asked Questions*)
 * **Pengelompokan Topik:** Kategori pertanyaan (Teknis & Hosting, Skema Biaya, Garansi Purnajual, Durasi Pengerjaan).
 * **Pertanyaan & Jawaban:** Jawaban lengkap dan mudah dipahami.
 * **Kontrol Tampil:** Tombol aktif/nonaktif dan pengurutan posisi pertanyaan secara fleksibel.
 
-#### 1.5 Testimoni Klien (*Social Proof*)
+#### 1.6 Testimoni Klien (*Social Proof*)
 * **Data Klien:** Nama pemberi testimoni, jabatan, nama brand/perusahaan, dan logo perusahaan.
 * **Ulasan:** Teks ulasan hasil kerja tim, rating bintang (skala 1 sampai 5).
 * **Relasi:** Tautan ke portofolio studi kasus proyek terkait.
 
-#### 1.6 Halaman Statis Kustom (*Pages*)
+#### 1.7 Halaman Statis Kustom (*Pages*)
 * Pengelolaan teks dan informasi untuk halaman seperti Kebijakan Privasi (*Privacy Policy*), Syarat Ketentuan (*Terms of Service*), maupun halaman promo khusus.
 
 ---
 
-### Pilar 2: Alur Penerbitan Konten (*Editorial Workflow*)
+### Pilar 2: Alur Penerbitan Konten & Snapshot Pengaman (Solusi MVP)
 
-* **Status Publikasi Lengkap:**
+Karena pada tahap awal (MVP) diterapkan sistem **1 Role Tunggal** di mana semua anggota tim bisa langsung mempublikasikan konten, sistem wajib dilengkapi pengaman agar konten tidak tertimpa atau hilang tanpa sengaja:
+
+* **Snapshot Pengaman Sederhana (*Auto-Snapshot before Publish*):**
+  - Setiap kali tombol "Publish" atau "Simpan Perubahan" ditekan pada artikel/portofolio yang sudah ada, sistem secara otomatis menduplikasi data versi sebelumnya ke tabel riwayat sederhana (`content_snapshots`).
+  - Dilengkapi tombol 1-klik "Pulihkan Versi Sebelumnya" (*Restore Snapshot*). Jika ada salah ketik fatal atau isi terhapus, data lama bisa dikembalikan dalam hitungan detik.
+* **Pencegahan Hapus Permanen (*Soft Delete Protection*):**
+  - Tombol hapus konten tidak melakukan *hard delete* (penghapusan fisik dari database).
+  - Konten yang dihapus otomatis beralih status menjadi **Arsip (*Archived*)**, sehingga sewaktu-waktu dapat dipulihkan kembali oleh tim.
+* **Status Publikasi Konten:**
   1. **Draf (*Draft*):** Konten masih dalam penulisan dan belum ingin ditampilkan ke publik.
-  2. **Tinjauan (*Review*):** Konten sudah selesai ditulis dan siap diperiksa sebelum tayang.
-  3. **Terjadwal (*Scheduled*):** Konten disetel untuk terbit otomatis pada tanggal dan jam tertentu di masa depan.
-  4. **Terbit (*Published*):** Konten aktif secara live dan langsung dapat diakses publik.
-  5. **Arsip (*Archived*):** Konten disembunyikan dari publik tanpa menghapus data historisnya dari database.
-* **Riwayat Revisi (*Version History*):**
-  - Mencatat *snapshot* perubahan konten (waktu modifikasi dan akun pengubah).
-  - Kemampuan mengembalikan isi konten ke versi sebelumnya (*rollback*) jika ada kekeliruan pengeditan.
+  2. **Terbit (*Published*):** Konten aktif secara live dan langsung dapat diakses publik.
+  3. **Arsip (*Archived*):** Konten disembunyikan dari publik sebagai pengaman.
+  4. **Terjadwal (*Scheduled - Fase 2*):** Konten disetel untuk terbit otomatis pada tanggal dan jam tertentu di masa depan.
 
 ---
 
@@ -102,6 +114,7 @@ Sistem CMS (Content Management System) Next Karya dirancang dengan pendekatan **
 
 * **Pustaka Media Universal:**
   - Pengunggahan gambar (WebP, PNG, JPG, SVG) dan dokumen digital (PDF brosur, infografis).
+  - Filter media berdasarkan `site_id` agar aset Next Karya dan aset klien tidak tercampur.
   - Pencarian file berdasarkan nama dan filter berdasarkan tanggal atau tipe file.
 * **Optimasi Gambar Otomatis:**
   - Kompresi ukuran file otomatis saat diunggah untuk menghemat ruang dan mempercepat loading pengunjung.
@@ -124,19 +137,23 @@ Sistem CMS (Content Management System) Next Karya dirancang dengan pendekatan **
 
 ---
 
-### Pilar 5: Integrasi Headless API & Sinyal Webhook
+### Pilar 5: Integrasi Headless API, Webhook & Pengamanan Spam
 
-* **RESTful JSON API:**
-  - **Endpoint Publik (Tanpa Otentikasi):** Cepat, aman, dan dapat di-*cache* oleh Next.js untuk membaca artikel, portofolio, layanan, dan FAQ:
-    - `GET /api/v1/articles` dan `GET /api/v1/articles/:slug`
-    - `GET /api/v1/portfolios` dan `GET /api/v1/portfolios/:slug`
-    - `GET /api/v1/services`
-    - `GET /api/v1/faqs`
-  - **Endpoint Terlindungi (Bearer Token):** Digunakan oleh aplikasi mobile tim untuk mengelola konten dan upload media secara aman.
+* **RESTful JSON API Multi-Tenant:**
+  - Endpoint publik yang dikonsumsi Next.js dengan filter `site_id`:
+    - `GET /api/v1/articles?site_id=nextkarya-main`
+    - `GET /api/v1/articles/:slug?site_id=nextkarya-main`
+    - `GET /api/v1/portfolios?site_id=nextkarya-main`
+    - `GET /api/v1/services?site_id=nextkarya-main`
+    - `GET /api/v1/faqs?site_id=nextkarya-main`
+* **Pengamanan Endpoint Publik dari Bot & Spam:**
+  - **Rate Limiting:** Pembatasan frekuensi request per IP (misal: maksimal 120 request per menit untuk API publik).
+  - **Origin / Referrer Header Check:** Server hanya membalas request yang berasal dari domain yang terdaftar di konfigurasi `site_id` (contoh: `https://nextkarya.id` atau domain resmi klien).
+  - **Validasi Skema Zod Ketat:** Memastikan tidak ada injeksi payload karakter berbahaya.
 * **Penyegaran Cache Instan (*On-Demand Revalidation Webhook*):**
-  - Setiap kali ada data yang diterbitkan, diperbarui, atau dihapus di CMS, sistem otomatis menembak webhook ke website Next.js:
-    `POST https://naykon.id/api/revalidate?tag=articles&secret=KUNCI_RAHASIA`
-  - Next.js langsung memperbarui halaman terkait secara instan tanpa perlu membebani server backend secara terus-menerus.
+  - Setiap kali ada data yang diterbitkan, diperbarui, atau diarsipkan di CMS, sistem otomatis menembak webhook ke website Next.js:
+    `POST https://nextkarya.id/api/revalidate?tag=articles&secret=KUNCI_RAHASIA`
+  - Next.js langsung menyegarkan halaman terkait secara instan tanpa perlu membebani server database berulang kali.
 
 ---
 
@@ -145,37 +162,40 @@ Sistem CMS (Content Management System) Next Karya dirancang dengan pendekatan **
 Untuk menjaga sistem tetap gesit, efisien, dan bebas dari *overengineering*:
 
 * **Model 1 Role Tunggal (*Flat Access*):**
-  - Seluruh anggota tim Next Karya yang memiliki akun terdaftar memiliki hak akses penuh dan setara.
+  - Seluruh anggota tim Next Karya Digital Solutions yang memiliki akun terdaftar memiliki hak akses penuh dan setara.
   - Setiap staf dapat membuat draf, mengunggah media, mengedit konten, dan langsung mempublikasikan data tanpa alur birokrasi persetujuan berbelit.
+  - Perlindungan konten diamankan oleh sistem **Snapshot Otomatis** dan **Soft Delete** pada Pilar 2.
 * **Keamanan Akun:**
-  - Login menggunakan alamat email kerja dan kata sandi yang di-hash dengan standar keamanan industri (Argon2id atau Bcrypt).
-  - Manajemen sesi login yang aman dengan perlindungan brute force.
+  - Login menggunakan alamat email kerja (`nama@nextkarya.id`) dan kata sandi yang di-hash dengan standar keamanan industri (Argon2id atau Bcrypt).
+  - Manajemen sesi login yang aman dengan perlindungan *brute-force lockout*.
 
 ---
 
-## 3. Matriks Kebutuhan & Prioritas Rilis
+## 3. Matriks Prioritas Rilis Fitur
 
 | No | Modul / Fitur | Prioritas | Keterangan |
 | :--- | :--- | :---: | :--- |
-| **1** | Artikel & Blog | **Fase 1 (MVP)** | Sangat penting untuk pemasaran konten & SEO Google |
-| **2** | Portofolio & Studi Kasus | **Fase 1 (MVP)** | Etalase karya dan bukti kredibilitas bagi calon klien |
-| **3** | Katalog Layanan & Paket Harga | **Fase 1 (MVP)** | Menampilkan penawaran jasa dan struktur harga transparan |
-| **4** | FAQ (Tanya Jawab) | **Fase 1 (MVP)** | Menjawab pertanyaan umum seputar teknis dan garansi |
-| **5** | Pengelola Media (Cloud R2 / S3) | **Fase 1 (MVP)** | Media penyimpanan terpusat gambar dan mockup |
-| **6** | Headless API & Webhook Next.js | **Fase 1 (MVP)** | Jalur distribusi data ke website publik dan mobile app |
-| **7** | Status Draf & Terbit Langsung | **Fase 1 (MVP)** | Alur kerja penulisan konten yang cepat dan praktis |
-| **8** | Akun Tim 1 Role Tunggal | **Fase 1 (MVP)** | Akses langsung tanpa hierarki berbelit |
-| **9** | Testimoni Klien | **Fase 1 (MVP)** | Bukti sosial (*social proof*) dari klien sebelumnya |
-| **10** | Penjadwalan Terbit Otomatis | **Fase 2** | Otomasi tanggal dan jam terbit di masa depan |
-| **11** | Riwayat Revisi (*Rollback*) | **Fase 2** | Pelacak riwayat perubahan konten tingkat lanjut |
-| **12** | Otomatisasi 301 Redirects | **Fase 2** | Pencegah tautan rusak jika slug URL diganti |
+| **1** | Multi-Tenancy Dasar (`site_id` di database) | **Fase 1 (MVP)** | Menjamin sistem siap dipakai internal maupun klien |
+| **2** | Artikel & Blog (Editor, Cover, Kategori, Tag) | **Fase 1 (MVP)** | Pemasaran konten & SEO Google |
+| **3** | Portofolio & Studi Kasus Bisnis | **Fase 1 (MVP)** | Etalase karya dan bukti kredibilitas bagi calon klien |
+| **4** | Katalog Layanan & Paket Harga | **Fase 1 (MVP)** | Menampilkan penawaran jasa dan struktur harga |
+| **5** | FAQ & Testimoni Klien | **Fase 1 (MVP)** | Menjawab pertanyaan umum & bukti sosial |
+| **6** | Snapshot Pengaman Sebelum Publish | **Fase 1 (MVP)** | Pengaman anti-konten tertimpa pada sistem 1 role |
+| **7** | Soft Delete (Arsip Pengaman) | **Fase 1 (MVP)** | Mencegah konten terhapus permanen tanpa sengaja |
+| **8** | Pengamanan API (Rate Limit & Origin Check) | **Fase 1 (MVP)** | Mencegah serangan spam dan request liar |
+| **9** | Pengelola Media (Cloud R2 / S3) | **Fase 1 (MVP)** | Media penyimpanan terpusat gambar dan mockup |
+| **10** | Headless API & Webhook Next.js | **Fase 1 (MVP)** | Jalur distribusi data ke website publik dan mobile app |
+| **11** | Akun Tim 1 Role Tunggal | **Fase 1 (MVP)** | Akses langsung tanpa hierarki berbelit |
+| **12** | Penjadwalan Terbit Otomatis | **Fase 2** | Otomasi tanggal dan jam terbit di masa depan |
+| **13** | Riwayat Revisi Lengkap Berjenjang | **Fase 2** | Audit trail multi-versi dengan visual diff |
+| **14** | Otomatisasi 301 Redirects | **Fase 2** | Pencegah tautan rusak jika slug URL diganti |
 
 ---
 
-## 4. Kesimpulan & Langkah Selanjutnya
+## 4. Kesimpulan
 
-Dokumentasi ini menjadi cetak biru (*blueprint*) resmi untuk pembangunan Web CMS terpisah Next Karya. 
-
-Dengan arsitektur ini:
-1. **Website Publik Next.js** tetap ringan, super cepat, dan fokus pada konversi bisnis.
-2. **Web CMS Terpisah** menjadi pusat komando konten yang fleksibel dan siap melayani aplikasi mobile di masa depan tanpa harus merombak ulang struktur website publik.
+Dengan penyempurnaan ini, **Sistem CMS Next Karya Digital Solutions**:
+1. Menghilangkan seluruh jejak penamaan brand lama dan menggunakan domain resmi `nextkarya.id`.
+2. Siap melayani website Next Karya sekaligus siap dijual ke klien (*Multi-Tenant Ready*) sejak hari pertama melalui partisi `site_id`.
+3. Memiliki pengaman konten yang kuat (Snapshot Otomatis & Soft Delete) meskipun menggunakan 1 role tim.
+4. Terlindungi dari spam dan bot melalui Rate Limiting dan validasi Origin.
