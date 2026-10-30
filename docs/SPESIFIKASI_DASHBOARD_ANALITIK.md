@@ -1,7 +1,7 @@
 # Spesifikasi & Daftar Fitur Dashboard Analitik (Multi-Tenant & Anti-Overclaim)
 **Next Karya Digital Solutions**  
 *Dokumen Arsitektur & Perencanaan Fitur Sistem Analitik Kunjungan & Konversi*  
-*Versi: 2.1 (Multi-Tenant site_id, Anti-Spam, & Transparansi Data Tren)*  
+*Versi: 2.2 (Multi-Tenant site_id, Multi-User Concurrent Access, & Transparansi Data)*  
 *Tanggal: 30 Oktober 2026*
 
 ---
@@ -44,8 +44,9 @@ Untuk menjaga integritas dan kejujuran data di hadapan klien:
                     │ Data Siap Tampil per site_id
                     ▼
 ┌────────────────────────────────────────────────────────────────────────┐
-│ DASHBOARD ANALITIK (WEB ADMIN & PORTAL KLIEN)                          │
+│ DASHBOARD ANALITIK (3 ANGGOTA TIM AKSES PARALEL)                       │
 │ - Tampilan Tren Trafik, Halaman Terpopuler & Saluran Rujukan           │
+│ - Sesi Filter Mandiri di Setiap Perangkat Staf                         │
 │ - Pelacakan Konversi Riil: Klik Chat WhatsApp & Kirim Formulir         │
 └────────────────────────────────────────────────────────────────────────┘
 ```
@@ -139,6 +140,24 @@ Mengukur efektivitas website dalam menghasilkan calon klien (*leads*):
 
 ---
 
+### Pilar 6: Akses Kolaborasi Multi-Akun pada Dashboard Analitik (*Multi-User Access*)
+
+Dirancang agar seluruh 3 anggota tim Next Karya Digital Solutions dapat menganalisis data secara paralel tanpa hambatan:
+
+#### 6.1 Sesi Filter Mandiri di Setiap Perangkat (*Client-Side State*)
+* Ketiga staf dapat membuka Dashboard Analitik secara bersamaan di perangkat masing-masing.
+* Filter rentang tanggal atau pemilihan situs (*Site Selector*) berjalan di sisi peramban masing-masing staf:
+  - Jika Staf 1 sedang menganalisis trafik *"7 Hari Terakhir"* di ponsel,
+  - Dan Staf 2 sedang memeriksa metrik *"Bulan Lalu"* di laptop,
+  - Tampilan kedua staf tidak akan saling memengaruhi atau mengubah layar satu sama lain.
+
+#### 6.2 Pembacaan Agregasi Ringan (*High Concurrency Read*)
+* Dashboard Analitik bersifat *Read-Only* bagi pengguna biasa.
+* Query grafik tidak memindai jutaan baris data mentah, melainkan membaca data dari tabel agregasi harian (`AnalyticsDaily`).
+* Dampak Teknis: Meskipun ketiga anggota tim membuka, memfilter, atau mengunduh laporan analitik pada detik yang sama, server database tetap dingin, cepat, dan tidak mengalami penurunan performa.
+
+---
+
 ## 3. Arsitektur Teknis & Pengamanan Anti-Spam
 
 ### 3.1 Skrip Pelacak di Sisi Klien (Next.js & Mobile)
@@ -183,24 +202,26 @@ Untuk mencegah serangan bot, spam log, dan request palsu:
 | No | Modul / Fitur | Prioritas | Manfaat bagi Bisnis |
 | :--- | :--- | :---: | :--- |
 | **1** | Multi-Tenancy Dasar (`site_id` di setiap event) | **Fase 1 (MVP)** | Siap dipakai website sendiri & website klien |
-| **2** | Metrik Trafik Utama (Visitors, Views, Duration) | **Fase 1 (MVP)** | Mengetahui volume tren pengunjung harian |
-| **3** | Pelacakan Klik WhatsApp & Form Submit | **Fase 1 (MVP)** | Mengetahui konversi prospek klien riil |
-| **4** | Pengamanan Anti-Spam (Rate Limit & Origin) | **Fase 1 (MVP)** | Melindungi endpoint dari bot dan request sampah |
-| **5** | Halaman Terpopuler (*Top Pages*) | **Fase 1 (MVP)** | Melihat artikel dan portofolio paling diminati |
-| **6** | Sumber Kunjungan (Google, Media Sosial, Direct) | **Fase 1 (MVP)** | Evaluasi saluran pemasaran yang paling efektif |
-| **7** | Proporsi Perangkat (Mobile vs Desktop) | **Fase 1 (MVP)** | Memastikan kenyamanan tampilan antarmuka |
-| **8** | Filter Rentang Waktu (Hari Ini, 7 & 30 Hari) | **Fase 1 (MVP)** | Analisis perbandingan performa berkala |
-| **9** | Pemilih Situs (*Site Selector* untuk Tim) | **Fase 1 (MVP)** | Kemudahan berpindah antara situs Next Karya dan klien |
-| **10** | Sebaran Wilayah / Geografis Kota | **Fase 2** | Pemetaan persebaran lokasi calon klien |
-| **11** | Pelacakan UTM Parameters Detail | **Fase 2** | Pengukuran efektivitas kampanye promosi berbayar |
-| **12** | Ekspor Laporan CSV / Excel | **Fase 2** | Pelaporan berkala ke manajemen internal |
+| **2** | Akses Multi-Akun Paralel (Sesi Mandiri 3 Staf) | **Fase 1 (MVP)** | Memastikan 3 staf dapat melihat metrik bersamaan |
+| **3** | Metrik Trafik Utama (Visitors, Views, Duration) | **Fase 1 (MVP)** | Mengetahui volume tren pengunjung harian |
+| **4** | Pelacakan Klik WhatsApp & Form Submit | **Fase 1 (MVP)** | Mengetahui konversi prospek klien riil |
+| **5** | Pengamanan Anti-Spam (Rate Limit & Origin) | **Fase 1 (MVP)** | Melindungi endpoint dari bot dan request sampah |
+| **6** | Halaman Terpopuler (*Top Pages*) | **Fase 1 (MVP)** | Melihat artikel dan portofolio paling diminati |
+| **7** | Sumber Kunjungan (Google, Media Sosial, Direct) | **Fase 1 (MVP)** | Evaluasi saluran pemasaran yang paling efektif |
+| **8** | Proporsi Perangkat (Mobile vs Desktop) | **Fase 1 (MVP)** | Memastikan kenyamanan tampilan antarmuka |
+| **9** | Filter Rentang Waktu (Hari Ini, 7 & 30 Hari) | **Fase 1 (MVP)** | Analisis perbandingan performa berkala |
+| **10** | Pemilih Situs (*Site Selector* untuk Tim) | **Fase 1 (MVP)** | Kemudahan berpindah antara situs Next Karya dan klien |
+| **11** | Sebaran Wilayah / Geografis Kota | **Fase 2** | Pemetaan persebaran lokasi calon klien |
+| **12** | Pelacakan UTM Parameters Detail | **Fase 2** | Pengukuran efektivitas kampanye promosi berbayar |
+| **13** | Ekspor Laporan CSV / Excel | **Fase 2** | Pelaporan berkala ke manajemen internal |
 
 ---
 
 ## 5. Kesimpulan
 
 Dengan spesifikasi ini, **Dashboard Analitik Next Karya Digital Solutions**:
-1. Menghilangkan brand lama dan beroperasi penuh menggunakan domain resmi `nextkarya.id`.
-2. Menerapkan arsitektur multi-tenant `site_id` sejak hari pertama.
-3. Terlindungi dari spam bot melalui Rate Limiting dan verifikasi Origin domain.
-4. Menjunjung transparansi teknis dengan memposisikan data sebagai indikator tren pertumbuhan bisnis riil tanpa *overclaim*.
+1. Beroperasi penuh menggunakan domain resmi `nextkarya.id`.
+2. Menjamin seluruh 3 anggota tim dapat mengakses, memfilter, dan mengevaluasi data secara bersamaan tanpa gangguan sesi.
+3. Menerapkan arsitektur multi-tenant `site_id` sejak hari pertama.
+4. Terlindungi dari spam bot melalui Rate Limiting dan verifikasi Origin domain.
+5. Menjunjung transparansi teknis dengan memposisikan data sebagai indikator tren pertumbuhan bisnis riil tanpa *overclaim*.
