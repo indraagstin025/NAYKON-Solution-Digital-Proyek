@@ -53,10 +53,6 @@ export function HeroSection() {
       <div className="relative z-10 mx-auto w-full max-w-[1240px] px-6 sm:px-9 lg:px-14 py-10 sm:py-14 lg:py-12">
         <div className="grid items-center gap-10 lg:grid-cols-[1.02fr_0.98fr] lg:gap-8">
           <div className="max-w-[530px]">
-            <div className="nk-hero-enter mb-3.5 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3.5 py-1 text-xs font-semibold text-[#005090] shadow-xs dark:border-slate-800 dark:bg-slate-900 dark:text-[#0986C8]">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#005090]" />
-              <span>Digital Solution for Your Business</span>
-            </div>
 
             <h1 className="nk-hero-enter text-[33px] sm:text-[42px] lg:text-[48px] xl:text-[52px] font-extrabold leading-[1.12] tracking-[-0.025em] text-[#041E42] dark:text-[#f4f8ff]">
               Inovasi teknologi.
