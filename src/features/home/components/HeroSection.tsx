@@ -56,21 +56,17 @@ export function HeroSection() {
         <div className="grid items-center gap-10 lg:grid-cols-[1.02fr_0.98fr] lg:gap-8">
           <div className="max-w-[530px]">
 
-            <h1 className="nk-hero-enter text-[33px] sm:text-[42px] lg:text-[48px] xl:text-[52px] font-extrabold leading-[1.12] tracking-[-0.025em] text-[#041E42] dark:text-[#f4f8ff]">
-              Inovasi teknologi.
+            <h1 className="nk-hero-enter text-[31px] sm:text-[38px] lg:text-[44px] xl:text-[48px] font-extrabold leading-[1.15] tracking-[-0.025em] text-[#041E42] dark:text-[#f4f8ff]">
+              Bangun Website Profesional
               <br />
-              <span className="sm:whitespace-nowrap">
-                Dampak yang{" "}
-                <span className="text-[#005090] dark:text-[#0986C8]">
-                  nyata.
-                </span>
+              untuk Bisnis Anda yang{" "}
+              <span className="text-[#005090] dark:text-[#0986C8]">
+                Lebih Dipercaya.
               </span>
             </h1>
 
-            <p className="nk-hero-enter nk-hero-delay-1 mt-4 max-w-[465px] text-[13.5px] sm:text-[15px] leading-[1.65] text-[#4A5D78] dark:text-[#b5c5dd] font-normal">
-              Next Karya Digital Solutions adalah tim rekayasa website dan aplikasi yang
-              merancang solusi digital cerdas untuk membantu bisnis Anda tumbuh,
-              beradaptasi, dan melangkah lebih jauh.
+            <p className="nk-hero-enter nk-hero-delay-1 mt-4 max-w-[490px] text-[14px] sm:text-[15px] leading-[1.68] text-[#4A5D78] dark:text-[#b5c5dd] font-normal">
+              Tingkatkan kepercayaan pelanggan dan jangkauan bisnis Anda. Kami merancang website modern, cepat, aman, dan mudah dihubungi, khusus untuk UMKM, perusahaan, dan organisasi.
             </p>
 
             <div className="nk-hero-enter nk-hero-delay-2 mt-6 flex flex-wrap items-center gap-3.5">
