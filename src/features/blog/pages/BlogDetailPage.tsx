@@ -25,7 +25,7 @@ export function BlogDetailPage({
               <li>
                 <Link
                   href="/blog"
-                  className="inline-flex min-h-11 items-center font-semibold text-[#0052CC] underline-offset-2 hover:underline dark:text-blue-400"
+                  className="inline-flex min-h-11 items-center font-semibold text-[#003E70] underline-offset-2 hover:underline dark:text-[#0986C8]"
                 >
                   Blog
                 </Link>
@@ -38,7 +38,7 @@ export function BlogDetailPage({
           </nav>
 
           <header className="mt-4 max-w-[860px]">
-            <p className="inline-block rounded-md bg-[#0052CC] px-3 py-1 text-xs font-semibold text-white">
+            <p className="inline-block rounded-md bg-[#003E70] px-3 py-1 text-xs font-semibold text-white">
               {article.categoryName}
             </p>
             <h1 className="mt-4 text-[28px] sm:text-[38px] lg:text-[44px] font-extrabold leading-[1.15] tracking-[-0.02em] text-[#041E42] dark:text-white">
@@ -99,7 +99,7 @@ export function BlogDetailPage({
             </div>
             <Link
               href="/kontak"
-              className="group inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-xl bg-[#0052CC] px-5 py-2.5 text-[13.5px] font-bold text-white transition-colors hover:bg-[#003E99]"
+              className="group inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-xl bg-[#003E70] px-5 py-2.5 text-[13.5px] font-bold text-white transition-colors hover:bg-[#003E99]"
             >
               <span>Jadwalkan diskusi proyek</span>
               <ArrowRightIcon className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
@@ -118,10 +118,10 @@ export function BlogDetailPage({
                 {related.map((item) => (
                   <li
                     key={item.id}
-                    className="relative flex flex-col justify-between rounded-2xl border border-[#D5E1EF] bg-white p-5 transition-colors hover:border-[#0066FF] dark:border-slate-800 dark:bg-slate-900 dark:hover:border-blue-500"
+                    className="relative flex flex-col justify-between rounded-2xl border border-[#D5E1EF] bg-white p-5 transition-colors hover:border-[#005090] dark:border-slate-800 dark:bg-slate-900 dark:hover:border-blue-500"
                   >
                     <div>
-                      <p className="text-xs font-semibold text-[#0052CC] dark:text-blue-400">
+                      <p className="text-xs font-semibold text-[#003E70] dark:text-[#0986C8]">
                         {item.categoryName}
                       </p>
                       <h3 className="mt-1.5 text-[16px] font-extrabold leading-snug text-[#041E42] dark:text-white">

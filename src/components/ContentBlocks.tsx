@@ -26,7 +26,7 @@ export function ContentBlocks({ blocks }: { blocks: ContentBlock[] }) {
             );
           case "list":
             return (
-              <ul key={index} className="mt-4 list-disc space-y-2.5 pl-5 marker:text-[#0066FF]">
+              <ul key={index} className="mt-4 list-disc space-y-2.5 pl-5 marker:text-[#005090]">
                 {block.items.map((item, itemIndex) => (
                   <li key={itemIndex}>{item}</li>
                 ))}
@@ -36,7 +36,7 @@ export function ContentBlocks({ blocks }: { blocks: ContentBlock[] }) {
             return (
               <aside
                 key={index}
-                className="mt-8 rounded-2xl border border-[#E4F2FD] bg-[#EAF4FC] p-5 sm:p-6 dark:border-[#4E6E9E] dark:bg-slate-900"
+                className="mt-8 rounded-2xl border border-[#E2E8F0] bg-[#FFFFFF] p-5 sm:p-6 dark:border-[#4E6E9E] dark:bg-slate-900"
               >
                 {block.title && (
                   <p className="text-[15px] font-extrabold text-[#041E42] dark:text-white">

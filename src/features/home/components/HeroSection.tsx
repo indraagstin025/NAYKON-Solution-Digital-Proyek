@@ -8,7 +8,7 @@ export function HeroSection() {
   return (
     <section
       id="beranda"
-      className="relative isolate overflow-hidden pt-[68px] lg:pt-[76px] bg-gradient-to-b from-[#F7FAFC] via-[#FFFFFF] to-[#EFF6FC] dark:from-[#030711] dark:via-[#061231] dark:to-[#091a45] min-h-[auto] lg:min-h-dvh flex items-center"
+      className="relative isolate overflow-hidden pt-[68px] lg:pt-[76px] bg-white dark:bg-[#030711] min-h-[auto] lg:min-h-dvh flex items-center"
     >
       {/* Background Tech Waves matching Brand Colors (Navy & Primary Blue) */}
       <div
@@ -35,18 +35,16 @@ export function HeroSection() {
           />
           <defs>
             <linearGradient id="heroWaveBack" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#0066FF" stopOpacity="0.14" />
-              <stop offset="48%" stopColor="#0052CC" stopOpacity="0.08" />
-              <stop offset="100%" stopColor="#002857" stopOpacity="0.12" />
+              <stop offset="0%" stopColor="#005090" stopOpacity="0.04" />
+              <stop offset="100%" stopColor="#002857" stopOpacity="0.06" />
             </linearGradient>
             <linearGradient id="heroWaveLeft" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#0066FF" stopOpacity="0.18" />
-              <stop offset="65%" stopColor="#0D90DE" stopOpacity="0.10" />
-              <stop offset="100%" stopColor="#002857" stopOpacity="0.04" />
+              <stop offset="0%" stopColor="#0986C8" stopOpacity="0.05" />
+              <stop offset="100%" stopColor="#005090" stopOpacity="0.02" />
             </linearGradient>
             <linearGradient id="heroWaveRight" x1="100%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="#0D90DE" stopOpacity="0.15" />
-              <stop offset="100%" stopColor="#0052CC" stopOpacity="0.05" />
+              <stop offset="0%" stopColor="#0986C8" stopOpacity="0.05" />
+              <stop offset="100%" stopColor="#002857" stopOpacity="0.03" />
             </linearGradient>
           </defs>
         </svg>
@@ -55,8 +53,8 @@ export function HeroSection() {
       <div className="relative z-10 mx-auto w-full max-w-[1240px] px-6 sm:px-9 lg:px-14 py-10 sm:py-14 lg:py-12">
         <div className="grid items-center gap-10 lg:grid-cols-[1.02fr_0.98fr] lg:gap-8">
           <div className="max-w-[530px]">
-            <div className="nk-hero-enter mb-3.5 inline-flex items-center gap-2 rounded-full border border-[#D4E6FC] bg-[#EAF4FC] px-3.5 py-1 text-xs font-semibold text-[#0066FF] dark:border-blue-900/60 dark:bg-blue-950/40 dark:text-[#38BDF8]">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#0066FF]" />
+            <div className="nk-hero-enter mb-3.5 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3.5 py-1 text-xs font-semibold text-[#005090] shadow-xs dark:border-slate-800 dark:bg-slate-900 dark:text-[#0986C8]">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#005090]" />
               <span>Digital Solution for Your Business</span>
             </div>
 
@@ -65,7 +63,7 @@ export function HeroSection() {
               <br />
               <span className="sm:whitespace-nowrap">
                 Dampak yang{" "}
-                <span className="text-[#0066FF] dark:text-[#38BDF8]">
+                <span className="text-[#005090] dark:text-[#0986C8]">
                   nyata.
                 </span>
               </span>
@@ -80,14 +78,14 @@ export function HeroSection() {
             <div className="nk-hero-enter nk-hero-delay-2 mt-6 flex flex-wrap items-center gap-3.5">
               <Link
                 href="/kontak"
-                className="group inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-[#0066FF] hover:bg-[#0052CC] px-6 py-3 text-[13.5px] font-semibold text-white shadow-[0_10px_25px_-5px_rgba(0,102,255,0.45)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_14px_30px_-5px_rgba(0,102,255,0.55)] active:scale-[0.98]"
+                className="group inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-[#005090] hover:bg-[#003E70] px-6 py-3 text-[13.5px] font-semibold text-white shadow-[0_10px_25px_-5px_rgba(0,80,144,0.45)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_14px_30px_-5px_rgba(0,80,144,0.55)] active:scale-[0.98]"
               >
                 <span>Mulai Berkolaborasi</span>
                 <ArrowRightIcon className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
               </Link>
               <Link
                 href="/portofolio"
-                className="inline-flex min-h-11 items-center justify-center rounded-full border-2 border-[#0066FF] bg-white hover:bg-[#0066FF] hover:text-white px-6 py-3 text-[13.5px] font-semibold text-[#0066FF] transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98] dark:bg-slate-900 dark:border-blue-500 dark:text-blue-400 dark:hover:bg-[#0066FF] dark:hover:text-white"
+                className="inline-flex min-h-11 items-center justify-center rounded-full border-2 border-[#005090] bg-white hover:bg-[#005090] hover:text-white px-6 py-3 text-[13.5px] font-semibold text-[#005090] transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98] dark:bg-slate-900 dark:border-slate-700 dark:text-[#0986C8] dark:hover:bg-[#005090] dark:hover:text-white"
               >
                 Lihat Portofolio
               </Link>
@@ -100,7 +98,7 @@ export function HeroSection() {
                     <div className="hidden sm:block h-6 w-[1px] bg-[#CBD5E1] dark:bg-slate-700/80" />
                   )}
                   <div className="group flex items-center gap-2.5">
-                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#0066FF] text-white shadow-sm transition-transform duration-300 group-hover:scale-110">
+                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#005090] text-white shadow-sm transition-transform duration-300 group-hover:scale-110">
                       {item.icon}
                     </div>
                     <span className="text-xs sm:text-[12.5px] font-semibold text-[#041E42] dark:text-slate-200">
@@ -123,33 +121,33 @@ export function HeroSection() {
               <defs>
                 {/* Aura using Brand Primary & Navy colors instead of pale baby blue */}
                 <linearGradient id="heroAuraOval" x1="15%" y1="5%" x2="85%" y2="95%">
-                  <stop offset="0%" stopColor="#0066FF" stopOpacity="0.12" />
-                  <stop offset="55%" stopColor="#0D90DE" stopOpacity="0.06" />
+                  <stop offset="0%" stopColor="#005090" stopOpacity="0.12" />
+                  <stop offset="55%" stopColor="#0986C8" stopOpacity="0.06" />
                   <stop offset="100%" stopColor="#002857" stopOpacity="0.09" />
                 </linearGradient>
 
                 <radialGradient id="heroBottomGlow" cx="52%" cy="76%" r="38%">
-                  <stop offset="0%" stopColor="#0066FF" stopOpacity="0.22" />
-                  <stop offset="100%" stopColor="#0066FF" stopOpacity="0" />
+                  <stop offset="0%" stopColor="#005090" stopOpacity="0.22" />
+                  <stop offset="100%" stopColor="#005090" stopOpacity="0" />
                 </radialGradient>
 
                 <linearGradient id="primaryOrbitStroke" x1="0%" y1="100%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#0D90DE" stopOpacity="0.45" />
-                  <stop offset="45%" stopColor="#0066FF" stopOpacity="0.80" />
-                  <stop offset="80%" stopColor="#0052CC" stopOpacity="0.95" />
+                  <stop offset="0%" stopColor="#0986C8" stopOpacity="0.45" />
+                  <stop offset="45%" stopColor="#005090" stopOpacity="0.80" />
+                  <stop offset="80%" stopColor="#003E70" stopOpacity="0.95" />
                   <stop offset="100%" stopColor="#002857" stopOpacity="0.45" />
                 </linearGradient>
 
                 <linearGradient id="innerOrbitStroke" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#0066FF" stopOpacity="0.40" />
-                  <stop offset="50%" stopColor="#0D90DE" stopOpacity="0.15" />
-                  <stop offset="100%" stopColor="#0052CC" stopOpacity="0.35" />
+                  <stop offset="0%" stopColor="#005090" stopOpacity="0.40" />
+                  <stop offset="50%" stopColor="#0986C8" stopOpacity="0.15" />
+                  <stop offset="100%" stopColor="#003E70" stopOpacity="0.35" />
                 </linearGradient>
 
                 {/* 3D Sphere using brand gradient */}
                 <radialGradient id="iceSphere3D" cx="72%" cy="72%" r="68%" fx="72%" fy="72%">
-                  <stop offset="0%" stopColor="#EAF4FC" />
-                  <stop offset="45%" stopColor="#0D90DE" />
+                  <stop offset="0%" stopColor="#F8FAFC" />
+                  <stop offset="45%" stopColor="#0986C8" />
                   <stop offset="100%" stopColor="#002857" />
                 </radialGradient>
               </defs>
@@ -194,8 +192,8 @@ export function HeroSection() {
                   stroke="url(#primaryOrbitStroke)"
                   strokeWidth="1.6"
                 />
-                <circle cx="600.6" cy="148.1" r="10.5" fill="#0066FF" />
-                <circle cx="99.4" cy="391.9" r="5.5" fill="#0066FF" />
+                <circle cx="600.6" cy="148.1" r="10.5" fill="#005090" />
+                <circle cx="99.4" cy="391.9" r="5.5" fill="#005090" />
               </g>
 
               <circle
@@ -215,7 +213,7 @@ export function HeroSection() {
                 width={960}
                 height={304}
                 priority
-                className="w-full h-auto object-contain drop-shadow-[0_14px_32px_rgba(0,102,255,0.14)] dark:drop-shadow-[0_14px_32px_rgba(0,102,255,0.30)]"
+                className="w-full h-auto object-contain drop-shadow-[0_14px_32px_rgba(0,80,144,0.14)] dark:drop-shadow-[0_14px_32px_rgba(0,80,144,0.30)]"
               />
             </div>
           </div>

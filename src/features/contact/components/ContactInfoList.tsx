@@ -16,8 +16,8 @@ export function ContactInfoList() {
       <div className="mt-7 space-y-4">
         {CONTACT_CHANNELS.map((item, idx) => (
           <ScrollReveal key={item.title} delayMs={idx * 75}>
-            <div className="group flex items-center gap-4 rounded-2xl bg-white dark:bg-slate-900 border border-[#E4F2FD] dark:border-slate-800 p-4 sm:p-5 shadow-[0_12px_32px_-10px_rgba(10,35,80,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-[#0066FF] dark:hover:border-blue-500 hover:shadow-[0_18px_38px_-10px_rgba(0,102,255,0.14)]">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#0066FF] text-white shadow-sm transition-transform duration-300 group-hover:scale-110">
+            <div className="group flex items-center gap-4 rounded-2xl bg-white dark:bg-slate-900 border border-[#E2E8F0] dark:border-slate-800 p-4 sm:p-5 shadow-[0_12px_32px_-10px_rgba(10,35,80,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-[#005090] dark:hover:border-blue-500 hover:shadow-[0_18px_38px_-10px_rgba(0,80,144,0.14)]">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#005090] text-white shadow-sm transition-transform duration-300 group-hover:scale-110">
                 {item.icon}
               </div>
               <div>
@@ -27,7 +27,7 @@ export function ContactInfoList() {
                 {item.isLink && item.linkHref ? (
                   <a
                     href={item.linkHref}
-                    className="mt-0.5 inline-block text-[15px] sm:text-base font-extrabold text-[#0066FF] dark:text-blue-400 hover:underline"
+                    className="mt-0.5 inline-block text-[15px] sm:text-base font-extrabold text-[#005090] dark:text-[#0986C8] hover:underline"
                   >
                     {item.content}
                   </a>

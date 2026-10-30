@@ -170,7 +170,7 @@ export function AdminSidebar({
         <div className="flex items-center justify-between border-b border-slate-200 dark:border-[#1E3358] pb-4">
           <Link
             href="/admin"
-            className="flex items-center gap-2.5 transition-transform hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8] rounded-lg"
+            className="flex items-center gap-2.5 transition-transform hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005090] dark:focus-visible:outline-[#0986C8] rounded-lg"
             onClick={() => setMobileOpen(false)}
           >
             <Image
@@ -182,7 +182,7 @@ export function AdminSidebar({
               className="h-[28px] w-auto object-contain"
             />
           </Link>
-          <span className="rounded-md border border-[#D4E6FC] dark:border-[#4E6E9E] bg-[#EAF4FC] dark:bg-[#12213F] px-2 py-0.5 text-[10px] font-bold text-[#0066FF] dark:text-[#94A7C4]">
+          <span className="rounded-md border border-[#CBD5E1] dark:border-[#4E6E9E] bg-[#FFFFFF] dark:bg-[#12213F] px-2 py-0.5 text-[10px] font-bold text-[#005090] dark:text-[#94A7C4]">
             CMS
           </span>
         </div>
@@ -192,10 +192,10 @@ export function AdminSidebar({
           <DropdownMenuTrigger asChild>
             <button
               type="button"
-              className="w-full text-left rounded-2xl border border-slate-200 dark:border-[#1E3358] bg-slate-50/80 hover:bg-slate-100 dark:bg-[#071225] dark:hover:bg-[#12213F] p-3 flex items-center justify-between gap-2.5 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
+              className="w-full text-left rounded-2xl border border-slate-200 dark:border-[#1E3358] bg-slate-50/80 hover:bg-slate-100 dark:bg-[#071225] dark:hover:bg-[#12213F] p-3 flex items-center justify-between gap-2.5 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005090] dark:focus-visible:outline-[#0986C8]"
             >
               <div className="flex items-center gap-3 min-w-0">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#0066FF] to-[#1D4ED8] text-white font-bold text-sm shadow-xs">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#005090] to-[#1D4ED8] text-white font-bold text-sm shadow-xs">
                   {userName.charAt(0).toUpperCase()}
                 </div>
                 <div className="min-w-0 flex-1">
@@ -268,9 +268,9 @@ export function AdminSidebar({
                         href={item.href}
                         onClick={() => setMobileOpen(false)}
                         aria-current={active ? "page" : undefined}
-                        className={`flex min-h-11 items-center justify-between rounded-xl px-3 text-xs font-semibold transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8] ${
+                        className={`flex min-h-11 items-center justify-between rounded-xl px-3 text-xs font-semibold transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005090] dark:focus-visible:outline-[#0986C8] ${
                           active
-                            ? "bg-[#EAF4FC] text-[#0066FF] font-bold border-l-4 border-l-[#0066FF] rounded-r-xl rounded-l-none pl-3 dark:bg-[#12213F] dark:text-[#38BDF8] dark:border-l-[#38BDF8]"
+                            ? "bg-[#FFFFFF] text-[#005090] font-bold border-l-4 border-l-[#005090] rounded-r-xl rounded-l-none pl-3 dark:bg-[#12213F] dark:text-[#0986C8] dark:border-l-[#0986C8]"
                             : "border border-transparent text-[#5A6E85] dark:text-[#94A7C4] hover:bg-slate-100 dark:hover:bg-[#12213F] hover:text-[#041E42] dark:hover:text-[#F1F5FB]"
                         }`}
                       >
@@ -278,7 +278,7 @@ export function AdminSidebar({
                           <Icon
                             className={`h-4 w-4 shrink-0 ${
                               active
-                                ? "text-[#0066FF] dark:text-[#38BDF8]"
+                                ? "text-[#005090] dark:text-[#0986C8]"
                                 : "text-[#5A6E85] dark:text-[#94A7C4]"
                             }`}
                           />
@@ -307,7 +307,7 @@ export function AdminSidebar({
           <Tooltip content="Lihat Situs Publik">
             <Link
               href="/"
-              className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-white dark:bg-[#12213F] text-[#5A6E85] dark:text-[#94A7C4] transition-colors hover:bg-slate-100 dark:hover:bg-[#192D54] hover:text-[#041E42] dark:hover:text-[#F1F5FB] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
+              className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-white dark:bg-[#12213F] text-[#5A6E85] dark:text-[#94A7C4] transition-colors hover:bg-slate-100 dark:hover:bg-[#192D54] hover:text-[#041E42] dark:hover:text-[#F1F5FB] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005090] dark:focus-visible:outline-[#0986C8]"
             >
               <ExternalLinkIcon className="h-4 w-4" aria-hidden="true" />
               <span className="sr-only">Buka Situs Publik</span>

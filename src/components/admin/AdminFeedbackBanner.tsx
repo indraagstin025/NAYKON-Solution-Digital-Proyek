@@ -77,7 +77,7 @@ export function AdminFeedbackBanner({
             type="button"
             onClick={onDismiss}
             aria-label="Tutup pemberitahuan"
-            className="inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-white dark:bg-[#0B1730] text-[#5A6E85] dark:text-[#94A7C4] transition-colors hover:bg-slate-100 dark:hover:bg-[#192D54] hover:text-[#041E42] dark:hover:text-[#F1F5FB] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
+            className="inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-white dark:bg-[#0B1730] text-[#5A6E85] dark:text-[#94A7C4] transition-colors hover:bg-slate-100 dark:hover:bg-[#192D54] hover:text-[#041E42] dark:hover:text-[#F1F5FB] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005090] dark:focus-visible:outline-[#0986C8]"
           >
             <Cross2Icon className="h-4 w-4" aria-hidden="true" />
           </button>

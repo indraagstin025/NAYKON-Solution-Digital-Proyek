@@ -59,7 +59,7 @@ export default function LogoutForm() {
         <button
           type="submit"
           disabled={isPending}
-          className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-white dark:bg-[#12213F] px-3.5 py-2 text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] transition-colors hover:bg-rose-50 hover:text-rose-600 hover:border-rose-200 dark:hover:bg-[#192D54] dark:hover:text-[#FCA5A5] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8] disabled:cursor-not-allowed disabled:opacity-65"
+          className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-white dark:bg-[#12213F] px-3.5 py-2 text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] transition-colors hover:bg-rose-50 hover:text-rose-600 hover:border-rose-200 dark:hover:bg-[#192D54] dark:hover:text-[#FCA5A5] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005090] dark:focus-visible:outline-[#0986C8] disabled:cursor-not-allowed disabled:opacity-65"
         >
           <ExitIcon className="h-4 w-4 text-[#5A6E85] dark:text-[#94A7C4]" aria-hidden="true" />
           <span>{isPending ? "Mengakhiri Sesi..." : "Keluar Sesi"}</span>

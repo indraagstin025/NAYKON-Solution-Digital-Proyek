@@ -35,7 +35,7 @@ export const RadixSwitch = React.forwardRef<
       <SwitchPrimitive.Root
         ref={ref}
         id={switchId}
-        className={`peer inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-[#0066FF] data-[state=unchecked]:bg-slate-300 dark:focus-visible:outline-[#38BDF8] dark:data-[state=checked]:bg-[#2563EB] dark:data-[state=unchecked]:bg-[#1E3358] ${className}`}
+        className={`peer inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005090] disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-[#005090] data-[state=unchecked]:bg-slate-300 dark:focus-visible:outline-[#0986C8] dark:data-[state=checked]:bg-[#2563EB] dark:data-[state=unchecked]:bg-[#1E3358] ${className}`}
         {...props}
       >
         <SwitchPrimitive.Thumb className="pointer-events-none block h-5 w-5 rounded-full bg-white shadow-sm ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0" />

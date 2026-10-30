@@ -356,7 +356,7 @@ export default function PortalAccessBar({
             <button
               type="button"
               onClick={() => applyOpenState(false)}
-              className="inline-flex lg:hidden min-h-11 min-w-11 items-center justify-center rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3 text-xs font-semibold text-[#F1F5FB] transition-colors hover:bg-[#192D54] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8]"
+              className="inline-flex lg:hidden min-h-11 min-w-11 items-center justify-center rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3 text-xs font-semibold text-[#F1F5FB] transition-colors hover:bg-[#192D54] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0986C8]"
               aria-label="Tutup panel akses internal"
             >
               <Cross1Icon className="h-4 w-4" aria-hidden="true" />
@@ -413,7 +413,7 @@ export default function PortalAccessBar({
                   placeholder="Email kerja"
                   aria-invalid={Boolean(emailError)}
                   aria-describedby={emailError ? "nk-portal-email-error" : undefined}
-                  className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3.5 py-2 text-sm text-[#F1F5FB] placeholder:text-[#94A7C4] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8] disabled:opacity-60"
+                  className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3.5 py-2 text-sm text-[#F1F5FB] placeholder:text-[#94A7C4] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0986C8] disabled:opacity-60"
                 />
                 {emailError && (
                   <p
@@ -460,7 +460,7 @@ export default function PortalAccessBar({
                     aria-describedby={
                       passwordError ? "nk-portal-password-error" : undefined
                     }
-                    className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] pl-3.5 pr-12 py-2 text-sm text-[#F1F5FB] placeholder:text-[#94A7C4] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8] disabled:opacity-60"
+                    className="min-h-11 w-full rounded-xl border border-[#4E6E9E] bg-[#12213F] pl-3.5 pr-12 py-2 text-sm text-[#F1F5FB] placeholder:text-[#94A7C4] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0986C8] disabled:opacity-60"
                   />
                   <button
                     type="button"
@@ -471,7 +471,7 @@ export default function PortalAccessBar({
                         ? "Sembunyikan kata sandi"
                         : "Tampilkan kata sandi"
                     }
-                    className="absolute right-0 inline-flex min-h-11 min-w-11 items-center justify-center rounded-r-xl text-[#94A7C4] transition-colors hover:text-[#F1F5FB] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8]"
+                    className="absolute right-0 inline-flex min-h-11 min-w-11 items-center justify-center rounded-r-xl text-[#94A7C4] transition-colors hover:text-[#F1F5FB] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0986C8]"
                   >
                     {showPassword ? (
                       <EyeNoneIcon className="h-4 w-4" aria-hidden="true" />
@@ -494,7 +494,7 @@ export default function PortalAccessBar({
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="inline-flex min-h-11 flex-1 sm:flex-none items-center justify-center rounded-xl bg-[#2563EB] px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#1D4ED8] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8] disabled:cursor-not-allowed disabled:opacity-65"
+                  className="inline-flex min-h-11 flex-1 sm:flex-none items-center justify-center rounded-xl bg-[#2563EB] px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#1D4ED8] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0986C8] disabled:cursor-not-allowed disabled:opacity-65"
                 >
                   {isSubmitting ? "Memverifikasi..." : "Masuk"}
                 </button>
@@ -502,7 +502,7 @@ export default function PortalAccessBar({
                 <button
                   type="button"
                   onClick={() => applyOpenState(false)}
-                  className="hidden lg:inline-flex min-h-11 items-center justify-center gap-1.5 rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3.5 py-2 text-sm font-medium text-[#F1F5FB] transition-colors hover:bg-[#192D54] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8]"
+                  className="hidden lg:inline-flex min-h-11 items-center justify-center gap-1.5 rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3.5 py-2 text-sm font-medium text-[#F1F5FB] transition-colors hover:bg-[#192D54] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0986C8]"
                 >
                   <Cross1Icon className="h-3.5 w-3.5" aria-hidden="true" />
                   <span>Tutup</span>
@@ -549,7 +549,7 @@ export default function PortalAccessBar({
                   <button
                     type="button"
                     onClick={() => window.location.reload()}
-                    className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-xl border border-[#4E6E9E] bg-[#0B1730] px-3 py-2 text-xs font-semibold text-[#F1F5FB] transition-colors hover:bg-[#192D54] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8]"
+                    className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-xl border border-[#4E6E9E] bg-[#0B1730] px-3 py-2 text-xs font-semibold text-[#F1F5FB] transition-colors hover:bg-[#192D54] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0986C8]"
                   >
                     <ReloadIcon className="h-3.5 w-3.5" aria-hidden="true" />
                     <span>Muat Ulang</span>

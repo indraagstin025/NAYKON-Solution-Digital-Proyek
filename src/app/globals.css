@@ -3,15 +3,15 @@
 @custom-variant dark (&:where(.theme-dark, .theme-dark *));
 
 :root {
-  --page: #f7fafc;
+  --page: #ffffff;
   --surface: #ffffff;
-  --surface-alt: #edf6fe;
+  --surface-alt: #f8fafc;
   --ink: #041e42;
   --muted: #4a5d78;
-  --line: #e4f2fd;
-  --accent: #0066ff;
+  --line: #e2e8f0;
+  --accent: #005090;
   --accent-navy: #002857;
-  --accent-soft: #eaf4fc;
+  --accent-soft: #f1f5f9;
   --field: #ffffff;
 }
 
@@ -32,12 +32,12 @@ body {
 }
 
 ::selection {
-  background: #1681ff;
+  background: #005090;
   color: #fff;
 }
 
 :focus-visible {
-  outline: 3px solid #1681ff;
+  outline: 3px solid #005090;
   outline-offset: 4px;
 }
 
@@ -178,7 +178,7 @@ body {
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: #1681ff;
+  background: #005090;
   box-shadow: 0 0 14px #38bfff;
   animation: float-particle 4s ease-in-out infinite;
 }
@@ -615,7 +615,7 @@ body {
 }
 
 .theme-toggle:focus-visible {
-  outline: 3px solid #1681ff;
+  outline: 3px solid #005090;
   outline-offset: 3px;
 }
 

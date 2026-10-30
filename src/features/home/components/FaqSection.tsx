@@ -18,18 +18,18 @@ export function FaqSection({ faqs }: { faqs?: PublicFaqDTO[] | null }) {
   return (
     <section
       id="faq"
-      className="relative isolate overflow-hidden bg-[#F7FAFC] dark:bg-[#030711] py-16 sm:py-20 lg:py-24 border-t border-[#E4F2FD] dark:border-blue-900/30"
+      className="relative isolate overflow-hidden bg-[#F8FAFC] dark:bg-[#030711] py-16 sm:py-20 lg:py-24 border-t border-[#E2E8F0] dark:border-blue-900/30"
     >
       <div className="relative z-10 mx-auto w-full max-w-[980px] px-6 sm:px-9 lg:px-14">
         <ScrollReveal className="text-center max-w-[700px] mx-auto">
-          <p className="text-[11px] sm:text-xs font-extrabold uppercase tracking-[0.24em] text-[#0066FF] dark:text-blue-400">
+          <p className="text-[11px] sm:text-xs font-extrabold uppercase tracking-[0.24em] text-[#005090] dark:text-[#0986C8]">
             PERTANYAAN UMUM (FAQ)
           </p>
           <h2 className="mt-3 text-[26px] sm:text-[34px] lg:text-[38px] font-extrabold leading-[1.18] tracking-[-0.02em] text-[#041E42] dark:text-white">
             Hal yang sering ditanyakan{" "}
             <br className="hidden sm:inline" />
             seputar{" "}
-            <span className="text-[#0066FF] dark:text-[#38BDF8]">
+            <span className="text-[#005090] dark:text-[#0986C8]">
               proyek dan kolaborasi
             </span>
           </h2>
@@ -48,8 +48,8 @@ export function FaqSection({ faqs }: { faqs?: PublicFaqDTO[] | null }) {
                 <div
                   className={`overflow-hidden rounded-2xl bg-white dark:bg-slate-900 border shadow-[0_8px_24px_-8px_rgba(10,35,80,0.05)] transition-all duration-300 ${
                     isOpen
-                      ? "border-[#0066FF] shadow-[0_14px_34px_-10px_rgba(0,102,255,0.14)]"
-                      : "border-[#E4F2FD] dark:border-slate-800 hover:border-[#0066FF] dark:hover:border-blue-500"
+                      ? "border-[#005090] shadow-[0_14px_34px_-10px_rgba(0,80,144,0.14)]"
+                      : "border-[#E2E8F0] dark:border-slate-800 hover:border-[#005090] dark:hover:border-blue-500"
                   }`}
                 >
                   <button
@@ -62,14 +62,14 @@ export function FaqSection({ faqs }: { faqs?: PublicFaqDTO[] | null }) {
                     <span
                       className={`text-[15px] sm:text-[16px] font-bold transition-colors ${
                         isOpen
-                          ? "text-[#0066FF] dark:text-[#38BDF8]"
-                          : "text-[#041E42] dark:text-white group-hover:text-[#0066FF] dark:group-hover:text-[#38BDF8]"
+                          ? "text-[#005090] dark:text-[#0986C8]"
+                          : "text-[#041E42] dark:text-white group-hover:text-[#005090] dark:group-hover:text-[#0986C8]"
                       }`}
                     >
                       {item.question}
                     </span>
                     <div
-                      className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#0066FF] text-white shadow-sm transition-transform duration-300 ${
+                      className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#005090] text-white shadow-sm transition-transform duration-300 ${
                         isOpen ? "rotate-180 scale-105" : "group-hover:scale-105"
                       }`}
                     >
@@ -101,9 +101,9 @@ export function FaqSection({ faqs }: { faqs?: PublicFaqDTO[] | null }) {
         </div>
 
         <ScrollReveal delayMs={120}>
-          <div className="mt-12 rounded-[24px] bg-[#EAF4FC] dark:bg-slate-900 border border-[#E4F2FD] dark:border-slate-800 p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-5 transition-all duration-300 hover:border-[#0066FF]">
+          <div className="mt-12 rounded-[24px] bg-[#FFFFFF] dark:bg-slate-900 border border-[#E2E8F0] dark:border-slate-800 p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-5 transition-all duration-300 hover:border-[#005090]">
             <div className="flex items-center gap-3.5 group">
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#0066FF] text-white shadow-sm transition-transform duration-300 group-hover:scale-110">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#005090] text-white shadow-sm transition-transform duration-300 group-hover:scale-110">
                 <ChatBubbleIcon className="h-5 w-5" />
               </div>
               <div>
@@ -117,7 +117,7 @@ export function FaqSection({ faqs }: { faqs?: PublicFaqDTO[] | null }) {
             </div>
             <Link
               href="/kontak"
-              className="group shrink-0 inline-flex min-h-11 items-center gap-2 rounded-full bg-[#0066FF] hover:bg-[#0052CC] px-5 py-2.5 text-xs sm:text-[13px] font-bold text-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98]"
+              className="group shrink-0 inline-flex min-h-11 items-center gap-2 rounded-full bg-[#005090] hover:bg-[#003E70] px-5 py-2.5 text-xs sm:text-[13px] font-bold text-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98]"
             >
               <span>Hubungi Kami</span>
               <ArrowRightIcon className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-1" />

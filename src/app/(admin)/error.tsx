@@ -56,7 +56,7 @@ export default function AdminWorkspaceError({
         <button
           type="button"
           onClick={() => retry()}
-          className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-[#2563EB] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#1D4ED8] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8]"
+          className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-[#2563EB] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#1D4ED8] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0986C8]"
         >
           <ReloadIcon className="h-4 w-4" aria-hidden="true" />
           <span>Muat Ulang Modul</span>
@@ -64,7 +64,7 @@ export default function AdminWorkspaceError({
 
         <Link
           href="/"
-          className="inline-flex min-h-11 items-center justify-center rounded-xl border border-[#4E6E9E] bg-[#12213F] px-4 py-2 text-sm font-semibold text-[#F1F5FB] transition-colors hover:bg-[#192D54] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8]"
+          className="inline-flex min-h-11 items-center justify-center rounded-xl border border-[#4E6E9E] bg-[#12213F] px-4 py-2 text-sm font-semibold text-[#F1F5FB] transition-colors hover:bg-[#192D54] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0986C8]"
         >
           Buka Situs Publik
         </Link>

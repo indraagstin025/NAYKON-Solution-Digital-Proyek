@@ -18,7 +18,7 @@ export function PortfolioCtaBanner() {
         </div>
         <Link
           href="/kontak"
-          className="group shrink-0 inline-flex min-h-11 items-center gap-2 rounded-full bg-[#0066FF] hover:bg-[#0052CC] px-6 py-3 text-[13.5px] font-bold text-white shadow-[0_10px_25px_-5px_rgba(0,102,255,0.45)] transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98]"
+          className="group shrink-0 inline-flex min-h-11 items-center gap-2 rounded-full bg-[#005090] hover:bg-[#003E70] px-6 py-3 text-[13.5px] font-bold text-white shadow-[0_10px_25px_-5px_rgba(0,80,144,0.45)] transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98]"
         >
           <span>Konsultasikan Proyek</span>
           <ArrowRightIcon className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />

@@ -313,7 +313,7 @@ export function ArticlesManager({
             <button
               type="button"
               onClick={startNewArticle}
-              className="inline-flex min-h-11 items-center gap-1.5 rounded-xl bg-[#0066FF] hover:bg-[#0052CC] dark:bg-[#2563EB] dark:hover:bg-[#1D4ED8] px-3.5 text-xs font-semibold text-white transition-colors shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
+              className="inline-flex min-h-11 items-center gap-1.5 rounded-xl bg-[#005090] hover:bg-[#003E70] dark:bg-[#2563EB] dark:hover:bg-[#1D4ED8] px-3.5 text-xs font-semibold text-white transition-colors shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005090] dark:focus-visible:outline-[#0986C8]"
             >
               <PlusIcon className="h-4 w-4" aria-hidden="true" />
               <span>Artikel Baru</span>
@@ -353,9 +353,9 @@ export function ArticlesManager({
                       key={art.id}
                       type="button"
                       onClick={() => loadArticleIntoForm(art)}
-                      className={`w-full text-left py-3.5 px-3 transition-colors rounded-xl focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8] ${
+                      className={`w-full text-left py-3.5 px-3 transition-colors rounded-xl focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#005090] dark:focus-visible:outline-[#0986C8] ${
                         selected
-                          ? "bg-[#EAF4FC] dark:bg-[#12213F]"
+                          ? "bg-[#FFFFFF] dark:bg-[#12213F]"
                           : "bg-white dark:bg-[#0B1730] hover:bg-slate-50 dark:hover:bg-[#12213F]/60"
                       }`}
                     >
@@ -409,7 +409,7 @@ export function ArticlesManager({
                 <Link
                   href={`/blog/${currentArticle.slug}`}
                   target="_blank"
-                  className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] px-3.5 text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] hover:bg-slate-100 dark:hover:bg-[#192D54] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
+                  className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] px-3.5 text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] hover:bg-slate-100 dark:hover:bg-[#192D54] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005090] dark:focus-visible:outline-[#0986C8]"
                 >
                   <span>Lihat di Situs Publik</span>
                   <ExternalLinkIcon className="h-3.5 w-3.5" aria-hidden="true" />
@@ -440,7 +440,7 @@ export function ArticlesManager({
                     }
                   }}
                   placeholder="Contoh: Arsitektur Aplikasi Web Multi-Cabang yang Mudah Dipelihara"
-                  className="min-h-11 w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] px-3.5 text-sm text-[#041E42] dark:text-[#F1F5FB] placeholder:text-slate-400 dark:placeholder:text-[#94A7C4] focus:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
+                  className="min-h-11 w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] px-3.5 text-sm text-[#041E42] dark:text-[#F1F5FB] placeholder:text-slate-400 dark:placeholder:text-[#94A7C4] focus:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005090] dark:focus-visible:outline-[#0986C8]"
                 />
               </div>
 
@@ -456,7 +456,7 @@ export function ArticlesManager({
                     <button
                       type="button"
                       onClick={() => setSlug(toClientSlug(title))}
-                      className="text-[11px] font-bold text-[#0066FF] dark:text-[#38BDF8] hover:underline"
+                      className="text-[11px] font-bold text-[#005090] dark:text-[#0986C8] hover:underline"
                     >
                       Buat dari judul
                     </button>
@@ -471,7 +471,7 @@ export function ArticlesManager({
                     value={slug}
                     onChange={(e) => setSlug(e.target.value)}
                     placeholder="arsitektur-aplikasi-web-multi-cabang"
-                    className="min-h-11 w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] px-3.5 text-sm text-[#041E42] dark:text-[#F1F5FB] placeholder:text-slate-400 dark:placeholder:text-[#94A7C4] focus:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
+                    className="min-h-11 w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] px-3.5 text-sm text-[#041E42] dark:text-[#F1F5FB] placeholder:text-slate-400 dark:placeholder:text-[#94A7C4] focus:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005090] dark:focus-visible:outline-[#0986C8]"
                   />
                 </div>
 
@@ -488,7 +488,7 @@ export function ArticlesManager({
                     disabled={!canSubmitForm || isPending}
                     value={categoryId}
                     onChange={(e) => setCategoryId(e.target.value)}
-                    className="min-h-11 w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] px-3.5 text-sm text-[#041E42] dark:text-[#F1F5FB] focus:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
+                    className="min-h-11 w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] px-3.5 text-sm text-[#041E42] dark:text-[#F1F5FB] focus:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005090] dark:focus-visible:outline-[#0986C8]"
                   >
                     {categories.map((cat) => (
                       <option key={cat.id} value={cat.id}>
@@ -516,7 +516,7 @@ export function ArticlesManager({
                   value={excerpt}
                   onChange={(e) => setExcerpt(e.target.value)}
                   placeholder="Ringkasan 1 hingga 2 kalimat yang tampil pada kartu daftar artikel blog."
-                  className="w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] p-3.5 text-sm text-[#041E42] dark:text-[#F1F5FB] placeholder:text-slate-400 dark:placeholder:text-[#94A7C4] focus:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
+                  className="w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] p-3.5 text-sm text-[#041E42] dark:text-[#F1F5FB] placeholder:text-slate-400 dark:placeholder:text-[#94A7C4] focus:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005090] dark:focus-visible:outline-[#0986C8]"
                 />
               </div>
 
@@ -529,11 +529,11 @@ export function ArticlesManager({
                 </label>
                 <p className="mb-2 text-[11px] text-[#5A6E85] dark:text-[#94A7C4]">
                   Pisahkan blok dengan baris kosong. Awali dengan{" "}
-                  <code className="text-[#0066FF] dark:text-[#38BDF8]">## Judul Bagian</code> untuk
+                  <code className="text-[#005090] dark:text-[#0986C8]">## Judul Bagian</code> untuk
                   subjudul H2,{" "}
-                  <code className="text-[#0066FF] dark:text-[#38BDF8]">### Subbagian</code> untuk H3,{" "}
-                  <code className="text-[#0066FF] dark:text-[#38BDF8]">- Butir</code> untuk daftar,
-                  atau <code className="text-[#0066FF] dark:text-[#38BDF8]">&gt; Kutipan</code>.
+                  <code className="text-[#005090] dark:text-[#0986C8]">### Subbagian</code> untuk H3,{" "}
+                  <code className="text-[#005090] dark:text-[#0986C8]">- Butir</code> untuk daftar,
+                  atau <code className="text-[#005090] dark:text-[#0986C8]">&gt; Kutipan</code>.
                 </p>
                 <textarea
                   id="article-body"
@@ -542,7 +542,7 @@ export function ArticlesManager({
                   disabled={!canSubmitForm || isPending}
                   value={bodyText}
                   onChange={(e) => setBodyText(e.target.value)}
-                  className="w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] p-3.5 font-mono text-xs leading-relaxed text-[#041E42] dark:text-[#F1F5FB] focus:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
+                  className="w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] p-3.5 font-mono text-xs leading-relaxed text-[#041E42] dark:text-[#F1F5FB] focus:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005090] dark:focus-visible:outline-[#0986C8]"
                 />
               </div>
 
@@ -561,9 +561,9 @@ export function ArticlesManager({
                           disabled={!canSubmitForm || isPending}
                           onClick={() => toggleTagSelection(tag.id)}
                           aria-pressed={checked}
-                          className={`inline-flex min-h-11 items-center rounded-xl border px-3 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8] ${
+                          className={`inline-flex min-h-11 items-center rounded-xl border px-3 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005090] dark:focus-visible:outline-[#0986C8] ${
                             checked
-                              ? "border-[#0066FF] bg-[#0066FF]/10 text-[#0066FF] dark:border-[#0066FF] dark:bg-[#12213F] dark:text-[#F1F5FB]"
+                              ? "border-[#005090] bg-[#005090]/10 text-[#005090] dark:border-[#005090] dark:bg-[#12213F] dark:text-[#F1F5FB]"
                               : "border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#0B1730] text-[#5A6E85] dark:text-[#94A7C4] hover:bg-slate-100 dark:hover:bg-[#12213F]"
                           }`}
                         >
@@ -590,7 +590,7 @@ export function ArticlesManager({
                     onChange={(e) =>
                       setStatus(e.target.value as ContentStatus)
                     }
-                    className="min-h-11 w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] px-3.5 text-sm text-[#041E42] dark:text-[#F1F5FB] focus:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
+                    className="min-h-11 w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] px-3.5 text-sm text-[#041E42] dark:text-[#F1F5FB] focus:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005090] dark:focus-visible:outline-[#0986C8]"
                   >
                     <option value="DRAFT">Draf</option>
                     <option value="REVIEW">Tinjauan</option>
@@ -614,7 +614,7 @@ export function ArticlesManager({
                     value={seoTitle}
                     onChange={(e) => setSeoTitle(e.target.value)}
                     placeholder="Kosongkan untuk memakai judul utama"
-                    className="min-h-11 w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] px-3.5 text-sm text-[#041E42] dark:text-[#F1F5FB] placeholder:text-slate-400 dark:placeholder:text-[#94A7C4] focus:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
+                    className="min-h-11 w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] px-3.5 text-sm text-[#041E42] dark:text-[#F1F5FB] placeholder:text-slate-400 dark:placeholder:text-[#94A7C4] focus:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005090] dark:focus-visible:outline-[#0986C8]"
                   />
                 </div>
 
@@ -633,7 +633,7 @@ export function ArticlesManager({
                     value={seoDescription}
                     onChange={(e) => setSeoDescription(e.target.value)}
                     placeholder="Kosongkan untuk memakai ringkasan"
-                    className="min-h-11 w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] px-3.5 text-sm text-[#041E42] dark:text-[#F1F5FB] placeholder:text-slate-400 dark:placeholder:text-[#94A7C4] focus:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
+                    className="min-h-11 w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] px-3.5 text-sm text-[#041E42] dark:text-[#F1F5FB] placeholder:text-slate-400 dark:placeholder:text-[#94A7C4] focus:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005090] dark:focus-visible:outline-[#0986C8]"
                   />
                 </div>
               </div>
@@ -643,7 +643,7 @@ export function ArticlesManager({
                   <button
                     type="submit"
                     disabled={isPending}
-                    className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#0066FF] hover:bg-[#0052CC] dark:bg-[#2563EB] dark:hover:bg-[#1D4ED8] px-4 text-xs font-semibold text-white transition-colors disabled:opacity-60 shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
+                    className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#005090] hover:bg-[#003E70] dark:bg-[#2563EB] dark:hover:bg-[#1D4ED8] px-4 text-xs font-semibold text-white transition-colors disabled:opacity-60 shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005090] dark:focus-visible:outline-[#0986C8]"
                   >
                     <CheckCircledIcon className="h-4 w-4" aria-hidden="true" />
                     <span>
@@ -669,7 +669,7 @@ export function ArticlesManager({
                             type="button"
                             disabled={isPending}
                             onClick={() => setIsRestoreRevisionOpen(true)}
-                            className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] px-3.5 text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] hover:bg-slate-100 dark:hover:bg-[#192D54] disabled:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
+                            className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] px-3.5 text-xs font-semibold text-[#041E42] dark:text-[#F1F5FB] hover:bg-slate-100 dark:hover:bg-[#192D54] disabled:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005090] dark:focus-visible:outline-[#0986C8]"
                           >
                             <ResetIcon className="h-3.5 w-3.5" aria-hidden="true" />
                             <span>
@@ -844,7 +844,7 @@ export function ArticlesManager({
                   <button
                     type="submit"
                     disabled={isPending}
-                    className="inline-flex min-h-11 flex-1 items-center justify-center gap-1.5 rounded-xl bg-[#0066FF] hover:bg-[#0052CC] dark:bg-[#2563EB] dark:hover:bg-[#1D4ED8] px-4 text-xs font-semibold text-white disabled:opacity-60 shadow-xs"
+                    className="inline-flex min-h-11 flex-1 items-center justify-center gap-1.5 rounded-xl bg-[#005090] hover:bg-[#003E70] dark:bg-[#2563EB] dark:hover:bg-[#1D4ED8] px-4 text-xs font-semibold text-white disabled:opacity-60 shadow-xs"
                   >
                     <PlusIcon className="h-4 w-4" aria-hidden="true" />
                     <span>Tambah Kategori</span>
@@ -967,7 +967,7 @@ export function ArticlesManager({
                 <button
                   type="submit"
                   disabled={isPending}
-                  className="inline-flex min-h-11 w-full items-center justify-center gap-1.5 rounded-xl bg-[#0066FF] hover:bg-[#0052CC] dark:bg-[#2563EB] dark:hover:bg-[#1D4ED8] px-4 text-xs font-semibold text-white disabled:opacity-60 shadow-xs"
+                  className="inline-flex min-h-11 w-full items-center justify-center gap-1.5 rounded-xl bg-[#005090] hover:bg-[#003E70] dark:bg-[#2563EB] dark:hover:bg-[#1D4ED8] px-4 text-xs font-semibold text-white disabled:opacity-60 shadow-xs"
                 >
                   <PlusIcon className="h-4 w-4" aria-hidden="true" />
                   <span>Tambah Tag</span>

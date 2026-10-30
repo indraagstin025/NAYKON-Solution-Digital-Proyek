@@ -109,7 +109,7 @@ export function AdminNav({
             onClick={() => setMobileOpen((prev) => !prev)}
             aria-expanded={mobileOpen}
             aria-controls="admin-mobile-menu"
-            className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3.5 text-xs font-semibold text-[#F1F5FB] transition-colors hover:bg-[#192D54] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8]"
+            className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3.5 text-xs font-semibold text-[#F1F5FB] transition-colors hover:bg-[#192D54] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0986C8]"
           >
             {mobileOpen ? (
               <Cross1Icon className="h-4 w-4" aria-hidden="true" />
@@ -126,7 +126,7 @@ export function AdminNav({
 
           <Link
             href="/"
-            className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-[#4E6E9E] px-3 text-xs font-medium text-[#94A7C4] transition-colors hover:bg-[#12213F] hover:text-[#F1F5FB] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8]"
+            className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-[#4E6E9E] px-3 text-xs font-medium text-[#94A7C4] transition-colors hover:bg-[#12213F] hover:text-[#F1F5FB] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0986C8]"
           >
             <span>Situs Publik</span>
             <ExternalLinkIcon className="h-3.5 w-3.5" aria-hidden="true" />
@@ -145,9 +145,9 @@ export function AdminNav({
                   key={item.href}
                   href={item.href}
                   aria-current={active ? "page" : undefined}
-                  className={`inline-flex min-h-11 items-center gap-2 rounded-xl border px-3.5 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8] ${
+                  className={`inline-flex min-h-11 items-center gap-2 rounded-xl border px-3.5 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0986C8] ${
                     active
-                      ? "border-[#0066FF] bg-[#12213F] text-[#F1F5FB]"
+                      ? "border-[#005090] bg-[#12213F] text-[#F1F5FB]"
                       : "border-transparent text-[#94A7C4] hover:border-[#4E6E9E] hover:bg-[#12213F] hover:text-[#F1F5FB]"
                   }`}
                 >
@@ -164,7 +164,7 @@ export function AdminNav({
 
           <Link
             href="/"
-            className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-[#4E6E9E] px-3.5 text-xs font-medium text-[#94A7C4] transition-colors hover:bg-[#12213F] hover:text-[#F1F5FB] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8]"
+            className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-[#4E6E9E] px-3.5 text-xs font-medium text-[#94A7C4] transition-colors hover:bg-[#12213F] hover:text-[#F1F5FB] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0986C8]"
           >
             <span>Situs Publik</span>
             <ExternalLinkIcon className="h-3.5 w-3.5" aria-hidden="true" />
@@ -186,9 +186,9 @@ export function AdminNav({
                 href={item.href}
                 onClick={() => setMobileOpen(false)}
                 aria-current={active ? "page" : undefined}
-                className={`flex min-h-11 items-center justify-between rounded-xl border px-3.5 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8] ${
+                className={`flex min-h-11 items-center justify-between rounded-xl border px-3.5 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0986C8] ${
                   active
-                    ? "border-[#0066FF] bg-[#12213F] text-[#F1F5FB]"
+                    ? "border-[#005090] bg-[#12213F] text-[#F1F5FB]"
                     : "border-[#4E6E9E] bg-[#0B1730] text-[#94A7C4] hover:bg-[#12213F] hover:text-[#F1F5FB]"
                 }`}
               >

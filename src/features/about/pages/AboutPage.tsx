@@ -28,7 +28,7 @@ export function AboutPage() {
       <main className="flex-1 pt-[68px] lg:pt-[76px]">
         <AboutHero />
 
-        <section className="relative isolate overflow-hidden bg-[#F7FAFC] dark:bg-[#030711] py-16 sm:py-20">
+        <section className="relative isolate overflow-hidden bg-[#F8FAFC] dark:bg-[#030711] py-16 sm:py-20">
           <AboutProfile />
           <AboutValues />
         </section>

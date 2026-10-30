@@ -63,7 +63,7 @@ export function RadixConfirmDialog({
             type="button"
             disabled={isPending}
             onClick={() => onOpenChange(false)}
-            className="inline-flex min-h-11 items-center justify-center rounded-xl border border-slate-200 bg-white px-4 text-xs font-semibold text-[#041E42] hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] disabled:opacity-50 dark:border-[#4E6E9E] dark:bg-[#0B1730] dark:text-[#F1F5FB] dark:hover:bg-[#12213F] dark:focus-visible:outline-[#38BDF8]"
+            className="inline-flex min-h-11 items-center justify-center rounded-xl border border-slate-200 bg-white px-4 text-xs font-semibold text-[#041E42] hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005090] disabled:opacity-50 dark:border-[#4E6E9E] dark:bg-[#0B1730] dark:text-[#F1F5FB] dark:hover:bg-[#12213F] dark:focus-visible:outline-[#0986C8]"
           >
             {cancelLabel}
           </button>
@@ -74,7 +74,7 @@ export function RadixConfirmDialog({
             className={`inline-flex min-h-11 items-center justify-center rounded-xl px-4 text-xs font-semibold text-white focus-visible:outline-2 focus-visible:outline-offset-2 disabled:opacity-50 ${
               isDestructive
                 ? "bg-rose-600 hover:bg-rose-700 focus-visible:outline-rose-500 dark:bg-rose-600 dark:hover:bg-rose-700"
-                : "bg-[#0066FF] hover:bg-[#0052CC] focus-visible:outline-[#0066FF] dark:bg-[#2563EB] dark:hover:bg-[#1D4ED8] dark:focus-visible:outline-[#38BDF8]"
+                : "bg-[#005090] hover:bg-[#003E70] focus-visible:outline-[#005090] dark:bg-[#2563EB] dark:hover:bg-[#1D4ED8] dark:focus-visible:outline-[#0986C8]"
             }`}
           >
             {isPending ? "Memproses..." : confirmLabel}

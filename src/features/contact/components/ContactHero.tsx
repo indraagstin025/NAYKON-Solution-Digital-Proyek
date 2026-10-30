@@ -9,12 +9,12 @@ export function ContactHero() {
       />
 
       <div className="mx-auto w-full max-w-[1240px] px-6 sm:px-9 lg:px-14 text-center">
-        <p className="nk-hero-enter text-[11px] sm:text-xs font-extrabold uppercase tracking-[0.24em] text-[#38BDF8]">
+        <p className="nk-hero-enter text-[11px] sm:text-xs font-extrabold uppercase tracking-[0.24em] text-[#0986C8]">
           HUBUNGI TIM KAMI
         </p>
         <h1 className="nk-hero-enter nk-hero-delay-1 mt-3 text-[30px] sm:text-[40px] lg:text-[44px] font-extrabold leading-[1.15] tracking-[-0.02em] text-white">
           Siap mendiskusikan{" "}
-          <span className="text-[#38BDF8]">rencana digital</span>{" "}
+          <span className="text-[#0986C8]">rencana digital</span>{" "}
           Anda?
         </h1>
         <p className="nk-hero-enter nk-hero-delay-2 mx-auto mt-4 max-w-[660px] text-[14px] sm:text-[15px] leading-[1.7] text-slate-200">

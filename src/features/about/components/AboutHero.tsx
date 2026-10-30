@@ -9,12 +9,12 @@ export function AboutHero() {
       />
 
       <div className="mx-auto w-full max-w-[1240px] px-6 sm:px-9 lg:px-14 text-center">
-        <p className="nk-hero-enter text-[11px] sm:text-xs font-extrabold uppercase tracking-[0.24em] text-[#38BDF8]">
+        <p className="nk-hero-enter text-[11px] sm:text-xs font-extrabold uppercase tracking-[0.24em] text-[#0986C8]">
           TENTANG TIM KAMI
         </p>
         <h1 className="nk-hero-enter nk-hero-delay-1 mt-3 text-[30px] sm:text-[40px] lg:text-[44px] font-extrabold leading-[1.15] tracking-[-0.02em] text-white">
           Mengenal Next Karya{" "}
-          <span className="text-[#38BDF8]">
+          <span className="text-[#0986C8]">
             Lebih Dekat
           </span>
         </h1>

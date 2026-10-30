@@ -37,7 +37,7 @@ export const DialogContent = React.forwardRef<
       {children}
       {showCloseButton && (
         <DialogPrimitive.Close
-          className="absolute right-4 top-4 inline-flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-slate-50 text-[#5A6E85] transition-colors hover:bg-slate-100 hover:text-[#041E42] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#94A7C4] dark:hover:bg-[#192D54] dark:hover:text-[#F1F5FB] dark:focus-visible:outline-[#38BDF8]"
+          className="absolute right-4 top-4 inline-flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-slate-50 text-[#5A6E85] transition-colors hover:bg-slate-100 hover:text-[#041E42] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005090] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#94A7C4] dark:hover:bg-[#192D54] dark:hover:text-[#F1F5FB] dark:focus-visible:outline-[#0986C8]"
           aria-label="Tutup jendela dialog"
         >
           <Cross2Icon className="h-4 w-4" />

@@ -7,7 +7,7 @@ import { useContactForm } from "../hooks/useContactForm";
 import { CONTACT_SERVICES, CONTACT_SERVICE_LABELS } from "../schema";
 
 const FIELD_CLASS =
-  "w-full rounded-xl border bg-[#F7FAFC] dark:bg-slate-800 px-4 py-3 text-[13.5px] text-[#041E42] dark:text-white placeholder:text-[#647896] transition-all duration-200 focus:border-[#0066FF] focus:bg-white dark:focus:bg-slate-900";
+  "w-full rounded-xl border bg-[#F8FAFC] dark:bg-slate-800 px-4 py-3 text-[13.5px] text-[#041E42] dark:text-white placeholder:text-[#647896] transition-all duration-200 focus:border-[#005090] focus:bg-white dark:focus:bg-slate-900";
 const FIELD_OK = "border-[#5B789E] dark:border-slate-600";
 const FIELD_ERR = "border-rose-700 dark:border-rose-400";
 const LABEL_CLASS = "mb-2 block text-[13px] font-bold text-[#041E42] dark:text-slate-200";
@@ -30,11 +30,11 @@ export function ContactFormCard({ sourcePage = "/kontak" }: { sourcePage?: strin
     <form
       id="contact-form"
       onSubmit={handleSubmit}
-      className="relative overflow-hidden rounded-[24px] bg-white dark:bg-slate-900 border border-[#E4F2FD] dark:border-slate-800 p-6 sm:p-8 lg:p-9 shadow-[0_18px_46px_-12px_rgba(10,35,80,0.08)] transition-colors duration-300 hover:border-[#0066FF] dark:hover:border-slate-700"
+      className="relative overflow-hidden rounded-[24px] bg-white dark:bg-slate-900 border border-[#E2E8F0] dark:border-slate-800 p-6 sm:p-8 lg:p-9 shadow-[0_18px_46px_-12px_rgba(10,35,80,0.08)] transition-colors duration-300 hover:border-[#005090] dark:hover:border-slate-700"
       noValidate
       aria-busy={sending}
     >
-      <div className="mb-6 pb-4 border-b border-[#E4F2FD] dark:border-slate-800">
+      <div className="mb-6 pb-4 border-b border-[#E2E8F0] dark:border-slate-800">
         <h3 className="text-[18px] sm:text-[20px] font-extrabold text-[#041E42] dark:text-white">
           Formulir Konsultasi Proyek
         </h3>
@@ -156,7 +156,7 @@ export function ContactFormCard({ sourcePage = "/kontak" }: { sourcePage?: strin
         id="submit-button"
         type="submit"
         disabled={sending || !isOnline}
-        className="group mt-6 inline-flex min-h-12 w-full items-center justify-center gap-2.5 rounded-full bg-[#0066FF] hover:bg-[#0052CC] px-6 py-3.5 text-[14px] font-bold text-white shadow-[0_10px_25px_-5px_rgba(0,102,255,0.45)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_14px_30px_-5px_rgba(0,102,255,0.55)] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 cursor-pointer"
+        className="group mt-6 inline-flex min-h-12 w-full items-center justify-center gap-2.5 rounded-full bg-[#005090] hover:bg-[#003E70] px-6 py-3.5 text-[14px] font-bold text-white shadow-[0_10px_25px_-5px_rgba(0,80,144,0.45)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_14px_30px_-5px_rgba(0,80,144,0.55)] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 cursor-pointer"
       >
         <span>{sending ? "Sedang Mengirim..." : "Kirim Pesan Konsultasi"}</span>
         <PaperPlaneIcon className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

@@ -9,7 +9,7 @@ import {
 
 export default function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-[#F7FAFC] dark:bg-[#030711] border-t border-[#E4F2FD] dark:border-blue-900/40 pt-14 pb-10">
+    <footer className="relative overflow-hidden bg-[#F8FAFC] dark:bg-[#030711] border-t border-[#E2E8F0] dark:border-blue-900/40 pt-14 pb-10">
       <div className="mx-auto w-full max-w-[1240px] px-6 sm:px-9 lg:px-14">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.35fr_0.75fr_1fr_1fr] lg:gap-8">
           <div>
@@ -30,8 +30,8 @@ export default function Footer() {
               yang berfokus pada arsitektur modern, performa tinggi, dan dampak
               pertumbuhan nyata bagi bisnis Anda.
             </p>
-            <div className="mt-5 inline-flex items-center gap-2 rounded-full bg-white dark:bg-slate-900 border border-[#E4F2FD] dark:border-slate-800 px-3.5 py-1.5 shadow-2xs">
-              <span className="h-2 w-2 rounded-full bg-[#0066FF]" />
+            <div className="mt-5 inline-flex items-center gap-2 rounded-full bg-white dark:bg-slate-900 border border-[#E2E8F0] dark:border-slate-800 px-3.5 py-1.5 shadow-2xs">
+              <span className="h-2 w-2 rounded-full bg-[#005090]" />
               <span className="text-[11.5px] font-semibold text-[#041E42] dark:text-slate-200">
                 Mengakselerasi Inovasi, Mewujudkan Karya Digital
               </span>
@@ -54,7 +54,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="inline-block py-0.5 transition-all duration-200 hover:translate-x-1 hover:text-[#0066FF] dark:hover:text-blue-400"
+                    className="inline-block py-0.5 transition-all duration-200 hover:translate-x-1 hover:text-[#005090] dark:hover:text-blue-400"
                   >
                     {link.label}
                   </Link>
@@ -78,7 +78,7 @@ export default function Footer() {
                 <li key={service.label}>
                   <Link
                     href={service.href}
-                    className="inline-block py-0.5 transition-all duration-200 hover:translate-x-1 hover:text-[#0066FF] dark:hover:text-blue-400"
+                    className="inline-block py-0.5 transition-all duration-200 hover:translate-x-1 hover:text-[#005090] dark:hover:text-blue-400"
                   >
                     {service.label}
                   </Link>
@@ -93,7 +93,7 @@ export default function Footer() {
             </h3>
             <ul className="mt-4 space-y-3 text-[13.5px] text-[#4A5D78] dark:text-slate-300">
               <li className="flex items-start gap-2.5">
-                <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-[#0066FF] text-white mt-0.5">
+                <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-[#005090] text-white mt-0.5">
                   <EnvelopeClosedIcon className="h-3.5 w-3.5" />
                 </div>
                 <div>
@@ -102,14 +102,14 @@ export default function Footer() {
                   </span>
                   <a
                     href="mailto:contact@naykon.id"
-                    className="font-bold text-[#0066FF] dark:text-blue-400 hover:underline"
+                    className="font-bold text-[#005090] dark:text-[#0986C8] hover:underline"
                   >
                     contact@naykon.id
                   </a>
                 </div>
               </li>
               <li className="flex items-start gap-2.5">
-                <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-[#0066FF] text-white mt-0.5">
+                <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-[#005090] text-white mt-0.5">
                   <ClockIcon className="h-3.5 w-3.5" />
                 </div>
                 <div>
@@ -126,7 +126,7 @@ export default function Footer() {
             <div className="mt-5">
               <Link
                 href="/kontak"
-                className="group inline-flex min-h-11 items-center gap-2 rounded-full bg-[#0066FF] hover:bg-[#0052CC] px-5 py-2.5 text-xs font-bold text-white shadow-[0_8px_20px_-4px_rgba(0,102,255,0.4)] transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98]"
+                className="group inline-flex min-h-11 items-center gap-2 rounded-full bg-[#005090] hover:bg-[#003E70] px-5 py-2.5 text-xs font-bold text-white shadow-[0_8px_20px_-4px_rgba(0,80,144,0.4)] transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98]"
               >
                 <span>Mulai Diskusi Proyek</span>
                 <ArrowRightIcon className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-1" />
@@ -142,7 +142,7 @@ export default function Footer() {
           <div className="flex flex-wrap items-center justify-center gap-5 font-medium">
             <Link
               href="/kebijakan-privasi"
-              className="inline-flex min-h-11 items-center font-semibold text-[#0052CC] underline-offset-2 hover:underline dark:text-blue-400"
+              className="inline-flex min-h-11 items-center font-semibold text-[#003E70] underline-offset-2 hover:underline dark:text-[#0986C8]"
             >
               Kebijakan Privasi
             </Link>

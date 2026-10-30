@@ -179,7 +179,7 @@ export function FaqsManager({
           <button
             type="button"
             onClick={startNewFaq}
-            className="inline-flex min-h-11 items-center gap-1.5 rounded-xl bg-[#0066FF] px-3.5 text-xs font-semibold text-white hover:bg-[#0052CC] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:bg-[#2563EB] dark:hover:bg-[#1D4ED8] dark:focus-visible:outline-[#38BDF8]"
+            className="inline-flex min-h-11 items-center gap-1.5 rounded-xl bg-[#005090] px-3.5 text-xs font-semibold text-white hover:bg-[#003E70] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005090] dark:bg-[#2563EB] dark:hover:bg-[#1D4ED8] dark:focus-visible:outline-[#0986C8]"
           >
             <PlusIcon className="h-4 w-4" aria-hidden="true" />
             <span>Pertanyaan FAQ Baru</span>
@@ -197,9 +197,9 @@ export function FaqsManager({
                   key={item.id}
                   type="button"
                   onClick={() => loadFaq(item)}
-                  className={`w-full text-left p-4 transition-colors focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8] ${
+                  className={`w-full text-left p-4 transition-colors focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#005090] dark:focus-visible:outline-[#0986C8] ${
                     selected
-                      ? "bg-[#EAF4FC] border-l-4 border-l-[#0066FF] dark:bg-[#12213F] dark:border-l-[#38BDF8]"
+                      ? "bg-[#FFFFFF] border-l-4 border-l-[#005090] dark:bg-[#12213F] dark:border-l-[#0986C8]"
                       : "bg-white hover:bg-slate-50 dark:bg-[#0B1730] dark:hover:bg-[#12213F]/60"
                   }`}
                 >
@@ -257,7 +257,7 @@ export function FaqsManager({
                   maxLength={180}
                   value={question}
                   onChange={(e) => setQuestion(e.target.value)}
-                  className="min-h-11 w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#0066FF] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#38BDF8]"
+                  className="min-h-11 w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#005090] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#0986C8]"
                 />
               </div>
 
@@ -276,7 +276,7 @@ export function FaqsManager({
                   maxLength={1200}
                   value={answer}
                   onChange={(e) => setAnswer(e.target.value)}
-                  className="w-full rounded-xl border border-slate-300 bg-slate-50 p-3.5 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#0066FF] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#38BDF8]"
+                  className="w-full rounded-xl border border-slate-300 bg-slate-50 p-3.5 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#005090] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#0986C8]"
                 />
               </div>
 
@@ -293,7 +293,7 @@ export function FaqsManager({
                     type="text"
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
-                    className="min-h-11 w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#0066FF] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#38BDF8]"
+                    className="min-h-11 w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#005090] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#0986C8]"
                   />
                 </div>
 
@@ -311,7 +311,7 @@ export function FaqsManager({
                     max={999}
                     value={sortOrder}
                     onChange={(e) => setSortOrder(Number(e.target.value))}
-                    className="min-h-11 w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#0066FF] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#38BDF8]"
+                    className="min-h-11 w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#005090] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#0986C8]"
                   />
                 </div>
 
@@ -328,7 +328,7 @@ export function FaqsManager({
                     onChange={(e) =>
                       setFaqStatus(e.target.value as ContentStatus)
                     }
-                    className="min-h-11 w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#0066FF] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#38BDF8]"
+                    className="min-h-11 w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#005090] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#0986C8]"
                   >
                     <option value="DRAFT">Draf</option>
                     <option value="REVIEW">Tinjauan</option>
@@ -343,7 +343,7 @@ export function FaqsManager({
                   <button
                     type="submit"
                     disabled={isPending}
-                    className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#0066FF] px-4 text-xs font-semibold text-white hover:bg-[#0052CC] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] disabled:opacity-60 dark:bg-[#2563EB] dark:hover:bg-[#1D4ED8] dark:focus-visible:outline-[#38BDF8]"
+                    className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#005090] px-4 text-xs font-semibold text-white hover:bg-[#003E70] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005090] disabled:opacity-60 dark:bg-[#2563EB] dark:hover:bg-[#1D4ED8] dark:focus-visible:outline-[#0986C8]"
                   >
                     <CheckCircledIcon className="h-4 w-4" aria-hidden="true" />
                     <span>{isPending ? "Menyimpan..." : "Simpan FAQ"}</span>
@@ -409,9 +409,9 @@ export function FaqsManager({
                   key={p.id}
                   type="button"
                   onClick={() => loadPage(p)}
-                  className={`w-full text-left p-4 transition-colors focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8] ${
+                  className={`w-full text-left p-4 transition-colors focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#005090] dark:focus-visible:outline-[#0986C8] ${
                     selected
-                      ? "bg-[#EAF4FC] border-l-4 border-l-[#0066FF] dark:bg-[#12213F] dark:border-l-[#38BDF8]"
+                      ? "bg-[#FFFFFF] border-l-4 border-l-[#005090] dark:bg-[#12213F] dark:border-l-[#0986C8]"
                       : "bg-white hover:bg-slate-50 dark:bg-[#0B1730] dark:hover:bg-[#12213F]/60"
                   }`}
                 >
@@ -454,7 +454,7 @@ export function FaqsManager({
                       required
                       value={pageTitle}
                       onChange={(e) => setPageTitle(e.target.value)}
-                      className="min-h-11 w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#0066FF] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#38BDF8]"
+                      className="min-h-11 w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#005090] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#0986C8]"
                     />
                   </div>
 
@@ -471,7 +471,7 @@ export function FaqsManager({
                       value={pageUpdatedLabel}
                       onChange={(e) => setPageUpdatedLabel(e.target.value)}
                       placeholder="Contoh: Oktober 2026"
-                      className="min-h-11 w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#0066FF] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#38BDF8]"
+                      className="min-h-11 w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#005090] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#0986C8]"
                     />
                   </div>
                 </div>
@@ -489,7 +489,7 @@ export function FaqsManager({
                     required
                     value={pageBodyText}
                     onChange={(e) => setPageBodyText(e.target.value)}
-                    className="w-full rounded-xl border border-slate-300 bg-slate-50 p-3.5 font-mono text-xs leading-relaxed text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#0066FF] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#38BDF8]"
+                    className="w-full rounded-xl border border-slate-300 bg-slate-50 p-3.5 font-mono text-xs leading-relaxed text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#005090] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#0986C8]"
                   />
                 </div>
 
@@ -507,7 +507,7 @@ export function FaqsManager({
                       maxLength={70}
                       value={pageSeoTitle}
                       onChange={(e) => setPageSeoTitle(e.target.value)}
-                      className="min-h-11 w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#0066FF] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#38BDF8]"
+                      className="min-h-11 w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#005090] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#0986C8]"
                     />
                   </div>
 
@@ -524,7 +524,7 @@ export function FaqsManager({
                       maxLength={170}
                       value={pageSeoDesc}
                       onChange={(e) => setPageSeoDesc(e.target.value)}
-                      className="min-h-11 w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#0066FF] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#38BDF8]"
+                      className="min-h-11 w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#005090] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#0986C8]"
                     />
                   </div>
 
@@ -541,7 +541,7 @@ export function FaqsManager({
                       onChange={(e) =>
                         setPageStatus(e.target.value as ContentStatus)
                       }
-                      className="min-h-11 w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#0066FF] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#38BDF8]"
+                      className="min-h-11 w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#005090] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#0986C8]"
                     >
                       <option value="DRAFT">Draf</option>
                       {canPublish && <option value="PUBLISHED">Terbit</option>}
@@ -553,7 +553,7 @@ export function FaqsManager({
                   <button
                     type="submit"
                     disabled={isPending}
-                    className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#0066FF] px-4 text-xs font-semibold text-white hover:bg-[#0052CC] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] disabled:opacity-60 dark:bg-[#2563EB] dark:hover:bg-[#1D4ED8] dark:focus-visible:outline-[#38BDF8]"
+                    className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#005090] px-4 text-xs font-semibold text-white hover:bg-[#003E70] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005090] disabled:opacity-60 dark:bg-[#2563EB] dark:hover:bg-[#1D4ED8] dark:focus-visible:outline-[#0986C8]"
                   >
                     <CheckCircledIcon className="h-4 w-4" aria-hidden="true" />
                     <span>

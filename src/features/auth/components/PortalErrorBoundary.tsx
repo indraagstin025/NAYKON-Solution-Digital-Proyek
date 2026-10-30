@@ -57,7 +57,7 @@ export default class PortalErrorBoundary extends Component<
             <button
               type="button"
               onClick={() => this.setState({ hasError: false })}
-              className="inline-flex min-h-11 items-center justify-center rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3.5 py-2 text-xs font-semibold text-[#F1F5FB] transition-colors hover:bg-[#192D54] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8]"
+              className="inline-flex min-h-11 items-center justify-center rounded-xl border border-[#4E6E9E] bg-[#12213F] px-3.5 py-2 text-xs font-semibold text-[#F1F5FB] transition-colors hover:bg-[#192D54] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0986C8]"
             >
               Pulihkan Panel
             </button>

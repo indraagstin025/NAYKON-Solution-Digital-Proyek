@@ -197,7 +197,7 @@ export function MessagesManager({
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Cari nama, email, atau layanan..."
-              className="min-h-11 w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] pl-10 pr-3.5 text-sm text-[#041E42] dark:text-[#F1F5FB] placeholder:text-slate-400 dark:placeholder:text-[#94A7C4] focus:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
+              className="min-h-11 w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] pl-10 pr-3.5 text-sm text-[#041E42] dark:text-[#F1F5FB] placeholder:text-slate-400 dark:placeholder:text-[#94A7C4] focus:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005090] dark:focus-visible:outline-[#0986C8]"
             />
           </div>
         </div>
@@ -222,9 +222,9 @@ export function MessagesManager({
                   key={msg.id}
                   type="button"
                   onClick={() => selectMessage(msg)}
-                  className={`w-full text-left p-4 transition-colors focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8] ${
+                  className={`w-full text-left p-4 transition-colors focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#005090] dark:focus-visible:outline-[#0986C8] ${
                     isSelected
-                      ? "bg-[#EAF4FC] dark:bg-[#12213F]"
+                      ? "bg-[#FFFFFF] dark:bg-[#12213F]"
                       : "bg-white dark:bg-[#0B1730] hover:bg-slate-50 dark:hover:bg-[#12213F]/70"
                   }`}
                 >
@@ -301,7 +301,7 @@ export function MessagesManager({
                         selectedMessage.service || "Kebutuhan Proyek Digital"
                       }`
                     )}`}
-                    className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#0066FF] hover:bg-[#0052CC] dark:bg-[#2563EB] dark:hover:bg-[#1D4ED8] px-4 text-xs font-semibold text-white transition-colors shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
+                    className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#005090] hover:bg-[#003E70] dark:bg-[#2563EB] dark:hover:bg-[#1D4ED8] px-4 text-xs font-semibold text-white transition-colors shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005090] dark:focus-visible:outline-[#0986C8]"
                   >
                     <EnvelopeClosedIcon className="h-4 w-4" aria-hidden="true" />
                     <span>Balas via Email</span>
@@ -334,7 +334,7 @@ export function MessagesManager({
                       onChange={(e) =>
                         setDraftStatus(e.target.value as MessageStatus)
                       }
-                      className="min-h-11 w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] px-3.5 text-sm text-[#041E42] dark:text-[#F1F5FB] disabled:opacity-60 focus:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
+                      className="min-h-11 w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] px-3.5 text-sm text-[#041E42] dark:text-[#F1F5FB] disabled:opacity-60 focus:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005090] dark:focus-visible:outline-[#0986C8]"
                     >
                       <option value="NEW">Baru (Belum Ditangani)</option>
                       <option value="READ">Sudah Dibaca</option>
@@ -359,7 +359,7 @@ export function MessagesManager({
                     value={draftNote}
                     onChange={(e) => setDraftNote(e.target.value)}
                     placeholder="Contoh: Sudah dihubungi melalui email pada pukul 10.30 WIB untuk penjadwalan diskusi teknis."
-                    className="w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] p-3.5 text-sm text-[#041E42] dark:text-[#F1F5FB] placeholder:text-slate-400 dark:placeholder:text-[#94A7C4] disabled:opacity-60 focus:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
+                    className="w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] p-3.5 text-sm text-[#041E42] dark:text-[#F1F5FB] placeholder:text-slate-400 dark:placeholder:text-[#94A7C4] disabled:opacity-60 focus:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005090] dark:focus-visible:outline-[#0986C8]"
                   />
                 </div>
 
@@ -368,7 +368,7 @@ export function MessagesManager({
                     <button
                       type="submit"
                       disabled={isPending}
-                      className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#0066FF] hover:bg-[#0052CC] dark:bg-[#2563EB] dark:hover:bg-[#1D4ED8] px-4 text-xs font-semibold text-white transition-colors disabled:opacity-60 shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
+                      className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#005090] hover:bg-[#003E70] dark:bg-[#2563EB] dark:hover:bg-[#1D4ED8] px-4 text-xs font-semibold text-white transition-colors disabled:opacity-60 shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005090] dark:focus-visible:outline-[#0986C8]"
                     >
                       <CheckCircledIcon className="h-4 w-4" aria-hidden="true" />
                       <span>

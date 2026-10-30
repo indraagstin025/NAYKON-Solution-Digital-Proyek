@@ -137,7 +137,7 @@ export function UsersManager({
                 value={newName}
                 onChange={(e) => setNewName(e.target.value)}
                 placeholder="Contoh: Raka Pradipta"
-                className="min-h-11 w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#0066FF] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#38BDF8]"
+                className="min-h-11 w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#005090] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#0986C8]"
               />
             </div>
 
@@ -155,7 +155,7 @@ export function UsersManager({
                 value={newEmail}
                 onChange={(e) => setNewEmail(e.target.value)}
                 placeholder="raka@nextkarya.id"
-                className="min-h-11 w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#0066FF] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#38BDF8]"
+                className="min-h-11 w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#005090] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#0986C8]"
               />
             </div>
 
@@ -175,7 +175,7 @@ export function UsersManager({
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
                 placeholder="Minimal 10 karakter (huruf besar, kecil & angka)"
-                className="min-h-11 w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#0066FF] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#38BDF8]"
+                className="min-h-11 w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#005090] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#0986C8]"
               />
             </div>
 
@@ -190,7 +190,7 @@ export function UsersManager({
                 id="user-role"
                 value={newRole}
                 onChange={(e) => setNewRole(e.target.value as Role)}
-                className="min-h-11 w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#0066FF] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#38BDF8]"
+                className="min-h-11 w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 text-sm text-[#041E42] placeholder:text-slate-400 focus:bg-white focus:border-[#005090] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:placeholder:text-[#94A7C4] dark:focus:border-[#0986C8]"
               >
                 <option value="EDITOR">Editor Konten (Kelola & Terbitkan)</option>
                 <option value="ANALYST">Analis (Akses Metrik & Baca)</option>
@@ -202,7 +202,7 @@ export function UsersManager({
             <button
               type="submit"
               disabled={isPending}
-              className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl bg-[#0066FF] px-4 text-xs font-semibold text-white hover:bg-[#0052CC] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] disabled:opacity-60 dark:bg-[#2563EB] dark:hover:bg-[#1D4ED8] dark:focus-visible:outline-[#38BDF8]"
+              className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl bg-[#005090] px-4 text-xs font-semibold text-white hover:bg-[#003E70] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005090] disabled:opacity-60 dark:bg-[#2563EB] dark:hover:bg-[#1D4ED8] dark:focus-visible:outline-[#0986C8]"
             >
               <PlusIcon className="h-4 w-4" aria-hidden="true" />
               <span>
@@ -241,7 +241,7 @@ export function UsersManager({
                       <p className="text-sm font-bold text-[#041E42] dark:text-[#F1F5FB] flex items-center gap-2">
                         <span>{u.name}</span>
                         {isSelf && (
-                          <span className="rounded-md border border-[#D4E6FC] bg-[#EAF4FC] px-2 py-0.5 text-[10px] font-semibold text-[#0066FF] dark:border-[#0066FF] dark:bg-[#0B1730] dark:text-[#38BDF8]">
+                          <span className="rounded-md border border-[#CBD5E1] bg-[#FFFFFF] px-2 py-0.5 text-[10px] font-semibold text-[#005090] dark:border-[#005090] dark:bg-[#0B1730] dark:text-[#0986C8]">
                             Akun Anda
                           </span>
                         )}
@@ -303,7 +303,7 @@ export function UsersManager({
                             handleRoleOrActiveChange(u, u.role, true);
                           }
                         }}
-                        className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-slate-300 bg-white px-3 text-xs font-semibold text-[#041E42] hover:bg-slate-100 disabled:opacity-50 dark:border-[#4E6E9E] dark:bg-[#0B1730] dark:text-[#F1F5FB] dark:hover:bg-[#12213F] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
+                        className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-slate-300 bg-white px-3 text-xs font-semibold text-[#041E42] hover:bg-slate-100 disabled:opacity-50 dark:border-[#4E6E9E] dark:bg-[#0B1730] dark:text-[#F1F5FB] dark:hover:bg-[#12213F] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005090] dark:focus-visible:outline-[#0986C8]"
                       >
                         <CheckCircledIcon className="h-3.5 w-3.5" />
                         <span>

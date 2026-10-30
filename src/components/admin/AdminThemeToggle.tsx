@@ -45,12 +45,12 @@ export function AdminThemeToggle({
       type="button"
       onClick={toggleTheme}
       aria-label={isDark ? "Beralih ke mode terang" : "Beralih ke mode gelap"}
-      className={`inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-3.5 py-2 text-xs font-semibold text-[#041E42] transition-colors hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:hover:bg-[#192D54] dark:focus-visible:outline-[#38BDF8] ${className}`}
+      className={`inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-3.5 py-2 text-xs font-semibold text-[#041E42] transition-colors hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005090] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:hover:bg-[#192D54] dark:focus-visible:outline-[#0986C8] ${className}`}
     >
       {isDark ? (
         <SunIcon className="h-4 w-4 text-[#FBBF24]" aria-hidden="true" />
       ) : (
-        <MoonIcon className="h-4 w-4 text-[#0066FF]" aria-hidden="true" />
+        <MoonIcon className="h-4 w-4 text-[#005090]" aria-hidden="true" />
       )}
       {showLabel && (
         <span>{isDark ? "Mode Terang" : "Mode Gelap"}</span>

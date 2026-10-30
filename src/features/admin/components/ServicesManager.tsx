@@ -273,7 +273,7 @@ export function ServicesManager({
             onClick={
               activeTab === "services" ? startNewService : startNewPricingPlan
             }
-            className="inline-flex min-h-11 items-center gap-1.5 rounded-xl bg-[#0066FF] hover:bg-[#0052CC] dark:bg-[#2563EB] dark:hover:bg-[#1D4ED8] px-3.5 text-xs font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
+            className="inline-flex min-h-11 items-center gap-1.5 rounded-xl bg-[#005090] hover:bg-[#003E70] dark:bg-[#2563EB] dark:hover:bg-[#1D4ED8] px-3.5 text-xs font-semibold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005090] dark:focus-visible:outline-[#0986C8]"
           >
             <PlusIcon className="h-4 w-4" aria-hidden="true" />
             <span>
@@ -293,9 +293,9 @@ export function ServicesManager({
                   key={svc.id}
                   type="button"
                   onClick={() => loadService(svc)}
-                  className={`w-full text-left p-4 transition-colors focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8] ${
+                  className={`w-full text-left p-4 transition-colors focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#005090] dark:focus-visible:outline-[#0986C8] ${
                     selected
-                      ? "bg-[#EAF4FC] dark:bg-[#12213F]"
+                      ? "bg-[#FFFFFF] dark:bg-[#12213F]"
                       : "bg-white dark:bg-[#0B1730] hover:bg-slate-50 dark:hover:bg-[#12213F]/60"
                   }`}
                 >
@@ -360,7 +360,7 @@ export function ServicesManager({
                       setSvcTitle(e.target.value);
                       if (!svcId) setSvcSlug(toClientSlug(e.target.value));
                     }}
-                    className="min-h-11 w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] px-3.5 text-sm text-[#041E42] dark:text-[#F1F5FB] focus:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
+                    className="min-h-11 w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] px-3.5 text-sm text-[#041E42] dark:text-[#F1F5FB] focus:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005090] dark:focus-visible:outline-[#0986C8]"
                   />
                 </div>
 
@@ -380,7 +380,7 @@ export function ServicesManager({
                     disabled={!canSubmitService || isPending}
                     value={svcSlug}
                     onChange={(e) => setSvcSlug(e.target.value)}
-                    className="min-h-11 w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] px-3.5 text-sm text-[#041E42] dark:text-[#F1F5FB] focus:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
+                    className="min-h-11 w-full rounded-xl border border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#12213F] px-3.5 text-sm text-[#041E42] dark:text-[#F1F5FB] focus:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005090] dark:focus-visible:outline-[#0986C8]"
                   />
                 </div>
               </div>
@@ -546,7 +546,7 @@ export function ServicesManager({
                   <button
                     type="submit"
                     disabled={isPending}
-                    className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#0066FF] hover:bg-[#0052CC] dark:bg-[#2563EB] dark:hover:bg-[#1D4ED8] px-4 text-xs font-semibold text-white shadow-xs disabled:opacity-60"
+                    className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#005090] hover:bg-[#003E70] dark:bg-[#2563EB] dark:hover:bg-[#1D4ED8] px-4 text-xs font-semibold text-white shadow-xs disabled:opacity-60"
                   >
                     <CheckCircledIcon className="h-4 w-4" aria-hidden="true" />
                     <span>
@@ -614,9 +614,9 @@ export function ServicesManager({
                   key={plan.id}
                   type="button"
                   onClick={() => loadPricingPlan(plan)}
-                  className={`w-full text-left p-4 transition-colors focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8] ${
+                  className={`w-full text-left p-4 transition-colors focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#005090] dark:focus-visible:outline-[#0986C8] ${
                     selected
-                      ? "bg-[#EAF4FC] dark:bg-[#12213F]"
+                      ? "bg-[#FFFFFF] dark:bg-[#12213F]"
                       : "bg-white dark:bg-[#0B1730] hover:bg-slate-50 dark:hover:bg-[#12213F]/60"
                   }`}
                 >
@@ -625,7 +625,7 @@ export function ServicesManager({
                       <p className="text-sm font-bold text-[#041E42] dark:text-[#F1F5FB] flex items-center gap-1.5">
                         <span>{plan.name}</span>
                         {plan.isPopular && (
-                          <span className="inline-flex items-center gap-1 rounded-md border border-[#D4E6FC] dark:border-[#0066FF] bg-[#EAF4FC] dark:bg-[#0B1730] px-1.5 py-0.5 text-[10px] font-bold text-[#0066FF] dark:text-[#38BDF8]">
+                          <span className="inline-flex items-center gap-1 rounded-md border border-[#CBD5E1] dark:border-[#005090] bg-[#FFFFFF] dark:bg-[#0B1730] px-1.5 py-0.5 text-[10px] font-bold text-[#005090] dark:text-[#0986C8]">
                             <StarFilledIcon className="h-3 w-3" />
                             <span>Paling Populer</span>
                           </span>
@@ -846,7 +846,7 @@ export function ServicesManager({
                   <button
                     type="submit"
                     disabled={isPending}
-                    className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#0066FF] hover:bg-[#0052CC] dark:bg-[#2563EB] dark:hover:bg-[#1D4ED8] px-4 text-xs font-semibold text-white shadow-xs disabled:opacity-60"
+                    className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#005090] hover:bg-[#003E70] dark:bg-[#2563EB] dark:hover:bg-[#1D4ED8] px-4 text-xs font-semibold text-white shadow-xs disabled:opacity-60"
                   >
                     <CheckCircledIcon className="h-4 w-4" aria-hidden="true" />
                     <span>

@@ -92,10 +92,10 @@ export default function Navbar() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`canva-link relative py-1.5 text-[13px] lg:text-[13.5px] transition-colors after:content-[''] after:absolute after:-bottom-1 after:left-0 after:right-0 after:h-[2px] after:rounded-full after:bg-[#0066FF] after:transition-transform after:duration-200 ${
+                className={`canva-link relative py-1.5 text-[13px] lg:text-[13.5px] transition-colors after:content-[''] after:absolute after:-bottom-1 after:left-0 after:right-0 after:h-[2px] after:rounded-full after:bg-[#005090] after:transition-transform after:duration-200 ${
                   active
-                    ? "font-semibold text-[#0066FF] after:scale-x-100"
-                    : "font-medium text-[#0A1E3F] dark:text-slate-200 hover:text-[#0066FF] after:scale-x-0 hover:after:scale-x-100 after:origin-left"
+                    ? "font-semibold text-[#005090] after:scale-x-100"
+                    : "font-medium text-[#0A1E3F] dark:text-slate-200 hover:text-[#005090] after:scale-x-0 hover:after:scale-x-100 after:origin-left"
                 }`}
               >
                 <span>{item.label}</span>
@@ -107,7 +107,7 @@ export default function Navbar() {
         <div className="flex shrink-0 items-center justify-self-end gap-2.5">
           <Link
             href="/kontak"
-            className="group hidden sm:inline-flex min-h-11 items-center gap-2 rounded-full bg-[#0066FF] hover:bg-[#0052CC] text-white px-5 py-2 text-[13px] font-semibold shadow-[0_8px_20px_-4px_rgba(0,102,255,0.45)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_12px_24px_-4px_rgba(0,102,255,0.55)] active:scale-[0.98]"
+            className="group hidden sm:inline-flex min-h-11 items-center gap-2 rounded-full bg-[#005090] hover:bg-[#003E70] text-white px-5 py-2 text-[13px] font-semibold shadow-[0_8px_20px_-4px_rgba(0,80,144,0.45)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_12px_24px_-4px_rgba(0,80,144,0.55)] active:scale-[0.98]"
           >
             <span>Hubungi Kami</span>
             <ArrowRightIcon
@@ -151,7 +151,7 @@ export default function Navbar() {
                   onClick={() => setIsMenuOpen(false)}
                   className={`canva-link flex min-h-11 items-center rounded-xl px-3 text-base transition-colors ${
                     active
-                      ? "bg-[#0066FF] font-semibold text-white"
+                      ? "bg-[#005090] font-semibold text-white"
                       : "nav-link theme-text font-medium text-[#041E42] dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"
                   }`}
                 >
@@ -162,7 +162,7 @@ export default function Navbar() {
             <Link
               href="/kontak"
               onClick={() => setIsMenuOpen(false)}
-              className="mt-2 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-[#0066FF] hover:bg-[#0052CC] px-6 py-3 text-base font-semibold text-white shadow-md active:scale-[0.98]"
+              className="mt-2 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-[#005090] hover:bg-[#003E70] px-6 py-3 text-base font-semibold text-white shadow-md active:scale-[0.98]"
             >
               <span>Hubungi Kami</span>
               <ArrowRightIcon className="w-4 h-4" />

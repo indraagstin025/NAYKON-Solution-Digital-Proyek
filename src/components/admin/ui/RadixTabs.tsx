@@ -23,7 +23,7 @@ export const TabsTrigger = React.forwardRef<
 >(({ className = "", ...props }, ref) => (
   <TabsPrimitive.Trigger
     ref={ref}
-    className={`inline-flex min-h-11 items-center justify-center rounded-lg px-4 py-2 text-xs font-semibold text-[#5A6E85] transition-all hover:text-[#041E42] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] disabled:pointer-events-none disabled:opacity-50 data-[state=active]:border data-[state=active]:border-slate-200 data-[state=active]:bg-white data-[state=active]:text-[#0066FF] data-[state=active]:shadow-xs dark:text-[#94A7C4] dark:hover:text-[#F1F5FB] dark:focus-visible:outline-[#38BDF8] dark:data-[state=active]:border-[#60A5FA] dark:data-[state=active]:bg-[#12213F] dark:data-[state=active]:text-[#F1F5FB] ${className}`}
+    className={`inline-flex min-h-11 items-center justify-center rounded-lg px-4 py-2 text-xs font-semibold text-[#5A6E85] transition-all hover:text-[#041E42] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005090] disabled:pointer-events-none disabled:opacity-50 data-[state=active]:border data-[state=active]:border-slate-200 data-[state=active]:bg-white data-[state=active]:text-[#005090] data-[state=active]:shadow-xs dark:text-[#94A7C4] dark:hover:text-[#F1F5FB] dark:focus-visible:outline-[#0986C8] dark:data-[state=active]:border-[#60A5FA] dark:data-[state=active]:bg-[#12213F] dark:data-[state=active]:text-[#F1F5FB] ${className}`}
     {...props}
   />
 ));
@@ -35,7 +35,7 @@ export const TabsContent = React.forwardRef<
 >(({ className = "", ...props }, ref) => (
   <TabsPrimitive.Content
     ref={ref}
-    className={`mt-4 ring-offset-background focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8] ${className}`}
+    className={`mt-4 ring-offset-background focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#005090] dark:focus-visible:outline-[#0986C8] ${className}`}
     {...props}
   />
 ));
