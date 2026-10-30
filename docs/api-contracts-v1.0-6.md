@@ -1,7 +1,7 @@
 # Spesifikasi Kontrak REST API & Integrasi Klien (Web & Mobile Flutter)
 **Next Karya Digital Solutions**  
-*Cetak Biru Rute REST API Go, Aturan Validasi Struct Tag, Format Respons Standar, dan Pengamanan Endpoint*  
-*Versi: 1.0-6 Kanonik (Go Backend Core & Multiplatform Consumer)*  
+*Cetak Biru Rute REST API Express.js, Skema Validasi Zod TypeScript, Format Respons Standar, dan Pengamanan Endpoint*  
+*Versi: 1.0-6 Kanonik (Express.js TypeScript Backend & Multiplatform Consumer)*  
 *Tanggal: 31 Oktober 2026*
 
 > [!IMPORTANT]
@@ -12,7 +12,7 @@
 
 ## 1. Tujuh Keputusan Beku Arsitektur API (*Frozen Decisions*)
 
-Tujuh prinsip di bawah ini merupakan ketetapan arsitektur yang dikunci untuk rute `/api/v1`. Seluruh tim pengembang backend Golang maupun frontend Web Next.js dan mobile Flutter wajib mengikutinya tanpa deviasi:
+Tujuh prinsip di bawah ini merupakan ketetapan arsitektur yang dikunci untuk rute `/api/v1`. Seluruh tim pengembang backend Express.js (TypeScript) maupun frontend Web Next.js dan mobile Flutter wajib mengikutinya tanpa deviasi:
 
 ### 1.1 Base URL & Kebijakan Versi Rute
 * Seluruh endpoint pada dokumen ini berada di bawah rute dasar: `/api/v1`.
@@ -78,7 +78,7 @@ Seluruh endpoint di sistem mengembalikan amplop data yang seragam. Dilarang meng
 ### 1.6 Standardisasi Kode Status HTTP & Format Error
 * `200 OK`: Permintaan berhasil diproses.
 * `201 Created`: Entitas baru berhasil dibuat (misal artikel baru, tugas timeline).
-* `400 Bad Request`: Validasi masukan struct tag Go gagal, disertai rincian array `details: [{ field, message }]`.
+* `400 Bad Request`: Validasi skema Zod gagal, disertai rincian array `details: [{ field, message }]`.
 * `401 Unauthorized`: Kredensial tidak ada, token JWT kadaluarsa, atau tanda tangan token tidak sah.
 * `403 Forbidden`: Token valid, namun versi token telah dicabut (*stale tokenVersion*) atau tidak memiliki izin aksi.
 * `404 Not Found`: Parameter `site_id` atau ID catatan data tidak ditemukan di database.
@@ -228,18 +228,18 @@ Ini adalah **satu-satunya pintu intake publik untuk formulir konsultasi website*
   2. **Perangkap Bot (*Honeypot*):** Field tersembunyi `website_url`. Jika terisi string apa pun, server membalas dengan status palsu `200 OK` tanpa menyimpan data ke PostgreSQL.
   3. **Validasi Panjang Teks:** Pesan dibatasi maksimal 2.000 karakter.
   4. **Validasi Format WhatsApp:** Wajib format angka valid Indonesia (diawali `08` atau `+62` dengan panjang 10 hingga 15 digit).
-* **Aturan Validasi Request Body (Go Struct Tag Validator):**
-```go
-type CreateLeadPublicRequest struct {
-    SiteID           string  `json:"site_id" validate:"required"`
-    ClientName       string  `json:"clientName" validate:"required,min=2,max=255"`
-    CompanyName      *string `json:"companyName,omitempty" validate:"omitempty,max=255"`
-    WhatsappNumber   string  `json:"whatsappNumber" validate:"required,regex=^(\\+62|62|0)8[1-9][0-9]{6\\,11}$"`
-    Email            *string `json:"email,omitempty" validate:"omitempty,email,max=255"`
-    ServiceRequested string  `json:"serviceRequested" validate:"required,min=1"`
-    Message          string  `json:"message" validate:"required,min=5,max=2000"`
-    WebsiteURL       *string `json:"website_url,omitempty"` // Honeypot trap: wajib kosong untuk manusia
-}
+* **Skema Request Body (Zod TypeScript Schema):**
+```typescript
+const CreateLeadPublicSchema = z.object({
+  site_id: z.string().min(1).default("nextkarya-main"),
+  clientName: z.string().trim().min(2, "Nama minimal 2 karakter").max(255),
+  companyName: z.string().trim().max(255).optional().nullable(),
+  whatsappNumber: z.string().regex(/^(\+62|62|0)8[1-9][0-9]{6,11}$/, "Format nomor WhatsApp tidak valid"),
+  email: z.string().email("Format email tidak valid").optional().nullable(),
+  serviceRequested: z.string().min(1, "Pilih salah satu layanan"),
+  message: z.string().trim().min(5, "Pesan minimal 5 karakter").max(2000, "Pesan maksimal 2.000 karakter"),
+  website_url: z.string().max(0, "Honeypot trap").optional() // Wajib kosong untuk manusia
+});
 ```
 * **Contoh Request Payload:**
 ```json
@@ -281,20 +281,27 @@ Menerima sinyal aktivitas kunjungan dari peramban pengunjung tanpa memblokir ren
      - Nilai `durationSec` **hanya boleh lebih dari 0 pada event `heartbeat`**.
      - Pada event `pageview`, `whatsapp_click`, dan `form_submit`, nilai `durationSec` **wajib bernilai 0**.
      - Skrip klien mengirim event `heartbeat` setiap 15 detik selama tab aktif dan sekali lagi saat tab ditutup (*visibilitychange / pagehide*) dengan `sessionId` yang sama.
-* **Aturan Validasi Request Body (Go Struct Tag Validator):**
-```go
-type AnalyticsEventCollectRequest struct {
-    SiteID      string  `json:"site_id" validate:"required"`
-    SessionID   string  `json:"sessionId" validate:"required,min=10,max=64"`
-    EventName   string  `json:"eventName" validate:"required,oneof=pageview whatsapp_click form_submit heartbeat"`
-    Path        string  `json:"path" validate:"required,max=255"`
-    Referrer    *string `json:"referrer,omitempty" validate:"omitempty,max=500"`
-    Source      string  `json:"source" validate:"required,max=50"`
-    Device      string  `json:"device" validate:"required,oneof=mobile desktop tablet unknown"`
-    Browser     *string `json:"browser,omitempty" validate:"omitempty,max=50"`
-    OS          *string `json:"os,omitempty" validate:"omitempty,max=50"`
-    DurationSec int     `json:"durationSec" validate:"gte=0,lte=86400"` // Hanya boleh > 0 pada event heartbeat
-}
+* **Skema Request Body (Zod TypeScript Schema):**
+```typescript
+const AnalyticsEventSchema = z.object({
+  site_id: z.string().min(1),
+  sessionId: z.string().min(10).max(64),
+  eventName: z.enum(["pageview", "whatsapp_click", "form_submit", "heartbeat"]),
+  path: z.string().min(1).max(255),
+  referrer: z.string().max(500).optional().nullable(),
+  source: z.string().max(50).default("direct"),
+  device: z.enum(["mobile", "desktop", "tablet", "unknown"]).default("unknown"),
+  browser: z.string().max(50).optional().nullable(),
+  os: z.string().max(50).optional().nullable(),
+  durationSec: z.number().int().min(0).max(86400).default(0)
+}).refine(data => {
+  if (data.eventName !== "heartbeat" && data.durationSec > 0) {
+    return false;
+  }
+  return true;
+}, {
+  message: "durationSec hanya boleh bernilai > 0 pada event heartbeat"
+});
 ```
 * **Format Respons Berhasil (200 OK):**
 ```json
@@ -504,21 +511,21 @@ Setiap kali melakukan mutasi pembaruan (`PUT`, `PATCH`, `publish`, `archive`), k
   - Tidak terikat pada rate limit publik (5 req/15 menit).
   - Staf dapat langsung memilih `assignedToId`, memasukkan `dealValue`, status pipeline, dan tanggal `nextFollowUpDate`.
   - Otomatis mencatat entri baru ke tabel `activity_logs`.
-* **Aturan Validasi Request Body (Go Struct Tag Validator):**
-```go
-type CreateLeadInternalRequest struct {
-    SiteID           string  `json:"site_id" validate:"required"`
-    ClientName       string  `json:"clientName" validate:"required,min=2,max=255"`
-    CompanyName      *string `json:"companyName,omitempty" validate:"omitempty,max=255"`
-    WhatsappNumber   string  `json:"whatsappNumber" validate:"required,regex=^(\\+62|62|0)8[1-9][0-9]{6\\,11}$"`
-    Email            *string `json:"email,omitempty" validate:"omitempty,email,max=255"`
-    ServiceRequested string  `json:"serviceRequested" validate:"required,min=1"`
-    Message          string  `json:"message" validate:"required,min=5,max=2000"`
-    DealValue        int64   `json:"dealValue" validate:"gte=0"`
-    Status           string  `json:"status" validate:"required,oneof=BARU DIHUBUNGI PROPOSAL DEAL BATAL"`
-    AssignedToID     *string `json:"assignedToId,omitempty" validate:"omitempty,max=64"`
-    NextFollowUpDate *string `json:"nextFollowUpDate,omitempty" validate:"omitempty,datetime=2006-01-02"` // Format DATE (YYYY-MM-DD)
-}
+* **Skema Request Body (Zod TypeScript Schema):**
+```typescript
+const CreateLeadInternalSchema = z.object({
+  site_id: z.string().min(1).default("nextkarya-main"),
+  clientName: z.string().trim().min(2).max(255),
+  companyName: z.string().trim().max(255).optional().nullable(),
+  whatsappNumber: z.string().regex(/^(\+62|62|0)8[1-9][0-9]{6,11}$/, "Format nomor WhatsApp tidak valid"),
+  email: z.string().email().optional().nullable(),
+  serviceRequested: z.string().min(1),
+  message: z.string().trim().min(5).max(2000),
+  dealValue: z.number().int().min(0).default(0),
+  status: z.enum(["BARU", "DIHUBUNGI", "PROPOSAL", "DEAL", "BATAL"]).default("BARU"),
+  assignedToId: z.string().optional().nullable(),
+  nextFollowUpDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Format YYYY-MM-DD").optional().nullable() // Format DATE
+});
 ```
 * **Format Respons Berhasil (201 Created):**
 ```json
@@ -815,7 +822,7 @@ Jika selama masa pengerjaan Fase 1 terdapat permintaan untuk fitur-fitur di bawa
 ## 8. Riwayat Pembaruan (*Changelog*)
 
 ### Versi 1.0-6 Kanonik (31 Oktober 2026)
-* Menyelaraskan seluruh spesifikasi rute, validasi data, dan model request body ke bahasa backend Golang menggunakan struct tags validator (`validate:"required,..."`).
+* Menyelaraskan seluruh spesifikasi rute, validasi middleware Zod, dan model request body ke arsitektur backend Express.js (Node.js / TypeScript).
 * Menegaskan rujukan dokumen kanonik ke [`schema-database-v1.1-3.md`](./schema-database-v1.1-3.md), [`cms-v2.2-2.md`](./cms-v2.2-2.md), [`architecture-desktop-vs-mobile-v1.1-2.md`](./architecture-desktop-vs-mobile-v1.1-2.md), dan [`system-architecture-v1.0.md`](./system-architecture-v1.0.md).
 * Mengonfirmasi sinkronisasi penuh enum `REVOKE_SESSION` dan muatan webhook `"action": "update"`.
 

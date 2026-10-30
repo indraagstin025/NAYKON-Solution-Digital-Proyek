@@ -1,7 +1,7 @@
 # Cetak Biru Arsitektur Sistem Terintegrasi (Master System Architecture)
 **Next Karya Digital Solutions**  
-*Spesifikasi Arsitektur Backend Golang, Basis Data PostgreSQL, Cache Redis, Web Next.js, dan Mobile Flutter*  
-*Dokumen Versi: 1.0 (Arsitektur Final Multiplatform & High-Performance Core)*  
+*Spesifikasi Arsitektur Backend Express.js (TypeScript), Basis Data PostgreSQL, ORM Prisma & Raw SQL, Cache Redis, Web Next.js, dan Mobile Flutter*  
+*Dokumen Versi: 1.0 (Arsitektur Final Multiplatform & Headless Core)*  
 *Tanggal Berlaku: 31 Oktober 2026*
 
 > [!IMPORTANT]
@@ -16,9 +16,9 @@ Seluruh pengembangan rekayasa perangkat lunak, pemodelan basis data, kontrak ant
 
 | No | Nama Berkas Kanonik | Status Versi | Cakupan Domain Arsitektur | Target Pengguna & Perangkat |
 | :---: | :--- | :---: | :--- | :--- |
-| **1** | [`system-architecture-v1.0.md`](./system-architecture-v1.0.md) | **v1.0 Final** | Cetak Biru Arsitektur 5 Pilar (Golang, Postgres, Redis, Next.js, Flutter), Topologi, & SLA. | Seluruh Tim Rekayasa & Arsitek |
-| **2** | [`schema-database-v1.1-3.md`](./schema-database-v1.1-3.md) | **v1.1-3 Kanonik** | Struktur 20 Tabel PostgreSQL, Relasi, Indeks Konkurensi, Cron Maintenance, & Representasi Go. | Pengembang Backend & Database |
-| **3** | [`api-contracts-v1.0-6.md`](./api-contracts-v1.0-6.md) | **v1.0-6 Kanonik** | Kontrak REST API `/api/v1`, Format Respons Tunggal, Aturan Validasi Struct Go, & Integrasi. | Seluruh Tim Pengembang (Backend, Web & Mobile) |
+| **1** | [`system-architecture-v1.0.md`](./system-architecture-v1.0.md) | **v1.0 Final** | Cetak Biru Arsitektur 5 Pilar (Express.js, Prisma, Postgres, Redis, Next.js, Flutter), Topologi, & SLA. | Seluruh Tim Rekayasa & Arsitek |
+| **2** | [`schema-database-v1.1-3.md`](./schema-database-v1.1-3.md) | **v1.1-3 Kanonik** | Struktur 20 Tabel PostgreSQL, Model Prisma, Raw SQL CTE Rollup, Indeks Konkurensi, & Maintenance. | Pengembang Backend & Database |
+| **3** | [`api-contracts-v1.0-6.md`](./api-contracts-v1.0-6.md) | **v1.0-6 Kanonik** | Kontrak REST API `/api/v1`, Format Respons Tunggal, Skema Validasi Zod TypeScript, & Integrasi. | Seluruh Tim Pengembang (Backend, Web & Mobile) |
 | **4** | [`cms-v2.2-2.md`](./cms-v2.2-2.md) | **v2.2-2 Kanonik** | Manajemen Konten Headless, Snapshot FIFO 5 Versi, Webhook Cache (`action: "update"`), & Takedown. | Tim Internal (Desktop & Mobile) |
 | **5** | [`analytics-v2.2.md`](./analytics-v2.2.md) | **v2.2 Kanonik** | Mesin Pengukur Trafik Ringan (< 2 KB), Proteksi Bot, Konversi WA, Ingesti Redis, & Rollup Jam. | Tim Internal (Desktop & Mobile) |
 | **6** | [`crm-v2.2.md`](./crm-v2.2.md) | **v2.2 Kanonik** | Kotak Masuk Prospek (*Leads*), Agenda Follow-Up Harian, Pipeline 5 Tahap, & Timeline Proyek. | Tim Internal (Desktop & Mobile) |
@@ -46,13 +46,13 @@ flowchart TD
         NextWebhook["Webhook Receiver<br>POST /api/revalidate"]
     end
 
-    subgraph BackendCore["Lapisan Inti Backend (Golang Engine)"]
-        GoGateway["API Router & Middleware<br>(CORS, Auth JWT, Rate Limit)"]
-        GoCMS["Modul Layanan CMS & Media"]
-        GoCRM["Modul Layanan CRM & Timeline"]
-        GoAnalytics["Modul Ingesti & Rollup Analitik"]
-        GoEmergency["Modul Tanggap Darurat & Audit"]
-        GoWorkers["Background Workers & Cron Jobs<br>(Rollup 1 Jam, Purge 02:00 WIB, FIFO Prune)"]
+    subgraph BackendCore["Lapisan Inti Backend (Express.js TypeScript)"]
+        ExpressGateway["API Router & Middleware<br>(CORS, Auth JWT, Rate Limit, Zod Validator)"]
+        ExpressCMS["Modul Layanan CMS & Media<br>(Prisma Client)"]
+        ExpressCRM["Modul Layanan CRM & Timeline<br>(Prisma Client)"]
+        ExpressAnalytics["Modul Ingesti & Rollup Analitik<br>(Redis Buffer & Raw SQL CTE)"]
+        ExpressEmergency["Modul Tanggap Darurat & Audit<br>(Prisma Client)"]
+        ExpressWorkers["Background Workers & Node-Cron Jobs<br>(Rollup 1 Jam Raw SQL, Purge 02:00 WIB, FIFO Prune)"]
     end
 
     subgraph DataTier["Lapisan Data & Akselerasi (Stateful Storage)"]
@@ -61,21 +61,21 @@ flowchart TD
     end
 
     BrowserPublik -->|"1. Akses Halaman Web (HTTPS)"| NextPublic
-    BrowserPublik -->|"2. Kirim Beacon Analitik & Form Kontak"| GoGateway
+    BrowserPublik -->|"2. Kirim Beacon Analitik & Form Kontak"| ExpressGateway
     WhatsAppUser <-->|"Komunikasi Penjualan Langsung"| MobileStaf
 
     DesktopStaf -->|"Kelola Konten & Pipeline Penuh"| NextAdmin
-    NextAdmin -->|"Kueri & Mutasi Data (REST JSON)"| GoGateway
-    MobileStaf -->|"Aksi Cepat & Emergency (Bearer JWT)"| GoGateway
+    NextAdmin -->|"Kueri & Mutasi Data (REST JSON)"| ExpressGateway
+    MobileStaf -->|"Aksi Cepat & Emergency (Bearer JWT)"| ExpressGateway
     MobileStaf -->|"1-Klik Buka Obrolan WhatsApp"| WhatsAppUser
 
-    GoGateway <-->|"Verifikasi Rate Limit & Cek Token Version"| RedisStore
-    GoGateway --> GoCMS & GoCRM & GoAnalytics & GoEmergency
-    GoCMS & GoCRM & GoAnalytics & GoEmergency <-->|"Cache Read / Invalidation"| RedisStore
-    GoCMS & GoCRM & GoAnalytics & GoEmergency <-->|"Query & Mutasi Data (SQL)"| PostgresDB
-    GoWorkers <-->|"Agregasi Data & Pembersihan Berkala"| PostgresDB
+    ExpressGateway <-->|"Verifikasi Rate Limit & Cek Token Version"| RedisStore
+    ExpressGateway --> ExpressCMS & ExpressCRM & ExpressAnalytics & ExpressEmergency
+    ExpressCMS & ExpressCRM & ExpressAnalytics & ExpressEmergency <-->|"Cache Read / Invalidation"| RedisStore
+    ExpressCMS & ExpressCRM & ExpressEmergency -->|"Prisma ORM Mutasi & Kueri"| PostgresDB
+    ExpressAnalytics & ExpressWorkers -->|"Raw SQL CTE & Maintenance Query"| PostgresDB
 
-    GoCMS -->|"Picu Pembersihan Cache (action: update)"| NextWebhook
+    ExpressCMS -->|"Picu Pembersihan Cache (action: update)"| NextWebhook
     NextWebhook -->|"Penyegaran Cache Instan (< 3s)"| NextPublic
 ```
 
@@ -83,20 +83,25 @@ flowchart TD
 
 ## 3. Rincian Peran & Tanggung Jawab per Lapisan
 
-### 3.1 Backend Engine (Golang)
-Backend Golang berperan sebagai gerbang sentral yang melayani seluruh endpoint RESTful JSON `/api/v1`:
+### 3.1 Backend Engine (Express.js & TypeScript)
+Backend dibangun menggunakan runtime Node.js dengan framework **Express.js** berbasis **TypeScript** yang melayani seluruh rute RESTful JSON `/api/v1`:
 
-* **Kompilasi Biner Native & Kinerja Tinggi:** Menghasilkan biner tunggal mandiri tanpa dependensi runtime eksternal, dengan jejak memori (*memory footprint*) rendah dan waktu mulai (*startup time*) instan.
-* **Model Konkurensi Efisien (*Goroutines & Channels*):** Menangani ribuan request simultan secara paralel, terutama saat menerima semburan beacon analitik (`navigator.sendBeacon`) dan request formulir publik tanpa memblokir thread sistem operasi.
+* **Arsitektur Modular & Type-Safety:** Dibangun menggunakan pola clean controller/service/repository berbasis TypeScript murni, menjamin keamanan tipe data (*type-safety*) dari lapisan HTTP request hingga query database.
+* **ORM Prisma & Pendekatan Hibrida Raw SQL:**
+  - **Prisma Client:** Digunakan sebagai ORM utama untuk seluruh operasi CRUD standar, penegakan relasi, dan mutasi data entitas CMS, CRM, Media, dan Akun Pengguna.
+  - **Raw SQL (`prisma.$queryRaw` / `prisma.$executeRaw`) & Query Builder:** Digunakan secara terarah pada operasi tingkat lanjut yang membutuhkan efisiensi tinggi, seperti:
+    1. Agregasi berkala inkremental harian analitik dengan Common Table Expressions (CTE) `session_summary` yang mengelompokkan sesi, durasi, dan rasio pentalan (*bounce*).
+    2. Pembersihan otomatis data analitik mentah yang berusia lebih dari 90 hari (`DELETE FROM analytics_events WHERE occurredAt < NOW() - INTERVAL '90 days'`).
+    3. Pemangkasan riwayat snapshot konten rolling FIFO 5 versi menggunakan window function `ROW_NUMBER() OVER (...)`.
 * **Lapisan Autentikasi & Otorisasi:**
-  - Menerbitkan dan memvalidasi JSON Web Token (JWT) dengan algoritma HMAC-SHA256.
+  - Menerbitkan dan memvalidasi JSON Web Token (JWT) menggunakan pustaka `jsonwebtoken` dengan algoritma HMAC-SHA256.
   - Memeriksa keabsahan `tokenVersion` secara mikrodetik ke Redis pada setiap request terproteksi.
-  - Menolak akses dengan HTTP `403 Forbidden` jika `tokenVersion` pada klaim JWT lebih rendah dari nilai aktif di Redis/DB (fitur pemutusan darurat sesi HP hilang `REVOKE_SESSION`).
-* **Validasi Masukan Baku & Sanitasi:**
-  - Seluruh payload request divalidasi ketat menggunakan struct tag validator Go (padanan validasi skema Zod pada kontrak kanonik [`api-contracts-v1.0-6.md`](./api-contracts-v1.0-6.md)).
-  - Sanitasi teks terhadap potensi XSS, pemangkasan whitespace, dan penolakan payload liar.
+  - Menolak akses dengan status HTTP `403 Forbidden` jika `tokenVersion` pada klaim JWT lebih rendah dari nilai aktif di Redis/DB (fitur pemutusan darurat sesi HP hilang `REVOKE_SESSION`).
+* **Validasi Masukan Baku dengan Zod:**
+  - Seluruh payload request divalidasi ketat menggunakan skema Zod di lapisan middleware Express.js (selaras penuh dengan kontrak kanonik [`api-contracts-v1.0-6.md`](./api-contracts-v1.0-6.md)).
+  - Sanitasi string terhadap potensi XSS, pemangkasan spasi liar, dan penolakan payload tak dikenal.
 * **Proteksi Bot & Anti-Spam Publik:**
-  - Memeriksa field honeypot tersembunyi `website_url` pada endpoint kontak publik. Request otomatis diabaikan (*silent reject*) jika field terisi.
+  - Memeriksa field honeypot tersembunyi `website_url` pada endpoint kontak publik. Request otomatis diabaikan secara senyap (*silent reject*) jika field terisi string.
   - Menghitung batasan laju request berbasis IP menggunakan Redis sliding-window:
     - Form kontak publik: Maksimal 5 kiriman per 15 menit per IP.
     - Beacon analitik: Maksimal 60 event per menit per IP.
@@ -104,14 +109,15 @@ Backend Golang berperan sebagai gerbang sentral yang melayani seluruh endpoint R
 * **Pencegahan Konflik Konkurensi (*Optimistic Locking*):**
   - Pada setiap operasi mutasi entitas CMS dan CRM, backend memverifikasi nilai header atau body `updatedAt`.
   - Jika stempel waktu di database telah berubah akibat perubahan oleh rekan tim lain, backend mengembalikan status HTTP `409 Conflict`.
-* **Pengelolaan Transaksi ACID (PostgreSQL):**
-  - Seluruh mutasi terkait multi-tabel (misal: penambahan catatan prospek sekaligus pembaruan status pipeline dan pembuatan log aktivitas) dibungkus dalam blok `BEGIN ... COMMIT / ROLLBACK`.
+* **Pengelolaan Transaksi ACID:**
+  - Seluruh mutasi terkait multi-tabel dibungkus dalam transaksi Prisma `$transaction` atau transaksi SQL murni.
 * **Pekerja Latar Belakang (*Background Cron Workers*):**
-  - **Pukul 02:00 WIB Setiap Hari:** Menjalankan pembersihan rekaman `analytics_events` mentah yang berusia lebih dari 90 hari.
-  - **Inkremental Tiap Jam:** Menjalankan rollup analitik dari event mentah ke `analytics_daily` menggunakan CTE `session_summary` yang presisi.
-  - **Rolling FIFO 5 Versi:** Memangkas riwayat snapshot konten pada tabel `content_snapshots` agar tepat tersisa maksimal 5 versi terakhir per entitas.
+  - Menggunakan modul penjadwal tugas (*node-cron* / worker thread):
+    - **Pukul 02:00 WIB Setiap Hari:** Pembersihan rekaman `analytics_events` mentah yang berusia lebih dari 90 hari via Raw SQL.
+    - **Inkremental Tiap Jam:** Rollup analitik dari event mentah ke `analytics_daily` menggunakan Raw SQL CTE `session_summary`.
+    - **Rolling FIFO 5 Versi:** Pemangkasan snapshot pada tabel `content_snapshots`.
 * **Pengiriman Webhook Revalidasi Cache:**
-  - Setiap kali ada data konten yang diterbitkan, diperbarui, atau diarsipkan, backend Golang mengirimkan HTTP POST ke endpoint website Next.js `https://nextkarya.id/api/revalidate` dengan header `x-webhook-secret` dan muatan baku:
+  - Setiap kali ada data konten yang diterbitkan, diperbarui, atau diarsipkan, backend Express.js mengirimkan HTTP POST via `fetch` / `axios` ke endpoint website Next.js `https://nextkarya.id/api/revalidate` dengan header `x-webhook-secret` dan muatan baku:
     ```json
     {
       "tag": "articles",
@@ -129,7 +135,7 @@ Di Fase 1, Redis difungsikan secara terarah khusus untuk empat kebutuhan kritis:
 1. **Counter Live Rate Limiting per IP:** Pencatatan sliding-window request publik secara in-memory untuk latensi instan O(1). Tabel PostgreSQL `rate_limits` difungsikan sebagai media persistensi rekam jejak dan cadangan (*fallback*) jika Redis offline, bukan keduanya berjalan paralel secara membingungkan.
 2. **Cache `tokenVersion` Pengguna:** Menyimpan nilai integer `tokenVersion` aktif untuk verifikasi keabsahan JWT O(1). Fitur daftar perangkat individual yang dapat dicabut satu per satu (*device session manager*) dialokasikan untuk Fase 2, sehingga kunci blacklist token individual `auth:revoked_tokens:{jti}` ditiadakan dari Fase 1.
 3. **Cache Kueri Baca Publik CMS:** Menyimpan serialisasi JSON hasil kueri publik artikel, portofolio, layanan, dan FAQ. Kunci `cache:cms:{site_id}:pricing` merupakan proyeksi turunan dari data tabel `services` (katalog paket harga layanan), karena data harga tersimpan di dalam tabel `services` tanpa tabel harga terpisah.
-4. **Buffer Ingesti Event Analitik:** Event pelacak ditampung sementara dalam antrean Redis (*List / Stream*) dan di-flush ke tabel PostgreSQL `analytics_events` secara berkala setiap interval **30 detik** atau setelah **100 event** terkumpul. Jika Redis mengalami gangguan atau mati sebelum proses flush, backend Golang secara *graceful* langsung menuliskan (*direct write*) event analitik ke PostgreSQL tanpa membuang request pengunjung.
+4. **Buffer Ingesti Event Analitik:** Event pelacak ditampung sementara dalam antrean Redis (*List / Stream*) dan di-flush ke tabel PostgreSQL `analytics_events` secara berkala setiap interval **30 detik** atau setelah **100 event** terkumpul. Jika Redis mengalami gangguan atau mati sebelum proses flush, backend Express.js secara *graceful* langsung menuliskan (*direct write*) event analitik ke PostgreSQL tanpa membuang request pengunjung.
 
 #### Skema Struktur Kunci Redis Fase 1 (*Keyspace Conventions*):
 
@@ -144,13 +150,13 @@ Di Fase 1, Redis difungsikan secara terarah khusus untuk empat kebutuhan kritis:
 | `analytics:buffer:{site_id}` | `List / Stream` | Dikosongkan per interval 30s / 100 event | Penampung event analitik sebelum batch-insert ke PostgreSQL. |
 
 #### Kebijakan Pembersihan Cache (*Cache Invalidation Strategy*):
-* **Pembersihan Berbasis Mutasi (*Event-Driven Invalidation*):** Begitu backend Golang mengeksekusi operasi `INSERT`, `UPDATE`, atau `DELETE` pada tabel CMS, kunci cache terkait di Redis langsung dihapus (`DEL`), bersamaan dengan penembakan webhook ke Next.js.
+* **Pembersihan Berbasis Mutasi (*Event-Driven Invalidation*):** Begitu backend Express.js mengeksekusi operasi `INSERT`, `UPDATE`, atau `DELETE` pada tabel CMS, kunci cache terkait di Redis langsung dihapus (`DEL`), bersamaan dengan penembakan webhook ke Next.js.
 * **Pencabutan Sesi Seketika (`REVOKE_SESSION`):**
-  Saat aksi darurat pencabutan sesi dieksekusi, backend menaikkan nilai `auth:token_ver:{userId}` di Redis dengan perintah `INCR` secara atomik, lalu memperbarui kolom `tokenVersion` di PostgreSQL. Seluruh perangkat staf dengan token lama seketika tertolak dengan status HTTP `403 Forbidden` pada request milidetik berikutnya.
+  Saat aksi darurat pencabutan sesi dieksekusi, backend menaikkan nilai `auth:token_ver:{userId}` di Redis dengan perintah `INCR` secara atomik, lalu memperbarui kolom `tokenVersion` di PostgreSQL via Prisma. Seluruh perangkat staf dengan token lama seketika tertolak dengan status HTTP `403 Forbidden` pada request milidetik berikutnya.
 
 ---
 
-### 3.3 Basis Data Relasional (PostgreSQL)
+### 3.3 Basis Data Relasional (PostgreSQL) & Lapisan Akses Data
 PostgreSQL bertindak sebagai repositori data permanen sistem dengan konfigurasi terstandar:
 
 * **Partisi Data Multi-Tenant (`site_id`):**
@@ -173,7 +179,7 @@ PostgreSQL bertindak sebagai repositori data permanen sistem dengan konfigurasi 
   3. `activity_logs`: Menyimpan jejak audit perubahan otomatis status pipeline, pengalihan penanggung jawab, dan pergeseran timeline.
   4. `project_schedules`: Menyimpan timeline pengerjaan proyek (Gantt Chart), balok durasi pengerjaan, dan masa garansi `warrantyExpiryDate` (DATE).
 * **Integritas Relasi (*Referential Integrity*):**
-  Seluruh relasi foreign key dilindungi dengan kebijakan `ON DELETE RESTRICT` untuk mencegah terhapusnya entitas induk secara tidak sengaja (misal: kategori artikel tidak dapat dihapus jika masih memuat artikel). Penghapusan konten menerapkan pola *Soft Delete* ke status `ARCHIVED`.
+  Seluruh relasi foreign key dilindungi dengan kebijakan `ON DELETE RESTRICT` untuk mencegah terhapusnya entitas induk secara tidak sengaja. Penghapusan konten menerapkan pola *Soft Delete* ke status `ARCHIVED`.
 
 ---
 
@@ -184,7 +190,7 @@ Next.js menjalankan dua peran antarmuka komputer yang memanfaatkan keunggulan Ap
 * **React Server Components (RSC):** Merender halaman secara server-side untuk memastikan skor performa Google Core Web Vitals optimal dan SEO metadata terindeks sempurna oleh mesin pencari.
 * **Incremental Static Regeneration (ISR):**
   - Halaman portofolio dan blog di-cache statis di edge/server.
-  - Rute Route Handler `app/api/revalidate/route.ts` menerima sinyal webhook dari backend Golang:
+  - Rute Route Handler `app/api/revalidate/route.ts` menerima sinyal webhook dari backend Express.js:
     ```typescript
     export async function POST(request: NextRequest) {
       const secret = request.headers.get("x-webhook-secret");
@@ -215,7 +221,7 @@ Aplikasi mobile dibangun dengan framework Flutter (Dart) sebagai alat aksi cepat
 * **Satu Basis Kode (*Single Codebase*):** Dikompilasi secara native ke berkas APK/AAB Android dan IPA iOS dengan performa rendering halus 60 frame per detik (fps).
 * **Arsitektur State Management Bersih (*Clean Architecture + Riverpod / BLoC*):**
   Memisahkan antara lapisan presentasi (*Widgets*), logika bisnis (*Controllers / Notifiers*), dan penyedia data (*Repositories / API Clients*).
-* **Koneksi REST API Golang:**
+* **Koneksi REST API Express.js:**
   Mengonsumsi endpoint `/api/v1` dengan HTTP client teroptimasi (`dio` package) yang menyertakan interceptor penyemat token `Authorization: Bearer <token>` dan penanganan error terpusat.
 * **Keamanan Penyimpanan Lokal:**
   Menggunakan `flutter_secure_storage` yang memanfaatkan *Android Keystore* dan *Apple Keychain* untuk mengenkripsi token JWT pada ponsel staf.
@@ -228,13 +234,13 @@ Aplikasi mobile dibangun dengan framework Flutter (Dart) sebagai alat aksi cepat
 
 ## 4. Matriks Pembagian Tugas Antar-Platform
 
-| Domain Fitur | Backend Golang | Database Postgres & Redis | Frontend Web Next.js | Mobile Flutter App |
+| Domain Fitur | Backend Express.js (TypeScript) | Database Postgres & Redis | Frontend Web Next.js | Mobile Flutter App |
 | :--- | :--- | :--- | :--- | :--- |
 | **Autentikasi & Sesi** | • Penerbitan JWT<br>• Verifikasi tokenVersion | • Postgres: Simpan passwordHash & tokenVersion<br>• Redis: Cek versi token O(1) | • Form login desktop<br>• Penyimpanan cookie sesi aman | • Form login mobile<br>• Secure Storage ponsel |
 | **Tanggap Darurat (Revoke)** | • Logika endpoint revoke<br>• Naikkan tokenVersion | • Redis: INCR tokenVersion O(1)<br>• Postgres: Catat audit entitas USER | • Tampilan audit log darurat di dashboard desktop | • **Tombol aksi darurat putus sesi HP hilang (Fase 1 MVP)** |
-| **Katalog Konten (CMS)** | • Validasi struct tag Go<br>• Optimistic Locking check<br>• Picu Webhook Revalidate | • Postgres: 7 tabel konten, FIFO 5 snapshot<br>• Redis: Cache daftar kueri publik | • Desktop: Studio editor, pratinjau konten<br>• Publik: ISR render & SEO | • Pemantauan status terbit<br>• 1-Tap Emergency Unpublish |
-| **Prospek & Timeline (CRM)** | • Validasi struct prospek<br>• Anti-spam bot honeypot<br>• Hitung beban tugas staf | • Postgres: 4 tabel CRM (`leads`, `interaction_logs`, `activity_logs`, `project_schedules`) | • Desktop: Visual pipeline penjualan & Gantt Chart lebar | • **Agenda Follow-Up Hari Ini**<br>• **1-Klik Chat WhatsApp**<br>• Kartu tugas harian vertikal |
-| **Trafik & Metrik (Analitik)** | • Intake beacon pelacak<br>• Rollup inkremental harian<br>• Cron purge data > 90 hari | • Redis: Buffer ingesti 30s/100 event<br>• Postgres: Raw events (TTL 90h) & Daily Rollup | • Desktop: Grafik tren multi-minggu & analisis saluran | • Sekilas 4 angka metrik hari ini (*Quick Pulse Check*) |
+| **Katalog Konten (CMS)** | • Validasi Zod schema<br>• Optimistic Locking check<br>• Picu Webhook Revalidate | • Postgres: 7 tabel konten, FIFO 5 snapshot<br>• Redis: Cache daftar kueri publik | • Desktop: Studio editor, pratinjau konten<br>• Publik: ISR render & SEO | • Pemantauan status terbit<br>• 1-Tap Emergency Unpublish |
+| **Prospek & Timeline (CRM)** | • Validasi Zod prospek<br>• Anti-spam bot honeypot<br>• Hitung beban tugas staf | • Postgres: 4 tabel CRM (`leads`, `interaction_logs`, `activity_logs`, `project_schedules`) | • Desktop: Visual pipeline penjualan & Gantt Chart lebar | • **Agenda Follow-Up Hari Ini**<br>• **1-Klik Chat WhatsApp**<br>• Kartu tugas harian vertikal |
+| **Trafik & Metrik (Analitik)** | • Intake beacon pelacak<br>• Raw SQL Rollup harian<br>• Raw SQL purge data > 90 hari | • Redis: Buffer ingesti 30s/100 event<br>• Postgres: Raw events (TTL 90h) & Daily Rollup | • Desktop: Grafik tren multi-minggu & analisis saluran | • Sekilas 4 angka metrik hari ini (*Quick Pulse Check*) |
 | **Proteksi Spam & Rate Limit** | • Evaluasi honeypot website_url<br>• Penolakan bot otomatis | • Redis: Counter live sliding-window<br>• Postgres: Tabel rate_limits (cadangan/audit) | • Tampilan form publik aman | • Notifikasi internal & sakelar kunci form darurat |
 
 ---
@@ -242,7 +248,7 @@ Aplikasi mobile dibangun dengan framework Flutter (Dart) sebagai alat aksi cepat
 ## 5. Protokol Komunikasi & Format Data
 
 ### 5.1 Format Respons Tunggal (*Single Envelope Pattern*)
-Seluruh komunikasi API antara backend Golang, frontend Next.js, dan aplikasi mobile Flutter menggunakan format amplop JSON seragam:
+Seluruh komunikasi API antara backend Express.js, frontend Next.js, dan aplikasi mobile Flutter menggunakan format amplop JSON seragam:
 
 ```json
 {
@@ -286,7 +292,7 @@ Format respons gagal (*Error Response*):
 * `404 Not Found`: Entitas ID atau rute tidak ditemukan.
 * `409 Conflict`: Konflik stempel waktu konkurensi (*Optimistic Locking* `updatedAt`).
 * `429 Too Many Requests`: Batasan frekuensi request (*Rate Limit*) terlampaui. Disertai header `Retry-After`.
-* `500 Internal Server Error`: Kesalahan internal pada server Golang.
+* `500 Internal Server Error`: Kesalahan internal pada server Express.js.
 
 ---
 
@@ -296,12 +302,12 @@ Untuk menjamin kepastian performa teknis, batas SLA dipisahkan secara tegas anta
 
 1. **Latensi Operasi Data Internal (Database & Cache):**
    - Kueri baca ter-cache di Redis: **< 15 milidetik**.
-   - Kueri baca basis data PostgreSQL: **< 60 milidetik**.
+   - Kueri baca basis data PostgreSQL via Prisma: **< 60 milidetik**.
    - Transaksi penulisan basis data PostgreSQL umum: **< 120 milidetik**.
 2. **Latensi Respons Penuh Endpoint HTTP (End-to-End API SLA):**
    - Endpoint kueri baca ter-cache (`GET /api/v1/posts`, `GET /api/v1/services`): **< 30 milidetik**.
    - Endpoint kueri baca database terproteksi internal: **< 80 milidetik**.
-   - Endpoint penerimaan formulir prospek publik (`POST /api/v1/leads`): **< 100 milidetik** penuh (termasuk verifikasi honeypot, rate limit Redis, dan insert PostgreSQL). Target endpoint < 100ms ini mengikat dan tidak boleh dikalahkan oleh angka latensi database write umum.
+   - Endpoint penerimaan formulir prospek publik (`POST /api/v1/leads`): **< 100 milidetik** penuh (termasuk verifikasi honeypot, rate limit Redis, dan insert PostgreSQL via Prisma). Target endpoint < 100ms ini mengikat dan tidak boleh dikalahkan oleh angka latensi database write umum.
    - Endpoint penerimaan beacon analitik (`POST /api/v1/analytics/collect`): **< 50 milidetik** (diterima ke antrean buffer Redis O(1)).
 3. **Pembersihan Cache Website Publik Next.js:**
    - Webhook revalidasi cache wajib tuntas dalam waktu **< 3 detik** sejak tombol terbit/simpan ditekan di CMS.
@@ -327,7 +333,7 @@ Arsitektur Fase 1 (MVP) sengaja mengunci akses hanya untuk internal Next Karya d
 4. **Push Notification Native:**
    Integrasi Firebase Cloud Messaging (FCM) dan Apple Push Notification service (APNs) pada aplikasi Flutter untuk pengiriman peringatan prospek baru dan tenggat follow-up secara real-time.
 5. **Penjadwalan Terbit Otomatis (*Scheduled Publishing*):**
-   Worker terjadwal di Golang untuk mempublikasikan draf konten secara otomatis pada tanggal dan jam mendatang.
+   Worker terjadwal di Express.js untuk mempublikasikan draf konten secara otomatis pada tanggal dan jam mendatang.
 6. **Otomatisasi 301 Permanent Redirects:**
    Pencatatan otomatis ke tabel `redirects` saat staf mengubah slug judul artikel yang telah berstatus terbit.
 7. **Pelacakan Parameter Kampanye UTM Mendalam:**
@@ -347,7 +353,7 @@ Arsitektur Fase 1 (MVP) sengaja mengunci akses hanya untuk internal Next Karya d
 
 ### Versi 1.0 (31 Oktober 2026)
 * Penyusunan cetak biru resmi arsitektur sistem terintegrasi (*Master System Architecture*).
-* Menetapkan dan mengunci 5 pilar teknologi resmi: Backend Golang, Basis Data PostgreSQL, Lapisan Akselerasi Redis, Frontend Web Next.js, dan Mobile Flutter.
+* Menetapkan dan mengunci 5 pilar teknologi resmi: Backend Express.js (TypeScript), Basis Data PostgreSQL dengan Prisma ORM + Raw SQL / Query Builder, Lapisan Akselerasi Redis, Frontend Web Next.js, dan Mobile Flutter.
 * Menetapkan daftar 7 dokumen kanonik resmi yang menjadi acuan tunggal pengembangan.
 * Menyusun diagram topologi sistem terintegrasi lengkap menggunakan format Mermaid.
 * Mengunci batasan peran Redis Fase 1 (counter live rate limit, tokenVersion cache, query cache publik, dan buffer analitik 30s/100 event) serta mekanisme fallback graceful saat Redis offline.

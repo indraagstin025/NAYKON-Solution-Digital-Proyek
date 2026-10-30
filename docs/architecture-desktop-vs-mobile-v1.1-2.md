@@ -20,14 +20,14 @@ Untuk mencegah antarmuka mobile menjadi lambat, rumit, dan tidak nyaman digunaka
    - Dikhususkan untuk tugas mendalam: penulisan artikel panjang, tata letak portofolio resolusi tinggi, penataan jadwal Gantt chart multi-minggu di layar lebar, dan analisis data bisnis komprehensif.
 2. **Aplikasi Mobile (Flutter untuk Android & iOS):**
    **"Pendamping Reaksi Cepat & Alat Darurat (*Action Companion & Emergency Toolkit*)"**
-   - Dibangun menggunakan framework **Flutter** (satu basis kode untuk Android & iOS) yang berkomunikasi dengan backend Golang melalui rute RESTful JSON.
+   - Dibangun menggunakan framework **Flutter** (satu basis kode untuk Android & iOS) yang berkomunikasi dengan backend Express.js (TypeScript) melalui rute RESTful JSON.
    - Dioperasikan saat anggota tim sedang bergerak (*on-the-go*), di luar kantor, atau di akhir pekan.
    - Dikhususkan untuk respon cepat: merespons prospek klien seketika (integrasi `url_launcher` WhatsApp), membuka agenda follow-up harian, memantau angka ringkas hari ini, dan mengeksekusi penyelamatan darurat dalam hitungan detik.
 
 ### 1.1 Spesifikasi Teknologi Aplikasi Mobile (Flutter)
 
 * **Framework & Bahasa:** Flutter (Dart), mendukung kompilasi native untuk Android dan iOS dari satu basis kode (*Single Codebase*).
-* **Integrasi Backend:** Mengonsumsi REST API JSON dari layanan backend Golang (`/api/v1/...`).
+* **Integrasi Backend:** Mengonsumsi REST API JSON dari layanan backend Express.js (TypeScript) (`/api/v1/...`).
 * **Autentikasi & Keamanan:** Token sesi terenkripsi menggunakan Secure Storage pada perangkat mobile dengan header `Authorization: Bearer <token>` dan validasi parameter `site_id: "nextkarya-main"`.
 * **Keunggulan untuk Tim Next Karya:**
   - Performa render UI native 60 fps yang ringan dan hemat baterai di seluruh tipe smartphone.
@@ -44,7 +44,7 @@ Untuk mencegah antarmuka mobile menjadi lambat, rumit, dan tidak nyaman digunaka
 │ - Manajemen Kontrak & Pipeline CRM Komprehensif        │
 └───────────────────────────┬────────────────────────────┘
                             │
-                            │ Database PostgreSQL, Cache Redis & API Golang
+                            │ Database PostgreSQL, Cache Redis & API Express.js (TypeScript)
                             │ (site_id: "nextkarya-main")
                             │
 ┌───────────────────────────┴────────────────────────────┐
@@ -153,6 +153,6 @@ Dengan menerapkan arsitektur pemisahan ini:
 
 ### Versi 1.1-2 Kanonik (31 Oktober 2026)
 * Menyelaraskan status pemutusan sesi darurat HP hilang (`REVOKE_SESSION`) menjadi cakupan resmi Fase 1 (MVP) berbasis `tokenVersion` dan cache Redis.
-* Memutakhirkan rujukan arsitektur backend ke layanan Golang dan database PostgreSQL dengan partisi `site_id: "nextkarya-main"`.
+* Memutakhirkan rujukan arsitektur backend ke layanan Express.js (TypeScript) dengan Prisma ORM & Raw SQL, database PostgreSQL, dan partisi `site_id: "nextkarya-main"`.
 * Menyatakan berkas ini sebagai dokumen arsitektur komparatif kanonik (`architecture-desktop-vs-mobile-v1.1-2.md`).
 

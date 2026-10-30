@@ -1,7 +1,7 @@
-# Spesifikasi Skema Basis Data PostgreSQL (Single Source of Truth)
+# Spesifikasi Skema Basis Data PostgreSQL & Prisma (Single Source of Truth)
 **Next Karya Digital Solutions**  
-*Cetak Biru Struktur 20 Tabel Relasional, Indeks, Konkurensi, dan Representasi Go / sqlc / Prisma*  
-*Versi: 1.1-3 Kanonik (Struktur Tabel Relasional PostgreSQL & Padanan Go)*  
+*Cetak Biru Struktur 20 Tabel Relasional, Indeks, Konkurensi, Prisma ORM & Raw SQL*  
+*Versi: 1.1-3 Kanonik (Struktur Tabel Relasional PostgreSQL & Prisma ORM)*  
 *Tanggal Berlaku: 31 Oktober 2026*
 
 > [!IMPORTANT]
@@ -12,11 +12,11 @@
 
 ## 1. Prinsip Utama Desain Basis Data
 
-Dokumen ini merupakan satu-satunya sumber kebenaran (*single source of truth*) untuk seluruh pemodelan data PostgreSQL. Seluruh pengembang backend Golang wajib mematuhi aturan baku berikut:
+Dokumen ini merupakan satu-satunya sumber kebenaran (*single source of truth*) untuk seluruh pemodelan data PostgreSQL. Seluruh pengembang backend Express.js (TypeScript) dengan Prisma ORM wajib mematuhi aturan baku berikut:
 
 ### 1.1 Konvensi Penamaan Kolom
 * **Kolom `site_id` (Snake Case):** Wajib ditulis `site_id` (menggunakan garis bawah) di seluruh tabel dan skema relasional. Dilarang mengubahnya menjadi `siteId` agar konsisten dengan parameter REST API, query string, dan header integrasi lintas sistem.
-* **Kolom Lainnya (Camel Case):** Seluruh kolom entitas lainnya menggunakan standar camelCase (contoh: `lastEditedById`, `visitorIdHash`, `nextFollowUpDate`) yang dipetakan langsung ke struct field Go dan model skema.
+* **Kolom Lainnya (Camel Case):** Seluruh kolom entitas lainnya menggunakan standar camelCase (contoh: `lastEditedById`, `visitorIdHash`, `nextFollowUpDate`) yang dipetakan langsung ke model Prisma dan objek TypeScript.
 
 ### 1.2 Multi-Tenancy Sejak Hari Pertama
 * Kolom `site_id` bertipe `VARCHAR(64)` wajib hadir dan terindeks di 17 tabel entitas data (konten, media, prospek CRM, jadwal proyek, analitik, hingga log audit). Tiga tabel tingkat sistem yang dikecualikan dari kolom `site_id` adalah `sites` (master tenant), `users` (master kredensial staf), dan `rate_limits` (rekayasa IP).
@@ -53,7 +53,7 @@ Dokumen ini merupakan satu-satunya sumber kebenaran (*single source of truth*) u
 
 ### 1.9 Pemutusan Sesi Login HP (*Session Revocation*)
 * Kolom `tokenVersion` bertipe integer pada tabel `users` digunakan sebagai mekanisme pemutus sesi cepat di Fase 1 (MVP).
-* Nilai `tokenVersion` aktif disimpan secara paralel pada cache Redis (`auth:token_ver:{userId}`) untuk verifikasi token JWT O(1) pada setiap request API ke backend Golang.
+* Nilai `tokenVersion` aktif disimpan secara paralel pada cache Redis (`auth:token_ver:{userId}`) untuk verifikasi token JWT O(1) pada setiap request API ke backend Express.js.
 * Jika salah satu ponsel staf hilang atau tertinggal, menaikkan nilai `tokenVersion` (via endpoint `POST /api/v1/users/:id/revoke-sessions`) akan memperbarui Redis dan database seketika, membatalkan seluruh token JWT yang beredar untuk staf tersebut pada request milidetik berikutnya.
 
 ### 1.10 Kebijakan Hapus Situs (*Cascading vs Restricting*)
@@ -776,11 +776,11 @@ DO UPDATE SET
 
 ---
 
-## 5. Berkas Skema Lengkap (`prisma/schema.prisma`) & Padanan Tipe Go
+## 5. Berkas Skema Lengkap (`prisma/schema.prisma`) & Pendekatan Raw SQL
 
 > [!NOTE]
-> **Representasi Skema untuk Backend Go:**  
-> PostgreSQL adalah satu-satunya sumber kebenaran (*Single Source of Truth*) untuk seluruh struktur data, tipe kolom, dan constraint. Definisi model Prisma di bawah ini berfungsi sebagai representasi deklaratif dan skema migrasi DDL awal. Pada backend Golang, pemetaan query data menggunakan driver native `pgx` atau generator tipe Go `sqlc` yang membaca langsung DDL PostgreSQL yang sama, sehingga tidak terdapat divergensi struktur antar-bahasa.
+> **Integrasi Prisma ORM & Raw SQL / Query Builder:**  
+> PostgreSQL adalah satu-satunya sumber kebenaran (*Single Source of Truth*) untuk seluruh struktur data, tipe kolom, dan constraint. Definisi model Prisma di bawah ini berfungsi sebagai skema ORM utama untuk seluruh operasi CRUD di backend Express.js. Untuk operasi analitik dan pemeliharaan berkinerja tinggi (seperti kalkulasi CTE `session_summary` pada rollup harian, pembersihan event 90 hari, dan pemangkasan snapshot FIFO 5 versi), backend menggunakan Raw SQL via `prisma.$queryRaw` / `prisma.$executeRaw` atau query builder teroptimasi.
 
 Berikut adalah berkas Prisma Schema lengkap yang merefleksikan seluruh tabel di atas:
 
@@ -1390,6 +1390,7 @@ WHERE "id" IN (
 
 ### Versi 1.1-3 Kanonik (31 Oktober 2026)
 * Penetapan status berkas sebagai Skema Basis Data Kanonik (`schema-database-v1.1-3.md`) yang menjadi acuan tunggal struktur 20 tabel sistem.
+* Menetapkan Prisma ORM sebagai ORM utama backend Express.js (TypeScript), dengan pendekatan hibrida Raw SQL (`prisma.$queryRaw` / `prisma.$executeRaw`) untuk kalkulasi analitik dan maintenance.
 * Memperbaiki daftar 20 tabel entitas relasional sebenarnya di sistem:
   - Identitas & Multi-Tenant: `sites`, `users`.
   - CMS Konten: `categories`, `posts`, `services`, `faqs`, `testimonials`, `pages`, `content_snapshots`.
@@ -1400,7 +1401,6 @@ WHERE "id" IN (
   - Keamanan & Tanggap Darurat: `rate_limits`, `emergency_audit_logs`.
 * Menegaskan pemisahan tipe waktu: `TIMESTAMPTZ(3)` untuk stempel waktu transaksi UTC, dan `DATE` untuk tanggal kalender (`nextFollowUpDate` dan `warrantyExpiryDate`).
 * Menegaskan bahwa 17 dari 20 tabel memuat kolom `site_id` (mengecualikan `sites`, `users`, dan `rate_limits`).
-* Menambahkan catatan keselarasan padanan tipe Go dan generator `sqlc` di Bab 1 dan Bab 5 untuk menjamin ketiadaan divergensi ganda.
 * Menyelaraskan seluruh tautan dan nilai enum dengan kontrak resmi [`docs/api-contracts-v1.0-6.md`](./api-contracts-v1.0-6.md) dan [`docs/system-architecture-v1.0.md`](./system-architecture-v1.0.md).
 
 ### Versi 1.1 (30 Oktober 2026)

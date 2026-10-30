@@ -16,9 +16,9 @@ Seluruh pengembangan fitur, pemodelan skema database, penulisan API, dan peranca
 
 | Nama Berkas | Versi | Cakupan Sistem | Target Pengguna & Perangkat |
 | :--- | :---: | :--- | :--- |
-| [system-architecture-v1.0.md](./system-architecture-v1.0.md) | **v1.0 Final** | Cetak Biru Arsitektur Terintegrasi (Backend Golang, Postgres, Redis, Web Next.js, Mobile Flutter). | Seluruh Tim Rekayasa & Arsitek |
-| [schema-database-v1.1-3.md](./schema-database-v1.1-3.md) | **v1.1-3 Kanonik** | Struktur 20 Tabel PostgreSQL, Model Relasional, Indeks Konkurensi, & Representasi Go / sqlc. | Pengembang Backend & Database |
-| [api-contracts-v1.0-6.md](./api-contracts-v1.0-6.md) | **v1.0-6 Kanonik** | Cetak Biru Kontrak REST API /api/v1, Validasi Struct Go, Format Respons Tunggal, & Mobile. | Seluruh Tim Pengembang (Backend, Web & Mobile) |
+| [system-architecture-v1.0.md](./system-architecture-v1.0.md) | **v1.0 Final** | Cetak Biru Arsitektur Terintegrasi (Backend Express.js, Postgres, Redis, Web Next.js, Mobile Flutter). | Seluruh Tim Rekayasa & Arsitek |
+| [schema-database-v1.1-3.md](./schema-database-v1.1-3.md) | **v1.1-3 Kanonik** | Struktur 20 Tabel PostgreSQL, Model Relasional, Indeks Konkurensi, & Model Prisma ORM / Raw SQL. | Pengembang Backend & Database |
+| [api-contracts-v1.0-6.md](./api-contracts-v1.0-6.md) | **v1.0-6 Kanonik** | Cetak Biru Kontrak REST API /api/v1, Validasi Zod Express.js, Format Respons Tunggal, & Mobile. | Seluruh Tim Pengembang (Backend, Web & Mobile) |
 | [cms-v2.2-2.md](./cms-v2.2-2.md) | **v2.2-2 Kanonik** | Manajemen Konten, Galeri Portofolio, Snapshot Riwayat, Pembersihan Cache Webhook, & Takedown. | Tim Internal (Desktop & Mobile) |
 | [analytics-v2.2.md](./analytics-v2.2.md) | **v2.2 Kanonik** | Mesin Pengukur Trafik Ringan (< 2 KB), Proteksi Bot, Konversi WA, Ingesti Redis, & Rollup Jam. | Tim Internal (Desktop & Mobile) |
 | [crm-v2.2.md](./crm-v2.2.md) | **v2.2 Kanonik** | Kotak Masuk Prospek (*Leads*), Agenda Follow-Up Harian, Pipeline Penjualan 5 Tahap, & Timeline Tim. | Tim Internal (Desktop & Mobile) |
