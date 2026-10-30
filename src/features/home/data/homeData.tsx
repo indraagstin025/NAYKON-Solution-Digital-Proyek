@@ -124,38 +124,62 @@ export const WORKFLOW_STEPS: WorkflowStepItem[] = [
   {
     stepNumber: "01 / 04",
     badge: "Tahap 01",
-    title: "Discovery & Spesifikasi",
+    title: "Discovery, Riset & Arsitektur Solusi",
     description:
-      "Sesi konsultasi untuk memetakan tujuan bisnis, kendala alur kerja, spesifikasi teknis, serta estimasi jadwal pengerjaan yang transparan.",
-    milestone: "Pemetaan Kebutuhan",
-    icon: <MagnifyingGlassIcon className="h-6 w-6" />,
+      "Konsultasi mendalam untuk membedah model bisnis, alur kerja operasional, dan ekspektasi pengguna. Kami merumuskan spesifikasi teknis (SRS), arsitektur sistem, serta estimasi linimasa yang realistis.",
+    milestone: "Spesifikasi & Arsitektur SRS",
+    image: "/assets/workflow/workflow-discovery.jpg",
+    deliverables: [
+      "Pemetaan Kebutuhan & User Story",
+      "Dokumen Spesifikasi Teknis (SRS)",
+      "Arsitektur Database & Solusi Cloud",
+    ],
+    icon: <MagnifyingGlassIcon className="h-5 w-5" />,
   },
   {
     stepNumber: "02 / 04",
     badge: "Tahap 02",
-    title: "Desain UI/UX & Alur",
+    title: "Desain UI/UX & Prototipe Interaktif",
     description:
-      "Penyusunan arsitektur informasi, wireframe, dan prototipe antarmuka interaktif sehingga Anda dapat meninjau alur aplikasi sebelum koding dimulai.",
-    milestone: "Prototipe Interaktif",
-    icon: <LayoutIcon className="h-6 w-6" />,
+      "Penyusunan arsitektur informasi, wireframe tata letak, dan antarmuka visual modern berbasis design system terstandarisasi. Anda dapat menguji alur aplikasi secara nyata di Figma sebelum tahap koding.",
+    milestone: "Prototipe Interaktif Figma",
+    image: "/assets/workflow/workflow-design.jpg",
+    deliverables: [
+      "Wireframe & User Flow Terstruktur",
+      "Design System & Komponen UI",
+      "Prototipe Interaktif Siap Uji",
+    ],
+    icon: <LayoutIcon className="h-5 w-5" />,
   },
   {
     stepNumber: "03 / 04",
     badge: "Tahap 03",
-    title: "Rekayasa Kode & QA",
+    title: "Pengembangan Agile & Rekayasa Kode",
     description:
-      "Pengembangan dengan standar arsitektur bersih, integrasi API, pengujian responsivitas antar device, serta evaluasi keamanan sistem.",
-    milestone: "Pengujian & Keamanan",
-    icon: <CodeIcon className="h-6 w-6" />,
+      "Implementasi sistem menggunakan metodologi Agile Scrum dengan siklus sprint mingguan. Kode dibangun berstandar clean architecture, integrasi API aman, serta reviu kode berlapis untuk performa maksimal.",
+    milestone: "Clean Code & Sprint Review",
+    image: "/assets/workflow/workflow-development.jpg",
+    deliverables: [
+      "Siklus Sprint & Demo Berkala",
+      "Clean Architecture & Modular Code",
+      "Integrasi API & Database Teroptimasi",
+    ],
+    icon: <CodeIcon className="h-5 w-5" />,
   },
   {
     stepNumber: "04 / 04",
     badge: "Tahap 04",
-    title: "Deployment & Garansi",
+    title: "Pengujian QA, Peluncuran & Pemeliharaan",
     description:
-      "Peluncuran aplikasi ke server produksi atau app store, pelatihan penggunaan bagi tim Anda, serta garansi pemeliharaan pasca rilis.",
-    milestone: "Rilis & Pendampingan",
-    icon: <RocketIcon className="h-6 w-6" />,
+      "Pengujian menyeluruh meliputi fungsionalitas, performa beban, kompatibilitas perangkat, dan audit keamanan sistem. Setelah verifikasi lolos, sistem dirilis ke server produksi dengan garansi dan pendampingan.",
+    milestone: "Rilis Produksi & Garansi SLA",
+    image: "/assets/workflow/workflow-deployment.jpg",
+    deliverables: [
+      "Automated & Manual QA Testing",
+      "Deployment Server Produksi CI/CD",
+      "Garansi Bug & Pemeliharaan SLA",
+    ],
+    icon: <RocketIcon className="h-5 w-5" />,
   },
 ];
 

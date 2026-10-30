@@ -35,6 +35,8 @@ export interface WorkflowStepItem {
   description: string;
   milestone: string;
   icon: React.ReactNode;
+  image: string;
+  deliverables?: string[];
 }
 
 export interface PortfolioTeaserItem {
