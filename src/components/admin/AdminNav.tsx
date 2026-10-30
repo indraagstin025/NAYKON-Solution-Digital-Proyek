@@ -147,7 +147,7 @@ export function AdminNav({
                   aria-current={active ? "page" : undefined}
                   className={`inline-flex min-h-11 items-center gap-2 rounded-xl border px-3.5 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8] ${
                     active
-                      ? "border-[#60A5FA] bg-[#12213F] text-[#F1F5FB]"
+                      ? "border-[#0066FF] bg-[#12213F] text-[#F1F5FB]"
                       : "border-transparent text-[#94A7C4] hover:border-[#4E6E9E] hover:bg-[#12213F] hover:text-[#F1F5FB]"
                   }`}
                 >
@@ -188,7 +188,7 @@ export function AdminNav({
                 aria-current={active ? "page" : undefined}
                 className={`flex min-h-11 items-center justify-between rounded-xl border px-3.5 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38BDF8] ${
                   active
-                    ? "border-[#60A5FA] bg-[#12213F] text-[#F1F5FB]"
+                    ? "border-[#0066FF] bg-[#12213F] text-[#F1F5FB]"
                     : "border-[#4E6E9E] bg-[#0B1730] text-[#94A7C4] hover:bg-[#12213F] hover:text-[#F1F5FB]"
                 }`}
               >

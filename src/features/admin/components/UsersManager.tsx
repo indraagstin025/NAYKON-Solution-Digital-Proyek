@@ -241,7 +241,7 @@ export function UsersManager({
                       <p className="text-sm font-bold text-[#041E42] dark:text-[#F1F5FB] flex items-center gap-2">
                         <span>{u.name}</span>
                         {isSelf && (
-                          <span className="rounded-md border border-blue-200 bg-blue-50 px-2 py-0.5 text-[10px] font-semibold text-[#0066FF] dark:border-[#60A5FA] dark:bg-[#0B1730] dark:text-[#60A5FA]">
+                          <span className="rounded-md border border-[#D4E6FC] bg-[#EAF4FC] px-2 py-0.5 text-[10px] font-semibold text-[#0066FF] dark:border-[#0066FF] dark:bg-[#0B1730] dark:text-[#38BDF8]">
                             Akun Anda
                           </span>
                         )}

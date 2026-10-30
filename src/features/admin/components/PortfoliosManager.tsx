@@ -157,7 +157,7 @@ export function PortfoliosManager({
           <span className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 font-semibold text-[#041E42] dark:border-[#1E3358] dark:bg-[#12213F] dark:text-[#F1F5FB]">
             Total Studi Kasus: {portfolios.length}
           </span>
-          <span className="rounded-lg border border-blue-200 bg-blue-50 px-3 py-1.5 font-semibold tabular-nums text-[#0066FF] dark:border-[#60A5FA]/60 dark:bg-[#12213F] dark:text-[#F1F5FB]">
+          <span className="rounded-lg border border-[#D4E6FC] bg-[#EAF4FC] px-3 py-1.5 font-semibold tabular-nums text-[#0066FF] dark:border-[#0066FF]/60 dark:bg-[#12213F] dark:text-[#F1F5FB]">
             Sorotan Beranda Aktif: {featuredCount} / 3
           </span>
         </div>
@@ -185,7 +185,7 @@ export function PortfoliosManager({
                 onClick={() => loadPortfolio(item)}
                 className={`w-full text-left p-4 transition-colors focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8] ${
                   selected
-                    ? "bg-blue-50/70 border-l-4 border-l-[#0066FF] dark:bg-[#12213F] dark:border-l-[#38BDF8]"
+                    ? "bg-[#EAF4FC] border-l-4 border-l-[#0066FF] dark:bg-[#12213F] dark:border-l-[#38BDF8]"
                     : "bg-white hover:bg-slate-50 dark:bg-[#0B1730] dark:hover:bg-[#12213F]/60"
                 }`}
               >
@@ -194,7 +194,7 @@ export function PortfoliosManager({
                     <p className="text-sm font-semibold text-[#041E42] dark:text-[#F1F5FB] flex items-center gap-1.5">
                       <span>{item.title}</span>
                       {item.featured && (
-                        <span className="inline-flex items-center gap-1 rounded-md border border-blue-200 bg-blue-50 px-1.5 py-0.5 text-[10px] font-bold text-[#0066FF] dark:border-[#60A5FA] dark:bg-[#0B1730] dark:text-[#60A5FA]">
+                        <span className="inline-flex items-center gap-1 rounded-md border border-[#D4E6FC] bg-[#EAF4FC] px-1.5 py-0.5 text-[10px] font-bold text-[#0066FF] dark:border-[#0066FF] dark:bg-[#0B1730] dark:text-[#38BDF8]">
                           <StarFilledIcon className="h-3 w-3" />
                           <span>Beranda</span>
                         </span>

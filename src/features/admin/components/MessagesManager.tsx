@@ -224,7 +224,7 @@ export function MessagesManager({
                   onClick={() => selectMessage(msg)}
                   className={`w-full text-left p-4 transition-colors focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8] ${
                     isSelected
-                      ? "bg-blue-50/70 dark:bg-[#12213F]"
+                      ? "bg-[#EAF4FC] dark:bg-[#12213F]"
                       : "bg-white dark:bg-[#0B1730] hover:bg-slate-50 dark:hover:bg-[#12213F]/70"
                   }`}
                 >

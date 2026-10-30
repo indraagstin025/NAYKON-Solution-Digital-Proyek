@@ -6,7 +6,7 @@ import { ScrollReveal } from "@/components/ui/ScrollReveal";
 export function BlogCallout() {
   return (
     <ScrollReveal delayMs={120}>
-      <div className="mt-12 rounded-[24px] bg-[#F4F8FF] dark:bg-slate-900 border border-[#DCEBFE] dark:border-slate-800 p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 transition-all duration-300 hover:border-[#0066FF] dark:hover:border-blue-500">
+      <div className="mt-12 rounded-[24px] bg-[#EAF4FC] dark:bg-slate-900 border border-[#E4F2FD] dark:border-slate-800 p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 transition-all duration-300 hover:border-[#0066FF] dark:hover:border-blue-500">
         <div className="flex items-start sm:items-center gap-4 group">
           <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#0066FF] text-white shadow-sm transition-transform duration-300 group-hover:scale-110">
             <ReaderIcon className="h-6 w-6" />

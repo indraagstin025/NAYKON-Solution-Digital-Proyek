@@ -355,7 +355,7 @@ export function ArticlesManager({
                       onClick={() => loadArticleIntoForm(art)}
                       className={`w-full text-left py-3.5 px-3 transition-colors rounded-xl focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8] ${
                         selected
-                          ? "bg-blue-50/70 dark:bg-[#12213F]"
+                          ? "bg-[#EAF4FC] dark:bg-[#12213F]"
                           : "bg-white dark:bg-[#0B1730] hover:bg-slate-50 dark:hover:bg-[#12213F]/60"
                       }`}
                     >
@@ -456,7 +456,7 @@ export function ArticlesManager({
                     <button
                       type="button"
                       onClick={() => setSlug(toClientSlug(title))}
-                      className="text-[11px] font-bold text-[#0066FF] dark:text-[#60A5FA] hover:underline"
+                      className="text-[11px] font-bold text-[#0066FF] dark:text-[#38BDF8] hover:underline"
                     >
                       Buat dari judul
                     </button>
@@ -529,11 +529,11 @@ export function ArticlesManager({
                 </label>
                 <p className="mb-2 text-[11px] text-[#5A6E85] dark:text-[#94A7C4]">
                   Pisahkan blok dengan baris kosong. Awali dengan{" "}
-                  <code className="text-[#0066FF] dark:text-[#60A5FA]">## Judul Bagian</code> untuk
+                  <code className="text-[#0066FF] dark:text-[#38BDF8]">## Judul Bagian</code> untuk
                   subjudul H2,{" "}
-                  <code className="text-[#0066FF] dark:text-[#60A5FA]">### Subbagian</code> untuk H3,{" "}
-                  <code className="text-[#0066FF] dark:text-[#60A5FA]">- Butir</code> untuk daftar,
-                  atau <code className="text-[#0066FF] dark:text-[#60A5FA]">&gt; Kutipan</code>.
+                  <code className="text-[#0066FF] dark:text-[#38BDF8]">### Subbagian</code> untuk H3,{" "}
+                  <code className="text-[#0066FF] dark:text-[#38BDF8]">- Butir</code> untuk daftar,
+                  atau <code className="text-[#0066FF] dark:text-[#38BDF8]">&gt; Kutipan</code>.
                 </p>
                 <textarea
                   id="article-body"
@@ -563,7 +563,7 @@ export function ArticlesManager({
                           aria-pressed={checked}
                           className={`inline-flex min-h-11 items-center rounded-xl border px-3 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8] ${
                             checked
-                              ? "border-[#0066FF] bg-[#0066FF]/10 text-[#0066FF] dark:border-[#60A5FA] dark:bg-[#12213F] dark:text-[#F1F5FB]"
+                              ? "border-[#0066FF] bg-[#0066FF]/10 text-[#0066FF] dark:border-[#0066FF] dark:bg-[#12213F] dark:text-[#F1F5FB]"
                               : "border-slate-300 dark:border-[#4E6E9E] bg-slate-50 dark:bg-[#0B1730] text-[#5A6E85] dark:text-[#94A7C4] hover:bg-slate-100 dark:hover:bg-[#12213F]"
                           }`}
                         >

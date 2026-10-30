@@ -48,7 +48,7 @@ export function PortfolioCaseStudies({
                 className={`min-h-11 rounded-full px-4.5 py-2 text-xs sm:text-[13px] font-semibold transition-all duration-200 active:scale-95 cursor-pointer ${
                   selected
                     ? "bg-[#0066FF] text-white shadow-[0_6px_18px_-3px_rgba(0,102,255,0.4)]"
-                    : "bg-white text-[#4A5D78] border border-[#DCEBFE] hover:border-[#0066FF] hover:text-[#0066FF] dark:bg-slate-900 dark:text-slate-300 dark:border-slate-800 dark:hover:border-blue-500"
+                    : "bg-white text-[#4A5D78] border border-[#E4F2FD] hover:border-[#0066FF] hover:text-[#0066FF] dark:bg-slate-900 dark:text-slate-300 dark:border-slate-800 dark:hover:border-blue-500"
                 }`}
               >
                 {tab.label}
@@ -87,7 +87,7 @@ export function PortfolioCaseStudies({
                 </div>
 
                 <div className="p-6 sm:p-7 pb-0 sm:pb-0">
-                  <p className="text-[11px] font-bold uppercase tracking-wider text-[#0066FF] dark:text-blue-400">
+                  <p className="text-[11px] font-bold uppercase tracking-wider text-[#0066FF] dark:text-[#38BDF8]">
                     {item.clientSector}
                   </p>
 
@@ -112,8 +112,8 @@ export function PortfolioCaseStudies({
               </div>
 
               <div className="p-6 sm:p-7 pt-5 sm:pt-5 mt-5">
-                <div className="rounded-2xl bg-[#F4F8FF] dark:bg-slate-800 p-3.5 text-xs text-[#4A5D78] dark:text-slate-300 border border-[#DCEBFE] dark:border-slate-700 leading-relaxed transition-colors duration-300 group-hover:border-[#0066FF]">
-                  <div className="flex items-center gap-1.5 font-extrabold text-[#0066FF] dark:text-blue-400 mb-0.5">
+                <div className="rounded-2xl bg-[#EAF4FC] dark:bg-slate-800 p-3.5 text-xs text-[#4A5D78] dark:text-slate-300 border border-[#E4F2FD] dark:border-slate-700 leading-relaxed transition-colors duration-300 group-hover:border-[#0066FF]">
+                  <div className="flex items-center gap-1.5 font-extrabold text-[#0066FF] dark:text-[#38BDF8] mb-0.5">
                     <CheckCircledIcon className="h-3.5 w-3.5 shrink-0" />
                     <span>Dampak Bisnis</span>
                   </div>

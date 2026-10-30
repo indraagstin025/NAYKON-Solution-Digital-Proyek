@@ -11,7 +11,7 @@ export function WorkflowSection() {
 
       <div className="relative z-10 mx-auto w-full max-w-[1240px] px-6 sm:px-9 lg:px-14">
         <ScrollReveal className="text-center max-w-[740px] mx-auto">
-          <p className="text-[11px] sm:text-xs font-extrabold uppercase tracking-[0.24em] text-[#0066FF] dark:text-blue-400">
+          <p className="text-[11px] sm:text-xs font-extrabold uppercase tracking-[0.24em] text-[#0066FF] dark:text-[#38BDF8]">
             PROSES KERJA
           </p>
           <h2 className="mt-3 text-[26px] sm:text-[34px] lg:text-[38px] font-extrabold leading-[1.18] tracking-[-0.02em] text-[#041E42] dark:text-white">
@@ -48,7 +48,7 @@ export function WorkflowSection() {
                   </p>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-[#E8F0FC] dark:border-slate-800 flex items-center justify-between text-xs font-semibold text-[#0066FF] dark:text-blue-400">
+                <div className="mt-6 pt-4 border-t border-[#E4F2FD] dark:border-slate-800 flex items-center justify-between text-xs font-semibold text-[#0066FF] dark:text-[#38BDF8]">
                   <span>{step.milestone}</span>
                   <span className="text-[#4A5D78] dark:text-slate-400 font-bold">
                     {step.stepNumber}

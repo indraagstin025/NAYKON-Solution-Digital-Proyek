@@ -6,7 +6,7 @@ export function ServiceWorkflow() {
   return (
     <div className="mt-20 pt-16 border-t border-[#E4F2FD] dark:border-slate-800">
       <ScrollReveal className="text-center max-w-[680px] mx-auto mb-10">
-        <p className="text-[11px] sm:text-xs font-extrabold uppercase tracking-[0.24em] text-[#0066FF] dark:text-blue-400">
+        <p className="text-[11px] sm:text-xs font-extrabold uppercase tracking-[0.24em] text-[#0066FF] dark:text-[#38BDF8]">
           PROSES KERJA
         </p>
         <h2 className="mt-2.5 text-[24px] sm:text-[32px] font-extrabold text-[#041E42] dark:text-white">

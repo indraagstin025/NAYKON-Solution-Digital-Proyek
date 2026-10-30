@@ -13,9 +13,9 @@ import { toPricingPlans } from "@/lib/live-content-adapters";
 export function ServicePricing({ plans }: { plans?: PublicPricingPlanDTO[] | null }) {
   const PRICING_PLANS = toPricingPlans(plans);
   return (
-    <div id="paket-layanan" className="mt-20 pt-16 border-t border-[#DCEBFE] dark:border-slate-800 scroll-mt-24">
+    <div id="paket-layanan" className="mt-20 pt-16 border-t border-[#E4F2FD] dark:border-slate-800 scroll-mt-24">
       <ScrollReveal className="text-center max-w-[760px] mx-auto">
-        <p className="text-[11px] sm:text-xs font-extrabold uppercase tracking-[0.24em] text-[#0066FF] dark:text-blue-400">
+        <p className="text-[11px] sm:text-xs font-extrabold uppercase tracking-[0.24em] text-[#0066FF] dark:text-[#38BDF8]">
           DAFTAR PAKET &amp; INVESTASI
         </p>
         <h2 className="mt-3 text-[26px] sm:text-[34px] lg:text-[38px] font-extrabold leading-[1.18] tracking-[-0.02em] text-[#041E42] dark:text-white">
@@ -65,7 +65,7 @@ export function ServicePricing({ plans }: { plans?: PublicPricingPlanDTO[] | nul
                   {plan.description}
                 </p>
 
-                <div className="mt-5 pt-4 pb-5 border-y border-[#E8F0FC] dark:border-slate-800">
+                <div className="mt-5 pt-4 pb-5 border-y border-[#E4F2FD] dark:border-slate-800">
                   <span className="block text-xs font-semibold uppercase tracking-wider text-[#4A5D78] dark:text-slate-400">
                     {plan.priceLabel}
                   </span>
@@ -84,7 +84,7 @@ export function ServicePricing({ plans }: { plans?: PublicPricingPlanDTO[] | nul
                         key={feature}
                         className="flex items-start gap-2.5 text-[12.5px] sm:text-[13px] text-[#4A5D78] dark:text-slate-300"
                       >
-                        <CheckCircledIcon className="h-4 w-4 shrink-0 text-[#0066FF] dark:text-blue-400 mt-0.5 transition-transform duration-200 group-hover:scale-110" />
+                        <CheckCircledIcon className="h-4 w-4 shrink-0 text-[#0066FF] dark:text-[#38BDF8] mt-0.5 transition-transform duration-200 group-hover:scale-110" />
                         <span>{feature}</span>
                       </li>
                     ))}
@@ -111,7 +111,7 @@ export function ServicePricing({ plans }: { plans?: PublicPricingPlanDTO[] | nul
       </div>
 
       <ScrollReveal delayMs={120}>
-        <div className="mt-12 rounded-[26px] bg-white dark:bg-slate-900 border border-[#DCEBFE] dark:border-slate-800 p-7 sm:p-9 shadow-[0_14px_38px_-10px_rgba(10,35,80,0.06)] transition-all duration-300 hover:border-[#0066FF] grid gap-6 md:grid-cols-2 items-center">
+        <div className="mt-12 rounded-[26px] bg-white dark:bg-slate-900 border border-[#E4F2FD] dark:border-slate-800 p-7 sm:p-9 shadow-[0_14px_38px_-10px_rgba(10,35,80,0.06)] transition-all duration-300 hover:border-[#0066FF] grid gap-6 md:grid-cols-2 items-center">
           <div className="flex items-start gap-4 group">
             <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#0066FF] text-white shadow-sm transition-transform duration-300 group-hover:scale-110">
               <BarChartIcon className="h-6 w-6" />
@@ -144,7 +144,7 @@ export function ServicePricing({ plans }: { plans?: PublicPricingPlanDTO[] | nul
               <div className="mt-3">
                 <Link
                   href="/kontak"
-                  className="group/link inline-flex items-center gap-1.5 text-xs sm:text-[13px] font-bold text-[#0066FF] dark:text-blue-400 hover:text-[#0052CC]"
+                  className="group/link inline-flex items-center gap-1.5 text-xs sm:text-[13px] font-bold text-[#0066FF] dark:text-[#38BDF8] hover:text-[#0052CC]"
                 >
                   <span>Konsultasikan Kebutuhan Kustom</span>
                   <ArrowRightIcon className="h-3.5 w-3.5 transition-transform duration-200 group-hover/link:translate-x-1" />

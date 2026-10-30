@@ -54,7 +54,7 @@ export function ServicesSection({ services }: { services?: PublicServiceDTO[] | 
 
       <div className="relative z-10 mx-auto w-full max-w-[1240px] px-6 sm:px-9 lg:px-14">
         <ScrollReveal className="text-center max-w-[760px] mx-auto">
-          <p className="text-[11px] sm:text-xs font-extrabold uppercase tracking-[0.24em] text-[#0066FF] dark:text-blue-400">
+          <p className="text-[11px] sm:text-xs font-extrabold uppercase tracking-[0.24em] text-[#0066FF] dark:text-[#38BDF8]">
             LAYANAN UTAMA
           </p>
           <h2 className="mt-3 text-[26px] sm:text-[34px] lg:text-[40px] font-extrabold leading-[1.18] tracking-[-0.02em] text-[#041E42] dark:text-white">
@@ -100,7 +100,7 @@ export function ServicesSection({ services }: { services?: PublicServiceDTO[] | 
                           key={tag}
                           className="inline-flex items-center gap-1.5 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-3 py-1.5 text-[11.5px] font-semibold text-[#0F172A] dark:text-slate-200 transition-colors group-hover:bg-slate-200 dark:group-hover:bg-slate-700"
                         >
-                          <CheckIcon className="h-3.5 w-3.5 shrink-0 text-[#0066FF] dark:text-blue-400 stroke-2" />
+                          <CheckIcon className="h-3.5 w-3.5 shrink-0 text-[#0066FF] dark:text-[#38BDF8] stroke-2" />
                           <span>{tag}</span>
                         </span>
                       ))}
@@ -109,7 +109,7 @@ export function ServicesSection({ services }: { services?: PublicServiceDTO[] | 
                     <div className="mt-7">
                       <Link
                         href="/layanan#paket-layanan"
-                        className="inline-flex items-center gap-2 text-[13.5px] font-bold text-[#0066FF] dark:text-blue-400 hover:text-[#0052CC] transition-colors group/link"
+                        className="inline-flex items-center gap-2 text-[13.5px] font-bold text-[#0066FF] dark:text-[#38BDF8] hover:text-[#0052CC] transition-colors group/link"
                       >
                         <span>Lihat detail &amp; harga</span>
                         <ArrowRightIcon className="h-4 w-4 transition-transform group-hover/link:translate-x-1.5" />
@@ -126,12 +126,12 @@ export function ServicesSection({ services }: { services?: PublicServiceDTO[] | 
                       >
                         <defs>
                           <linearGradient id="browserHeaderGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" stopColor="#F0F5FF" />
-                            <stop offset="100%" stopColor="#E4EFFF" />
+                            <stop offset="0%" stopColor="#F7FAFC" />
+                            <stop offset="100%" stopColor="#EAF4FC" />
                           </linearGradient>
                           <linearGradient id="browserLandscapeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stopColor="#CBE2FE" />
-                            <stop offset="100%" stopColor="#87B9FA" />
+                            <stop offset="0%" stopColor="#EAF4FC" />
+                            <stop offset="100%" stopColor="#0066FF" />
                           </linearGradient>
                         </defs>
 
@@ -142,7 +142,7 @@ export function ServicesSection({ services }: { services?: PublicServiceDTO[] | 
                           height="190"
                           rx="16"
                           fill="#FFFFFF"
-                          stroke="#D5E6FE"
+                          stroke="#E4F2FD"
                           strokeWidth="2"
                           className="dark:fill-slate-800 dark:stroke-slate-700"
                         />
@@ -171,14 +171,14 @@ export function ServicesSection({ services }: { services?: PublicServiceDTO[] | 
                         />
                         <path
                           d="M50 148 L80 102 L106 132 L124 114 L146 148 Z"
-                          fill="#3B82F6"
+                          fill="#0066FF"
                         />
                         <circle cx="70" cy="88" r="8" fill="#FFFFFF" />
 
-                        <rect x="168" y="68" width="118" height="10" rx="5" fill="#E2EDFC" />
-                        <rect x="168" y="86" width="94" height="8" rx="4" fill="#EDF3FD" />
-                        <rect x="168" y="100" width="110" height="8" rx="4" fill="#EDF3FD" />
-                        <rect x="168" y="114" width="80" height="8" rx="4" fill="#EDF3FD" />
+                        <rect x="168" y="68" width="118" height="10" rx="5" fill="#E4F2FD" />
+                        <rect x="168" y="86" width="94" height="8" rx="4" fill="#F7FAFC" />
+                        <rect x="168" y="100" width="110" height="8" rx="4" fill="#F7FAFC" />
+                        <rect x="168" y="114" width="80" height="8" rx="4" fill="#F7FAFC" />
 
                         <rect x="168" y="132" width="58" height="14" rx="7" fill="#0066FF" />
 
@@ -189,7 +189,7 @@ export function ServicesSection({ services }: { services?: PublicServiceDTO[] | 
                         </g>
 
                         <g className="transition-transform duration-500 group-hover:translate-y-1 group-hover:translate-x-1">
-                          <rect x="268" y="142" width="28" height="28" rx="8" fill="#FFFFFF" stroke="#D5E6FE" strokeWidth="1.5" className="drop-shadow-md dark:fill-slate-800" />
+                          <rect x="268" y="142" width="28" height="28" rx="8" fill="#FFFFFF" stroke="#E4F2FD" strokeWidth="1.5" className="drop-shadow-md dark:fill-slate-800" />
                           <path d="M276 156 L288 156 M282 150 L288 156 L282 162" stroke="#0066FF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                         </g>
 
@@ -200,7 +200,7 @@ export function ServicesSection({ services }: { services?: PublicServiceDTO[] | 
                         </g>
 
                         <g className="transition-transform duration-500 group-hover:translate-y-1">
-                          <rect x="24" y="174" width="32" height="32" rx="9" fill="#FFFFFF" stroke="#D5E6FE" strokeWidth="1.5" className="drop-shadow-md dark:fill-slate-800" />
+                          <rect x="24" y="174" width="32" height="32" rx="9" fill="#FFFFFF" stroke="#E4F2FD" strokeWidth="1.5" className="drop-shadow-md dark:fill-slate-800" />
                           <path d="M32 196 L32 188 M40 196 L40 182 M48 196 L48 185" stroke="#0066FF" strokeWidth="2.5" strokeLinecap="round" />
                         </g>
                       </svg>
@@ -241,10 +241,10 @@ export function ServicesSection({ services }: { services?: PublicServiceDTO[] | 
                   </div>
                 </div>
 
-                <div className="mt-8 pt-4 border-t border-[#E8F0FC] dark:border-slate-800">
+                <div className="mt-8 pt-4 border-t border-[#E4F2FD] dark:border-slate-800">
                   <Link
                     href="/layanan"
-                    className="inline-flex items-center gap-2 text-[13.5px] font-bold text-[#0066FF] dark:text-blue-400 hover:text-[#0052CC] transition-colors group/link"
+                    className="inline-flex items-center gap-2 text-[13.5px] font-bold text-[#0066FF] dark:text-[#38BDF8] hover:text-[#0052CC] transition-colors group/link"
                   >
                     <span>Lihat detail</span>
                     <ArrowRightIcon className="h-4 w-4 transition-transform group-hover/link:translate-x-1.5" />
@@ -286,10 +286,10 @@ export function ServicesSection({ services }: { services?: PublicServiceDTO[] | 
                   </div>
                 </div>
 
-                <div className="relative mt-8 pt-4 border-t border-[#E8F0FC] dark:border-slate-800 flex items-center justify-between">
+                <div className="relative mt-8 pt-4 border-t border-[#E4F2FD] dark:border-slate-800 flex items-center justify-between">
                   <Link
                     href="/layanan"
-                    className="inline-flex items-center gap-2 text-[13.5px] font-bold text-[#0066FF] dark:text-blue-400 hover:text-[#0052CC] transition-colors group/link z-10"
+                    className="inline-flex items-center gap-2 text-[13.5px] font-bold text-[#0066FF] dark:text-[#38BDF8] hover:text-[#0052CC] transition-colors group/link z-10"
                   >
                     <span>Lihat detail</span>
                     <ArrowRightIcon className="h-4 w-4 transition-transform group-hover/link:translate-x-1.5" />
@@ -297,17 +297,17 @@ export function ServicesSection({ services }: { services?: PublicServiceDTO[] | 
 
                   <div className="absolute right-0 bottom-0 pointer-events-none w-[170px] h-[100px] transition-transform duration-500 group-hover:scale-105 group-hover:-translate-y-1">
                     <svg viewBox="0 0 180 110" fill="none" className="w-full h-full">
-                      <rect x="25" y="15" width="145" height="90" rx="10" fill="#F8FBFF" stroke="#D3E5FD" strokeWidth="1.6" className="dark:fill-slate-800 dark:stroke-slate-700" />
-                      <rect x="25" y="15" width="145" height="18" rx="10" fill="#E8F2FF" className="dark:fill-slate-700" />
+                      <rect x="25" y="15" width="145" height="90" rx="10" fill="#F8FBFF" stroke="#E4F2FD" strokeWidth="1.6" className="dark:fill-slate-800 dark:stroke-slate-700" />
+                      <rect x="25" y="15" width="145" height="18" rx="10" fill="#EAF4FC" className="dark:fill-slate-700" />
                       <circle cx="37" cy="24" r="2.5" fill="#0066FF" />
                       <circle cx="45" cy="24" r="2.5" fill="#38BDF8" />
-                      <circle cx="53" cy="24" r="2.5" fill="#93C5FD" />
+                      <circle cx="53" cy="24" r="2.5" fill="#0066FF" />
                       <rect x="36" y="44" width="58" height="42" rx="6" fill="#FFFFFF" stroke="#E2EEFE" className="dark:fill-slate-700" />
                       <path d="M44 76 L52 64 L62 70 L72 56 L82 76 Z" fill="#0066FF" />
                       <rect x="104" y="44" width="54" height="6" rx="3" fill="#0066FF" />
-                      <rect x="104" y="56" width="46" height="5" rx="2.5" fill="#CBDDF8" />
-                      <rect x="104" y="66" width="38" height="5" rx="2.5" fill="#CBDDF8" />
-                      <rect x="104" y="76" width="50" height="5" rx="2.5" fill="#CBDDF8" />
+                      <rect x="104" y="56" width="46" height="5" rx="2.5" fill="#EAF4FC" />
+                      <rect x="104" y="66" width="38" height="5" rx="2.5" fill="#EAF4FC" />
+                      <rect x="104" y="76" width="50" height="5" rx="2.5" fill="#EAF4FC" />
                     </svg>
                   </div>
                 </div>
@@ -348,7 +348,7 @@ export function ServicesSection({ services }: { services?: PublicServiceDTO[] | 
                     <div className="mt-7">
                       <Link
                         href="/layanan"
-                        className="inline-flex items-center gap-2 text-[13.5px] font-bold text-white hover:text-blue-200 transition-colors group/link"
+                        className="inline-flex items-center gap-2 text-[13.5px] font-bold text-white hover:text-blue-100 transition-colors group/link"
                       >
                         <span>Lihat detail</span>
                         <ArrowRightIcon className="h-4 w-4 transition-transform group-hover/link:translate-x-1.5" />
@@ -366,7 +366,7 @@ export function ServicesSection({ services }: { services?: PublicServiceDTO[] | 
                           height="280"
                           rx="28"
                           fill="#FFFFFF"
-                          stroke="#CBDDF8"
+                          stroke="#E4F2FD"
                           strokeWidth="3.5"
                         />
 
@@ -380,24 +380,24 @@ export function ServicesSection({ services }: { services?: PublicServiceDTO[] | 
                         />
 
                         <rect x="90" y="36" width="60" height="7" rx="3.5" fill="#1D4080" />
-                        <circle cx="158" cy="39.5" r="2.5" fill="#3B82F6" />
+                        <circle cx="158" cy="39.5" r="2.5" fill="#0066FF" />
 
                         <rect x="60" y="58" width="56" height="50" rx="10" fill="#1D4080" />
                         <rect x="124" y="58" width="56" height="50" rx="10" fill="#1D4080" />
                         <rect x="60" y="118" width="56" height="50" rx="10" fill="#1D4080" />
                         <rect x="124" y="118" width="56" height="50" rx="10" fill="#1D4080" />
 
-                        <circle cx="88" cy="78" r="8" fill="#3B82F6" />
+                        <circle cx="88" cy="78" r="8" fill="#0066FF" />
                         <circle cx="152" cy="78" r="8" fill="#38BDF8" />
                         <circle cx="88" cy="138" r="8" fill="#38BDF8" />
-                        <circle cx="152" cy="138" r="8" fill="#3B82F6" />
+                        <circle cx="152" cy="138" r="8" fill="#0066FF" />
 
                         <rect x="60" y="182" width="120" height="42" rx="10" fill="#13336B" />
-                        <rect x="72" y="196" width="70" height="6" rx="3" fill="#60A5FA" />
-                        <rect x="72" y="206" width="45" height="5" rx="2.5" fill="#3B82F6" />
+                        <rect x="72" y="196" width="70" height="6" rx="3" fill="#0066FF" />
+                        <rect x="72" y="206" width="45" height="5" rx="2.5" fill="#0066FF" />
 
                         <rect x="60" y="234" width="120" height="40" rx="10" fill="#13336B" />
-                        <rect x="72" y="248" width="60" height="6" rx="3" fill="#60A5FA" />
+                        <rect x="72" y="248" width="60" height="6" rx="3" fill="#0066FF" />
 
                         <g className="transition-transform duration-500 group-hover:-translate-y-2">
                           <circle cx="28" cy="120" r="19" fill="#0066FF" stroke="#FFFFFF" strokeWidth="2" className="drop-shadow-lg" />
@@ -468,10 +468,10 @@ export function ServicesSection({ services }: { services?: PublicServiceDTO[] | 
                       )}
                     </div>
 
-                    <div className="mt-8 pt-4 border-t border-[#E8F0FC] dark:border-slate-800">
+                    <div className="mt-8 pt-4 border-t border-[#E4F2FD] dark:border-slate-800">
                       <Link
                         href="/layanan"
-                        className="inline-flex items-center gap-2 text-[13.5px] font-bold text-[#0066FF] dark:text-blue-400 hover:text-[#0052CC] transition-colors group/link"
+                        className="inline-flex items-center gap-2 text-[13.5px] font-bold text-[#0066FF] dark:text-[#38BDF8] hover:text-[#0052CC] transition-colors group/link"
                       >
                         <span>Lihat detail</span>
                         <ArrowRightIcon className="h-4 w-4 transition-transform group-hover/link:translate-x-1.5" />

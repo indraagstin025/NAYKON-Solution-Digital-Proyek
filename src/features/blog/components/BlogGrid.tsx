@@ -82,7 +82,7 @@ export function BlogGrid({
               </p>
             </div>
 
-            <div className="mt-6 pt-4 border-t border-[#E8F0FC] dark:border-slate-800 flex items-center justify-between gap-3 text-xs text-[#4A5D78] dark:text-slate-400">
+            <div className="mt-6 pt-4 border-t border-[#E4F2FD] dark:border-slate-800 flex items-center justify-between gap-3 text-xs text-[#4A5D78] dark:text-slate-400">
               <span className="inline-flex items-center gap-1.5 font-semibold text-[#0052CC] dark:text-blue-400">
                 <CalendarIcon className="h-3.5 w-3.5" />
                 <time dateTime={post.publishedAt ?? undefined}>

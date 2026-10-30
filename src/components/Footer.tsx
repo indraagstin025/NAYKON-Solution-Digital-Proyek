@@ -30,7 +30,7 @@ export default function Footer() {
               yang berfokus pada arsitektur modern, performa tinggi, dan dampak
               pertumbuhan nyata bagi bisnis Anda.
             </p>
-            <div className="mt-5 inline-flex items-center gap-2 rounded-full bg-white dark:bg-slate-900 border border-[#D4E6FF] dark:border-slate-800 px-3.5 py-1.5 shadow-2xs">
+            <div className="mt-5 inline-flex items-center gap-2 rounded-full bg-white dark:bg-slate-900 border border-[#E4F2FD] dark:border-slate-800 px-3.5 py-1.5 shadow-2xs">
               <span className="h-2 w-2 rounded-full bg-[#0066FF]" />
               <span className="text-[11.5px] font-semibold text-[#041E42] dark:text-slate-200">
                 Mengakselerasi Inovasi, Mewujudkan Karya Digital

@@ -36,7 +36,7 @@ export function ContentBlocks({ blocks }: { blocks: ContentBlock[] }) {
             return (
               <aside
                 key={index}
-                className="mt-8 rounded-2xl border border-[#5B789E] bg-[#F4F8FF] p-5 sm:p-6 dark:border-[#4E6E9E] dark:bg-slate-900"
+                className="mt-8 rounded-2xl border border-[#E4F2FD] bg-[#EAF4FC] p-5 sm:p-6 dark:border-[#4E6E9E] dark:bg-slate-900"
               >
                 {block.title && (
                   <p className="text-[15px] font-extrabold text-[#041E42] dark:text-white">

@@ -295,7 +295,7 @@ export function ServicesManager({
                   onClick={() => loadService(svc)}
                   className={`w-full text-left p-4 transition-colors focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8] ${
                     selected
-                      ? "bg-blue-50/70 dark:bg-[#12213F]"
+                      ? "bg-[#EAF4FC] dark:bg-[#12213F]"
                       : "bg-white dark:bg-[#0B1730] hover:bg-slate-50 dark:hover:bg-[#12213F]/60"
                   }`}
                 >
@@ -616,7 +616,7 @@ export function ServicesManager({
                   onClick={() => loadPricingPlan(plan)}
                   className={`w-full text-left p-4 transition-colors focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8] ${
                     selected
-                      ? "bg-blue-50/70 dark:bg-[#12213F]"
+                      ? "bg-[#EAF4FC] dark:bg-[#12213F]"
                       : "bg-white dark:bg-[#0B1730] hover:bg-slate-50 dark:hover:bg-[#12213F]/60"
                   }`}
                 >
@@ -625,7 +625,7 @@ export function ServicesManager({
                       <p className="text-sm font-bold text-[#041E42] dark:text-[#F1F5FB] flex items-center gap-1.5">
                         <span>{plan.name}</span>
                         {plan.isPopular && (
-                          <span className="inline-flex items-center gap-1 rounded-md border border-blue-200 dark:border-[#60A5FA] bg-blue-50 dark:bg-[#0B1730] px-1.5 py-0.5 text-[10px] font-bold text-[#0066FF] dark:text-[#60A5FA]">
+                          <span className="inline-flex items-center gap-1 rounded-md border border-[#D4E6FC] dark:border-[#0066FF] bg-[#EAF4FC] dark:bg-[#0B1730] px-1.5 py-0.5 text-[10px] font-bold text-[#0066FF] dark:text-[#38BDF8]">
                             <StarFilledIcon className="h-3 w-3" />
                             <span>Paling Populer</span>
                           </span>

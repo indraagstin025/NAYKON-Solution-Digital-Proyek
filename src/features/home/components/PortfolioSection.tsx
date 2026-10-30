@@ -38,7 +38,7 @@ export function PortfolioSection({
 
       <div className="relative z-10 mx-auto w-full max-w-[1240px] px-6 sm:px-9 lg:px-14">
         <ScrollReveal className="text-center max-w-[740px] mx-auto">
-          <p className="text-[11px] sm:text-xs font-extrabold uppercase tracking-[0.24em] text-[#0066FF] dark:text-blue-400">
+          <p className="text-[11px] sm:text-xs font-extrabold uppercase tracking-[0.24em] text-[#0066FF] dark:text-[#38BDF8]">
             STUDI KASUS &amp; KONSEP SOLUSI
           </p>
           <h2 className="mt-3 text-[26px] sm:text-[34px] lg:text-[38px] font-extrabold leading-[1.18] tracking-[-0.02em] text-[#041E42] dark:text-white">
@@ -67,7 +67,7 @@ export function PortfolioSection({
                   className={`min-h-11 rounded-full px-4.5 py-2 text-xs sm:text-[13px] font-semibold transition-all duration-200 active:scale-95 cursor-pointer ${
                     selected
                       ? "bg-[#0066FF] text-white shadow-[0_6px_18px_-3px_rgba(0,102,255,0.4)]"
-                      : "bg-white text-[#4A5D78] border border-[#DCEBFE] hover:border-[#0066FF] hover:text-[#0066FF] dark:bg-slate-900 dark:text-slate-300 dark:border-slate-800 dark:hover:border-blue-500"
+                      : "bg-white text-[#4A5D78] border border-[#E4F2FD] hover:border-[#0066FF] hover:text-[#0066FF] dark:bg-slate-900 dark:text-slate-300 dark:border-slate-800 dark:hover:border-blue-500"
                   }`}
                 >
                   {tab.label}
@@ -106,7 +106,7 @@ export function PortfolioSection({
                   </div>
 
                   <div className="p-6 sm:p-7 pb-0 sm:pb-0">
-                    <p className="text-[11px] font-bold uppercase tracking-wider text-[#0066FF] dark:text-blue-400">
+                    <p className="text-[11px] font-bold uppercase tracking-wider text-[#0066FF] dark:text-[#38BDF8]">
                       {item.clientSector}
                     </p>
 
@@ -131,8 +131,8 @@ export function PortfolioSection({
                 </div>
 
                 <div className="p-6 sm:p-7 pt-5 sm:pt-5 mt-5">
-                  <div className="rounded-2xl bg-[#F4F8FF] dark:bg-slate-800 p-3.5 text-xs text-[#4A5D78] dark:text-slate-300 border border-[#DCEBFE] dark:border-slate-700 leading-relaxed transition-colors duration-300 group-hover:border-[#0066FF]">
-                    <div className="flex items-center gap-1.5 font-extrabold text-[#0066FF] dark:text-blue-400 mb-0.5">
+                  <div className="rounded-2xl bg-[#EAF4FC] dark:bg-slate-800 p-3.5 text-xs text-[#4A5D78] dark:text-slate-300 border border-[#E4F2FD] dark:border-slate-700 leading-relaxed transition-colors duration-300 group-hover:border-[#0066FF]">
+                    <div className="flex items-center gap-1.5 font-extrabold text-[#0066FF] dark:text-[#38BDF8] mb-0.5">
                       <CheckCircledIcon className="h-3.5 w-3.5 shrink-0" />
                       <span>Dampak Bisnis</span>
                     </div>
@@ -147,7 +147,7 @@ export function PortfolioSection({
         <ScrollReveal delayMs={150} className="mt-12 text-center">
           <Link
             href="/portofolio"
-            className="group inline-flex min-h-11 items-center gap-2 rounded-full border-2 border-[#0066FF] bg-white px-6 py-3 text-[13.5px] font-bold text-[#0066FF] shadow-sm transition-all duration-200 hover:bg-[#0066FF] hover:text-white hover:-translate-y-0.5 active:scale-[0.98] dark:bg-slate-900 dark:text-blue-400 dark:hover:bg-[#0066FF] dark:hover:text-white"
+            className="group inline-flex min-h-11 items-center gap-2 rounded-full border-2 border-[#0066FF] bg-white px-6 py-3 text-[13.5px] font-bold text-[#0066FF] shadow-sm transition-all duration-200 hover:bg-[#0066FF] hover:text-white hover:-translate-y-0.5 active:scale-[0.98] dark:bg-slate-900 dark:text-[#38BDF8] dark:hover:bg-[#0066FF] dark:hover:text-white"
           >
             <span>Eksplorasi Seluruh Studi Kasus</span>
             <ArrowRightIcon className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />

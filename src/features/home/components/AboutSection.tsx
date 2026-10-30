@@ -74,7 +74,7 @@ export function AboutSection() {
             efisien.
           </p>
 
-          <div className="mt-6 divide-y divide-[#D8E6F8] dark:divide-slate-800">
+          <div className="mt-6 divide-y divide-[#E4F2FD] dark:divide-slate-800">
             {ABOUT_FEATURES.map((item) => (
               <div
                 key={item.title}

@@ -7,7 +7,7 @@ import { useContactForm } from "../hooks/useContactForm";
 import { CONTACT_SERVICES, CONTACT_SERVICE_LABELS } from "../schema";
 
 const FIELD_CLASS =
-  "w-full rounded-xl border bg-[#F8FBFF] dark:bg-slate-800 px-4 py-3 text-[13.5px] text-[#041E42] dark:text-white placeholder:text-[#647896] transition-all duration-200 focus:border-[#0066FF] focus:bg-white dark:focus:bg-slate-900";
+  "w-full rounded-xl border bg-[#F7FAFC] dark:bg-slate-800 px-4 py-3 text-[13.5px] text-[#041E42] dark:text-white placeholder:text-[#647896] transition-all duration-200 focus:border-[#0066FF] focus:bg-white dark:focus:bg-slate-900";
 const FIELD_OK = "border-[#5B789E] dark:border-slate-600";
 const FIELD_ERR = "border-rose-700 dark:border-rose-400";
 const LABEL_CLASS = "mb-2 block text-[13px] font-bold text-[#041E42] dark:text-slate-200";
@@ -30,11 +30,11 @@ export function ContactFormCard({ sourcePage = "/kontak" }: { sourcePage?: strin
     <form
       id="contact-form"
       onSubmit={handleSubmit}
-      className="relative overflow-hidden rounded-[24px] bg-white dark:bg-slate-900 border border-[#E4F2FD] dark:border-slate-800 p-6 sm:p-8 lg:p-9 shadow-[0_18px_46px_-12px_rgba(10,35,80,0.08)] transition-colors duration-300 hover:border-[#BBD7FE] dark:hover:border-slate-700"
+      className="relative overflow-hidden rounded-[24px] bg-white dark:bg-slate-900 border border-[#E4F2FD] dark:border-slate-800 p-6 sm:p-8 lg:p-9 shadow-[0_18px_46px_-12px_rgba(10,35,80,0.08)] transition-colors duration-300 hover:border-[#0066FF] dark:hover:border-slate-700"
       noValidate
       aria-busy={sending}
     >
-      <div className="mb-6 pb-4 border-b border-[#E8F0FC] dark:border-slate-800">
+      <div className="mb-6 pb-4 border-b border-[#E4F2FD] dark:border-slate-800">
         <h3 className="text-[18px] sm:text-[20px] font-extrabold text-[#041E42] dark:text-white">
           Formulir Konsultasi Proyek
         </h3>

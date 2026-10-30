@@ -101,7 +101,7 @@ export function FaqSection({ faqs }: { faqs?: PublicFaqDTO[] | null }) {
         </div>
 
         <ScrollReveal delayMs={120}>
-          <div className="mt-12 rounded-[24px] bg-[#F4F8FF] dark:bg-slate-900 border border-[#DCEBFE] dark:border-slate-800 p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-5 transition-all duration-300 hover:border-[#0066FF]">
+          <div className="mt-12 rounded-[24px] bg-[#EAF4FC] dark:bg-slate-900 border border-[#E4F2FD] dark:border-slate-800 p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-5 transition-all duration-300 hover:border-[#0066FF]">
             <div className="flex items-center gap-3.5 group">
               <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#0066FF] text-white shadow-sm transition-transform duration-300 group-hover:scale-110">
                 <ChatBubbleIcon className="h-5 w-5" />

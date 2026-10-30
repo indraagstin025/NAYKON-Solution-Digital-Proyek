@@ -199,7 +199,7 @@ export function FaqsManager({
                   onClick={() => loadFaq(item)}
                   className={`w-full text-left p-4 transition-colors focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8] ${
                     selected
-                      ? "bg-blue-50/70 border-l-4 border-l-[#0066FF] dark:bg-[#12213F] dark:border-l-[#38BDF8]"
+                      ? "bg-[#EAF4FC] border-l-4 border-l-[#0066FF] dark:bg-[#12213F] dark:border-l-[#38BDF8]"
                       : "bg-white hover:bg-slate-50 dark:bg-[#0B1730] dark:hover:bg-[#12213F]/60"
                   }`}
                 >
@@ -411,7 +411,7 @@ export function FaqsManager({
                   onClick={() => loadPage(p)}
                   className={`w-full text-left p-4 transition-colors focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8] ${
                     selected
-                      ? "bg-blue-50/70 border-l-4 border-l-[#0066FF] dark:bg-[#12213F] dark:border-l-[#38BDF8]"
+                      ? "bg-[#EAF4FC] border-l-4 border-l-[#0066FF] dark:bg-[#12213F] dark:border-l-[#38BDF8]"
                       : "bg-white hover:bg-slate-50 dark:bg-[#0B1730] dark:hover:bg-[#12213F]/60"
                   }`}
                 >

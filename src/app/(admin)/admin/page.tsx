@@ -72,7 +72,7 @@ export default async function AdminOverviewPage() {
       >
         <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
           <div className="space-y-2 max-w-2xl">
-            <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50/80 px-3 py-1 text-xs font-semibold text-[#0066FF] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#94A7C4]">
+            <div className="inline-flex items-center gap-2 rounded-full border border-[#D4E6FC] bg-[#EAF4FC] px-3 py-1 text-xs font-semibold text-[#0066FF] dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#94A7C4]">
               <CalendarIcon className="h-3.5 w-3.5" aria-hidden="true" />
               <span>{todayFormatted}</span>
             </div>
@@ -104,7 +104,7 @@ export default async function AdminOverviewPage() {
                 href="/admin/pesan"
                 className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-slate-300 bg-white px-4 text-xs font-bold text-[#041E42] shadow-xs transition-colors hover:bg-slate-50 dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:hover:bg-[#192D54] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
               >
-                <EnvelopeClosedIcon className="h-4 w-4 text-[#0066FF] dark:text-[#60A5FA]" aria-hidden="true" />
+                <EnvelopeClosedIcon className="h-4 w-4 text-[#0066FF] dark:text-[#38BDF8]" aria-hidden="true" />
                 <span>Inbox Konsultasi</span>
                 {overview.unreadMessagesCount > 0 && (
                   <span className="ml-1 rounded-full bg-amber-500 px-2 py-0.5 text-[10px] font-extrabold text-white">
@@ -151,7 +151,7 @@ export default async function AdminOverviewPage() {
         {canViewMessages ? (
           <Link
             href="/admin/pesan"
-            className="group flex flex-col justify-between rounded-2xl border border-slate-200/90 bg-white p-5 shadow-xs transition-all duration-200 hover:-translate-y-0.5 hover:border-[#0066FF] hover:shadow-[0_12px_28px_-8px_rgba(0,102,255,0.16)] dark:border-[#1E3358] dark:bg-[#0B1730] dark:hover:border-[#60A5FA] dark:hover:bg-[#12213F] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
+            className="group flex flex-col justify-between rounded-2xl border border-slate-200/90 bg-white p-5 shadow-xs transition-all duration-200 hover:-translate-y-0.5 hover:border-[#0066FF] hover:shadow-[0_12px_28px_-8px_rgba(0,102,255,0.16)] dark:border-[#1E3358] dark:bg-[#0B1730] dark:hover:border-[#0066FF] dark:hover:bg-[#12213F] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
           >
             <div>
               <div className="flex items-center justify-between">
@@ -183,7 +183,7 @@ export default async function AdminOverviewPage() {
               >
                 {overview.unreadMessagesCount > 0 ? "Perlu Respons" : "Inbox Bersih"}
               </span>
-              <span className="inline-flex items-center gap-1 text-xs font-bold text-[#0066FF] group-hover:translate-x-0.5 transition-transform dark:text-[#60A5FA]">
+              <span className="inline-flex items-center gap-1 text-xs font-bold text-[#0066FF] group-hover:translate-x-0.5 transition-transform dark:text-[#38BDF8]">
                 <span>Buka Inbox</span>
                 <ArrowRightIcon className="h-3 w-3" aria-hidden="true" />
               </span>
@@ -200,14 +200,14 @@ export default async function AdminOverviewPage() {
         {canViewContent ? (
           <Link
             href="/admin/konten/artikel"
-            className="group flex flex-col justify-between rounded-2xl border border-slate-200/90 bg-white p-5 shadow-xs transition-all duration-200 hover:-translate-y-0.5 hover:border-[#0066FF] hover:shadow-[0_12px_28px_-8px_rgba(0,102,255,0.16)] dark:border-[#1E3358] dark:bg-[#0B1730] dark:hover:border-[#60A5FA] dark:hover:bg-[#12213F] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
+            className="group flex flex-col justify-between rounded-2xl border border-slate-200/90 bg-white p-5 shadow-xs transition-all duration-200 hover:-translate-y-0.5 hover:border-[#0066FF] hover:shadow-[0_12px_28px_-8px_rgba(0,102,255,0.16)] dark:border-[#1E3358] dark:bg-[#0B1730] dark:hover:border-[#0066FF] dark:hover:bg-[#12213F] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
           >
             <div>
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold uppercase tracking-wider text-[#5A6E85] dark:text-[#94A7C4]">
                   Artikel Publik
                 </span>
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-[#0066FF] dark:bg-[#12213F] dark:text-[#60A5FA]">
+                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#EAF4FC] text-[#0066FF] dark:bg-[#12213F] dark:text-[#38BDF8]">
                   <FileTextIcon className="h-4 w-4" aria-hidden="true" />
                 </div>
               </div>
@@ -223,10 +223,10 @@ export default async function AdminOverviewPage() {
             </div>
 
             <div className="mt-4 flex items-center justify-between border-t border-slate-100 pt-3 dark:border-[#1E3358]/80">
-              <span className="inline-block rounded-md bg-blue-100 px-2 py-0.5 text-[11px] font-bold text-blue-800 dark:bg-[#12213F] dark:text-[#94A7C4]">
+              <span className="inline-block rounded-md bg-[#EAF4FC] border border-[#D4E6FC] px-2 py-0.5 text-[11px] font-bold text-[#0066FF] dark:bg-[#12213F] dark:text-[#94A7C4]">
                 +{overview.draftArticles} Draf Aktif
               </span>
-              <span className="inline-flex items-center gap-1 text-xs font-bold text-[#0066FF] group-hover:translate-x-0.5 transition-transform dark:text-[#60A5FA]">
+              <span className="inline-flex items-center gap-1 text-xs font-bold text-[#0066FF] group-hover:translate-x-0.5 transition-transform dark:text-[#38BDF8]">
                 <span>Kelola Blog</span>
                 <ArrowRightIcon className="h-3 w-3" aria-hidden="true" />
               </span>
@@ -238,7 +238,7 @@ export default async function AdminOverviewPage() {
         {canViewContent ? (
           <Link
             href="/admin/konten/portofolio"
-            className="group flex flex-col justify-between rounded-2xl border border-slate-200/90 bg-white p-5 shadow-xs transition-all duration-200 hover:-translate-y-0.5 hover:border-[#0066FF] hover:shadow-[0_12px_28px_-8px_rgba(0,102,255,0.16)] dark:border-[#1E3358] dark:bg-[#0B1730] dark:hover:border-[#60A5FA] dark:hover:bg-[#12213F] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
+            className="group flex flex-col justify-between rounded-2xl border border-slate-200/90 bg-white p-5 shadow-xs transition-all duration-200 hover:-translate-y-0.5 hover:border-[#0066FF] hover:shadow-[0_12px_28px_-8px_rgba(0,102,255,0.16)] dark:border-[#1E3358] dark:bg-[#0B1730] dark:hover:border-[#0066FF] dark:hover:bg-[#12213F] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
           >
             <div>
               <div className="flex items-center justify-between">
@@ -264,7 +264,7 @@ export default async function AdminOverviewPage() {
               <span className="inline-block rounded-md bg-indigo-100 px-2 py-0.5 text-[11px] font-bold text-indigo-800 dark:bg-indigo-950/40 dark:text-indigo-300">
                 Studi Kasus
               </span>
-              <span className="inline-flex items-center gap-1 text-xs font-bold text-[#0066FF] group-hover:translate-x-0.5 transition-transform dark:text-[#60A5FA]">
+              <span className="inline-flex items-center gap-1 text-xs font-bold text-[#0066FF] group-hover:translate-x-0.5 transition-transform dark:text-[#38BDF8]">
                 <span>Kelola Portofolio</span>
                 <ArrowRightIcon className="h-3 w-3" aria-hidden="true" />
               </span>
@@ -276,7 +276,7 @@ export default async function AdminOverviewPage() {
         {canViewContent ? (
           <Link
             href="/admin/konten/layanan"
-            className="group flex flex-col justify-between rounded-2xl border border-slate-200/90 bg-white p-5 shadow-xs transition-all duration-200 hover:-translate-y-0.5 hover:border-[#0066FF] hover:shadow-[0_12px_28px_-8px_rgba(0,102,255,0.16)] dark:border-[#1E3358] dark:bg-[#0B1730] dark:hover:border-[#60A5FA] dark:hover:bg-[#12213F] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
+            className="group flex flex-col justify-between rounded-2xl border border-slate-200/90 bg-white p-5 shadow-xs transition-all duration-200 hover:-translate-y-0.5 hover:border-[#0066FF] hover:shadow-[0_12px_28px_-8px_rgba(0,102,255,0.16)] dark:border-[#1E3358] dark:bg-[#0B1730] dark:hover:border-[#0066FF] dark:hover:bg-[#12213F] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
           >
             <div>
               <div className="flex items-center justify-between">
@@ -302,7 +302,7 @@ export default async function AdminOverviewPage() {
               <span className="inline-block rounded-md bg-cyan-100 px-2 py-0.5 text-[11px] font-bold text-cyan-800 dark:bg-cyan-950/40 dark:text-cyan-300">
                 {overview.publishedPricingPlans} Paket Harga
               </span>
-              <span className="inline-flex items-center gap-1 text-xs font-bold text-[#0066FF] group-hover:translate-x-0.5 transition-transform dark:text-[#60A5FA]">
+              <span className="inline-flex items-center gap-1 text-xs font-bold text-[#0066FF] group-hover:translate-x-0.5 transition-transform dark:text-[#38BDF8]">
                 <span>Kelola Layanan</span>
                 <ArrowRightIcon className="h-3 w-3" aria-hidden="true" />
               </span>
@@ -323,7 +323,7 @@ export default async function AdminOverviewPage() {
             >
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between border-b border-slate-100 pb-4 dark:border-[#1E3358]">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-[#0066FF] dark:bg-[#12213F] dark:text-[#60A5FA]">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#EAF4FC] text-[#0066FF] dark:bg-[#12213F] dark:text-[#38BDF8]">
                     <EnvelopeClosedIcon className="h-5 w-5" aria-hidden="true" />
                   </div>
                   <div>
@@ -352,7 +352,7 @@ export default async function AdminOverviewPage() {
 
               {overview.recentMessages.length === 0 ? (
                 <div className="py-12 text-center">
-                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-[#0066FF] dark:bg-[#12213F] dark:text-[#60A5FA]">
+                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-[#EAF4FC] text-[#0066FF] dark:bg-[#12213F] dark:text-[#38BDF8]">
                     <EnvelopeClosedIcon className="h-6 w-6" aria-hidden="true" />
                   </div>
                   <p className="mt-3 text-sm font-bold text-[#041E42] dark:text-[#F1F5FB]">
@@ -395,7 +395,7 @@ export default async function AdminOverviewPage() {
                           <p className="truncate text-xs text-[#5A6E85] dark:text-[#94A7C4]">
                             {msg.email}
                           </p>
-                          <p className="mt-0.5 text-[11px] font-medium text-[#0066FF] dark:text-[#60A5FA]">
+                          <p className="mt-0.5 text-[11px] font-medium text-[#0066FF] dark:text-[#38BDF8]">
                             Kebutuhan: {msg.service || "Konsultasi Umum"}
                           </p>
                         </div>
@@ -408,7 +408,7 @@ export default async function AdminOverviewPage() {
                         </div>
                         <Link
                           href="/admin/pesan"
-                          className="inline-flex min-h-11 items-center justify-center rounded-lg px-2.5 text-xs font-semibold text-[#0066FF] hover:bg-blue-50 dark:text-[#60A5FA] dark:hover:bg-[#12213F] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF]"
+                          className="inline-flex min-h-11 items-center justify-center rounded-lg px-2.5 text-xs font-semibold text-[#0066FF] hover:bg-[#EAF4FC] dark:text-[#38BDF8] dark:hover:bg-[#12213F] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF]"
                         >
                           Tinjau
                         </Link>
@@ -428,7 +428,7 @@ export default async function AdminOverviewPage() {
             >
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between border-b border-slate-100 pb-4 dark:border-[#1E3358]">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-[#0066FF] dark:bg-[#12213F] dark:text-[#60A5FA]">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#EAF4FC] text-[#0066FF] dark:bg-[#12213F] dark:text-[#38BDF8]">
                     <FileTextIcon className="h-5 w-5" aria-hidden="true" />
                   </div>
                   <div>
@@ -490,7 +490,7 @@ export default async function AdminOverviewPage() {
                         </span>
                         <Link
                           href={`/admin/konten/artikel?edit=${art.id}`}
-                          className="inline-flex min-h-11 items-center justify-center rounded-lg px-2.5 text-xs font-semibold text-[#0066FF] hover:bg-blue-50 dark:text-[#60A5FA] dark:hover:bg-[#12213F] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF]"
+                          className="inline-flex min-h-11 items-center justify-center rounded-lg px-2.5 text-xs font-semibold text-[#0066FF] hover:bg-[#EAF4FC] dark:text-[#38BDF8] dark:hover:bg-[#12213F] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF]"
                         >
                           Sunting
                         </Link>
@@ -644,7 +644,7 @@ export default async function AdminOverviewPage() {
 
                 <Link
                   href="/admin/audit"
-                  className="inline-flex min-h-11 items-center gap-1 text-xs font-bold text-[#0066FF] hover:underline dark:text-[#60A5FA] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF]"
+                  className="inline-flex min-h-11 items-center gap-1 text-xs font-bold text-[#0066FF] hover:underline dark:text-[#38BDF8] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF]"
                 >
                   <span>Lihat Semua</span>
                   <ArrowRightIcon className="h-3 w-3" aria-hidden="true" />
@@ -682,7 +682,7 @@ export default async function AdminOverviewPage() {
                     className="flex min-h-11 items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-3 text-xs font-semibold text-[#041E42] hover:bg-slate-100 dark:border-[#4E6E9E] dark:bg-[#12213F] dark:text-[#F1F5FB] dark:hover:bg-[#192D54] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8]"
                   >
                     <div className="flex items-center gap-2">
-                      <PersonIcon className="h-3.5 w-3.5 text-[#0066FF] dark:text-[#60A5FA]" aria-hidden="true" />
+                      <PersonIcon className="h-3.5 w-3.5 text-[#0066FF] dark:text-[#38BDF8]" aria-hidden="true" />
                       <span>Manajemen Pengguna & Peran</span>
                     </div>
                     <ArrowRightIcon className="h-3.5 w-3.5 text-[#5A6E85] dark:text-[#94A7C4]" aria-hidden="true" />

@@ -182,7 +182,7 @@ export function AdminSidebar({
               className="h-[28px] w-auto object-contain"
             />
           </Link>
-          <span className="rounded-md border border-blue-200 dark:border-[#4E6E9E] bg-blue-50 dark:bg-[#12213F] px-2 py-0.5 text-[10px] font-bold text-[#0066FF] dark:text-[#94A7C4]">
+          <span className="rounded-md border border-[#D4E6FC] dark:border-[#4E6E9E] bg-[#EAF4FC] dark:bg-[#12213F] px-2 py-0.5 text-[10px] font-bold text-[#0066FF] dark:text-[#94A7C4]">
             CMS
           </span>
         </div>
@@ -270,7 +270,7 @@ export function AdminSidebar({
                         aria-current={active ? "page" : undefined}
                         className={`flex min-h-11 items-center justify-between rounded-xl px-3 text-xs font-semibold transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0066FF] dark:focus-visible:outline-[#38BDF8] ${
                           active
-                            ? "bg-blue-50 text-[#0066FF] font-bold border-l-4 border-l-[#0066FF] rounded-r-xl rounded-l-none pl-3 dark:bg-[#12213F] dark:text-[#60A5FA] dark:border-l-[#38BDF8]"
+                            ? "bg-[#EAF4FC] text-[#0066FF] font-bold border-l-4 border-l-[#0066FF] rounded-r-xl rounded-l-none pl-3 dark:bg-[#12213F] dark:text-[#38BDF8] dark:border-l-[#38BDF8]"
                             : "border border-transparent text-[#5A6E85] dark:text-[#94A7C4] hover:bg-slate-100 dark:hover:bg-[#12213F] hover:text-[#041E42] dark:hover:text-[#F1F5FB]"
                         }`}
                       >
@@ -278,7 +278,7 @@ export function AdminSidebar({
                           <Icon
                             className={`h-4 w-4 shrink-0 ${
                               active
-                                ? "text-[#0066FF] dark:text-[#60A5FA]"
+                                ? "text-[#0066FF] dark:text-[#38BDF8]"
                                 : "text-[#5A6E85] dark:text-[#94A7C4]"
                             }`}
                           />
