@@ -34,7 +34,7 @@ Tujuh prinsip di bawah ini merupakan ketetapan arsitektur yang dikunci untuk rut
   - `LeadStatus`: `BARU`, `DIHUBUNGI`, `PROPOSAL`, `DEAL`, `BATAL`
   - `ProjectStatus`: `PERSIAPAN`, `AKTIF`, `REVISI`, `SELESAI`
   - `UserRole`: `STAFF` (satu peran tunggal yang setara)
-  - `EmergencyActionType`: `UNPUBLISH_CONTENT`, `LOCK_CONTACT_FORM`, `UNLOCK_CONTACT_FORM`, `SET_ALERT_BANNER`, `REMOVE_ALERT_BANNER`, `REASSIGN_STAFF`
+  - `EmergencyActionType`: `UNPUBLISH_CONTENT`, `LOCK_CONTACT_FORM`, `UNLOCK_CONTACT_FORM`, `SET_ALERT_BANNER`, `REMOVE_ALERT_BANNER`, `REASSIGN_STAFF`, `REVOKE_SESSION`
   - `AnalyticsEventName`: `pageview`, `whatsapp_click`, `form_submit`, `heartbeat`
 
 ### 1.5 Format Respons Tunggal (*Single Envelope Pattern*)
@@ -413,7 +413,7 @@ Setiap kali melakukan mutasi pembaruan (`PUT`, `PATCH`, `publish`, `archive`), k
    - `GET /api/v1/faqs`: Daftar seluruh FAQ internal (aktif maupun nonaktif).
    - `GET /api/v1/faqs/:id`: Detail FAQ.
    - `PATCH /api/v1/faqs/:id`: Memperbarui teks pertanyaan/jawaban atau mengubah toggle keaktifan (`isActive: boolean`) dengan validasi `updatedAt`.
-   - `DELETE /api/v1/faqs/:id`: Menghapus FAQ secara permanen atau soft toggle `isActive: false`.
+   - `DELETE /api/v1/faqs/:id`: Melakukan soft toggle dengan mengubah status keaktifan FAQ menjadi nonaktif (`isActive: false`) secara aman tanpa menghapus baris dari database, selaras dengan prinsip soft delete sistem.
    - *Catatan:* Tidak ada endpoint `/publish` atau `/archive` untuk FAQs.
 
 3. **Ulasan Klien (`testimonials`) [Pengecualian: Default PUBLISHED]:**
@@ -822,7 +822,7 @@ Jika selama masa pengerjaan Fase 1 terdapat permintaan untuk fitur-fitur di bawa
 
 ### Versi 1.0 (30 Oktober 2026)
 * Penyusunan cetak biru kontrak REST API resmi untuk rute `/api/v1`.
-* Berlandaskan penuh pada [`docs/schema-database-v1.1.md`](file:///C:/Users/Indra/Documents/Documents/Proyek-NAYKON/docs/schema-database-v1.1.md), spesifikasi [`docs/cms-v2.2.md`](file:///C:/Users/Indra/Documents/Documents/Proyek-NAYKON/docs/cms-v2.2.md), [`docs/analytics-v2.2.md`](file:///C:/Users/Indra/Documents/Documents/Proyek-NAYKON/docs/analytics-v2.2.md), [`docs/crm-v2.2.md`](file:///C:/Users/Indra/Documents/Documents/Proyek-NAYKON/docs/crm-v2.2.md), dan arsitektur [`docs/architecture-desktop-vs-mobile-v1.1.md`](file:///C:/Users/Indra/Documents/Documents/Proyek-NAYKON/docs/architecture-desktop-vs-mobile-v1.1.md).
+* Berlandaskan penuh pada [docs/schema-database-v1.1.md](./schema-database-v1.1.md), spesifikasi [docs/cms-v2.2.md](./cms-v2.2.md), [docs/analytics-v2.2.md](./analytics-v2.2.md), [docs/crm-v2.2.md](./crm-v2.2.md), dan arsitektur [docs/architecture-desktop-vs-mobile-v1.1.md](./architecture-desktop-vs-mobile-v1.1.md).
 * Mengunci 7 keputusan arsitektur beku pada halaman pertama.
 * Menyediakan kontrak lengkap untuk 8 endpoint publik, 2 endpoint intake publik dengan proteksi berlapis, serta seluruh endpoint terproteksi internal (Auth, CMS, Media, CRM, Analitik, dan Emergency Toolkit).
 * Menstandarkan aturan `heartbeat` dan `durationSec` pada analitik untuk menjamin akurasi data agregasi.

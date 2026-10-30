@@ -94,6 +94,7 @@ Nilai enum di bawah ini harus sama persis antara skema Prisma, validasi Zod, API
 * `SET_ALERT_BANNER`: Pengaktifan strip banner pengumuman darurat di situs publik.
 * `REMOVE_ALERT_BANNER`: Penonaktifan strip banner darurat.
 * `REASSIGN_STAFF`: Pengalihan penanggung jawab prospek/proyek saat staf berhalangan.
+* `REVOKE_SESSION`: Pencabutan darurat seluruh sesi aktif pengguna saat perangkat HP hilang atau tertinggal.
 
 ### 2.6 `ActivityActionType` (Jenis Jejak Aktivitas CRM & CMS)
 * `LEAD_STATUS_CHANGED`: Perubahan status pada sales pipeline.
@@ -824,6 +825,7 @@ enum EmergencyActionType {
   SET_ALERT_BANNER
   REMOVE_ALERT_BANNER
   REASSIGN_STAFF
+  REVOKE_SESSION
 }
 
 enum ActivityActionType {
