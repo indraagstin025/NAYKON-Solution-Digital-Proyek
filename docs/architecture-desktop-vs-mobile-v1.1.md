@@ -18,10 +18,22 @@ Untuk mencegah antarmuka mobile menjadi lambat, rumit, dan tidak nyaman digunaka
    **"Pusat Komando & Kreasi Lengkap (*Deep Work & Command Center*)"**
    - Dioperasikan saat anggota tim duduk di meja kerja.
    - Dikhususkan untuk tugas mendalam: penulisan artikel panjang, tata letak portofolio resolusi tinggi, penataan jadwal Gantt chart multi-minggu di layar lebar, dan analisis data bisnis komprehensif.
-2. **Aplikasi Mobile / Web Mobile Responsif (Smartphone Android & iOS):**
+2. **Aplikasi Mobile (Flutter untuk Android & iOS):**
    **"Pendamping Reaksi Cepat & Alat Darurat (*Action Companion & Emergency Toolkit*)"**
+   - Dibangun menggunakan framework **Flutter** (satu basis kode untuk Android & iOS) yang berkomunikasi dengan API backend Next.js melalui rute RESTful JSON.
    - Dioperasikan saat anggota tim sedang bergerak (*on-the-go*), di luar kantor, atau di akhir pekan.
-   - Dikhususkan untuk respon cepat: merespons prospek klien seketika, membuka agenda follow-up harian, memantau angka ringkas hari ini, dan mengeksekusi penyelamatan darurat dalam hitungan detik.
+   - Dikhususkan untuk respon cepat: merespons prospek klien seketika (integrasi `url_launcher` WhatsApp), membuka agenda follow-up harian, memantau angka ringkas hari ini, dan mengeksekusi penyelamatan darurat dalam hitungan detik.
+
+### 1.1 Spesifikasi Teknologi Aplikasi Mobile (Flutter)
+
+* **Framework & Bahasa:** Flutter (Dart), mendukung kompilasi native untuk Android dan iOS dari satu basis kode (*Single Codebase*).
+* **Integrasi Backend:** Mengonsumsi REST API JSON dari Route Handlers Next.js App Router (`/api/v1/...`).
+* **Autentikasi & Keamanan:** Token sesi terenkripsi menggunakan Secure Storage pada perangkat mobile dengan header `Authorization: Bearer <token>` dan validasi parameter `site_id: "nextkarya-main"`.
+* **Keunggulan untuk Tim Next Karya:**
+  - Performa render UI native 60 fps yang ringan dan hemat baterai di seluruh tipe smartphone.
+  - Integrasi native cepat: membuka obrolan WhatsApp via package `url_launcher` tanpa jeda.
+  - Haptic feedback dan dialog konfirmasi instan saat mengeksekusi aksi darurat (*Emergency Toolkit*).
+  - Kesiapan integrasi push notification di Fase 2 via Firebase Cloud Messaging (FCM).
 
 ```
 ┌────────────────────────────────────────────────────────┐
