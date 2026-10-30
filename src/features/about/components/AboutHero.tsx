@@ -13,14 +13,14 @@ export function AboutHero() {
           TENTANG TIM KAMI
         </p>
         <h1 className="nk-hero-enter nk-hero-delay-1 mt-3 text-[30px] sm:text-[40px] lg:text-[44px] font-extrabold leading-[1.15] tracking-[-0.02em] text-white">
-          Mengenal Next Karya{" "}
+          Mengenal Next Karya:{" "}
           <span className="text-[#0986C8]">
-            Lebih Dekat
+            Mitra Pertumbuhan Digital Anda
           </span>
         </h1>
-        <p className="nk-hero-enter nk-hero-delay-2 mx-auto mt-4 max-w-[660px] text-[14px] sm:text-[15px] leading-[1.7] text-slate-200">
-          Kami adalah tim yang berdedikasi untuk menghadirkan solusi digital terbaik
-          bagi bisnis Anda dengan komitmen hasil yang nyata dan berkelanjutan.
+        <p className="nk-hero-enter nk-hero-delay-2 mx-auto mt-4 max-w-[680px] text-[14px] sm:text-[15px] leading-[1.7] text-slate-200">
+          Kami tidak sekadar membuat website. Kami membangun solusi digital yang
+          bekerja nyata untuk memperkuat kredibilitas bisnis Anda dan mendatangkan pelanggan.
         </p>
       </div>
     </section>

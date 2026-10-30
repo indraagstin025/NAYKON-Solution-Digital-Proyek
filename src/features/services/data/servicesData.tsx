@@ -64,26 +64,41 @@ export const SERVICES_LIST = [
 export const SERVICE_WORKFLOW_STEPS = [
   {
     step: "Tahap 01",
-    title: "Discovery & Spesifikasi",
-    desc: "Pemetaan tujuan bisnis, spesifikasi fitur, dan estimasi jadwal pengerjaan.",
+    stepNumber: "01 / 04",
+    title: "Brief dan Struktur",
+    desc: "Konsultasi awal, gali tujuan website, siapa targetnya, dan layanan apa yang mau ditonjolkan. Dari situ dibuat sitemap, alias daftar halamannya, plus checklist konten yang harus dikirim klien.",
+    output:
+      "Sitemap dan checklist konten yang sudah disetujui. Ini penting, karena konten yang telat biasanya yang bikin proyek molor.",
+    image: "/assets/workflow/workflow-brief.png",
     icon: <MagnifyingGlassIcon className="h-5 w-5" />,
   },
   {
     step: "Tahap 02",
-    title: "Desain UI/UX & Alur",
-    desc: "Penyusunan wireframe dan prototipe interaktif sebelum tahap penulisan kode.",
+    stepNumber: "02 / 04",
+    title: "Desain",
+    desc: "Dibuat mockup di Figma, biasanya untuk beranda dan satu halaman dalam. Klien bisa lihat dulu tampilannya, termasuk tombol WhatsApp-nya jelas atau tidak, sebelum masuk ke koding. Revisinya dibatasi, misalnya 2 kali, supaya tidak berlarut-larut.",
+    output: "Desain yang sudah disetujui klien.",
+    image: "/assets/workflow/workflow-design.png",
     icon: <LayoutIcon className="h-5 w-5" />,
   },
   {
     step: "Tahap 03",
-    title: "Rekayasa Kode & QA",
-    desc: "Pengembangan berstandar bersih, integrasi API, dan pengujian lintas perangkat.",
+    stepNumber: "03 / 04",
+    title: "Pembangunan",
+    desc: "Desain yang disetujui dibangun jadi website, konten dimasukkan, form dan tombol WhatsApp dipasang, SEO dasar dirapikan, dan dashboard analitik dasar ikut dipasang supaya klien bisa lihat pengunjung dan klik WhatsApp.",
+    output:
+      "Link staging, alias website versi percobaan yang bisa dicek klien sebelum rilis.",
+    image: "/assets/workflow/workflow-build.png",
     icon: <CodeIcon className="h-5 w-5" />,
   },
   {
     step: "Tahap 04",
-    title: "Deployment & Garansi",
-    desc: "Peluncuran ke server produksi disertai pelatihan tim dan garansi pemeliharaan.",
+    stepNumber: "04 / 04",
+    title: "Uji, Rilis, dan Serah Terima",
+    desc: "Website dites di HP dan laptop, dicek kecepatan, link, dan form-nya. Kalau lolos, baru dipasang ke domain dan hosting klien, lalu ada demo singkat cara membaca dashboard dan cara minta update.",
+    output:
+      "Website sudah live, plus panduan singkat dan garansi perbaikan bug.",
+    image: "/assets/workflow/workflow-release.png",
     icon: <RocketIcon className="h-5 w-5" />,
   },
 ];
