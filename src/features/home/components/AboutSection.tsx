@@ -19,40 +19,32 @@ export function AboutSection() {
         className="pointer-events-none absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-[#0986C8]/5 dark:bg-[#005090]/15 blur-3xl"
       />
 
-      <div className="relative z-10 mx-auto w-full max-w-[1240px] px-6 sm:px-9 lg:px-14 grid items-center gap-12 lg:grid-cols-[1fr_1fr] lg:gap-14">
-        {/* Kolom Kiri: Logo, Badge, Judul, Deskripsi, dan Foto Tim */}
-        <ScrollReveal direction="left" className="flex flex-col">
-          <div className="mb-3.5">
-            <Image
-              src="/logo/logo-gabungan.png"
-              alt="Next Karya Digital Solutions"
-              width={260}
-              height={82}
-              className="h-[32px] sm:h-[36px] w-auto object-contain"
-            />
+      <div className="relative z-10 mx-auto w-full max-w-[1240px] px-6 sm:px-9 lg:px-14 grid items-stretch gap-10 lg:grid-cols-2 lg:gap-12">
+        {/* Kolom Kiri: Badge, Judul, Deskripsi, dan Foto Tim */}
+        <ScrollReveal direction="left" className="h-full flex flex-col justify-between">
+          <div>
+            <div className="inline-flex items-center gap-2 rounded-full bg-[#005090] px-3.5 py-1 text-white shadow-sm w-fit">
+              <span className="h-2 w-2 rounded-full bg-white shrink-0" />
+              <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.12em] text-white">
+                TENTANG TIM KAMI
+              </span>
+            </div>
+
+            <h2 className="mt-4 text-[26px] sm:text-[32px] lg:text-[35px] font-extrabold leading-[1.18] tracking-[-0.02em] text-[#041E42] dark:text-white">
+              Solusi digital yang dibangun
+              <br className="hidden sm:inline" /> berdasarkan kebutuhan{" "}
+              <span className="text-[#005090] dark:text-[#0986C8]">
+                riil bisnis Anda.
+              </span>
+            </h2>
+
+            <p className="mt-3.5 text-[13.5px] sm:text-[14.5px] leading-[1.7] text-[#4A5D78] dark:text-slate-300">
+              Next Karya Digital Solutions adalah tim rekayasa web dan aplikasi yang berfokus
+              pada hasil terukur. Tim kami merancang arsitektur website dan sistem yang
+              cepat, aman, dan mudah dioperasikan agar bisnis Anda dapat berkembang secara
+              efisien.
+            </p>
           </div>
-
-          <div className="inline-flex items-center gap-2 rounded-full bg-[#005090] px-3.5 py-1 text-white shadow-sm w-fit">
-            <span className="h-2 w-2 rounded-full bg-white shrink-0" />
-            <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.12em] text-white">
-              TENTANG TIM KAMI
-            </span>
-          </div>
-
-          <h2 className="mt-4 text-[26px] sm:text-[32px] lg:text-[35px] font-extrabold leading-[1.18] tracking-[-0.02em] text-[#041E42] dark:text-white">
-            Solusi digital yang dibangun
-            <br className="hidden sm:inline" /> berdasarkan kebutuhan{" "}
-            <span className="text-[#005090] dark:text-[#0986C8]">
-              riil bisnis Anda.
-            </span>
-          </h2>
-
-          <p className="mt-3.5 text-[13.5px] sm:text-[14.5px] leading-[1.7] text-[#4A5D78] dark:text-slate-300">
-            Next Karya Digital Solutions adalah tim rekayasa web dan aplikasi yang berfokus
-            pada hasil terukur. Tim kami merancang arsitektur website dan sistem yang
-            cepat, aman, dan mudah dioperasikan agar bisnis Anda dapat berkembang secara
-            efisien.
-          </p>
 
           <div className="relative mt-6 sm:mt-7">
             <div
@@ -65,7 +57,7 @@ export function AboutSection() {
                 alt="Tim programmer Next Karya Digital Solutions berkolaborasi merancang arsitektur sistem"
                 width={960}
                 height={680}
-                className="h-[230px] sm:h-[270px] md:h-[290px] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                className="h-[210px] sm:h-[235px] lg:h-[230px] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
               />
 
               <div className="absolute bottom-3 left-3 right-3 sm:right-auto sm:max-w-[360px] rounded-xl border border-white/40 dark:border-slate-700/60 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md px-3.5 py-2.5 shadow-[0_10px_25px_-5px_rgba(10,35,80,0.18)] flex items-center gap-3 transition-transform duration-300 group-hover:-translate-y-0.5">
@@ -86,9 +78,9 @@ export function AboutSection() {
           </div>
         </ScrollReveal>
 
-        {/* Kolom Kanan: 4 Card Keunggulan dalam Grid 2x2 */}
-        <ScrollReveal direction="right" className="flex items-center">
-          <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4.5">
+        {/* Kolom Kanan: 4 Card Keunggulan dalam Grid 2x2 yang Sejajar */}
+        <ScrollReveal direction="right" className="h-full">
+          <div className="grid grid-cols-1 sm:grid-cols-2 sm:grid-rows-2 gap-3.5 sm:gap-4.5 h-full">
             {ABOUT_FEATURES.map((item) => (
               <div
                 key={item.title}
@@ -98,7 +90,7 @@ export function AboutSection() {
                   <div className="flex h-10 w-10 sm:h-11 sm:w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#005090] to-[#002857] text-white shadow-xs transition-transform duration-300 group-hover:scale-105 mb-3.5">
                     {item.icon}
                   </div>
-                  <h3 className="text-[13.5px] sm:text-[14.5px] font-bold text-[#041E42] dark:text-white transition-colors duration-200 group-hover:text-[#005090] dark:group-hover:text-[#0986C8] leading-snug">
+                  <h3 className="text-[13.5px] sm:text-[14.5px] font-bold text-[#041E42] dark:text-white transition-colors duration-200 group-hover:text-[#005090] dark:group-hover:text-[#0986C8] leading-snug min-h-[40px] flex items-center">
                     {item.title}
                   </h3>
                   <p className="mt-2 text-xs sm:text-[12.5px] leading-[1.65] text-[#4A5D78] dark:text-slate-300">
