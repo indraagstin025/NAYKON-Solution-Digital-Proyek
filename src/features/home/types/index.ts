@@ -33,7 +33,8 @@ export interface WorkflowStepItem {
   badge: string;
   title: string;
   description: string;
-  milestone: string;
+  output: string;
+  milestone?: string;
   icon: React.ReactNode;
   image: string;
   deliverables?: string[];

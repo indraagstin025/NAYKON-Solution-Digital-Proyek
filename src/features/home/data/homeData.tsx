@@ -124,61 +124,48 @@ export const WORKFLOW_STEPS: WorkflowStepItem[] = [
   {
     stepNumber: "01 / 04",
     badge: "Tahap 01",
-    title: "Discovery, Riset & Arsitektur Solusi",
+    title: "Brief dan Struktur",
     description:
-      "Konsultasi mendalam untuk membedah model bisnis, alur kerja operasional, dan ekspektasi pengguna. Kami merumuskan spesifikasi teknis (SRS), arsitektur sistem, serta estimasi linimasa yang realistis.",
-    milestone: "Spesifikasi & Arsitektur SRS",
-    image: "/assets/workflow/workflow-discovery.jpg",
-    deliverables: [
-      "Pemetaan Kebutuhan & User Story",
-      "Dokumen Spesifikasi Teknis (SRS)",
-      "Arsitektur Database & Solusi Cloud",
-    ],
+      "Konsultasi awal, gali tujuan website, siapa targetnya, dan layanan apa yang mau ditonjolkan. Dari situ dibuat sitemap, alias daftar halamannya, plus checklist konten yang harus dikirim klien.",
+    output:
+      "Sitemap dan checklist konten yang sudah disetujui. Ini penting, karena konten yang telat biasanya yang bikin proyek molor.",
+    milestone: "Sitemap & Checklist Disetujui",
+    image: "/assets/workflow/workflow-brief.png",
     icon: <MagnifyingGlassIcon className="h-5 w-5" />,
   },
   {
     stepNumber: "02 / 04",
     badge: "Tahap 02",
-    title: "Desain UI/UX & Prototipe Interaktif",
+    title: "Desain",
     description:
-      "Penyusunan arsitektur informasi, wireframe tata letak, dan antarmuka visual modern berbasis design system terstandarisasi. Anda dapat menguji alur aplikasi secara nyata di Figma sebelum tahap koding.",
-    milestone: "Prototipe Interaktif Figma",
-    image: "/assets/workflow/workflow-design.jpg",
-    deliverables: [
-      "Wireframe & User Flow Terstruktur",
-      "Design System & Komponen UI",
-      "Prototipe Interaktif Siap Uji",
-    ],
+      "Dibuat mockup di Figma, biasanya untuk beranda dan satu halaman dalam. Klien bisa lihat dulu tampilannya, termasuk tombol WhatsApp-nya jelas atau tidak, sebelum masuk ke koding. Revisinya dibatasi, misalnya 2 kali, supaya tidak berlarut-larut.",
+    output: "Desain yang sudah disetujui klien.",
+    milestone: "Desain Disetujui Klien",
+    image: "/assets/workflow/workflow-design.png",
     icon: <LayoutIcon className="h-5 w-5" />,
   },
   {
     stepNumber: "03 / 04",
     badge: "Tahap 03",
-    title: "Pengembangan Agile & Rekayasa Kode",
+    title: "Pembangunan",
     description:
-      "Implementasi sistem menggunakan metodologi Agile Scrum dengan siklus sprint mingguan. Kode dibangun berstandar clean architecture, integrasi API aman, serta reviu kode berlapis untuk performa maksimal.",
-    milestone: "Clean Code & Sprint Review",
-    image: "/assets/workflow/workflow-development.jpg",
-    deliverables: [
-      "Siklus Sprint & Demo Berkala",
-      "Clean Architecture & Modular Code",
-      "Integrasi API & Database Teroptimasi",
-    ],
+      "Desain yang disetujui dibangun jadi website, konten dimasukkan, form dan tombol WhatsApp dipasang, SEO dasar dirapikan, dan dashboard analitik dasar ikut dipasang supaya klien bisa lihat pengunjung dan klik WhatsApp.",
+    output:
+      "Link staging, alias website versi percobaan yang bisa dicek klien sebelum rilis.",
+    milestone: "Link Staging Siap Dicek",
+    image: "/assets/workflow/workflow-build.png",
     icon: <CodeIcon className="h-5 w-5" />,
   },
   {
     stepNumber: "04 / 04",
     badge: "Tahap 04",
-    title: "Pengujian QA, Peluncuran & Pemeliharaan",
+    title: "Uji, Rilis, dan Serah Terima",
     description:
-      "Pengujian menyeluruh meliputi fungsionalitas, performa beban, kompatibilitas perangkat, dan audit keamanan sistem. Setelah verifikasi lolos, sistem dirilis ke server produksi dengan garansi dan pendampingan.",
-    milestone: "Rilis Produksi & Garansi SLA",
-    image: "/assets/workflow/workflow-deployment.jpg",
-    deliverables: [
-      "Automated & Manual QA Testing",
-      "Deployment Server Produksi CI/CD",
-      "Garansi Bug & Pemeliharaan SLA",
-    ],
+      "Website dites di HP dan laptop, dicek kecepatan, link, dan form-nya. Kalau lolos, baru dipasang ke domain dan hosting klien, lalu ada demo singkat cara membaca dashboard dan cara minta update.",
+    output:
+      "Website sudah live, plus panduan singkat dan garansi perbaikan bug.",
+    milestone: "Website Live & Garansi Bug",
+    image: "/assets/workflow/workflow-release.png",
     icon: <RocketIcon className="h-5 w-5" />,
   },
 ];

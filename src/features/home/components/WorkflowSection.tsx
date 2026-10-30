@@ -60,14 +60,14 @@ export function WorkflowSection() {
             <ScrollReveal key={step.stepNumber} delayMs={idx * 80} className="h-full">
               <article className="group relative overflow-hidden h-full flex flex-col justify-between rounded-[26px] bg-white dark:bg-slate-900 border border-[#E2E8F0] dark:border-slate-800 p-5 sm:p-5.5 shadow-[0_12px_36px_-10px_rgba(10,35,80,0.06)] transition-all duration-300 hover:-translate-y-2 hover:border-[#005090] dark:hover:border-[#0986C8] hover:shadow-[0_22px_48px_-10px_rgba(0,80,144,0.16)]">
                 <div>
-                  {/* 3D Animated Illustration Box */}
-                  <div className="relative w-full aspect-square overflow-hidden rounded-2xl bg-gradient-to-b from-[#F1F6FB] to-[#E2EDF8] dark:from-slate-800 dark:to-slate-900 border border-slate-200/80 dark:border-slate-800 mb-5">
+                  {/* 2D Cartoon Illustration Box */}
+                  <div className="relative w-full aspect-square overflow-hidden rounded-2xl bg-gradient-to-b from-[#F4F8FC] to-[#E5F0FA] dark:from-slate-800 dark:to-slate-900 border border-slate-200/80 dark:border-slate-800 mb-5">
                     <Image
                       src={step.image}
                       alt={step.title}
                       width={512}
                       height={512}
-                      className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-108 group-hover:-rotate-1"
+                      className="h-full w-full object-contain p-2 transition-transform duration-500 ease-out group-hover:scale-108 group-hover:-rotate-1"
                     />
                     <span className="absolute top-3 left-3 rounded-full bg-[#005090] text-white px-3 py-1 text-[10.5px] font-bold shadow-md tracking-wider uppercase">
                       {step.badge}
@@ -77,29 +77,23 @@ export function WorkflowSection() {
                     </span>
                   </div>
 
-                  <h3 className="text-[15.5px] sm:text-[16.5px] font-extrabold tracking-[-0.015em] text-[#041E42] dark:text-white transition-colors duration-200 group-hover:text-[#005090] dark:group-hover:text-[#0986C8] leading-snug min-h-[46px] flex items-center">
+                  <h3 className="text-[16px] sm:text-[17px] font-extrabold tracking-[-0.015em] text-[#041E42] dark:text-white transition-colors duration-200 group-hover:text-[#005090] dark:group-hover:text-[#0986C8] leading-snug min-h-[44px] flex items-center">
                     {step.title}
                   </h3>
                   <p className="mt-2.5 text-[12.5px] sm:text-[13px] leading-[1.68] text-[#4A5D78] dark:text-slate-300">
                     {step.description}
                   </p>
 
-                  {/* Output Deliverables List */}
-                  {step.deliverables && (
-                    <div className="mt-4 pt-3.5 border-t border-slate-100 dark:border-slate-800/80 space-y-1.5">
-                      <p className="text-[10px] font-bold uppercase tracking-wider text-[#005090] dark:text-[#0986C8]">
-                        Output Tahapan:
-                      </p>
-                      <ul className="space-y-1.5">
-                        {step.deliverables.map((item) => (
-                          <li key={item} className="flex items-center gap-2 text-[11.5px] text-[#4A5D78] dark:text-slate-300">
-                            <span className="h-1.5 w-1.5 rounded-full bg-[#0986C8] shrink-0" />
-                            <span className="leading-tight">{item}</span>
-                          </li>
-                        ))}
-                      </ul>
+                  {/* Output Highlight Callout Box */}
+                  <div className="mt-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 p-3.5 border border-slate-200/80 dark:border-slate-700/60">
+                    <div className="flex items-center gap-1.5 text-[11px] font-extrabold uppercase tracking-wider text-[#005090] dark:text-[#0986C8]">
+                      <CheckCircledIcon className="h-3.5 w-3.5 text-[#005090] dark:text-[#0986C8] shrink-0" />
+                      <span>Output-nya:</span>
                     </div>
-                  )}
+                    <p className="mt-1 text-xs leading-relaxed text-[#4A5D78] dark:text-slate-300 font-medium">
+                      {step.output}
+                    </p>
+                  </div>
                 </div>
 
                 {/* Footer Milestone */}
