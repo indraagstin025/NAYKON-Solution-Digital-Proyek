@@ -94,7 +94,7 @@ Nilai enum di bawah ini harus sama persis antara skema Prisma, validasi Zod, API
 * `SET_ALERT_BANNER`: Pengaktifan strip banner pengumuman darurat di situs publik.
 * `REMOVE_ALERT_BANNER`: Penonaktifan strip banner darurat.
 * `REASSIGN_STAFF`: Pengalihan penanggung jawab prospek/proyek saat staf berhalangan.
-* `REVOKE_SESSION`: Pencabutan darurat seluruh sesi aktif pengguna saat perangkat HP hilang atau tertinggal.
+* `REVOKE_SESSION`: Pencabutan darurat seluruh sesi aktif pengguna saat perangkat HP hilang atau tertinggal (menaikkan `tokenVersion` pada tabel `users` dan mencatat log audit darurat dengan target entitas `USER`).
 
 ### 2.6 `ActivityActionType` (Jenis Jejak Aktivitas CRM & CMS)
 * `LEAD_STATUS_CHANGED`: Perubahan status pada sales pipeline.
@@ -641,7 +641,7 @@ Menampung counter pembatasan akses bot per IP untuk form CRM dan endpoint analit
 ### Kelompok 5: Keamanan & Tanggap Darurat (*Emergency Toolkit*)
 
 #### Tabel 20: `emergency_audit_logs` (Jejak Audit Aksi Darurat & Rollback)
-Mencatat seluruh aksi takedown konten, penguncian form, banner darurat, dan pengalihan tugas staf.
+Mencatat seluruh aksi takedown konten, penguncian form, banner darurat, pengalihan tugas staf, serta pencabutan darurat sesi login mobile staf (`REVOKE_SESSION`).
 
 | Nama Kolom | Tipe PostgreSQL | Tipe Prisma | Atribut | Nullable | Default | Keterangan |
 | :--- | :--- | :--- | :--- | :---: | :--- | :--- |
@@ -649,7 +649,7 @@ Mencatat seluruh aksi takedown konten, penguncian form, banner darurat, dan peng
 | `site_id` | `VARCHAR(64)` | `String` | - | Tidak | `nextkarya-main` | Identitas situs tempat insiden terjadi |
 | `actorId` | `VARCHAR(64)` | `String` | - | Tidak | - | Staf yang mengeksekusi aksi |
 | `actionType` | `VARCHAR(50)` | `EmergencyActionType` | - | Tidak | - | Jenis tindakan darurat |
-| `targetEntity` | `VARCHAR(50)` | `String` | - | Tidak | - | Entitas terdampak (`POST`, `FORM`, `LEAD`, dll) |
+| `targetEntity` | `VARCHAR(50)` | `String` | - | Tidak | - | Entitas terdampak (`POST`, `FORM`, `LEAD`, `USER`, dll) |
 | `targetId` | `VARCHAR(64)?` | `String?` | - | Ya | `null` | ID entitas terkait (misal: ID artikel) |
 | `reason` | `TEXT` | `String` | - | Tidak | - | Alasan darurat yang diinputkan staf |
 | `previousState` | `JSONB?` | `Json?` | - | Ya | `null` | Status sebelum aksi (untuk kebutuhan rollback) |
@@ -1378,3 +1378,15 @@ WHERE "id" IN (
   WHERE ranked.row_num > 5
 );
 ```
+
+---
+
+## 8. Riwayat Perubahan Skema (Changelog)
+
+### Versi 1.1 (30 Oktober 2026)
+* Penyusunan skema database PostgreSQL dan model Prisma resmi sebagai *Single Source of Truth*.
+* Pemodelan lengkap 20 tabel entitas sistem: Identitas & Tenant (`sites`, `users`), CMS Konten (`categories`, `tags`, `articles`, `portfolios`, `services`, `pricing_plans`, `faqs`, `testimonials`, `pages`, `content_snapshots`), Media (`media_assets`), CRM Prospek & Proyek (`leads`, `lead_notes`, `lead_activities`, `projects`, `project_milestones`), Analitik Ringan (`analytics_events`, `analytics_daily`), serta Keamanan & Tanggap Darurat (`emergency_audit_logs`).
+* Penambahan nilai enum `REVOKE_SESSION` pada `EmergencyActionType` di Bab 2.5 dan model Prisma untuk mendukung endpoint pencabutan darurat sesi staf HP hilang (`POST /api/v1/users/:id/revoke-sessions`) yang menaikkan `tokenVersion` dan mencatat audit log dengan target entitas `USER`.
+* Penguncian rollup analitik inkremental harian dengan CTE `session_summary` untuk kalkulasi `sessions`, `bounces`, dan `durationSec` secara presisi 100%.
+* Seluruh enum dan tipe data diselaraskan identik dengan kontrak resmi [`docs/api-contracts-v1.0.md`](./api-contracts-v1.0.md).
+

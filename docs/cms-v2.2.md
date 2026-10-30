@@ -171,6 +171,7 @@ Karena pada tahap awal (MVP) diterapkan sistem **1 Role Tunggal** di mana semua 
       "action": "revalidate"
     }
     ```
+  - **Catatan Penyelarasan Kontrak:** Nilai `"action": "revalidate"` dikunci baku dan selaras 100% dengan kontrak REST API resmi (`./api-contracts-v1.0.md` Bab 5.6).
   - **Kriteria Selesai & Toleransi Kegagalan (Failure Handling):**
     - Cache di website Next.js wajib terhapus dalam waktu maksimal **3 detik** setelah webhook diterima.
     - Jika server Next.js gagal merespons atau timeout, backend CMS secara otomatis melakukan **retry sebanyak 3 kali dengan jeda eksponensial (*exponential backoff: 2s, 4s, 8s*)** dan mencatat status kegagalan di log sistem.

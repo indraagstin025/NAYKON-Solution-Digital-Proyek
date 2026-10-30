@@ -29,12 +29,12 @@ Tujuh prinsip di bawah ini merupakan ketetapan arsitektur yang dikunci untuk rut
   - Dilarang keras menuliskan `siteId` pada endpoint apa pun.
 
 ### 1.4 Keselarasan Nilai Enum Baku
-* Nilai enum dikunci identik dengan `schema-database-v1.1.md`:
+* Nilai enum dikunci identik 100% dengan `schema-database-v1.1.md` (Bab 2.5, Tabel 20, dan model Prisma):
   - `ContentStatus`: `DRAFT`, `PUBLISHED`, `ARCHIVED`
   - `LeadStatus`: `BARU`, `DIHUBUNGI`, `PROPOSAL`, `DEAL`, `BATAL`
   - `ProjectStatus`: `PERSIAPAN`, `AKTIF`, `REVISI`, `SELESAI`
   - `UserRole`: `STAFF` (satu peran tunggal yang setara)
-  - `EmergencyActionType`: `UNPUBLISH_CONTENT`, `LOCK_CONTACT_FORM`, `UNLOCK_CONTACT_FORM`, `SET_ALERT_BANNER`, `REMOVE_ALERT_BANNER`, `REASSIGN_STAFF`, `REVOKE_SESSION`
+  - `EmergencyActionType`: `UNPUBLISH_CONTENT`, `LOCK_CONTACT_FORM`, `UNLOCK_CONTACT_FORM`, `SET_ALERT_BANNER`, `REMOVE_ALERT_BANNER`, `REASSIGN_STAFF`, `REVOKE_SESSION` (selaras penuh untuk pencabutan darurat sesi staf HP hilang)
   - `AnalyticsEventName`: `pageview`, `whatsapp_click`, `form_submit`, `heartbeat`
 
 ### 1.5 Format Respons Tunggal (*Single Envelope Pattern*)
@@ -743,6 +743,7 @@ Ini adalah halaman kerja operasional pagi hari yang dibuka oleh ketiga anggota t
   "action": "revalidate"
 }
 ```
+* **Catatan Penyelarasan Spesifikasi:** Nilai `"action": "revalidate"` dikunci baku dan selaras 100% dengan dokumen spesifikasi CMS ([`docs/cms-v2.2.md`](./cms-v2.2.md) Pilar 5).
 * **Kebijakan Percobaan Ulang (*Retry & Backoff*):**
   - Jika webhook mengembalikan status non-2xx atau waktu tunggu habis, sistem otomatis mencoba ulang maksimal 3 kali dengan jeda waktu eksponensial: 2 detik, 4 detik, dan 8 detik.
   - Target batas waktu pembersihan cache website publik: **< 3 detik**.
@@ -827,4 +828,5 @@ Jika selama masa pengerjaan Fase 1 terdapat permintaan untuk fitur-fitur di bawa
 * Menyediakan kontrak lengkap untuk 8 endpoint publik, 2 endpoint intake publik dengan proteksi berlapis, serta seluruh endpoint terproteksi internal (Auth, CMS, Media, CRM, Analitik, dan Emergency Toolkit).
 * Menstandarkan aturan `heartbeat` dan `durationSec` pada analitik untuk menjamin akurasi data agregasi.
 * Mengunci batas ukuran berkas media dan MIME types resmi.
+* Menegaskan keselarasan enum `REVOKE_SESSION` dengan `docs/schema-database-v1.1.md` Bab 2.5 dan Tabel 20, serta payload webhook `"action": "revalidate"` dengan `docs/cms-v2.2.md` Pilar 5.
 * Mengunci daftar fitur Fase 2 dan kriteria selesai kinerja per kelompok endpoint.
