@@ -71,10 +71,10 @@ export function HeroSection() {
 
             <div className="nk-hero-enter nk-hero-delay-2 mt-6 flex flex-wrap items-center gap-3.5">
               <Link
-                href="/kontak"
+                href="#layanan"
                 className="group inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-[#005090] hover:bg-[#003E70] px-6 py-3 text-[13.5px] font-semibold text-white shadow-[0_10px_25px_-5px_rgba(0,80,144,0.45)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_14px_30px_-5px_rgba(0,80,144,0.55)] active:scale-[0.98]"
               >
-                <span>Mulai Berkolaborasi</span>
+                <span>Lihat Layanan</span>
                 <ArrowRightIcon className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
               </Link>
               <Link
