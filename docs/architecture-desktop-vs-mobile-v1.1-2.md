@@ -1,8 +1,8 @@
 # Panduan & Arsitektur Peran: Desktop Web vs Aplikasi Mobile
 **Next Karya Digital Solutions**  
 *Cetak Biru Pembagian Fitur Antara Pusat Komando Desktop dan Pendamping Mobile*  
-*Versi: 1.1 (Action-First Companion & Emergency Toolkit)*  
-*Tanggal: 30 Oktober 2026*
+*Versi: 1.1-2 Kanonik (Action-First Companion & Emergency Toolkit)*  
+*Tanggal: 31 Oktober 2026*
 
 > [!IMPORTANT]
 > **Batasan Lingkup & Hak Akses (Fase 1 vs Fase Berikutnya):**  
@@ -67,7 +67,7 @@ Untuk mencegah antarmuka mobile menjadi lambat, rumit, dan tidak nyaman digunaka
 | **2. Timeline Proyek & Tim** | • **Tampilan Gantt Chart Horizontal Lebar:**<br>Melihat balok durasi proyek melintasi banyak hari dan banyak anggota tim sekaligus.<br>• Menata jadwal dan alokasi tugas tim. | • **Tampilan Agenda Vertikal Harian (*Card List*):**<br>Daftar tugas harian ringkas: tugas harian Staf A (Programmer), Staf B (Desainer), dan Staf C (Lead) tanpa tabel horizontal sempit. | **Fase 1 (MVP)** |
 | **3. CMS (Konten & Media)** | • **Studio Konten Lengkap:**<br>Editor artikel kaya (*rich text*), unggah galeri gambar resolusi tinggi, kurasi portofolio, dan snapshot otomatis 5 versi. | • **Pemantauan Status & Tindakan Darurat:**<br>Melihat daftar artikel yang sudah tayang.<br>• **1-Tap Emergency Unpublish:** Menurunkan konten bermasalah seketika.<br>• Koreksi cepat teks krusial (nomor WA/harga). | **Fase 1 (MVP)** |
 | **4. Dashboard Analitik** | • **Analisis Bisnis Mendalam:**<br>Grafik tren multi-minggu, tabel halaman terpopuler, analisis saluran rujukan (Google/Medsos), dan *Ekspor CSV/Excel (Fase 2)*. | • **Sekilas Angka Hari Ini (*Quick Pulse Check*):**<br>4 angka ringkas di layar utama HP:<br>1. Pengunjung unik hari ini.<br>2. Klik WhatsApp hari ini.<br>3. Leads baru hari ini.<br>4. Estimasi nilai proyek bulan ini. | **Fase 1 (MVP)**<br>*(Ekspor: Fase 2)* |
-| **5. Tindakan Darurat (*Emergency*)** | • Konfigurasi teknis mendalam dan pemeriksaan audit log sistem lengkap. | • **Sakelar Darurat Kunci Form Kontak** jika web diserang bot spam (alihkan form ke WA).<br>• **Sakelar Banner Darurat Website** (*Announcement*).<br>• **Alihkan Tugas Staf** jika rekan kerja sakit/darurat.<br>• *Putus Sesi HP Hilang (Fase 2)*. | **Fase 1 (MVP)**<br>*(Revoke: Fase 2)* |
+| **5. Tindakan Darurat (*Emergency*)** | • Konfigurasi teknis mendalam dan pemeriksaan audit log sistem lengkap. | • **Sakelar Darurat Kunci Form Kontak** jika web diserang bot spam (alihkan form ke WA).<br>• **Sakelar Banner Darurat Website** (*Announcement*).<br>• **Alihkan Tugas Staf** jika rekan kerja sakit/darurat.<br>• **Putus Sesi HP Hilang (`REVOKE_SESSION`)** via kenaikan tokenVersion & Redis. | **Fase 1 (MVP)** |
 
 ---
 
@@ -105,8 +105,9 @@ Aplikasi mobile dirancang untuk merespons skenario krisis operasional dalam wakt
 * **Sakelar Darurat "Kunci Formulir Kontak" (*Pause Form to WhatsApp - Fase 1 MVP*):**
   - Jika website publik tiba-tiba diserang banjir spam bot yang melewati batas wajar, sakelar ini langsung menonaktifkan pengiriman formulir web dan mengubah tampilan formulir menjadi tombol langsung menuju WhatsApp resmi tim.
   - Mencegah basis data CRM tercemar oleh ribuan entri sampah saat tim sedang mencari solusi pengetatan firewall.
-* **Pemutusan Sesi Login HP Hilang (*Emergency Revoke Session - Fase 2*):**
-  - Jika salah satu ponsel anggota tim tertinggal atau hilang, rekan tim melalui menu keamanan dapat mencabut seluruh token sesi aktif ponsel tersebut demi melindungi data klien. Fitur ini dialokasikan pada Fase 2 bersamaan dengan penguatan manajemen sesi terpusat di Redis.
+* **Pemutusan Sesi Login HP Hilang (*Emergency Revoke Session - Fase 1 MVP*):**
+  - Jika salah satu ponsel anggota tim tertinggal atau hilang, rekan staf lain dapat memicu endpoint darurat `POST /api/v1/users/:id/revoke-sessions`.
+  - Sistem seketika menaikkan `tokenVersion` staf tersebut di Redis dan database PostgreSQL, serta mencatat log audit darurat dengan `actionType: "REVOKE_SESSION"` dan target entitas `USER`. Seluruh token JWT yang beredar pada perangkat lama seketika ditolak dengan status HTTP `403 Forbidden`.
 
 ---
 
@@ -145,3 +146,13 @@ Dengan menerapkan arsitektur pemisahan ini:
 1. **Pengembangan Mobile Lebih Terfokus & Efisien:** Tim pengembang tidak perlu memaksakan pembuatan komponen layar lebar yang tidak ergonomis di ponsel (seperti tabel Gantt horizontal dan editor konten kaya).
 2. **Kinerja Antarmuka Ponsel Maksimal:** Antarmuka mobile sangat ringan, responsif, hemat kuota data, dan cepat dimuat di jaringan seluler.
 3. **Kesiapsiagaan Operasional Tinggi:** Anggota tim Next Karya Digital Solutions memiliki perlindungan darurat (*Emergency Toolkit*) di genggaman tangan untuk merespons insiden konten atau serangan spam kapan saja.
+
+---
+
+## 7. Riwayat Pembaruan Dokumen (*Changelog*)
+
+### Versi 1.1-2 Kanonik (31 Oktober 2026)
+* Menyelaraskan status pemutusan sesi darurat HP hilang (`REVOKE_SESSION`) menjadi cakupan resmi Fase 1 (MVP) berbasis `tokenVersion` dan cache Redis.
+* Memutakhirkan rujukan arsitektur backend ke layanan Golang dan database PostgreSQL dengan partisi `site_id: "nextkarya-main"`.
+* Menyatakan berkas ini sebagai dokumen arsitektur komparatif kanonik (`architecture-desktop-vs-mobile-v1.1-2.md`).
+

@@ -1,8 +1,8 @@
 # Indeks Dokumentasi Teknis Sistem Internal
 **Next Karya Digital Solutions**  
 *Pusat Navigasi, Riwayat Pembaruan (*Changelog*), dan Glosarium Istilah Sistem*  
-*Versi Master: 2.2 / 1.1*  
-*Tanggal: 30 Oktober 2026*
+*Versi Master: Kanonik 2026*  
+*Tanggal Berlaku: 31 Oktober 2026*
 
 > [!IMPORTANT]
 > **Batasan Lingkup & Hak Akses (Fase 1 vs Fase Berikutnya):**  
@@ -10,19 +10,19 @@
 
 ---
 
-## 1. Daftar Dokumen Aktif (*Single Source of Truth*)
+## 1. Daftar Dokumen Kanonik Sistem (*Single Source of Truth*)
 
-Seluruh pengembangan fitur, pemodelan skema database, penulisan API, dan perancangan antarmuka mengacu secara tunggal pada 7 dokumen aktif di bawah ini:
+Seluruh pengembangan fitur, pemodelan skema database, penulisan API, dan perancangan antarmuka mengacu secara tunggal pada 7 dokumen kanonik di bawah ini:
 
 | Nama Berkas | Versi | Cakupan Sistem | Target Pengguna & Perangkat |
 | :--- | :---: | :--- | :--- |
-| [system-architecture-v1.0.md](./system-architecture-v1.0.md) | **v1.0** | Cetak Biru Arsitektur Terintegrasi (Backend Golang, Postgres, Redis, Web Next.js, Mobile Flutter). | Seluruh Tim Rekayasa & Arsitek |
-| [schema-database-v1.1.md](./schema-database-v1.1.md) | **v1.1** | Struktur Tabel PostgreSQL, Model Prisma Lengkap, Relasi, Indeks Konkurensi, dan Seed Data. | Pengembang Backend & Database |
-| [api-contracts-v1.0.md](./api-contracts-v1.0.md) | **v1.0** | Cetak Biru Kontrak REST API /api/v1, Skema Zod, Format Respons Tunggal, dan Integrasi Mobile. | Seluruh Tim Pengembang (Backend, Web & Mobile) |
-| [cms-v2.2.md](./cms-v2.2.md) | **v2.2** | Manajemen Konten, Galeri Portofolio, Snapshot Riwayat, Pembersihan Cache Webhook, dan Takedown Darurat. | Tim Internal (Desktop & Mobile) |
-| [analytics-v2.2.md](./analytics-v2.2.md) | **v2.2** | Mesin Pengukur Trafik Ringan (< 2 KB), Perlindungan Anti-Spam Bot, Pelacakan Konversi WhatsApp, dan Dashboard Tren. | Tim Internal (Desktop & Mobile) |
-| [crm-v2.2.md](./crm-v2.2.md) | **v2.2** | Kotak Masuk Prospek (*Leads*), Agenda Follow-Up Harian, Pipeline Penjualan 5 Tahap, dan Timeline Beban Kerja Tim. | Tim Internal (Desktop & Mobile) |
-| [architecture-desktop-vs-mobile-v1.1.md](./architecture-desktop-vs-mobile-v1.1.md) | **v1.1** | Cetak Biru Pembagian Peran Desktop Web vs Mobile Flutter (*Action Companion*), Emergency Toolkit, dan Kriteria Selesai. | Seluruh Tim Pengembang (Web & Mobile Flutter) |
+| [system-architecture-v1.0.md](./system-architecture-v1.0.md) | **v1.0 Final** | Cetak Biru Arsitektur Terintegrasi (Backend Golang, Postgres, Redis, Web Next.js, Mobile Flutter). | Seluruh Tim Rekayasa & Arsitek |
+| [schema-database-v1.1-3.md](./schema-database-v1.1-3.md) | **v1.1-3 Kanonik** | Struktur 20 Tabel PostgreSQL, Model Relasional, Indeks Konkurensi, & Representasi Go / sqlc. | Pengembang Backend & Database |
+| [api-contracts-v1.0-6.md](./api-contracts-v1.0-6.md) | **v1.0-6 Kanonik** | Cetak Biru Kontrak REST API /api/v1, Validasi Struct Go, Format Respons Tunggal, & Mobile. | Seluruh Tim Pengembang (Backend, Web & Mobile) |
+| [cms-v2.2-2.md](./cms-v2.2-2.md) | **v2.2-2 Kanonik** | Manajemen Konten, Galeri Portofolio, Snapshot Riwayat, Pembersihan Cache Webhook, & Takedown. | Tim Internal (Desktop & Mobile) |
+| [analytics-v2.2.md](./analytics-v2.2.md) | **v2.2 Kanonik** | Mesin Pengukur Trafik Ringan (< 2 KB), Proteksi Bot, Konversi WA, Ingesti Redis, & Rollup Jam. | Tim Internal (Desktop & Mobile) |
+| [crm-v2.2.md](./crm-v2.2.md) | **v2.2 Kanonik** | Kotak Masuk Prospek (*Leads*), Agenda Follow-Up Harian, Pipeline Penjualan 5 Tahap, & Timeline Tim. | Tim Internal (Desktop & Mobile) |
+| [architecture-desktop-vs-mobile-v1.1-2.md](./architecture-desktop-vs-mobile-v1.1-2.md) | **v1.1-2 Kanonik** | Pembagian Peran Desktop Web vs Mobile Flutter (*Action Companion*), Emergency Toolkit Fase 1. | Seluruh Tim Pengembang (Web & Mobile Flutter) |
 
 > [!NOTE]
 > Seluruh berkas spesifikasi versi lama (v1.0 dan v2.0) telah dipindahkan ke direktori `docs/archive/` sebagai arsip historis. Tim dilarang melakukan modifikasi pada berkas di dalam folder arsip tersebut.

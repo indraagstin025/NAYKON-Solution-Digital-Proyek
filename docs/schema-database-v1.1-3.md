@@ -1,8 +1,8 @@
-# Spesifikasi Skema Basis Data PostgreSQL & Prisma (Single Source of Truth)
+# Spesifikasi Skema Basis Data PostgreSQL (Single Source of Truth)
 **Next Karya Digital Solutions**  
-*Cetak Biru Struktur Tabel, Relasi, Indeks, Konkurensi, dan Prosedur Agregasi Sistem*  
-*Versi: 1.1 (Penyelarasan Penuh Spesifikasi CMS, CRM, Analitik, & Arsitektur)*  
-*Tanggal: 30 Oktober 2026*
+*Cetak Biru Struktur 20 Tabel Relasional, Indeks, Konkurensi, dan Representasi Go / sqlc / Prisma*  
+*Versi: 1.1-3 Kanonik (Struktur Tabel Relasional PostgreSQL & Padanan Go)*  
+*Tanggal Berlaku: 31 Oktober 2026*
 
 > [!IMPORTANT]
 > **Batasan Lingkup & Hak Akses (Fase 1 vs Fase Berikutnya):**  
@@ -12,21 +12,21 @@
 
 ## 1. Prinsip Utama Desain Basis Data
 
-Dokumen ini merupakan satu-satunya sumber kebenaran (*single source of truth*) untuk seluruh pemodelan data PostgreSQL dan `schema.prisma`. Seluruh pengembang wajib mematuhi aturan baku berikut:
+Dokumen ini merupakan satu-satunya sumber kebenaran (*single source of truth*) untuk seluruh pemodelan data PostgreSQL. Seluruh pengembang backend Golang wajib mematuhi aturan baku berikut:
 
 ### 1.1 Konvensi Penamaan Kolom
-* **Kolom `site_id` (Snake Case):** Wajib ditulis `site_id` (menggunakan garis bawah) di seluruh tabel dan skema Prisma. Dilarang mengubahnya menjadi `siteId` agar konsisten dengan parameter REST API, query string, dan header integrasi lintas sistem.
-* **Kolom Lainnya (Camel Case):** Seluruh kolom entitas lainnya menggunakan standar camelCase (contoh: `lastEditedById`, `visitorIdHash`, `nextFollowUpDate`) sesuai konvensi TypeScript dan Prisma.
+* **Kolom `site_id` (Snake Case):** Wajib ditulis `site_id` (menggunakan garis bawah) di seluruh tabel dan skema relasional. Dilarang mengubahnya menjadi `siteId` agar konsisten dengan parameter REST API, query string, dan header integrasi lintas sistem.
+* **Kolom Lainnya (Camel Case):** Seluruh kolom entitas lainnya menggunakan standar camelCase (contoh: `lastEditedById`, `visitorIdHash`, `nextFollowUpDate`) yang dipetakan langsung ke struct field Go dan model skema.
 
 ### 1.2 Multi-Tenancy Sejak Hari Pertama
-* Kolom `site_id` bertipe `String` wajib hadir dan terindeks di seluruh tabel konten, media, prospek CRM, jadwal proyek, analitik, hingga log audit.
+* Kolom `site_id` bertipe `VARCHAR(64)` wajib hadir dan terindeks di 17 tabel entitas data (konten, media, prospek CRM, jadwal proyek, analitik, hingga log audit). Tiga tabel tingkat sistem yang dikecualikan dari kolom `site_id` adalah `sites` (master tenant), `users` (master kredensial staf), dan `rate_limits` (rekayasa IP).
 * Pada Fase 1 (MVP), seluruh baris data menggunakan nilai `site_id: "nextkarya-main"`.
 * Skema ini menjamin isolasi data siap pakai saat situs klien ditambahkan pada Fase 2 tanpa perlu migrasi pemecah kode (*zero breaking migration*).
 
-### 1.3 Standar Zona Waktu (UTC di Database, WIB di Tampilan)
-* Seluruh stempel waktu disimpan dalam format UTC menggunakan tipe PostgreSQL `TIMESTAMPTZ` (`DateTime @default(now())`).
+### 1.3 Standar Waktu & Pemisahan Tanggal
+* **Stempel Waktu Transaksi:** Seluruh stempel waktu transaksi (`occurredAt`, `createdAt`, `updatedAt`, `publishedAt`) disimpan dalam format UTC menggunakan tipe PostgreSQL `TIMESTAMPTZ(3)`.
+* **Kolom Tanggal Murni (DATE):** Kolom penanggalan murni kalender tanpa jam (`nextFollowUpDate` pada `leads`, serta `startDate`, `targetEndDate`, dan `warrantyExpiryDate` pada `project_schedules`) disimpan menggunakan tipe data `DATE`.
 * Lapisan antarmuka pengguna (Next.js Desktop Web dan Flutter Mobile) bertugas mengonversi waktu UTC menjadi Waktu Indonesia Barat (WIB / UTC+7) saat disajikan kepada staf.
-* Berlaku mutlak untuk `nextFollowUpDate`, `warrantyExpiryDate`, `startDate`, `endDate`, `occurredAt`, `createdAt`, dan `updatedAt`.
 
 ### 1.4 Satu Peran Tunggal yang Setara (*Single Role: STAFF*)
 * Seluruh 3 anggota tim internal (Staf A Programmer, Staf B Desainer, Staf C Project Lead) memiliki hak akses yang setara dan penuh (*full operational permissions*).
@@ -776,7 +776,11 @@ DO UPDATE SET
 
 ---
 
-## 5. Berkas Skema Lengkap (`prisma/schema.prisma`)
+## 5. Berkas Skema Lengkap (`prisma/schema.prisma`) & Padanan Tipe Go
+
+> [!NOTE]
+> **Representasi Skema untuk Backend Go:**  
+> PostgreSQL adalah satu-satunya sumber kebenaran (*Single Source of Truth*) untuk seluruh struktur data, tipe kolom, dan constraint. Definisi model Prisma di bawah ini berfungsi sebagai representasi deklaratif dan skema migrasi DDL awal. Pada backend Golang, pemetaan query data menggunakan driver native `pgx` atau generator tipe Go `sqlc` yang membaca langsung DDL PostgreSQL yang sama, sehingga tidak terdapat divergensi struktur antar-bahasa.
 
 Berikut adalah berkas Prisma Schema lengkap yang merefleksikan seluruh tabel di atas:
 
@@ -1384,10 +1388,23 @@ WHERE "id" IN (
 
 ## 8. Riwayat Perubahan Skema (Changelog)
 
+### Versi 1.1-3 Kanonik (31 Oktober 2026)
+* Penetapan status berkas sebagai Skema Basis Data Kanonik (`schema-database-v1.1-3.md`) yang menjadi acuan tunggal struktur 20 tabel sistem.
+* Memperbaiki daftar 20 tabel entitas relasional sebenarnya di sistem:
+  - Identitas & Multi-Tenant: `sites`, `users`.
+  - CMS Konten: `categories`, `posts`, `services`, `faqs`, `testimonials`, `pages`, `content_snapshots`.
+  - SEO & Redirects: `redirects`.
+  - Media: `media`.
+  - CRM Prospek & Proyek: `leads`, `interaction_logs`, `activity_logs`, `project_schedules`.
+  - Analitik Ringan: `analytics_events`, `analytics_daily`.
+  - Keamanan & Tanggap Darurat: `rate_limits`, `emergency_audit_logs`.
+* Menegaskan pemisahan tipe waktu: `TIMESTAMPTZ(3)` untuk stempel waktu transaksi UTC, dan `DATE` untuk tanggal kalender (`nextFollowUpDate` dan `warrantyExpiryDate`).
+* Menegaskan bahwa 17 dari 20 tabel memuat kolom `site_id` (mengecualikan `sites`, `users`, dan `rate_limits`).
+* Menambahkan catatan keselarasan padanan tipe Go dan generator `sqlc` di Bab 1 dan Bab 5 untuk menjamin ketiadaan divergensi ganda.
+* Menyelaraskan seluruh tautan dan nilai enum dengan kontrak resmi [`docs/api-contracts-v1.0-6.md`](./api-contracts-v1.0-6.md) dan [`docs/system-architecture-v1.0.md`](./system-architecture-v1.0.md).
+
 ### Versi 1.1 (30 Oktober 2026)
-* Penyusunan skema database PostgreSQL dan model Prisma resmi sebagai *Single Source of Truth*.
-* Pemodelan lengkap 20 tabel entitas sistem: Identitas & Tenant (`sites`, `users`), CMS Konten (`categories`, `tags`, `articles`, `portfolios`, `services`, `pricing_plans`, `faqs`, `testimonials`, `pages`, `content_snapshots`), Media (`media_assets`), CRM Prospek & Proyek (`leads`, `lead_notes`, `lead_activities`, `projects`, `project_milestones`), Analitik Ringan (`analytics_events`, `analytics_daily`), serta Keamanan & Tanggap Darurat (`emergency_audit_logs`).
+* Penyusunan skema database PostgreSQL dan model Prisma awal sebagai fondasi struktur data.
 * Penambahan nilai enum `REVOKE_SESSION` pada `EmergencyActionType` di Bab 2.5 dan model Prisma untuk mendukung endpoint pencabutan darurat sesi staf HP hilang (`POST /api/v1/users/:id/revoke-sessions`) yang menaikkan `tokenVersion` dan mencatat audit log dengan target entitas `USER`.
 * Penguncian rollup analitik inkremental harian dengan CTE `session_summary` untuk kalkulasi `sessions`, `bounces`, dan `durationSec` secara presisi 100%.
-* Seluruh enum dan tipe data diselaraskan identik dengan kontrak resmi [`docs/api-contracts-v1.0.md`](./api-contracts-v1.0.md).
 

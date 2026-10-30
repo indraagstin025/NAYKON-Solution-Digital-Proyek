@@ -42,7 +42,7 @@ Untuk menjaga integritas dan kejujuran data:
 ┌────────────────────────────────────────────────────────────────────────┐
 │ BACKEND ANALITIK & PENGAMAN SPAM (Pertahanan Berlapis)                 │
 │ 1. Rate Limiting IP Ketat (Maks 60 req/menit) [Pengaman Utama]         │
-│ 2. Validasi site_id Terdaftar & Skema Payload Zod (< 2 KB)             │
+│ 2. Validasi site_id Terdaftar & Struct Tag Validator Go (< 2 KB)         │
 │ 3. Verifikasi Origin / Referer Header (Lapisan Tambahan)               │
 │ 4. Tabel Raw Event (TTL 90 Hari) & Agregasi Harian (Daily Rollup)      │
 └───────────────────┬────────────────────────────────────────────────────┘
@@ -182,16 +182,16 @@ Untuk melindungi endpoint dari serangan banjir bot, spam log, dan request palsu:
 1. **Rate Limiting IP Ketat (Pertahanan Utama):**
    - Dibatasi maksimal 60 permintaan per IP per menit menggunakan sliding window rate limiter di Redis atau memori server.
    - Permintaan yang melebihi batas langsung dibalas dengan HTTP status 429 Too Many Requests.
-2. **Validasi Skema Zod & Batas Payload:**
+2. **Validasi Struct Tag Go & Batas Payload:**
    - Ukuran payload maksimal 2 KB. Permintaan dengan *body* lebih besar langsung ditolak.
-   - Tipe data, panjang string, dan format kolom divalidasi ketat sebelum diproses.
+   - Tipe data, panjang string, dan format kolom divalidasi ketat menggunakan Go struct validator sebelum diproses.
 3. **Validasi `site_id` Aktif:**
    - Server memverifikasi apakah `site_id` terdaftar dan berstatus aktif di database. Jika tidak valid, permintaan ditolak (HTTP 404/400).
 4. **Verifikasi Origin / Referer (Lapisan Pertahanan Tambahan):**
    - Server mencocokkan header `Origin` atau `Referer` dengan daftar domain terdaftar untuk `site_id` tersebut (misal: `https://nextkarya.id` untuk `nextkarya-main`).
    - *Catatan Batasan Teknis:* Header Origin dan Referer dapat tidak terkirim pada beberapa aplikasi mobile webview atau dapat dipalsukan oleh bot tingkat lanjut. Oleh sebab itu, pemeriksaan Origin diposisikan sebagai **lapisan penyaring tambahan**, sedangkan Rate Limiting dan validasi skema tetap menjadi pertahanan utama.
 
-### 3.3 Desain Database & Skema Agregasi (PostgreSQL & Prisma)
+### 3.3 Desain Database & Skema Agregasi (PostgreSQL & Go / sqlc)
 
 1. **Tabel `AnalyticsEvent` (Data Mentah Transaksional):**
    - Kolom: `id`, `site_id`, `eventName`, `path`, `referrer`, `source`, `device`, `visitorIdHash`, `occurredAt`.

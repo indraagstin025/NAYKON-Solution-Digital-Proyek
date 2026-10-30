@@ -1,8 +1,8 @@
 # Spesifikasi & Daftar Fitur CRM (Tahap Awal & Multiplatform)
 **Next Karya Digital Solutions**  
 *Dokumen Arsitektur & Perencanaan Fitur Sistem Manajemen Hubungan Klien & Jadwal Proyek*  
-*Versi: 2.2 (Multi-User Concurrency, Anti-Collision, & Resource Timeline)*  
-*Tanggal: 30 Oktober 2026*
+*Versi: 2.2 Kanonik (Multi-User Concurrency, Anti-Collision, & Resource Timeline)*  
+*Tanggal Berlaku: 31 Oktober 2026*
 
 > [!IMPORTANT]
 > **Batasan Lingkup & Hak Akses (Fase 1 vs Fase Berikutnya):**  
@@ -74,7 +74,7 @@ Menampung seluruh calon klien yang masuk secara otomatis dari formulir website, 
   - **Honeypot Protection:** Menyediakan field tersembunyi `website_url` yang tidak terlihat oleh pengunjung biasa. Jika bot spam mengisi field ini, pengiriman formulir langsung diabaikan secara otomatis tanpa memicu error di klien.
   - **Rate Limiting Ketat (Pertahanan Utama):** Maksimal 5 pengiriman pesan per IP per 15 menit untuk mencegah serangan spam banjir formulir.
   - **Validasi Origin / Referer (Lapisan Pertahanan Tambahan):** Server memeriksa apakah pengiriman berasal dari domain resmi (`https://nextkarya.id`). Karena header Origin dapat hilang pada webview atau dimanipulasi, perlindungan utama tetap berpegang pada Honeypot dan Rate Limiting.
-  - **Validasi Zod & Sanitasi Teks:** Mencegah injeksi kode berbahaya, memotong spasi berlebih, dan membatasi panjang teks pesan maksimal 2.000 karakter.
+  - **Validasi Struct Tag Go & Sanitasi Teks:** Mencegah injeksi kode berbahaya, memotong spasi berlebih, dan membatasi panjang teks pesan maksimal 2.000 karakter.
 
 ---
 
