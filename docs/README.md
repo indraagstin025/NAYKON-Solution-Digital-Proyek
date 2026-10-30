@@ -12,11 +12,12 @@
 
 ## 1. Daftar Dokumen Aktif (*Single Source of Truth*)
 
-Seluruh pengembangan fitur, pemodelan skema database, penulisan API, dan perancangan antarmuka mengacu secara tunggal pada 5 dokumen aktif di bawah ini:
+Seluruh pengembangan fitur, pemodelan skema database, penulisan API, dan perancangan antarmuka mengacu secara tunggal pada 6 dokumen aktif di bawah ini:
 
 | Nama Berkas | Versi | Cakupan Sistem | Target Pengguna & Perangkat |
 | :--- | :---: | :--- | :--- |
 | [schema-database-v1.1.md](file:///C:/Users/Indra/Documents/Documents/Proyek-NAYKON/docs/schema-database-v1.1.md) | **v1.1** | Struktur Tabel PostgreSQL, Model Prisma Lengkap, Relasi, Indeks Konkurensi, dan Seed Data. | Pengembang Backend & Database |
+| [api-contracts-v1.0.md](file:///C:/Users/Indra/Documents/Documents/Proyek-NAYKON/docs/api-contracts-v1.0.md) | **v1.0** | Cetak Biru Kontrak REST API /api/v1, Skema Zod, Format Respons Tunggal, dan Integrasi Mobile. | Seluruh Tim Pengembang (Backend, Web & Mobile) |
 | [cms-v2.2.md](file:///C:/Users/Indra/Documents/Documents/Proyek-NAYKON/docs/cms-v2.2.md) | **v2.2** | Manajemen Konten, Galeri Portofolio, Snapshot Riwayat, Pembersihan Cache Webhook, dan Takedown Darurat. | Tim Internal (Desktop & Mobile) |
 | [analytics-v2.2.md](file:///C:/Users/Indra/Documents/Documents/Proyek-NAYKON/docs/analytics-v2.2.md) | **v2.2** | Mesin Pengukur Trafik Ringan (< 2 KB), Perlindungan Anti-Spam Bot, Pelacakan Konversi WhatsApp, dan Dashboard Tren. | Tim Internal (Desktop & Mobile) |
 | [crm-v2.2.md](file:///C:/Users/Indra/Documents/Documents/Proyek-NAYKON/docs/crm-v2.2.md) | **v2.2** | Kotak Masuk Prospek (*Leads*), Agenda Follow-Up Harian, Pipeline Penjualan 5 Tahap, dan Timeline Beban Kerja Tim. | Tim Internal (Desktop & Mobile) |
