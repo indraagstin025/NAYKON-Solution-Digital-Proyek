@@ -8,7 +8,7 @@ export function HeroSection() {
   return (
     <section
       id="beranda"
-      className="relative isolate overflow-hidden pt-[68px] lg:pt-[76px] bg-white dark:bg-[#030711] min-h-[auto] lg:min-h-dvh flex items-center"
+      className="relative isolate overflow-hidden pt-[68px] lg:pt-[76px] bg-gradient-to-b from-[#FFFFFF] via-[#F8FAFC] to-[#EAF2F9] dark:from-[#030711] dark:via-[#061231] dark:to-[#08183A] min-h-[auto] lg:min-h-dvh flex items-center"
     >
       {/* Background Tech Waves matching Brand Colors (Navy & Primary Blue) */}
       <div
@@ -19,7 +19,7 @@ export function HeroSection() {
           viewBox="0 0 1440 240"
           fill="none"
           preserveAspectRatio="none"
-          className="w-full h-full opacity-70 dark:opacity-20"
+          className="w-full h-full opacity-85 dark:opacity-25"
         >
           <path
             d="M0 75 C210 95, 370 185, 620 220 C880 250, 1180 140, 1440 70 L1440 240 L0 240 Z"
@@ -35,16 +35,18 @@ export function HeroSection() {
           />
           <defs>
             <linearGradient id="heroWaveBack" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#005090" stopOpacity="0.04" />
-              <stop offset="100%" stopColor="#002857" stopOpacity="0.06" />
+              <stop offset="0%" stopColor="#005090" stopOpacity="0.16" />
+              <stop offset="48%" stopColor="#0986C8" stopOpacity="0.10" />
+              <stop offset="100%" stopColor="#002857" stopOpacity="0.14" />
             </linearGradient>
             <linearGradient id="heroWaveLeft" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#0986C8" stopOpacity="0.05" />
-              <stop offset="100%" stopColor="#005090" stopOpacity="0.02" />
+              <stop offset="0%" stopColor="#005090" stopOpacity="0.20" />
+              <stop offset="65%" stopColor="#0986C8" stopOpacity="0.12" />
+              <stop offset="100%" stopColor="#002857" stopOpacity="0.05" />
             </linearGradient>
             <linearGradient id="heroWaveRight" x1="100%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="#0986C8" stopOpacity="0.05" />
-              <stop offset="100%" stopColor="#002857" stopOpacity="0.03" />
+              <stop offset="0%" stopColor="#0986C8" stopOpacity="0.18" />
+              <stop offset="100%" stopColor="#005090" stopOpacity="0.08" />
             </linearGradient>
           </defs>
         </svg>
@@ -117,13 +119,13 @@ export function HeroSection() {
               <defs>
                 {/* Aura using Brand Primary & Navy colors instead of pale baby blue */}
                 <linearGradient id="heroAuraOval" x1="15%" y1="5%" x2="85%" y2="95%">
-                  <stop offset="0%" stopColor="#005090" stopOpacity="0.12" />
-                  <stop offset="55%" stopColor="#0986C8" stopOpacity="0.06" />
-                  <stop offset="100%" stopColor="#002857" stopOpacity="0.09" />
+                  <stop offset="0%" stopColor="#005090" stopOpacity="0.16" />
+                  <stop offset="55%" stopColor="#0986C8" stopOpacity="0.09" />
+                  <stop offset="100%" stopColor="#002857" stopOpacity="0.13" />
                 </linearGradient>
 
                 <radialGradient id="heroBottomGlow" cx="52%" cy="76%" r="38%">
-                  <stop offset="0%" stopColor="#005090" stopOpacity="0.22" />
+                  <stop offset="0%" stopColor="#005090" stopOpacity="0.26" />
                   <stop offset="100%" stopColor="#005090" stopOpacity="0" />
                 </radialGradient>
 
@@ -142,7 +144,7 @@ export function HeroSection() {
 
                 {/* 3D Sphere using brand gradient */}
                 <radialGradient id="iceSphere3D" cx="72%" cy="72%" r="68%" fx="72%" fy="72%">
-                  <stop offset="0%" stopColor="#F8FAFC" />
+                  <stop offset="0%" stopColor="#EAF2F9" />
                   <stop offset="45%" stopColor="#0986C8" />
                   <stop offset="100%" stopColor="#002857" />
                 </radialGradient>
