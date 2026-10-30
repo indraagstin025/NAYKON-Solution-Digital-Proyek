@@ -60,7 +60,17 @@ export function WorkflowSection() {
             <ScrollReveal key={step.stepNumber} delayMs={idx * 80} className="h-full">
               <article className="group relative overflow-hidden h-full flex flex-col justify-between rounded-[26px] bg-white dark:bg-slate-900 border border-[#E2E8F0] dark:border-slate-800 p-5 sm:p-5.5 shadow-[0_12px_36px_-10px_rgba(10,35,80,0.06)] transition-all duration-300 hover:-translate-y-2 hover:border-[#005090] dark:hover:border-[#0986C8] hover:shadow-[0_22px_48px_-10px_rgba(0,80,144,0.16)]">
                 <div>
-                  {/* 2D Cartoon Illustration Box */}
+                  {/* Card Header: Badge Tahap & Nomor Langkah di dalam card */}
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="rounded-full bg-[#005090] text-white px-3 py-1 text-[11px] font-bold shadow-xs tracking-wider uppercase">
+                      {step.badge}
+                    </span>
+                    <span className="rounded-full bg-slate-100 dark:bg-slate-800 text-[#041E42] dark:text-slate-200 px-2.5 py-1 text-[11px] font-extrabold border border-slate-200/80 dark:border-slate-700 shadow-xs">
+                      {step.stepNumber}
+                    </span>
+                  </div>
+
+                  {/* 2D Cartoon Illustration Box (Bersih tanpa badge di dalam foto) */}
                   <div className="relative w-full aspect-square overflow-hidden rounded-2xl bg-gradient-to-b from-[#F4F8FC] to-[#E5F0FA] dark:from-slate-800 dark:to-slate-900 border border-slate-200/80 dark:border-slate-800 mb-5">
                     <Image
                       src={step.image}
@@ -69,12 +79,6 @@ export function WorkflowSection() {
                       height={512}
                       className="h-full w-full object-contain p-2 transition-transform duration-500 ease-out group-hover:scale-108 group-hover:-rotate-1"
                     />
-                    <span className="absolute top-3 left-3 rounded-full bg-[#005090] text-white px-3 py-1 text-[10.5px] font-bold shadow-md tracking-wider uppercase">
-                      {step.badge}
-                    </span>
-                    <span className="absolute top-3 right-3 rounded-full bg-white/95 dark:bg-slate-900/95 backdrop-blur-xs text-[#041E42] dark:text-white px-2.5 py-1 text-[10px] font-extrabold border border-white/60 dark:border-slate-700 shadow-sm">
-                      {step.stepNumber}
-                    </span>
                   </div>
 
                   <h3 className="text-[16px] sm:text-[17px] font-extrabold tracking-[-0.015em] text-[#041E42] dark:text-white transition-colors duration-200 group-hover:text-[#005090] dark:group-hover:text-[#0986C8] leading-snug min-h-[44px] flex items-center">
