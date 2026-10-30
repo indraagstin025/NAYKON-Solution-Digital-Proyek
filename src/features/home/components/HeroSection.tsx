@@ -55,6 +55,10 @@ export function HeroSection() {
       <div className="relative z-10 mx-auto w-full max-w-[1240px] px-6 sm:px-9 lg:px-14 py-10 sm:py-14 lg:py-12">
         <div className="grid items-center gap-10 lg:grid-cols-[1.02fr_0.98fr] lg:gap-8">
           <div className="max-w-[530px]">
+            <div className="nk-hero-enter inline-flex items-center gap-2 rounded-full border border-[#005090]/25 bg-[#005090]/8 dark:bg-[#0986C8]/15 px-3.5 py-1 text-[11px] sm:text-xs font-bold text-[#005090] dark:text-[#76c2eb] mb-3.5">
+              <span className="h-2 w-2 rounded-full bg-[#005090] dark:bg-[#0986C8] animate-pulse" />
+              <span>Next Karya Digital Solutions • Software House & Jasa Website</span>
+            </div>
 
             <h1 className="nk-hero-enter text-[31px] sm:text-[38px] lg:text-[44px] xl:text-[48px] font-extrabold leading-[1.15] tracking-[-0.025em] text-[#041E42] dark:text-[#f4f8ff]">
               Bangun Website Profesional
@@ -66,7 +70,7 @@ export function HeroSection() {
             </h1>
 
             <p className="nk-hero-enter nk-hero-delay-1 mt-4 max-w-[490px] text-[14px] sm:text-[15px] leading-[1.68] text-[#4A5D78] dark:text-[#b5c5dd] font-normal">
-              Tingkatkan kepercayaan pelanggan dan jangkauan bisnis Anda. Kami merancang website modern, cepat, aman, dan mudah dihubungi, khusus untuk UMKM, perusahaan, dan organisasi.
+              Tingkatkan kredibilitas dan jangkauan pasar bisnis Anda. Next Karya Digital Solutions merancang website modern berkecepatan tinggi, sistem web kustom, dan aplikasi mobile yang ramah SEO serta mudah dihubungi oleh calon pelanggan.
             </p>
 
             <div className="nk-hero-enter nk-hero-delay-2 mt-6 flex flex-wrap items-center gap-3.5">

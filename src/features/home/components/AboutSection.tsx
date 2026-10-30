@@ -40,7 +40,7 @@ export function AboutSection() {
             </h2>
 
             <p className="mt-3.5 text-[13.5px] sm:text-[14.5px] leading-[1.7] text-[#4A5D78] dark:text-slate-300">
-              Bayangkan calon pelanggan menemukan bisnis Anda di Google, langsung paham apa yang Anda tawarkan, dan langsung menghubungi Anda, tanpa bingung dan tanpa menunggu loading lama. Itulah yang kami bangun, untuk UMKM, perusahaan, dan organisasi.
+              Berbasis di Bandung Barat dan melayani klien di seluruh Indonesia, Next Karya Digital Solutions merancang website dan aplikasi yang bekerja nyata: cepat ditemukan di Google, langsung dipahami calon pembeli, berkecepatan tinggi, dan terpercaya untuk UMKM maupun perusahaan.
             </p>
           </div>
 
@@ -51,7 +51,7 @@ export function AboutSection() {
             />
             <div className="group relative w-full overflow-hidden rounded-[22px] border-[4px] border-white dark:border-slate-800 bg-white shadow-[0_18px_42px_-10px_rgba(10,35,80,0.13)] transition-all duration-300 hover:shadow-[0_24px_50px_-10px_rgba(0,80,144,0.18)]">
               <Image
-                src="/team-naikon.jpg"
+                src="/team-next-karya.jpg"
                 alt="Tim programmer Next Karya Digital Solutions berkolaborasi merancang arsitektur sistem"
                 width={960}
                 height={680}

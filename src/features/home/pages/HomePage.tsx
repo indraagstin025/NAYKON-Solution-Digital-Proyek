@@ -1,8 +1,7 @@
-"use client";
-
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { ThemeWrapper } from "@/components/ThemeWrapper";
 import type {
   PublicFaqDTO,
   PublicPortfolioDTO,
@@ -25,22 +24,14 @@ export interface HomePageProps {
   faqs?: PublicFaqDTO[] | null;
 }
 
-export function HomePage({ services, portfolios, pricing, faqs }: HomePageProps) {
-  const [isDark, setIsDark] = useState(false);
-
-  useEffect(() => {
-    const saved = localStorage.getItem("nk-theme-preference");
-    if (saved === "dark") {
-      setIsDark(true);
-    }
-  }, []);
-
+export function HomePage({
+  services,
+  portfolios,
+  pricing,
+  faqs,
+}: HomePageProps) {
   return (
-    <div
-      id="nk-site"
-      className={`site-wrap ${isDark ? "theme-dark" : ""}`}
-      suppressHydrationWarning
-    >
+    <ThemeWrapper>
       <Navbar />
       <main>
         <HeroSection />
@@ -53,6 +44,6 @@ export function HomePage({ services, portfolios, pricing, faqs }: HomePageProps)
         <ContactSection />
       </main>
       <Footer />
-    </div>
+    </ThemeWrapper>
   );
 }

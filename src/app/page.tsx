@@ -6,11 +6,23 @@ import {
   getPublicPricing,
   getPublicServices,
 } from "@/lib/public-content";
+import { toFaqItems } from "@/lib/live-content-adapters";
 
 export const metadata: Metadata = {
-  title: "Next Karya Digital Solutions - Website, Aplikasi Web, dan Aplikasi Mobile",
+  title:
+    "Next Karya Digital Solutions - Jasa Pembuatan Website, Aplikasi Web & Mobile",
   description:
-    "Tim rekayasa perangkat lunak untuk website bisnis, dashboard kustom, dan aplikasi mobile. Lihat layanan, paket harga, dan studi kasus Next Karya Digital Solutions.",
+    "Mitra rekayasa perangkat lunak untuk pembuatan website bisnis, sistem web kustom, dan aplikasi mobile profesional berbasis di Bandung Barat. Konsultasikan kebutuhan proyek digital Anda.",
+  alternates: {
+    canonical: "https://nextkarya.web.id",
+  },
+  openGraph: {
+    title:
+      "Next Karya Digital Solutions - Jasa Pembuatan Website, Aplikasi Web & Mobile",
+    description:
+      "Tim rekayasa perangkat lunak untuk website bisnis, dashboard kustom, dan aplikasi mobile. Lihat layanan, paket harga, dan portofolio Next Karya Digital Solutions.",
+    url: "https://nextkarya.web.id",
+  },
 };
 
 export default async function Page() {
@@ -21,12 +33,32 @@ export default async function Page() {
     getPublicFaqs(),
   ]);
 
+  const faqList = toFaqItems(faqs);
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqList.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
+  };
+
   return (
-    <HomePage
-      services={services}
-      portfolios={portfolios}
-      pricing={pricing}
-      faqs={faqs}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+      <HomePage
+        services={services}
+        portfolios={portfolios}
+        pricing={pricing}
+        faqs={faqs}
+      />
+    </>
   );
 }
